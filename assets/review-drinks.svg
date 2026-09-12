@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="ÐÐ¾ÑÑÐ°Ð²ÑÐ¸Ðº Ð½Ð°Ð¿Ð¸ÑÐºÐ¾Ð²">
+  <defs>
+    <linearGradient id="bgDrinks" x1="18" y1="18" x2="142" y2="142" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff8ec"/>
+      <stop offset="1" stop-color="#e9e1ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#bgDrinks)"/>
+  <circle cx="80" cy="76" r="58" fill="#fffdf8" opacity=".72"/>
+  <path d="M42 148c5-31 22-48 38-48s33 17 38 48" fill="#b98224"/>
+  <path d="M58 107c7 10 14 15 22 15s15-5 22-15l-22-8-22 8Z" fill="#fff8ec"/>
+  <path d="M48 72c0-29 13-48 32-48s32 19 32 48c0 26-13 44-32 44S48 98 48 72Z" fill="#3b2b20"/>
+  <circle cx="80" cy="71" r="29" fill="#dda06f"/>
+  <path d="M53 65c11-21 36-29 57-8-4-23-20-35-36-32-15 3-23 18-21 40Z" fill="#3b2b20"/>
+  <circle cx="69" cy="74" r="3" fill="#2b2112"/>
+  <circle cx="92" cy="74" r="3" fill="#2b2112"/>
+  <path d="M71 90c6 4 13 4 19 0" fill="none" stroke="#8c4d32" stroke-width="4" stroke-linecap="round"/>
+  <path d="M110 111h10l-4 25h-12l-4-25h10Z" fill="#064c3b"/>
+  <path d="M104 111h12" stroke="#f7efe2" stroke-width="4" stroke-linecap="round"/>
+</svg>

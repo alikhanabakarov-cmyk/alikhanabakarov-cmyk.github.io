@@ -1,0 +1,11 @@
+gastroconnect-publish-v*.zip
+preview-*.png
+publish-v*/
+script-v*.js
+style-v*.css
+cabinet-v*.js
+node_modules/
+.env
+.env.local
+.openai/
+dist/

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Ð£Ð¿ÑÐ°Ð²Ð»ÑÑÑÐ°Ñ ÑÐµÑÑÐ¾ÑÐ°Ð½Ð°">
+  <defs>
+    <linearGradient id="bgManager" x1="18" y1="18" x2="142" y2="142" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff9ef"/>
+      <stop offset="1" stop-color="#f3dfb7"/>
+    </linearGradient>
+    <linearGradient id="jacketManager" x1="40" y1="98" x2="122" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b98224"/>
+      <stop offset="1" stop-color="#064c3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#bgManager)"/>
+  <circle cx="80" cy="76" r="58" fill="#fffdf8" opacity=".72"/>
+  <path d="M42 148c5-31 22-48 38-48s33 17 38 48" fill="url(#jacketManager)"/>
+  <path d="M62 108c5 9 11 14 18 14s13-5 18-14l-18-8-18 8Z" fill="#fff6e9"/>
+  <path d="M49 73c0-31 13-50 32-50s32 19 32 50c0 27-13 44-32 44S49 100 49 73Z" fill="#593524"/>
+  <circle cx="80" cy="72" r="29" fill="#e0a172"/>
+  <path d="M52 65c12-21 37-28 57-10-4-21-19-33-34-31-15 1-24 16-23 41Z" fill="#593524"/>
+  <path d="M51 79c5 17 14 32 29 37-17 0-31-15-31-39l2 2Z" fill="#593524"/>
+  <circle cx="69" cy="75" r="3" fill="#2b2112"/>
+  <circle cx="92" cy="75" r="3" fill="#2b2112"/>
+  <path d="M71 91c6 4 13 4 19 0" fill="none" stroke="#8c4d32" stroke-width="4" stroke-linecap="round"/>
+</svg>

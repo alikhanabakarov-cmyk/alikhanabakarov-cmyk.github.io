@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="ÐÐ°ÑÐ¸ÑÑÐ°">
+  <defs>
+    <linearGradient id="bgBarista" x1="18" y1="18" x2="142" y2="142" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff8ec"/>
+      <stop offset="1" stop-color="#f2d9a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#bgBarista)"/>
+  <circle cx="80" cy="77" r="58" fill="#fffdf8" opacity=".72"/>
+  <path d="M43 148c5-31 21-48 37-48s32 17 37 48" fill="#064c3b"/>
+  <path d="M61 105h38v43H61z" fill="#15382f" opacity=".9"/>
+  <path d="M60 112h40" stroke="#d2a24c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="80" cy="71" r="29" fill="#df9d6d"/>
+  <path d="M52 66c4-26 19-40 39-34 12 4 20 14 19 31-13-12-37-12-58 3Z" fill="#483126"/>
+  <path d="M48 63c7-20 20-32 38-32 17 0 28 10 34 28-25-9-48-8-72 4Z" fill="#064c3b"/>
+  <path d="M53 57c20-7 40-8 60-1" stroke="#d2a24c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="69" cy="74" r="3" fill="#2b2112"/>
+  <circle cx="92" cy="74" r="3" fill="#2b2112"/>
+  <path d="M71 90c6 4 13 4 19 0" fill="none" stroke="#8c4d32" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /manage.html
+Disallow: /manage/
+Disallow: /cabinet.html
+Disallow: /cabinet/
+Disallow: /auth.html
+Disallow: /auth/
+
+Host: gastroconnect.ru
+Sitemap: https://gastroconnect.ru/sitemap.xml
