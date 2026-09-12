@@ -1,17 +1,17 @@
-ï»¿# GastroConnect
+﻿# GastroConnect
 
 Static GitHub Pages site for the GastroConnect HoReCa marketplace.
 
 ## Main Pages
 
-- `index.html` â home page
-- `workers.html` â worker landing page
-- `restaurants.html` â restaurant landing page
-- `suppliers.html` â supplier landing page
-- `auth.html` â role-based login and registration
-- `cabinet.html` â worker, restaurant, supplier and admin cabinet
-- `manage.html` â public admin settings page
-- `admin.html` â protected admin entry, if server auth is enabled
+- `index.html` — home page
+- `workers.html` — worker landing page
+- `restaurants.html` — restaurant landing page
+- `suppliers.html` — supplier landing page
+- `auth.html` — role-based login and registration
+- `cabinet.html` — worker, restaurant, supplier and admin cabinet
+- `manage.html` — public admin settings page
+- `admin.html` — protected admin entry, if server auth is enabled
 
 ## Assets
 

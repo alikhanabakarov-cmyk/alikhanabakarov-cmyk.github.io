@@ -1,4 +1,4 @@
-ï»¿# GastroConnect product spec
+﻿# GastroConnect product spec
 
 GastroConnect is a Russian HoReCa marketplace inspired by Coople, VentraGo and Instawork, scoped to three roles only: establishments, workers and suppliers.
 

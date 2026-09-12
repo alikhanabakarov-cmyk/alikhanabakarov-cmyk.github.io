@@ -148,7 +148,7 @@
       }
     } catch (e) {
       // Local fallback rendering
-      previewEl.textContent = 'ÐÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¿ÑÐµÐ´Ð¿ÑÐ¾ÑÐ¼Ð¾ÑÑÐ°...';
+      previewEl.textContent = 'Обновление предпросмотра...';
     }
   }
 
@@ -161,7 +161,7 @@
     if (publishBtn) {
       publishBtn.addEventListener('click', async () => {
         publishBtn.disabled = true;
-        publishBtn.textContent = 'ð ÐÑÐ¿ÑÐ°Ð²ÐºÐ° Ð² Telegram...';
+        publishBtn.textContent = '🚀 Отправка в Telegram...';
         showToast('', '');
 
         try {
@@ -175,21 +175,21 @@
 
           if (result.success) {
             showToast(
-              `â ÐÐ¾ÑÑ ÑÑÐ¿ÐµÑÐ½Ð¾ Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½ Ð² ÐºÐ°Ð½Ð°Ð» ${result.channel}!`,
+              `✅ Пост успешно опубликован в канал ${result.channel}!`,
               'success'
             );
           } else {
             // Mode manual_ready or informational
             showToast(
-              `â¨ ÐÐ¾ÑÑ Ð¸Ð´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´Ð³Ð¾ÑÐ¾Ð²Ð»ÐµÐ½ Ð´Ð»Ñ @gastroconnect. Ð¡ÐºÐ¾Ð¿Ð¸ÑÑÐ¹ÑÐµ ÑÐµÐºÑÑ ÐºÐ½Ð¾Ð¿ÐºÐ¾Ð¹ Ð½Ð¸Ð¶Ðµ Ð¸Ð»Ð¸ Ð¾ÑÐºÑÐ¾Ð¹ÑÐµ ÐºÐ°Ð½Ð°Ð» Ð´Ð»Ñ Ð²ÑÑÐ°Ð²ÐºÐ¸.`,
+              `✨ Пост идеально подготовлен для @gastroconnect. Скопируйте текст кнопкой ниже или откройте канал для вставки.`,
               'success'
             );
           }
         } catch (err) {
-          showToast(`ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸: ${err.message}`, 'error');
+          showToast(`Ошибка отправки: ${err.message}`, 'error');
         } finally {
           publishBtn.disabled = false;
-          publishBtn.textContent = 'ð ÐÐ¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°ÑÑ Ð² @gastroconnect';
+          publishBtn.textContent = '🚀 Опубликовать в @gastroconnect';
         }
       });
     }
@@ -199,13 +199,13 @@
         try {
           await navigator.clipboard.writeText(currentPlainText || currentFormattedHtml);
           const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'â Ð¡ÐºÐ¾Ð¿Ð¸ÑÐ¾Ð²Ð°Ð½Ð¾ Ð² Ð±ÑÑÐµÑ!';
-          showToast('ð ÐÐ¾ÑÐ¾Ð²ÑÐ¹ ÑÐ¾ÑÐ¼Ð°ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¹ Ð¿Ð¾ÑÑ ÑÐºÐ¾Ð¿Ð¸ÑÐ¾Ð²Ð°Ð½!', 'success');
+          copyBtn.textContent = '✓ Скопировано в буфер!';
+          showToast('📋 Готовый форматированный пост скопирован!', 'success');
           setTimeout(() => {
             copyBtn.textContent = originalText;
           }, 2000);
         } catch (e) {
-          showToast('ÐÑÐ´ÐµÐ»Ð¸ÑÐµ ÑÐµÐºÑÑ Ð² Ð¿ÑÐµÐ´Ð¿ÑÐ¾ÑÐ¼Ð¾ÑÑÐµ Ð¸ ÑÐºÐ¾Ð¿Ð¸ÑÑÐ¹ÑÐµ Ð²ÑÑÑÐ½ÑÑ.', 'error');
+          showToast('Выделите текст в предпросмотре и скопируйте вручную.', 'error');
         }
       });
     }
@@ -240,9 +240,9 @@
     const reqsInput = document.getElementById('tgPostReqs');
 
     if (roleInput && shiftData.profession) roleInput.value = shiftData.profession;
-    if (rateInput && shiftData.rate) rateInput.value = `${shiftData.rate} â½ / ÑÐ¼ÐµÐ½Ð°`;
+    if (rateInput && shiftData.rate) rateInput.value = `${shiftData.rate} ₽ / смена`;
     if (metroInput && shiftData.district) metroInput.value = shiftData.district;
-    if (schedInput && shiftData.timeFrom) schedInput.value = `${shiftData.timeFrom} â ${shiftData.timeTo || '23:00'}`;
+    if (schedInput && shiftData.timeFrom) schedInput.value = `${shiftData.timeFrom} – ${shiftData.timeTo || '23:00'}`;
     if (reqsInput && shiftData.requirements) reqsInput.value = shiftData.requirements;
 
     const typeSelect = document.getElementById('tgPostType');

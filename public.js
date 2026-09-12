@@ -6,9 +6,9 @@
   const roles = ["worker", "restaurant", "supplier"];
   let allowBackgrounds = false;
   const roleName = {
-    worker: "ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ°",
-    restaurant: "Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ",
-    supplier: "Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°",
+    worker: "работника",
+    restaurant: "заведения",
+    supplier: "поставщика",
   };
 
   const normalizeRole = (role) => (roles.includes(role) ? role : "worker");
@@ -174,11 +174,11 @@
     } finally {
       timeout.clear();
     }
-    if (!response.ok) throw new Error("supabase.js Ð½Ðµ Ð·Ð°Ð³ÑÑÐ·Ð¸Ð»ÑÑ");
+    if (!response.ok) throw new Error("supabase.js не загрузился");
     const source = await response.text();
     const url = source.match(/SUPABASE_URL\s*=\s*['"]([^'"]+)['"]/i)?.[1];
     const key = source.match(/SUPABASE_ANON_KEY\s*=\s*['"]([^'"]+)['"]/i)?.[1];
-    if (!url || !key) throw new Error("Supabase config Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½");
+    if (!url || !key) throw new Error("Supabase config не найден");
     window.__gcSupabaseRestConfig = { url, key };
     return window.__gcSupabaseRestConfig;
   }
@@ -358,31 +358,31 @@
         if (input.name === "name") {
           if (!val) {
             isValid = false;
-            errorMsg = "ÐÐ¾Ð¶Ð°Ð»ÑÐ¹ÑÑÐ°, ÑÐºÐ°Ð¶Ð¸ÑÐµ Ð¸Ð¼Ñ";
+            errorMsg = "Пожалуйста, укажите имя";
           } else if (val.length < 2) {
             isValid = false;
-            errorMsg = "ÐÐ¼Ñ Ð´Ð¾Ð»Ð¶Ð½Ð¾ ÑÐ¾Ð´ÐµÑÐ¶Ð°ÑÑ Ð¾Ñ 2 ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²";
+            errorMsg = "Имя должно содержать от 2 символов";
           }
         } else if (input.name === "phone" || input.type === "tel") {
           const digits = val.replace(/\D/g, "");
           if (!val) {
             isValid = false;
-            errorMsg = "Ð£ÐºÐ°Ð¶Ð¸ÑÐµ Ð½Ð¾Ð¼ÐµÑ ÑÐµÐ»ÐµÑÐ¾Ð½Ð° Ð´Ð»Ñ ÑÐ²ÑÐ·Ð¸";
+            errorMsg = "Укажите номер телефона для связи";
           } else if (digits.length < 10) {
             isValid = false;
-            errorMsg = "ÐÐ²ÐµÐ´Ð¸ÑÐµ ÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ Ð½Ð¾Ð¼ÐµÑ (10â11 ÑÐ¸ÑÑ)";
+            errorMsg = "Введите корректный номер (10–11 цифр)";
           }
         } else if (input.name === "email" || input.type === "email") {
           if (input.required && !val) {
             isValid = false;
-            errorMsg = "Ð£ÐºÐ°Ð¶Ð¸ÑÐµ email";
+            errorMsg = "Укажите email";
           } else if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
             isValid = false;
-            errorMsg = "ÐÐµÐºÐ¾ÑÑÐµÐºÑÐ½ÑÐ¹ ÑÐ¾ÑÐ¼Ð°Ñ email";
+            errorMsg = "Некорректный формат email";
           }
         } else if (input.required && !val) {
           isValid = false;
-          errorMsg = "ÐÐ±ÑÐ·Ð°ÑÐµÐ»ÑÐ½Ð¾Ðµ Ð¿Ð¾Ð»Ðµ Ð´Ð»Ñ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ";
+          errorMsg = "Обязательное поле для заполнения";
         }
 
         if (isValid) {
@@ -487,15 +487,15 @@
             box.setAttribute("role", "status");
             box.textContent =
               form.dataset.formType === "callback"
-                ? "ÐÐ°ÑÐ²ÐºÐ° Ð½Ð° Ð·Ð²Ð¾Ð½Ð¾Ðº Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð°. ÐÑ ÑÐ²ÑÐ¶ÐµÐ¼ÑÑ Ñ Ð²Ð°Ð¼Ð¸ Ð¿Ð¾ ÑÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ð¼Ñ ÑÐµÐ»ÐµÑÐ¾Ð½Ñ."
+                ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
                 : form.dataset.formType === "feedback"
-                  ? "ÐÐ±ÑÐ°ÑÐµÐ½Ð¸Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾. ÐÑ Ð¾ÑÐ²ÐµÑÐ¸Ð¼ Ð¿Ð¾ ÑÐºÐ°Ð·Ð°Ð½Ð½ÑÐ¼ ÐºÐ¾Ð½ÑÐ°ÐºÑÐ°Ð¼."
+                  ? "Обращение отправлено. Мы ответим по указанным контактам."
                   : form.dataset.formType === "telegram_bot"
-                    ? "ÐÐ°ÑÐ²ÐºÐ° Ð½Ð° Telegram-ÑÐ²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ñ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð°. ÐÑ ÑÐ²ÑÐ¶ÐµÐ¼ÑÑ Ð´Ð»Ñ Ð¿Ð¾Ð´ÐºÐ»ÑÑÐµÐ½Ð¸Ñ."
-                    : "ÐÐ°ÑÐ²ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð°. ÐÑ Ð¿Ð¾Ð»ÑÑÐ¸Ð»Ð¸ Ð²Ð°ÑÐ¸ ÐºÐ¾Ð½ÑÐ°ÐºÑÑ Ð¸ ÑÐ²ÑÐ¶ÐµÐ¼ÑÑ Ñ Ð²Ð°Ð¼Ð¸.";
+                    ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
+                    : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
           }
         } catch {
-          if (box) box.textContent = "ÐÐ°ÑÐ²ÐºÐ° ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð° Ð² ÑÑÐ¾Ð¼ Ð±ÑÐ°ÑÐ·ÐµÑÐµ. ÐÑÐ»Ð¸ Ð¸Ð½ÑÐµÑÐ½ÐµÑ Ð¸Ð»Ð¸ Ð±Ð°Ð·Ð° Ð²ÑÐµÐ¼ÐµÐ½Ð½Ð¾ Ð½ÐµÐ´Ð¾ÑÑÑÐ¿Ð½Ñ, Ð¿Ð¾Ð²ÑÐ¾ÑÐ¸ÑÐµ Ð¾ÑÐ¿ÑÐ°Ð²ÐºÑ Ð¿Ð¾Ð·Ð¶Ðµ.";
+          if (box) box.textContent = "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
         } finally {
           if (box) box.style.display = "block";
           form.reset();
@@ -584,14 +584,14 @@
       if (cityField) cityField.hidden = loginMode;
       emailInput.required = loginMode ? !byPhone : methodInput.value === "email";
       phoneInput.required = loginMode ? byPhone : methodInput.value === "phone";
-      emailInput.placeholder = byPhone ? "ÐÐ¾Ð¶Ð½Ð¾ ÑÐºÐ°Ð·Ð°ÑÑ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸ÑÐµÐ»ÑÐ½Ð¾" : "example@mail.ru";
-      phoneInput.placeholder = byPhone ? "+7 910 000-00-00" : "ÐÐ¾Ð¶Ð½Ð¾ ÑÐºÐ°Ð·Ð°ÑÑ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸ÑÐµÐ»ÑÐ½Ð¾";
+      emailInput.placeholder = byPhone ? "Можно указать дополнительно" : "example@mail.ru";
+      phoneInput.placeholder = byPhone ? "+7 910 000-00-00" : "Можно указать дополнительно";
       if (updateUrl) updateHistory();
     }
 
     function setMode(nextMode, updateUrl = true) {
       mode = nextMode === "login" ? "login" : "signup";
-      if (formTitle) formTitle.textContent = mode === "login" ? "ÐÑÐ¾Ð´" : "Ð ÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ñ";
+      if (formTitle) formTitle.textContent = mode === "login" ? "Вход" : "Регистрация";
       if (roleField) roleField.hidden = mode === "login";
       if (registerBtn) registerBtn.hidden = mode !== "signup";
       if (loginBtn) loginBtn.hidden = mode !== "login";
@@ -601,8 +601,8 @@
       if (modeHint) {
         modeHint.textContent =
           mode === "login"
-            ? "ÐÐ²ÐµÐ´Ð¸ÑÐµ email Ð¸Ð»Ð¸ ÑÐµÐ»ÐµÑÐ¾Ð½ Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ. Ð Ð¾Ð»Ñ Ð¿Ð¾Ð´ÑÑÐ½ÐµÑÑÑ Ð¸Ð· Ð²Ð°ÑÐµÐ³Ð¾ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ."
-            : `ÐÑÐ´ÐµÑ ÑÐ¾Ð·Ð´Ð°Ð½ ÐºÐ°Ð±Ð¸Ð½ÐµÑ ${roleName[roleInput.value]}. ÐÐ°Ð½Ð½ÑÐµ ÑÐ¾ÑÑÐ°Ð½ÑÑÑÑ Ð² Ð±Ð°Ð·Ðµ Ð¸ Ð°Ð´Ð¼Ð¸Ð½ÐºÐµ.`;
+            ? "Введите email или телефон и пароль. Роль подтянется из вашего профиля."
+            : `Будет создан кабинет ${roleName[roleInput.value]}. Данные сохранятся в базе и админке.`;
       }
       if (cabinetShortcut) cabinetShortcut.href = profileCabinetUrl({ role: roleInput.value });
       setContactVisibility(false);
@@ -621,7 +621,7 @@
         role: normalizeRole(role),
         email: user.email || payload.email || emailValue() || null,
         phone: user.phone || payload.phone || phoneValue() || null,
-        name: payload.name || nameInput?.value.trim() || user.email || user.phone || "ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ñ",
+        name: payload.name || nameInput?.value.trim() || user.email || user.phone || "Пользователь",
         city: payload.city || cityInput?.value.trim() || null,
         auth_provider: payload.auth_provider || metadata.auth_provider || methodInput.value,
         status: "active",
@@ -650,7 +650,7 @@
       const authEmail = user.email || emailValue();
       const authPhone = user.phone || phoneValue();
       const authProvider = authPhone && !authEmail ? "phone" : "email";
-      const profileName = nameInput?.value.trim() || authEmail || authPhone || "ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ñ";
+      const profileName = nameInput?.value.trim() || authEmail || authPhone || "Пользователь";
       const profileCity = cityInput?.value.trim() || "";
       const { data: existing, error: readError } = await window.supabaseClient
         .from("profiles")
@@ -675,7 +675,7 @@
         return updated || existing;
       }
       if (!profileRole) {
-        throw new Error("ÐÑÐ¾ÑÐ¸Ð»Ñ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½. ÐÑÐºÑÐ¾Ð¹ÑÐµ ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ñ, Ð²ÑÐ±ÐµÑÐ¸ÑÐµ ÑÐ¾Ð»Ñ Ð¸ ÑÐ¾Ð·Ð´Ð°Ð¹ÑÐµ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ.");
+        throw new Error("Профиль не найден. Откройте регистрацию, выберите роль и создайте профиль.");
       }
       const payload = {
         id: user.id,
@@ -698,15 +698,15 @@
       const code = String(error?.code || error?.error_code || "");
       const text = String(error?.message || "").toLowerCase();
       if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
-        return "Email Ð½Ðµ Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ¶Ð´ÐµÐ½. ÐÑÐºÑÐ¾Ð¹ÑÐµ Ð¿Ð¸ÑÑÐ¼Ð¾ Ð¾Ñ GastroConnect Ð¸ Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ´Ð¸ÑÐµ ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ñ.";
+        return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
       }
       if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit")) {
-        return "Ð¡ÐµÐ¹ÑÐ°Ñ ÑÐ»Ð¸ÑÐºÐ¾Ð¼ Ð¼Ð½Ð¾Ð³Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÐ¾Ð² Ð½Ð° ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ñ. ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ ÐµÑÑ ÑÐ°Ð· ÑÐµÑÐµÐ· Ð½ÐµÑÐºÐ¾Ð»ÑÐºÐ¾ Ð¼Ð¸Ð½ÑÑ Ð¸Ð»Ð¸ Ð¾ÑÑÐ°Ð²ÑÑÐµ Ð·Ð°ÑÐ²ÐºÑ ÑÐµÑÐµÐ· ÑÐ¾ÑÐ¼Ñ Ð½Ð° ÑÐ°Ð¹ÑÐµ.";
+        return "Сейчас слишком много запросов на регистрацию. Попробуйте ещё раз через несколько минут или оставьте заявку через форму на сайте.";
       }
       if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
-        return "ÐÐµÐ²ÐµÑÐ½ÑÐ¹ email/ÑÐµÐ»ÐµÑÐ¾Ð½ Ð¸Ð»Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ. ÐÑÐ»Ð¸ Ð²Ñ ÑÐ¾Ð»ÑÐºÐ¾ Ð·Ð°ÑÐµÐ³Ð¸ÑÑÑÐ¸ÑÐ¾Ð²Ð°Ð»Ð¸ÑÑ, ÑÐ½Ð°ÑÐ°Ð»Ð° Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ´Ð¸ÑÐµ email.";
+        return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
       }
-      return error?.message || "ÐÐµÐ¸Ð·Ð²ÐµÑÑÐ½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ° Ð°Ð²ÑÐ¾ÑÐ¸Ð·Ð°ÑÐ¸Ð¸.";
+      return error?.message || "Неизвестная ошибка авторизации.";
     }
 
     async function refreshSession() {
@@ -718,7 +718,7 @@
           const sessionProfile = await ensureProfile(data.session.user, roleWasExplicit ? roleInput.value : "");
           cabinetShortcut.hidden = false;
           cabinetShortcut.href = profileCabinetUrl(sessionProfile);
-          message.textContent = "ÐÑ ÑÐ¶Ðµ Ð²Ð¾ÑÐ»Ð¸. ÐÐ¾Ð¶Ð½Ð¾ Ð¾ÑÐºÑÑÑÑ ÐºÐ°Ð±Ð¸Ð½ÐµÑ.";
+          message.textContent = "Вы уже вошли. Можно открыть кабинет.";
         } catch (error) {
           cabinetShortcut.hidden = true;
           message.textContent = error.message;
@@ -735,14 +735,14 @@
       const role = normalizeRole(roleInput.value);
       const name = nameInput?.value.trim() || "";
       const city = cityInput?.value.trim() || "";
-      if (!client) return (message.textContent = "Supabase Ð½Ðµ Ð·Ð°Ð³ÑÑÐ·Ð¸Ð»ÑÑ. ÐÐ±Ð½Ð¾Ð²Ð¸ÑÐµ ÑÑÑÐ°Ð½Ð¸ÑÑ.");
-      if (method === "email" && !email) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ email.");
-      if (method === "phone" && !phone) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ ÑÐµÐ»ÐµÑÐ¾Ð½ Ð² ÑÐ¾ÑÐ¼Ð°ÑÐµ +7...");
-      if (!password) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ Ð¿Ð°ÑÐ¾Ð»Ñ.");
-      if (authConsent && !authConsent.checked) return (message.textContent = "ÐÑÐ¶Ð½Ð¾ Ð¿ÑÐ¸Ð½ÑÑÑ Ð´Ð¾ÐºÑÐ¼ÐµÐ½ÑÑ Ð¸ Ð´Ð°ÑÑ ÑÐ¾Ð³Ð»Ð°ÑÐ¸Ðµ Ð½Ð° Ð¾Ð±ÑÐ°Ð±Ð¾ÑÐºÑ Ð¿ÐµÑÑÐ¾Ð½Ð°Ð»ÑÐ½ÑÑ Ð´Ð°Ð½Ð½ÑÑ.");
-      if (password.length < 6) return (message.textContent = "ÐÐ°ÑÐ¾Ð»Ñ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±ÑÑÑ Ð¼Ð¸Ð½Ð¸Ð¼ÑÐ¼ 6 ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð².");
+      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (method === "email" && !email) return (message.textContent = "Введите email.");
+      if (method === "phone" && !phone) return (message.textContent = "Введите телефон в формате +7...");
+      if (!password) return (message.textContent = "Введите пароль.");
+      if (authConsent && !authConsent.checked) return (message.textContent = "Нужно принять документы и дать согласие на обработку персональных данных.");
+      if (password.length < 6) return (message.textContent = "Пароль должен быть минимум 6 символов.");
 
-      setBusy(true, "Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð°ÐºÐºÐ°ÑÐ½Ñ...");
+      setBusy(true, "Создаем аккаунт...");
       const consentDate = new Date().toISOString();
       const options = { data: { role, name, city, email, phone, auth_provider: method, personalDataConsent: true, personalDataConsentDate: consentDate, userAgent: navigator.userAgent || "", ipAddress: "" } };
       const signUpPayload = method === "phone" ? { phone, password, options } : { email, password, options };
@@ -766,13 +766,13 @@
             await saveRemoteSubmission(fallbackRow);
             setBusy(false);
             setMode("login");
-            return (message.textContent = "ÐÐ°ÑÐ²ÐºÐ° Ð¿ÑÐ¸Ð½ÑÑÐ°. ÐÑ Ð¿Ð¾Ð»ÑÑÐ¸Ð»Ð¸ Ð²Ð°ÑÐ¸ ÐºÐ¾Ð½ÑÐ°ÐºÑÑ Ð¸ Ð¿Ð¾Ð¼Ð¾Ð¶ÐµÐ¼ Ð·Ð°Ð²ÐµÑÑÐ¸ÑÑ ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ñ.");
+            return (message.textContent = "Заявка принята. Мы получили ваши контакты и поможем завершить регистрацию.");
           } catch {
             // Keep the original auth error if even fallback lead capture is unavailable.
           }
         }
         setBusy(false);
-        return (message.textContent = `ÐÑÐ¸Ð±ÐºÐ° ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ð¸: ${readableAuthError(error)}`);
+        return (message.textContent = `Ошибка регистрации: ${readableAuthError(error)}`);
       }
       if (data?.session?.user) {
         try {
@@ -781,14 +781,14 @@
           return;
         } catch (profileError) {
           setBusy(false);
-          return (message.textContent = `ÐÐºÐºÐ°ÑÐ½Ñ ÑÐ¾Ð·Ð´Ð°Ð½, Ð½Ð¾ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ Ð½Ðµ ÑÐ¾ÑÑÐ°Ð½Ð¸Ð»ÑÑ: ${profileError.message}. ÐÐ¾Ð¶Ð°Ð»ÑÐ¹ÑÑÐ°, Ð½Ð°Ð¿Ð¸ÑÐ¸ÑÐµ Ð² Ð¿Ð¾Ð´Ð´ÐµÑÐ¶ÐºÑ.`);
+          return (message.textContent = `Аккаунт создан, но профиль не сохранился: ${profileError.message}. Пожалуйста, напишите в поддержку.`);
         }
       }
       setBusy(false);
       message.textContent =
         method === "phone"
-          ? "ÐÐºÐºÐ°ÑÐ½Ñ ÑÐ¾Ð·Ð´Ð°Ð½. ÐÑÐ»Ð¸ Supabase Ð¿ÑÐ¾ÑÐ¸Ñ SMS-ÐºÐ¾Ð´, Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ´Ð¸ÑÐµ ÑÐµÐ»ÐµÑÐ¾Ð½ Ð¸ Ð²Ð¾Ð¹Ð´Ð¸ÑÐµ."
-          : "ÐÐºÐºÐ°ÑÐ½Ñ ÑÐ¾Ð·Ð´Ð°Ð½. ÐÑÐ»Ð¸ Supabase Ð¿ÑÐ¾ÑÐ¸Ñ Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ¶Ð´ÐµÐ½Ð¸Ðµ email, Ð¿Ð¾Ð´ÑÐ²ÐµÑÐ´Ð¸ÑÐµ Ð¿Ð¾ÑÑÑ Ð¸ Ð²Ð¾Ð¹Ð´Ð¸ÑÐµ.";
+          ? "Аккаунт создан. Если Supabase просит SMS-код, подтвердите телефон и войдите."
+          : "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
       setMode("login");
     });
 
@@ -798,24 +798,24 @@
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
-      if (!client) return (message.textContent = "Supabase Ð½Ðµ Ð·Ð°Ð³ÑÑÐ·Ð¸Ð»ÑÑ. ÐÐ±Ð½Ð¾Ð²Ð¸ÑÐµ ÑÑÑÐ°Ð½Ð¸ÑÑ.");
-      if (method === "email" && !email) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ email.");
-      if (method === "phone" && !phone) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ ÑÐµÐ»ÐµÑÐ¾Ð½.");
-      if (!password) return (message.textContent = "ÐÐ²ÐµÐ´Ð¸ÑÐµ Ð¿Ð°ÑÐ¾Ð»Ñ.");
+      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (method === "email" && !email) return (message.textContent = "Введите email.");
+      if (method === "phone" && !phone) return (message.textContent = "Введите телефон.");
+      if (!password) return (message.textContent = "Введите пароль.");
 
-      setBusy(true, "ÐÑÐ¾Ð´Ð¸Ð¼...");
+      setBusy(true, "Входим...");
       const credentials = method === "phone" ? { phone, password } : { email, password };
       const { data, error } = await client.auth.signInWithPassword(credentials);
       if (error) {
         setBusy(false);
-        return (message.textContent = `ÐÑÐ¸Ð±ÐºÐ° Ð²ÑÐ¾Ð´Ð°: ${readableAuthError(error)}`);
+        return (message.textContent = `Ошибка входа: ${readableAuthError(error)}`);
       }
       try {
         const profile = await ensureProfile(data.user, roleWasExplicit ? roleInput.value : "");
         window.location.href = profileCabinetUrl(profile);
       } catch (profileError) {
         setBusy(false);
-        message.textContent = `ÐÑÐ¾Ð´ Ð²ÑÐ¿Ð¾Ð»Ð½ÐµÐ½, Ð½Ð¾ Ð¿ÑÐ¾ÑÐ¸Ð»Ñ Ð½Ðµ Ð¾ÑÐºÑÑÐ»ÑÑ: ${profileError.message}. ÐÐ¾Ð¶Ð°Ð»ÑÐ¹ÑÑÐ°, Ð½Ð°Ð¿Ð¸ÑÐ¸ÑÐµ Ð² Ð¿Ð¾Ð´Ð´ÐµÑÐ¶ÐºÑ.`;
+        message.textContent = `Вход выполнен, но профиль не открылся: ${profileError.message}. Пожалуйста, напишите в поддержку.`;
       }
     });
 
@@ -881,7 +881,7 @@
     const chips = document.querySelectorAll("#publicB2BCatChips button");
 
     function money(v) {
-      return v || v === 0 ? Number(v).toLocaleString("ru-RU") + " â½" : "-";
+      return v || v === 0 ? Number(v).toLocaleString("ru-RU") + " ₽" : "-";
     }
 
     function render() {
@@ -905,15 +905,15 @@
       }
 
       if (msgEl) {
-        msgEl.textContent = `ÐÐ°Ð¹Ð´ÐµÐ½Ð¾ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²: ${filtered.length}`;
+        msgEl.textContent = `Найдено поставщиков: ${filtered.length}`;
       }
 
       if (!filtered.length) {
         grid.innerHTML = `
           <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed var(--line);">
-            <div style="font-size: 32px; margin-bottom: 12px;">ð</div>
-            <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">ÐÐ¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾</h4>
-            <p style="margin: 0; color: #64748b; font-size: 14px;">ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ Ð¸Ð·Ð¼ÐµÐ½Ð¸ÑÑ Ð·Ð°Ð¿ÑÐ¾Ñ Ð¸Ð»Ð¸ Ð²ÑÐ±ÑÐ°ÑÑ Ð´ÑÑÐ³ÑÑ ÐºÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ Ð¿ÑÐ¾Ð´ÑÐºÑÐ¾Ð².</p>
+            <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
+            <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">Поставщиков по запросу не найдено</h4>
+            <p style="margin: 0; color: #64748b; font-size: 14px;">Попробуйте изменить запрос или выбрать другую категорию продуктов.</p>
           </div>
         `;
         return;
@@ -933,7 +933,7 @@
           </div>
         `).join("");
 
-        const badges = (s.badges || []).map(b => `<span class="b2b-mini-badge">â ${escapeText(b)}</span>`).join("");
+        const badges = (s.badges || []).map(b => `<span class="b2b-mini-badge">✓ ${escapeText(b)}</span>`).join("");
 
         return `
           <div class="b2b-supplier-card">
@@ -941,9 +941,9 @@
               <div>
                 <div class="b2b-sup-cat">${escapeText(s.category_label)}</div>
                 <h4 class="b2b-sup-name">${escapeText(s.company_name)}</h4>
-                <div style="font-size: 12px; color: #64748b;">ÐÑÑÐ¾ÑÐ½Ð¸Ðº: ${escapeText(s.source)}</div>
+                <div style="font-size: 12px; color: #64748b;">Источник: ${escapeText(s.source)}</div>
               </div>
-              <div class="b2b-rating-pill">â­ ${s.rating} (${s.reviews_count})</div>
+              <div class="b2b-rating-pill">⭐ ${s.rating} (${s.reviews_count})</div>
             </div>
 
             <p class="b2b-sup-desc">${escapeText(s.description)}</p>
@@ -951,15 +951,15 @@
 
             <div class="b2b-sup-meta">
               <div class="b2b-meta-row">
-                <span class="b2b-meta-label">ÐÐ¸Ð½. Ð·Ð°ÐºÐ°Ð·:</span>
+                <span class="b2b-meta-label">Мин. заказ:</span>
                 <span class="b2b-meta-value">${money(s.min_order_rub)}</span>
               </div>
               <div class="b2b-meta-row">
-                <span class="b2b-meta-label">ÐÑÐ°ÑÐ¸Ðº Ð´Ð¾ÑÑÐ°Ð²ÐºÐ¸:</span>
+                <span class="b2b-meta-label">График доставки:</span>
                 <span class="b2b-meta-value">${escapeText(s.delivery_schedule)}</span>
               </div>
               <div class="b2b-meta-row">
-                <span class="b2b-meta-label">ÐÐ¿Ð»Ð°ÑÐ°:</span>
+                <span class="b2b-meta-label">Оплата:</span>
                 <span class="b2b-meta-value" style="font-size: 12px;">${escapeText(s.payment_terms)}</span>
               </div>
             </div>
@@ -968,27 +968,27 @@
               var l = this.nextElementSibling;
               if (l.classList.contains('expanded')) {
                 l.classList.remove('expanded');
-                this.innerHTML = 'ð ÐÐ¿ÑÐ¾Ð²ÑÐ¹ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ (' + ${s.products.length} + ') â¼';
+                this.innerHTML = '📋 Оптовый прайс-лист (' + ${s.products.length} + ') ▼';
               } else {
                 l.classList.add('expanded');
-                this.innerHTML = 'ð Ð¡ÐºÑÑÑÑ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ â²';
+                this.innerHTML = '📋 Скрыть прайс-лист ▲';
               }
             ">
-              ð ÐÐ¿ÑÐ¾Ð²ÑÐ¹ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ (${s.products.length}) â¼
+              📋 Оптовый прайс-лист (${s.products.length}) ▼
             </button>
             <div class="b2b-products-list">
-              <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">ÐÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ Ð´Ð»Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¹</div>
+              <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Прайс-лист для заведений</div>
               ${prodHtml}
             </div>
 
             <div class="b2b-card-actions">
               <div class="b2b-action-row">
-                ${s.website ? `<a href="${escapeText(s.website)}" target="_blank" rel="noopener" class="b2b-btn-web">ð Ð¡Ð°Ð¹Ñ</a>` : ''}
+                ${s.website ? `<a href="${escapeText(s.website)}" target="_blank" rel="noopener" class="b2b-btn-web">🌐 Сайт</a>` : ''}
                 <a href="${tgUrl}" target="_blank" rel="noopener" class="b2b-btn-tg">Telegram</a>
-                <a href="${phoneUrl}" class="b2b-btn-phone">ð ÐÐ¾Ð·Ð²Ð¾Ð½Ð¸ÑÑ</a>
+                <a href="${phoneUrl}" class="b2b-btn-phone">📞 Позвонить</a>
               </div>
               <a href="/auth/?role=restaurant" class="b2b-btn-order" style="text-align:center; text-decoration:none; display:block;">
-                â¡ï¸ ÐÐ°ÐºÐ°Ð·Ð°ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÐºÑ ÑÐµÑÐµÐ· ÐºÐ°Ð±Ð¸Ð½ÐµÑ
+                ⚡️ Заказать поставку через кабинет
               </a>
             </div>
           </div>
@@ -1014,12 +1014,12 @@
       .then(res => {
         if (res.success && Array.isArray(res.suppliers)) {
           suppliersData = res.suppliers;
-          if (msgEl) msgEl.textContent = `ÐÐ¾ÑÑÑÐ¿Ð½Ð¾ Ð¿ÑÐ¾Ð²ÐµÑÐµÐ½Ð½ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²: ${suppliersData.length}`;
+          if (msgEl) msgEl.textContent = `Доступно проверенных поставщиков: ${suppliersData.length}`;
           render();
         }
       })
       .catch(err => {
-        if (msgEl) msgEl.textContent = "ÐÑÐ¸Ð±ÐºÐ° Ð·Ð°Ð³ÑÑÐ·ÐºÐ¸ ÐºÐ°ÑÐ°Ð»Ð¾Ð³Ð°.";
+        if (msgEl) msgEl.textContent = "Ошибка загрузки каталога.";
       });
   }
 

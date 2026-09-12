@@ -1,6 +1,6 @@
 {
   "name": "GastroConnect",
-  "description": "ÐÐ»Ð°ÑÑÐ¾ÑÐ¼Ð° Ð³Ð¸Ð±ÐºÐ¾Ð¹ Ð·Ð°Ð½ÑÑÐ¾ÑÑÐ¸ Ð¸ Ð¿Ð¾ÑÑÐ°Ð²Ð¾Ðº Ð´Ð»Ñ HoReCa Ð² ÐÐ¾ÑÐºÐ²Ðµ: ÑÐ¼ÐµÐ½Ñ, Ð¿ÐµÑÑÐ¾Ð½Ð°Ð» Ð¸ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ",
+  "description": "Платформа гибкой занятости и поставок для HoReCa в Москве: смены, персонал и заведения",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

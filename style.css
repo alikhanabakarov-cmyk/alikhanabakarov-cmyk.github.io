@@ -2432,7 +2432,7 @@ th {
 }
 
 .vacancy-card-featured::before {
-  content: "ÐÐ¾ÑÑÑÐ°Ñ Ð¿Ð¾Ð·Ð¸ÑÐ¸Ñ";
+  content: "Горячая позиция";
   position: absolute;
   top: 16px;
   right: 20px;
@@ -2508,7 +2508,7 @@ th {
 }
 
 .vacancy-perks-list li::before {
-  content: "â";
+  content: "✓";
   display: inline-grid;
   place-items: center;
   width: 20px;
@@ -2885,7 +2885,7 @@ th {
 }
 
 .tg-benefits-list li::before {
-  content: "â";
+  content: "✓";
   color: var(--green);
   font-weight: 900;
 }

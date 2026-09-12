@@ -220,22 +220,22 @@
   }
 
   function money(value) {
-    return value || value === 0 ? `${value} â½` : "-";
+    return value || value === 0 ? `${value} ₽` : "-";
   }
 
   function statusText(status) {
     return (
       {
-        pending: "Ð¾Ð¶Ð¸Ð´Ð°ÐµÑ",
-        new: "Ð½Ð¾Ð²Ð°Ñ",
-        accepted: "Ð¿ÑÐ¸Ð½ÑÑÐ°",
-        declined: "Ð¾ÑÐºÐ»Ð¾Ð½ÐµÐ½Ð°",
-        cancelled: "Ð¾ÑÐ¼ÐµÐ½ÐµÐ½Ð°",
-        done: "Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð°",
-        open: "Ð¾ÑÐºÑÑÑÐ°",
-        closed: "Ð·Ð°ÐºÑÑÑÐ°",
-        active: "Ð°ÐºÑÐ¸Ð²Ð½Ð¾",
-        paused: "Ð¿Ð°ÑÐ·Ð°",
+        pending: "ожидает",
+        new: "новая",
+        accepted: "принята",
+        declined: "отклонена",
+        cancelled: "отменена",
+        done: "завершена",
+        open: "открыта",
+        closed: "закрыта",
+        active: "активно",
+        paused: "пауза",
       }[status] ||
       status ||
       "-"
@@ -253,13 +253,13 @@
     return article;
   }
 
-  function showEmpty(list, title, text = "ÐÐ°Ð½Ð½ÑÐµ Ð¿Ð¾ÑÐ²ÑÑÑÑ Ð·Ð´ÐµÑÑ Ð¿Ð¾ÑÐ»Ðµ Ð¿ÑÐ±Ð»Ð¸ÐºÐ°ÑÐ¸Ð¸ Ð¸Ð»Ð¸ Ð¾ÑÐºÐ»Ð¸ÐºÐ°.") {
+  function showEmpty(list, title, text = "Данные появятся здесь после публикации или отклика.") {
     if (!list) return;
     list.innerHTML = "";
     list.appendChild(card(title, `<p>${escapeHtml(text)}</p>`));
   }
 
-  function setBusy(button, busy, text = "Ð¡Ð¾ÑÑÐ°Ð½ÑÐµÐ¼...") {
+  function setBusy(button, busy, text = "Сохраняем...") {
     if (!button) return;
     if (busy) {
       button.dataset.defaultText = button.textContent;
@@ -274,14 +274,14 @@
   function errorText(error, duplicateText) {
     if (!error) return "";
     if (error.code === "23505" && duplicateText) return duplicateText;
-    return error.message || "ÐÐµÐ¸Ð·Ð²ÐµÑÑÐ½Ð°Ñ Ð¾ÑÐ¸Ð±ÐºÐ° Supabase";
+    return error.message || "Неизвестная ошибка Supabase";
   }
 
   function withTimeout(promise, ms = 6000, label = "Supabase") {
     let timeoutId;
     const timeout = new Promise((_, reject) => {
       timeoutId = setTimeout(
-        () => reject(new Error(`${label}: Ð¿ÑÐµÐ²ÑÑÐµÐ½Ð¾ Ð²ÑÐµÐ¼Ñ Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ`)),
+        () => reject(new Error(`${label}: превышено время ожидания`)),
         ms,
       );
     });
@@ -306,7 +306,7 @@
   }
 
   function shiftSummary(shift) {
-    return [shift?.title, shift?.profession, shift?.city, shift?.date_from].filter(Boolean).join(" / ") || "Ð¡Ð¼ÐµÐ½Ð°";
+    return [shift?.title, shift?.profession, shift?.city, shift?.date_from].filter(Boolean).join(" / ") || "Смена";
   }
 
   function fillMainProfileFields(role) {
@@ -355,7 +355,7 @@
       role: state.profile.role,
       email: payload.email || state.profile.email || state.user.email || null,
       phone: payload.phone || state.profile.phone || state.user.phone || null,
-      name: payload.name || state.profile.name || state.user.email || state.user.phone || "ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ñ",
+      name: payload.name || state.profile.name || state.user.email || state.user.phone || "Пользователь",
       city: payload.city || state.profile.city || null,
       auth_provider: state.profile.auth_provider || metadata.auth_provider || (state.user.phone && !state.user.email ? "phone" : "email"),
       status: state.profile.status || "active",
@@ -408,7 +408,7 @@
     const missing = fields.filter((field) => !value(field.id));
     if (!missing.length) return true;
 
-    setMessage(messageTarget, `ÐÐ°Ð¿Ð¾Ð»Ð½Ð¸ÑÐµ: ${missing.map((field) => field.label).join(", ")}.`);
+    setMessage(messageTarget, `Заполните: ${missing.map((field) => field.label).join(", ")}.`);
     byId(missing[0].id)?.focus();
     return false;
   }
@@ -489,7 +489,7 @@
     setBusy(button, true);
 
     const mainProfile = {
-      name: value("workerName") || state.profile?.name || state.user.email || "Ð Ð°Ð±Ð¾ÑÐ½Ð¸Ðº",
+      name: value("workerName") || state.profile?.name || state.user.email || "Работник",
       city: value("workerCity"),
       district: value("workerDistrict"),
       email: value("workerEmail") || state.profile?.email || state.user.email || null,
@@ -514,8 +514,8 @@
     setMessage(
       el.workerProfileMessage,
       errors.length
-        ? `ÐÑÐ¸Ð±ÐºÐ°: ${errors.map((item) => item.message).join("; ")}`
-        : "ÐÑÐ¾ÑÐ¸Ð»Ñ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ° ÑÐ¾ÑÑÐ°Ð½ÐµÐ½."
+        ? `Ошибка: ${errors.map((item) => item.message).join("; ")}`
+        : "Профиль работника сохранен."
     );
     setBusy(button, false);
   }
@@ -537,7 +537,7 @@
   }
 
   async function loadShiftPosts() {
-    setMessage(el.shiftPostsMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ ÑÐ¼ÐµÐ½Ñ...");
+    setMessage(el.shiftPostsMessage, "Загружаем смены...");
     const { data, error } = await selectRowsWithFallback(
       "shift_posts",
       { status: "open" },
@@ -548,7 +548,7 @@
     );
 
     if (error) {
-      setMessage(el.shiftPostsMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.shiftPostsMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -567,8 +567,8 @@
     el.shiftPostsList.innerHTML = "";
 
     if (!shifts.length) {
-      showEmpty(el.shiftPostsList, "Ð¡Ð¼ÐµÐ½ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ", "ÐÐ¾Ð´ÑÐ¾Ð´ÑÑÐ¸Ñ ÑÐ¼ÐµÐ½ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
-      setMessage(el.shiftPostsMessage, "ÐÐ¾Ð´ÑÐ¾Ð´ÑÑÐ¸Ñ ÑÐ¼ÐµÐ½ Ð½ÐµÑ.");
+      showEmpty(el.shiftPostsList, "Смен пока нет", "Подходящих смен пока нет.");
+      setMessage(el.shiftPostsMessage, "Подходящих смен нет.");
       return;
     }
 
@@ -576,17 +576,17 @@
       const restaurant = relatedProfile(shift, "restaurant");
       const application = applicationsByShift.get(shift.id);
       const node = card(
-        shift.title || "Ð¡Ð¼ÐµÐ½Ð°",
+        shift.title || "Смена",
         `
-          <p>ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ: ${escapeHtml(displayName(restaurant, "Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½Ð¾"))}</p>
+          <p>Заведение: ${escapeHtml(displayName(restaurant, "не указано"))}</p>
           <p>${escapeHtml(shift.profession || "-")} / ${escapeHtml(shift.city || "-")}</p>
           <p>${escapeHtml(shift.date_from || "")} ${escapeHtml(shift.time_from || "")}-${escapeHtml(shift.time_to || "")}</p>
-          <p>Ð¡ÑÐ°Ð²ÐºÐ°: ${escapeHtml(money(shift.rate))}</p>
+          <p>Ставка: ${escapeHtml(money(shift.rate))}</p>
           <p>${escapeHtml(shift.requirements || "")}</p>
         `,
         application
-          ? `<p class="message">ÐÑ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ½ÑÐ»Ð¸ÑÑ. Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(application.status))}</p>`
-          : '<button type="button" data-action="apply-shift">ÐÑÐºÐ»Ð¸ÐºÐ½ÑÑÑÑÑ</button><p class="message"></p>'
+          ? `<p class="message">Вы уже откликнулись. Статус: ${escapeHtml(statusText(application.status))}</p>`
+          : '<button type="button" data-action="apply-shift">Откликнуться</button><p class="message"></p>'
       );
 
       node.querySelector("[data-action='apply-shift']")?.addEventListener("click", (event) => {
@@ -596,11 +596,11 @@
       el.shiftPostsList.appendChild(node);
     });
 
-    setMessage(el.shiftPostsMessage, `Ð¡Ð¼ÐµÐ½ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾: ${shifts.length}`);
+    setMessage(el.shiftPostsMessage, `Смен найдено: ${shifts.length}`);
   }
 
   async function applyToShift(shift, node, button) {
-    setBusy(button, true, "ÐÑÐ¿ÑÐ°Ð²Ð»ÑÐµÐ¼...");
+    setBusy(button, true, "Отправляем...");
     const message = node.querySelector(".message");
     const duplicate = await rowExists("shift_applications", {
       shift_id: shift.id,
@@ -608,14 +608,14 @@
     });
 
     if (duplicate.error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${duplicate.error.message}`);
+      setMessage(message, `Ошибка: ${duplicate.error.message}`);
       setBusy(button, false);
       return;
     }
 
     if (duplicate.exists) {
-      setMessage(message, "ÐÑ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ°Ð»Ð¸ÑÑ Ð½Ð° ÑÑÑ ÑÐ¼ÐµÐ½Ñ.");
-      button.textContent = "ÐÑÐºÐ»Ð¸Ðº ÑÐ¶Ðµ ÐµÑÑÑ";
+      setMessage(message, "Вы уже откликались на эту смену.");
+      button.textContent = "Отклик уже есть";
       button.disabled = true;
       return;
     }
@@ -624,27 +624,27 @@
       shift_id: shift.id,
       worker_id: state.user.id,
       restaurant_id: shift.restaurant_id,
-      message: "ÐÑÐºÐ»Ð¸Ðº ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ°",
+      message: "Отклик работника",
       status: "pending",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 
     if (error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${errorText(error, "Ð²Ñ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ°Ð»Ð¸ÑÑ Ð½Ð° ÑÑÑ ÑÐ¼ÐµÐ½Ñ")}`);
+      setMessage(message, `Ошибка: ${errorText(error, "вы уже откликались на эту смену")}`);
       setBusy(button, false);
       return;
     }
 
-    setMessage(message, "ÐÑÐºÐ»Ð¸Ðº Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ.");
-    button.textContent = "ÐÑÐºÐ»Ð¸Ðº Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½";
+    setMessage(message, "Отклик отправлен заведению.");
+    button.textContent = "Отклик отправлен";
     button.disabled = true;
     await loadWorkerApplications();
     renderShiftPosts();
   }
 
   async function loadWorkerApplications() {
-    setMessage(el.workerApplicationsMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð²Ð°ÑÐ¸ Ð¾ÑÐºÐ»Ð¸ÐºÐ¸...");
+    setMessage(el.workerApplicationsMessage, "Загружаем ваши отклики...");
     const { data, error } = await selectRowsWithFallback(
       "shift_applications",
       { worker_id: state.user.id },
@@ -656,7 +656,7 @@
     );
 
     if (error) {
-      setMessage(el.workerApplicationsMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.workerApplicationsMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -671,10 +671,10 @@
     if (!state.workerApplications.length) {
       showEmpty(
         el.workerApplicationsList,
-        "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ",
-        "ÐÑÐºÐ»Ð¸ÐºÐ½Ð¸ÑÐµÑÑ Ð½Ð° ÑÐ¼ÐµÐ½Ñ, Ð¸ ÑÑÐ°ÑÑÑ Ð¿Ð¾ÑÐ²Ð¸ÑÑÑ Ð·Ð´ÐµÑÑ."
+        "Откликов пока нет",
+        "Откликнитесь на смену, и статус появится здесь."
       );
-      setMessage(el.workerApplicationsMessage, "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      setMessage(el.workerApplicationsMessage, "Откликов пока нет.");
       return;
     }
 
@@ -683,24 +683,24 @@
       const restaurant = relatedProfile(application, "restaurant");
       el.workerApplicationsList.appendChild(
         card(
-          shift.title || "ÐÑÐºÐ»Ð¸Ðº Ð½Ð° ÑÐ¼ÐµÐ½Ñ",
+          shift.title || "Отклик на смену",
           `
-            <p>ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ: ${escapeHtml(displayName(restaurant, application.restaurant_id))}</p>
-            <p>Ð¡Ð¼ÐµÐ½Ð°: ${escapeHtml(shift.profession || application.shift_id || "-")} / ${escapeHtml(shift.city || restaurant.city || "-")}</p>
+            <p>Заведение: ${escapeHtml(displayName(restaurant, application.restaurant_id))}</p>
+            <p>Смена: ${escapeHtml(shift.profession || application.shift_id || "-")} / ${escapeHtml(shift.city || restaurant.city || "-")}</p>
             <p>${escapeHtml(shift.date_from || "")} ${escapeHtml(shift.time_from || "")}-${escapeHtml(shift.time_to || "")}</p>
-            <p>Ð¡ÑÐ°Ð²ÐºÐ°: ${escapeHtml(money(shift.rate))}</p>
-            <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(application.status))}</p>
+            <p>Ставка: ${escapeHtml(money(shift.rate))}</p>
+            <p>Статус: ${escapeHtml(statusText(application.status))}</p>
             <p>${escapeHtml(application.message || "")}</p>
           `
         )
       );
     });
 
-    setMessage(el.workerApplicationsMessage, `ÐÐ°ÑÐ¸Ñ Ð¾ÑÐºÐ»Ð¸ÐºÐ¾Ð²: ${state.workerApplications.length}`);
+    setMessage(el.workerApplicationsMessage, `Ваших откликов: ${state.workerApplications.length}`);
   }
 
   async function loadWorkerInvites() {
-    setMessage(el.invitesMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ñ...");
+    setMessage(el.invitesMessage, "Загружаем приглашения...");
     const { data, error } = await selectRowsWithFallback(
       "shift_invites",
       { worker_id: state.user.id },
@@ -712,7 +712,7 @@
     );
 
     if (error) {
-      setMessage(el.invitesMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.invitesMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -724,8 +724,8 @@
     el.invitesList.innerHTML = "";
 
     if (!invites.length) {
-      showEmpty(el.invitesList, "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹ Ð½ÐµÑ", "ÐÑÐ¾Ð´ÑÑÐ¸Ñ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
-      setMessage(el.invitesMessage, "ÐÑÐ¾Ð´ÑÑÐ¸Ñ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      showEmpty(el.invitesList, "Приглашений нет", "Входящих приглашений пока нет.");
+      setMessage(el.invitesMessage, "Входящих приглашений пока нет.");
       return;
     }
 
@@ -736,15 +736,15 @@
       const node = card(
         shiftTitle,
         `
-          <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(invite.status))}</p>
-          <p>Ð¡Ð¼ÐµÐ½Ð°: ${escapeHtml(shift.profession || "-")} / ${escapeHtml(shift.city || "-")}</p>
+          <p>Статус: ${escapeHtml(statusText(invite.status))}</p>
+          <p>Смена: ${escapeHtml(shift.profession || "-")} / ${escapeHtml(shift.city || "-")}</p>
           <p>${escapeHtml(shift.date_from || "")} ${escapeHtml(shift.time_from || "")}-${escapeHtml(shift.time_to || "")}</p>
-          <p>Ð¡ÑÐ°Ð²ÐºÐ°: ${escapeHtml(money(shift.rate))}</p>
-          <p>${escapeHtml(invite.message || "ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐ°ÐµÑ Ð²Ð°Ñ Ð½Ð° ÑÐ¼ÐµÐ½Ñ.")}</p>
+          <p>Ставка: ${escapeHtml(money(shift.rate))}</p>
+          <p>${escapeHtml(invite.message || "Заведение приглашает вас на смену.")}</p>
         `,
         pending
-          ? '<button type="button" data-status="accepted">ÐÑÐ¸Ð½ÑÑÑ</button><button class="btn" type="button" data-status="declined">ÐÑÐºÐ»Ð¾Ð½Ð¸ÑÑ</button><p class="message"></p>'
-          : '<p class="message">Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¶Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾.</p>'
+          ? '<button type="button" data-status="accepted">Принять</button><button class="btn" type="button" data-status="declined">Отклонить</button><p class="message"></p>'
+          : '<p class="message">Решение уже сохранено.</p>'
       );
 
       node.querySelectorAll("[data-status]").forEach((button) => {
@@ -756,7 +756,7 @@
       el.invitesList.appendChild(node);
     });
 
-    setMessage(el.invitesMessage, `ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹: ${invites.length}`);
+    setMessage(el.invitesMessage, `Приглашений: ${invites.length}`);
   }
 
   async function updateInviteStatus(id, status, node) {
@@ -771,7 +771,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾."
+      error ? `Ошибка: ${error.message}` : "Решение сохранено."
     );
 
     if (error) {
@@ -792,45 +792,45 @@
     {
       id: "rev-seed-1",
       worker_id: "default",
-      restaurant_name: "Ð ÐµÑÑÐ¾ÑÐ°Ð½ Â«Ð¡ÐµÐ²ÐµÑÑÐ½ÐµÂ» (ÐÐ¾Ð»ÑÑÐ°Ñ ÐÐ¸ÐºÐ¸ÑÑÐºÐ°Ñ)",
-      restaurant_city: "ÐÐ¾ÑÐºÐ²Ð°, Ð¦ÐÐ",
-      shift_title: "ÐÐ¾Ð²Ð°Ñ Ð³Ð¾ÑÑÑÐµÐ³Ð¾ ÑÐµÑÐ°",
+      restaurant_name: "Ресторан «Северяне» (Большая Никитская)",
+      restaurant_city: "Москва, ЦАО",
+      shift_title: "Повар горячего цеха",
       rating: 5,
-      tags: ["â¡ï¸ 100% Ð²ÑÑÐ¾Ð´", "ðª Ð¡ÑÑÐ¾Ð³Ð¾ Ð¿Ð¾ Ð¢Ð¢Ð", "â¨ ÐÐ´ÐµÐ°Ð»ÑÐ½Ð°Ñ ÑÐ¸ÑÑÐ¾ÑÐ°"],
-      comment: "ÐÑÐ»Ð¸ÑÐ½Ð¾ Ð¾ÑÑÐ°Ð±Ð¾ÑÐ°Ð» Ð¿Ð¸ÐºÐ¾Ð²ÑÑ Ð¿ÑÑÐ½Ð¸ÑÐ½ÑÑ ÑÐ¼ÐµÐ½Ñ. ÐÑÑÐ¾ÐºÐ°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ Ð½Ð° ÑÐµÐºÐ°Ñ, Ð±ÐµÐ·ÑÐ¿ÑÐµÑÐ½Ð°Ñ Ð¾ÑÐ´Ð°ÑÐ° Ð±Ð»ÑÐ´ Ð¿Ð¾ ÑÐµÑÐºÐ°ÑÑÐ°Ð¼, Ð¾ÑÑÐ°Ð²Ð¸Ð» ÑÐµÑ Ð² Ð¸Ð´ÐµÐ°Ð»ÑÐ½Ð¾Ð¹ ÑÐ¸ÑÑÐ¾ÑÐµ. Ð¡ ÑÐ´Ð¾Ð²Ð¾Ð»ÑÑÑÐ²Ð¸ÐµÐ¼ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐ¸Ð¼ Ð½Ð° Ð¿Ð¾ÑÑÐ¾ÑÐ½Ð½ÑÐµ ÑÐ¼ÐµÐ½Ñ!",
+      tags: ["⚡️ 100% выход", "🔪 Строго по ТТК", "✨ Идеальная чистота"],
+      comment: "Отлично отработал пиковую пятничную смену. Высокая скорость на чеках, безупречная отдача блюд по техкартам, оставил цех в идеальной чистоте. С удовольствием пригласим на постоянные смены!",
       created_at: new Date(Date.now() - 2 * 86400000).toISOString(),
     },
     {
       id: "rev-seed-2",
       worker_id: "default",
-      restaurant_name: "ÐÐ°ÑÑÑÐ¾Ð±Ð°Ñ Â«LoroÂ»",
-      restaurant_city: "ÐÐ¾ÑÐºÐ²Ð°, ÐÐ°ÑÑÐ¸Ð°ÑÑÐ¸Ðµ",
-      shift_title: "Ð¡Ñ-ÑÐµÑ / ÐÑÐ¸Ð³Ð°Ð´Ð¸Ñ ÑÐ¼ÐµÐ½Ñ",
+      restaurant_name: "Гастробар «Loro»",
+      restaurant_city: "Москва, Патриаршие",
+      shift_title: "Су-шеф / Бригадир смены",
       rating: 5,
-      tags: ["ð¤ ÐÐ¾Ð¼Ð°Ð½Ð´Ð½Ð°Ñ ÑÐ°Ð±Ð¾ÑÐ°", "ð¥ ÐÑÑÐ¾ÐºÐ°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ", "ð³ ÐÐ°ÑÐµÑÑÐ²Ð¾ Ð¾ÑÐ´Ð°ÑÐ¸"],
-      comment: "ÐÑÐ½ÐºÑÑÐ°Ð»ÑÐ½ÑÐ¹, Ð´Ð¸ÑÑÐ¸Ð¿Ð»Ð¸Ð½Ð¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¹ ÑÐ¿ÐµÑÐ¸Ð°Ð»Ð¸ÑÑ. ÐÐµÐ· Ð»Ð¸ÑÐ½Ð¸Ñ Ð²Ð¾Ð¿ÑÐ¾ÑÐ¾Ð² Ð²Ð¾ÑÐµÐ» Ð² Ð¿ÑÐ¾ÑÐµÑÑ, Ð¿Ð¾Ð´Ð´ÐµÑÐ¶Ð°Ð» ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ Ð²Ð¾ Ð²ÑÐµÐ¼Ñ Ð½Ð°Ð¿Ð»ÑÐ²Ð° Ð³Ð¾ÑÑÐµÐ¹. Ð ÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑÐµÐ¼ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸ÑÐ¼ ÐºÐ°Ðº Ð½Ð°Ð´ÐµÐ¶Ð½Ð¾Ð³Ð¾ Ð¿ÑÐ¾ÑÐµÑÑÐ¸Ð¾Ð½Ð°Ð»Ð°.",
+      tags: ["🤝 Командная работа", "🔥 Высокая скорость", "🍳 Качество отдачи"],
+      comment: "Пунктуальный, дисциплинированный специалист. Без лишних вопросов вошел в процесс, поддержал команду во время наплыва гостей. Рекомендуем заведениям как надежного профессионала.",
       created_at: new Date(Date.now() - 5 * 86400000).toISOString(),
     },
     {
       id: "rev-seed-3",
       worker_id: "default",
-      restaurant_name: "ÐÑÐ°Ð»ÑÑÐ½ÑÐºÐ¸Ð¹ ÑÐµÑÑÐ¾ÑÐ°Ð½ Â«Margarita BistroÂ»",
-      restaurant_city: "ÐÐ¾ÑÐºÐ²Ð°, ÐÐ°ÑÑÐ¸Ð°ÑÑÐ¸Ðµ Ð¿ÑÑÐ´Ñ",
-      shift_title: "ÐÐ¾Ð²Ð°Ñ ÑÐ¾Ð»Ð¾Ð´Ð½Ð¾Ð³Ð¾ ÑÐµÑÐ° / ÐÐ°Ð³Ð¾ÑÐ¾Ð²ÑÐ¸Ðº",
+      restaurant_name: "Итальянский ресторан «Margarita Bistro»",
+      restaurant_city: "Москва, Патриаршие пруды",
+      shift_title: "Повар холодного цеха / Заготовщик",
       rating: 5,
-      tags: ["ðª Ð§ÐµÑÐºÐ¾ Ð¿Ð¾ Ð¢Ð¢Ð", "â¡ï¸ ÐÐµÐ· Ð¾Ð¿Ð¾Ð·Ð´Ð°Ð½Ð¸Ð¹"],
-      comment: "ÐÑÐµÐ½Ñ Ð°ÐºÐºÑÑÐ°ÑÐ½Ð°Ñ ÑÐ°Ð±Ð¾ÑÐ° Ñ Ð¿ÑÐ¾Ð´ÑÐºÑÐ¾Ð¼, Ð¿ÑÐ°Ð²Ð¸Ð»ÑÐ½Ð°Ñ Ð½Ð°ÑÐµÐ·ÐºÐ° Ð¸ Ð¼Ð°ÑÐºÐ¸ÑÐ¾Ð²ÐºÐ°. Ð¡Ð¼ÐµÐ½Ñ Ð·Ð°ÐºÑÑÐ» Ð½Ð° Ð¾ÑÐ»Ð¸ÑÐ½Ð¾.",
+      tags: ["🔪 Четко по ТТК", "⚡️ Без опозданий"],
+      comment: "Очень аккуратная работа с продуктом, правильная нарезка и маркировка. Смену закрыл на отлично.",
       created_at: new Date(Date.now() - 11 * 86400000).toISOString(),
     },
     {
       id: "rev-seed-4",
       worker_id: "default",
-      restaurant_name: "ÐÐ¾ÑÐµÐ¹Ð½Ñ-Ð¿ÐµÐºÐ°ÑÐ½Ñ Â«SapiensÂ»",
-      restaurant_city: "ÐÐ¾ÑÐºÐ²Ð°, Ð¥Ð°Ð¼Ð¾Ð²Ð½Ð¸ÐºÐ¸",
-      shift_title: "ÐÐ°ÑÐ¸ÑÑÐ° / ÐÐ¾Ð¼Ð¾ÑÐ½Ð¸Ðº ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÐ°",
+      restaurant_name: "Кофейня-пекарня «Sapiens»",
+      restaurant_city: "Москва, Хамовники",
+      shift_title: "Бариста / Помощник кондитера",
       rating: 4,
-      tags: ["â¡ï¸ ÐÑÐ½ÐºÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑ", "â¨ Ð§Ð¸ÑÑÐ¾ÑÐ°"],
-      comment: "Ð¥Ð¾ÑÐ¾ÑÐ°Ñ ÑÐ¼ÐµÐ½Ð°, Ð±ÑÑÑÑÐ°Ñ Ð¾ÑÐ´Ð°ÑÐ° Ð·Ð°ÐºÐ°Ð·Ð¾Ð², Ð²ÐµÐ¶Ð»Ð¸Ð²Ð¾Ðµ Ð¾ÑÐ½Ð¾ÑÐµÐ½Ð¸Ðµ Ðº Ð³Ð¾ÑÑÑÐ¼ Ð¸ ÐºÐ¾Ð»Ð»ÐµÐ³Ð°Ð¼.",
+      tags: ["⚡️ Пунктуальность", "✨ Чистота"],
+      comment: "Хорошая смена, быстрая отдача заказов, вежливое отношение к гостям и коллегам.",
       created_at: new Date(Date.now() - 18 * 86400000).toISOString(),
     },
   ];
@@ -874,7 +874,7 @@
   }
 
   function formatReviewDate(isoStr) {
-    if (!isoStr) return "ÐÐµÐ´Ð°Ð²Ð½Ð¾";
+    if (!isoStr) return "Недавно";
     try {
       const date = new Date(isoStr);
       return date.toLocaleDateString("ru-RU", {
@@ -883,12 +883,12 @@
         year: "numeric",
       });
     } catch (e) {
-      return "ÐÐµÐ´Ð°Ð²Ð½Ð¾";
+      return "Недавно";
     }
   }
 
   async function loadWorkerReviews() {
-    setMessage(el.workerReviewsMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¾ÑÐ·ÑÐ²Ñ Ð¾Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¹...");
+    setMessage(el.workerReviewsMessage, "Загружаем отзывы от заведений...");
 
     let dbReviews = [];
     try {
@@ -943,10 +943,10 @@
     if (el.workerAvgRatingNum) el.workerAvgRatingNum.textContent = avg;
     if (el.workerRatingStars) {
       const rounded = Math.round(Number(avg));
-      el.workerRatingStars.textContent = "â".repeat(rounded) + "â".repeat(5 - rounded);
+      el.workerRatingStars.textContent = "★".repeat(rounded) + "☆".repeat(5 - rounded);
     }
     if (el.workerTotalReviewsCount) {
-      el.workerTotalReviewsCount.textContent = `ÐÐ° Ð¾ÑÐ½Ð¾Ð²Ðµ ${total} ${declOfNum(total, ["Ð¾ÑÐ·ÑÐ²Ð°", "Ð¾ÑÐ·ÑÐ²Ð¾Ð²", "Ð¾ÑÐ·ÑÐ²Ð¾Ð²"])}`;
+      el.workerTotalReviewsCount.textContent = `На основе ${total} ${declOfNum(total, ["отзыва", "отзывов", "отзывов"])}`;
     }
 
     if (el.workerRating5Bar) el.workerRating5Bar.style.width = `${pct5}%`;
@@ -957,8 +957,8 @@
     if (el.workerRating3Val) el.workerRating3Val.textContent = `${pct3}%`;
 
     reviews.forEach((review) => {
-      const rawName = review.restaurant_name || "Ð ÐµÑÑÐ¾ÑÐ°Ð½ ÐÐ¾ÑÐºÐ²Ñ";
-      const cleanName = rawName.replace(/^Â«|Â»$/g, "");
+      const rawName = review.restaurant_name || "Ресторан Москвы";
+      const cleanName = rawName.replace(/^«|»$/g, "");
       const initials = cleanName
         .split(/\s+/)
         .map((w) => w[0])
@@ -968,7 +968,7 @@
         .toUpperCase() || "GC";
 
       const ratingNum = Math.min(5, Math.max(1, Number(review.rating) || 5));
-      const starsHtml = "â".repeat(ratingNum) + "â".repeat(5 - ratingNum);
+      const starsHtml = "★".repeat(ratingNum) + "☆".repeat(5 - ratingNum);
 
       const tags = Array.isArray(review.tags)
         ? review.tags
@@ -990,8 +990,8 @@
             <div>
               <h5 class="worker-review-rest-name">${escapeHtml(rawName)}</h5>
               <div class="worker-review-rest-meta">
-                <span>${escapeHtml(review.shift_title || "Ð¡Ð¼ÐµÐ½Ð° Ð² Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸")}</span> â¢ 
-                <span>${escapeHtml(review.restaurant_city || "ÐÐ¾ÑÐºÐ²Ð°")}</span> â¢ 
+                <span>${escapeHtml(review.shift_title || "Смена в заведении")}</span> • 
+                <span>${escapeHtml(review.restaurant_city || "Москва")}</span> • 
                 <span>${formatReviewDate(review.created_at)}</span>
               </div>
             </div>
@@ -1000,14 +1000,14 @@
             <span style="color: #f59e0b;">${starsHtml}</span> ${ratingNum}.0
           </div>
         </div>
-        <blockquote class="worker-review-text">Â«${escapeHtml(review.comment || "Ð¡Ð¼ÐµÐ½Ð° Ð²ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð° ÐºÐ°ÑÐµÑÑÐ²ÐµÐ½Ð½Ð¾ Ð¸ Ð² ÑÑÐ¾Ðº.")}Â»</blockquote>
+        <blockquote class="worker-review-text">«${escapeHtml(review.comment || "Смена выполнена качественно и в срок.")}»</blockquote>
         ${tagsHtml ? `<div class="worker-review-tags">${tagsHtml}</div>` : ""}
       `;
 
       el.workerReviewsList.appendChild(item);
     });
 
-    setMessage(el.workerReviewsMessage, `ÐÑÐµÐ³Ð¾ Ð¾ÑÐ·ÑÐ²Ð¾Ð²: ${reviews.length}`);
+    setMessage(el.workerReviewsMessage, `Всего отзывов: ${reviews.length}`);
   }
 
   /* ==========================================================================
@@ -1017,68 +1017,68 @@
   const DEFAULT_WORKER_PAYOUTS = [
     {
       id: "pay-1",
-      restaurant_name: "Ð ÐµÑÑÐ¾ÑÐ°Ð½ Â«Ð¡ÐµÐ²ÐµÑÑÐ½ÐµÂ» (ÐÐ¾Ð»ÑÑÐ°Ñ ÐÐ¸ÐºÐ¸ÑÑÐºÐ°Ñ)",
-      shift_title: "ÐÐ¾Ð²Ð°Ñ Ð³Ð¾ÑÑÑÐµÐ³Ð¾ ÑÐµÑÐ° (12 Ñ)",
+      restaurant_name: "Ресторан «Северяне» (Большая Никитская)",
+      shift_title: "Повар горячего цеха (12 ч)",
       amount: 5500,
-      payout_type: "Ð¡ÐÐ (Ð¢-ÐÐ°Ð½Ðº)",
+      payout_type: "СБП (Т-Банк)",
       status: "paid",
-      status_label: "ÐÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾",
-      date: "ÐÑÐµÑÐ°, 23:15",
+      status_label: "Выплачено",
+      date: "Вчера, 23:15",
     },
     {
       id: "pay-2",
-      restaurant_name: "ÐÐ°ÑÑÑÐ¾Ð±Ð°Ñ Â«LoroÂ» (ÐÐ°ÑÑÐ¸Ð°ÑÑÐ¸Ðµ)",
-      shift_title: "Ð¡Ñ-ÑÐµÑ ÑÐ¼ÐµÐ½Ñ (12 Ñ)",
+      restaurant_name: "Гастробар «Loro» (Патриаршие)",
+      shift_title: "Су-шеф смены (12 ч)",
       amount: 7200,
-      payout_type: "Ð¡ÐÐ (Ð¡Ð±ÐµÑ)",
+      payout_type: "СБП (Сбер)",
       status: "paid",
-      status_label: "ÐÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾",
-      date: "3 Ð´Ð½Ñ Ð½Ð°Ð·Ð°Ð´",
+      status_label: "Выплачено",
+      date: "3 дня назад",
     },
     {
       id: "pay-3",
-      restaurant_name: "Ð ÐµÑÑÐ¾ÑÐ°Ð½ Â«Margarita BistroÂ»",
-      shift_title: "ÐÐ¾Ð²Ð°Ñ Ð¥Ð¦ / ÐÐ°Ð³Ð¾ÑÐ¾Ð²ÑÐ¸Ðº (10 Ñ)",
+      restaurant_name: "Ресторан «Margarita Bistro»",
+      shift_title: "Повар ХЦ / Заготовщик (10 ч)",
       amount: 5200,
-      payout_type: "ÐÐ°Ð»Ð¸ÑÐ½ÑÐµ Ð² ÐºÐ°ÑÑÐµ",
+      payout_type: "Наличные в кассе",
       status: "paid",
-      status_label: "ÐÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾",
-      date: "5 Ð´Ð½ÐµÐ¹ Ð½Ð°Ð·Ð°Ð´",
+      status_label: "Выплачено",
+      date: "5 дней назад",
     },
     {
       id: "pay-4",
-      restaurant_name: "ÐÐ¾ÑÐµÐ¹Ð½Ñ-Ð¿ÐµÐºÐ°ÑÐ½Ñ Â«SapiensÂ» (Ð¥Ð°Ð¼Ð¾Ð²Ð½Ð¸ÐºÐ¸)",
-      shift_title: "ÐÐ°ÑÐ¸ÑÑÐ° / ÐÐ¾Ð¼Ð¾ÑÐ½Ð¸Ðº (10 Ñ)",
+      restaurant_name: "Кофейня-пекарня «Sapiens» (Хамовники)",
+      shift_title: "Бариста / Помощник (10 ч)",
       amount: 4200,
-      payout_type: "Ð¡ÐÐ (ÐÐ»ÑÑÐ°-ÐÐ°Ð½Ðº)",
+      payout_type: "СБП (Альфа-Банк)",
       status: "paid",
-      status_label: "ÐÑÐ¿Ð»Ð°ÑÐµÐ½Ð¾",
-      date: "12 Ð´Ð½ÐµÐ¹ Ð½Ð°Ð·Ð°Ð´",
+      status_label: "Выплачено",
+      date: "12 дней назад",
     },
     {
       id: "pay-5",
-      restaurant_name: "Ð ÐµÑÑÐ¾ÑÐ°Ð½ Â«ÐÐ¾ÑÑÐ½ÑÑÂ» (Ð¦ÐµÐ½ÑÑÐ°Ð»ÑÐ½ÑÐ¹ ÑÑÐ½Ð¾Ðº)",
-      shift_title: "ÐÐ¾Ð²Ð°Ñ ÐÐ¦ / ÐÑÐ¸Ð»Ñ (12 Ñ)",
+      restaurant_name: "Ресторан «Горыныч» (Центральный рынок)",
+      shift_title: "Повар ГЦ / Гриль (12 ч)",
       amount: 5500,
-      payout_type: "Ð¡ÐÐ (Ð¿ÐµÑÐµÐ²Ð¾Ð´ Ð² ÐºÐ¾Ð½ÑÐµ ÑÐ¼ÐµÐ½Ñ)",
+      payout_type: "СБП (перевод в конце смены)",
       status: "pending",
-      status_label: "ÐÐ¶Ð¸Ð´Ð°ÐµÑ Ð¿ÐµÑÐµÐ²Ð¾Ð´ (ÑÐµÐ³Ð¾Ð´Ð½Ñ Ð² 23:00)",
-      date: "Ð¡ÐµÐ³Ð¾Ð´Ð½Ñ",
+      status_label: "Ожидает перевод (сегодня в 23:00)",
+      date: "Сегодня",
     },
     {
       id: "pay-6",
-      restaurant_name: "ÐÐ°Ñ Â«ÐÐ»Ð°Ð²Ð°Â» (ÐÐ°ÑÑÐ¸Ð°ÑÑÐ¸Ðµ)",
-      shift_title: "ÐÐ°ÑÐ¼ÐµÐ½ (10 Ñ)",
+      restaurant_name: "Бар «Клава» (Патриаршие)",
+      shift_title: "Бармен (10 ч)",
       amount: 6000,
-      payout_type: "Ð¡ÐÐ + Ð§Ð°Ð¹",
+      payout_type: "СБП + Чай",
       status: "pending",
-      status_label: "ÐÐ¾Ð´ÑÐ²ÐµÑÐ¶Ð´ÐµÐ½Ð½Ð°Ñ ÑÐ¼ÐµÐ½Ð° (Ð·Ð°Ð²ÑÑÐ°)",
-      date: "ÐÐ°Ð²ÑÑÐ°",
+      status_label: "Подтвержденная смена (завтра)",
+      date: "Завтра",
     },
   ];
 
   function formatMoneyRub(num) {
-    return `${Number(num || 0).toLocaleString("ru-RU")} â½`;
+    return `${Number(num || 0).toLocaleString("ru-RU")} ₽`;
   }
 
   async function loadWorkerEarnings() {
@@ -1122,7 +1122,7 @@
     if (el.workerTotalEarned) el.workerTotalEarned.textContent = formatMoneyRub(totalEarned);
     if (el.workerPendingPayout) el.workerPendingPayout.textContent = formatMoneyRub(pendingPayout);
     if (el.workerAvgShiftRate) el.workerAvgShiftRate.textContent = formatMoneyRub(avgRate);
-    if (el.workerCompletedShiftsCount) el.workerCompletedShiftsCount.textContent = `${completedShiftsCount} ${declOfNum(completedShiftsCount, ["ÑÐ¼ÐµÐ½Ð°", "ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½"])}`;
+    if (el.workerCompletedShiftsCount) el.workerCompletedShiftsCount.textContent = `${completedShiftsCount} ${declOfNum(completedShiftsCount, ["смена", "смены", "смен"])}`;
 
     renderWorkerPayouts(DEFAULT_WORKER_PAYOUTS);
     recalcWorkerEarnings();
@@ -1141,8 +1141,8 @@
         <div class="payout-item-info">
           <div class="payout-item-title">${escapeHtml(p.restaurant_name)}</div>
           <div class="payout-item-meta">
-            <span>${escapeHtml(p.shift_title)}</span> â¢ 
-            <span>${escapeHtml(p.date)}</span> â¢ 
+            <span>${escapeHtml(p.shift_title)}</span> • 
+            <span>${escapeHtml(p.date)}</span> • 
             <span>${escapeHtml(p.payout_type)}</span>
           </div>
         </div>
@@ -1213,12 +1213,12 @@
       el.workerCalcRateVal.textContent = formatMoneyRub(baseRate);
     }
 
-    let shiftsSubText = `${shiftsCount} ${declOfNum(shiftsCount, ["ÑÐ¼ÐµÐ½Ð°", "ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½"])}`;
-    if (shiftsCount === 8) shiftsSubText += " (Ð¿Ð¾Ð´ÑÐ°Ð±Ð¾ÑÐºÐ°)";
-    else if (shiftsCount === 15) shiftsSubText += " (Ð³ÑÐ°ÑÐ¸Ðº 2/2 Ð¸Ð»Ð¸ 3/3)";
-    else if (shiftsCount === 18) shiftsSubText += " (Ð³ÑÐ°ÑÐ¸Ðº 4/3)";
-    else if (shiftsCount === 22) shiftsSubText += " (Ð³ÑÐ°ÑÐ¸Ðº 5/2)";
-    else if (shiftsCount === 26) shiftsSubText += " (Ð¿Ð»Ð¾ÑÐ½ÑÐ¹ 6/1)";
+    let shiftsSubText = `${shiftsCount} ${declOfNum(shiftsCount, ["смена", "смены", "смен"])}`;
+    if (shiftsCount === 8) shiftsSubText += " (подработка)";
+    else if (shiftsCount === 15) shiftsSubText += " (график 2/2 или 3/3)";
+    else if (shiftsCount === 18) shiftsSubText += " (график 4/3)";
+    else if (shiftsCount === 22) shiftsSubText += " (график 5/2)";
+    else if (shiftsCount === 26) shiftsSubText += " (плотный 6/1)";
 
     if (el.workerCalcShiftsVal) {
       el.workerCalcShiftsVal.textContent = shiftsSubText;
@@ -1240,7 +1240,7 @@
     const yearIncome = monthIncome * 12;
 
     if (el.workerCalcMonthSum) el.workerCalcMonthSum.textContent = formatMoneyRub(monthIncome);
-    if (el.workerCalcPeriodNote) el.workerCalcPeriodNote.textContent = `Ð·Ð° ${shiftsCount} ${declOfNum(shiftsCount, ["ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½"])} Ð² Ð¼ÐµÑÑÑ Ð½Ð° ÑÑÐºÐ¸`;
+    if (el.workerCalcPeriodNote) el.workerCalcPeriodNote.textContent = `за ${shiftsCount} ${declOfNum(shiftsCount, ["смену", "смены", "смен"])} в месяц на руки`;
     if (el.workerCalcSingleShift) el.workerCalcSingleShift.textContent = formatMoneyRub(effectiveShiftRate);
     if (el.workerCalcWeekSum) el.workerCalcWeekSum.textContent = formatMoneyRub(weekIncome);
     if (el.workerCalcYearSum) el.workerCalcYearSum.textContent = formatMoneyRub(yearIncome);
@@ -1259,7 +1259,7 @@
         btn.addEventListener("click", () => {
           presetsContainer.querySelectorAll(".savings-preset-chip").forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
-          const title = btn.dataset.title || "Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð°Ñ ÑÐµÐ»Ñ";
+          const title = btn.dataset.title || "Финансовая цель";
           const amount = Number(btn.dataset.amount || 120000);
 
           if (el.savingsGoalTitleInput) {
@@ -1295,7 +1295,7 @@
     if (el.savingsGoalTitleInput) {
       el.savingsGoalTitleInput.addEventListener("input", () => {
         if (el.savingsTargetNamePreview) {
-          el.savingsTargetNamePreview.textContent = el.savingsGoalTitleInput.value.trim() || "Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð°Ñ ÑÐµÐ»Ñ";
+          el.savingsTargetNamePreview.textContent = el.savingsGoalTitleInput.value.trim() || "Финансовая цель";
         }
       });
     }
@@ -1318,10 +1318,10 @@
 
     const avgRate = currentSavingsWorkerAvgRate || 5500;
     if (el.savingsAvgRateBadge) {
-      el.savingsAvgRateBadge.textContent = `${formatMoneyRub(avgRate)} / ÑÐ¼ÐµÐ½Ð°`;
+      el.savingsAvgRateBadge.textContent = `${formatMoneyRub(avgRate)} / смена`;
     }
 
-    const goalTitle = el.savingsGoalTitleInput?.value.trim() || "Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð°Ñ ÑÐµÐ»Ñ";
+    const goalTitle = el.savingsGoalTitleInput?.value.trim() || "Финансовая цель";
     if (el.savingsTargetNamePreview) {
       el.savingsTargetNamePreview.textContent = goalTitle;
     }
@@ -1347,13 +1347,13 @@
 
     // Shifts per week
     const shiftsPerWeek = Number(el.savingsShiftsPerWeekSlider?.value || 4);
-    let shiftsPerWeekText = `${shiftsPerWeek} ${declOfNum(shiftsPerWeek, ["ÑÐ¼ÐµÐ½Ð°", "ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½"])}`;
-    if (shiftsPerWeek === 1) shiftsPerWeekText += " (ÑÐ°Ð·Ð¾Ð²Ð°Ñ Ð¿Ð¾Ð´ÑÐ°Ð±Ð¾ÑÐºÐ°)";
-    else if (shiftsPerWeek === 2) shiftsPerWeekText += " (Ð²ÑÑÐ¾Ð´Ð½ÑÐµ Ð´Ð½Ð¸)";
-    else if (shiftsPerWeek === 3) shiftsPerWeekText += " (ÑÐ²Ð¾Ð±Ð¾Ð´Ð½ÑÐ¹ Ð³ÑÐ°ÑÐ¸Ðº)";
-    else if (shiftsPerWeek === 4) shiftsPerWeekText += " (Ð³ÑÐ°ÑÐ¸Ðº 2/2 Ð¸Ð»Ð¸ 4/3)";
-    else if (shiftsPerWeek === 5) shiftsPerWeekText += " (Ð³ÑÐ°ÑÐ¸Ðº 5/2)";
-    else if (shiftsPerWeek >= 6) shiftsPerWeekText += " (Ð¸Ð½ÑÐµÐ½ÑÐ¸Ð² 6/1)";
+    let shiftsPerWeekText = `${shiftsPerWeek} ${declOfNum(shiftsPerWeek, ["смена", "смены", "смен"])}`;
+    if (shiftsPerWeek === 1) shiftsPerWeekText += " (разовая подработка)";
+    else if (shiftsPerWeek === 2) shiftsPerWeekText += " (выходные дни)";
+    else if (shiftsPerWeek === 3) shiftsPerWeekText += " (свободный график)";
+    else if (shiftsPerWeek === 4) shiftsPerWeekText += " (график 2/2 или 4/3)";
+    else if (shiftsPerWeek === 5) shiftsPerWeekText += " (график 5/2)";
+    else if (shiftsPerWeek >= 6) shiftsPerWeekText += " (интенсив 6/1)";
 
     if (el.savingsShiftsPerWeekLabel) {
       el.savingsShiftsPerWeekLabel.textContent = shiftsPerWeekText;
@@ -1366,16 +1366,16 @@
     const requiredMonths = (requiredWeeks / 4.33).toFixed(1);
 
     if (el.savingsRequiredShifts) {
-      el.savingsRequiredShifts.textContent = `${requiredShifts} ${declOfNum(requiredShifts, ["ÑÐ¼ÐµÐ½Ð°", "ÑÐ¼ÐµÐ½Ñ", "ÑÐ¼ÐµÐ½"])}`;
+      el.savingsRequiredShifts.textContent = `${requiredShifts} ${declOfNum(requiredShifts, ["смена", "смены", "смен"])}`;
     }
 
     let timeEstimateStr = "";
     if (requiredWeeks <= 2) {
-      timeEstimateStr = `~${requiredDays} ${declOfNum(requiredDays, ["Ð´ÐµÐ½Ñ", "Ð´Ð½Ñ", "Ð´Ð½ÐµÐ¹"])} (${requiredWeeks} ${declOfNum(requiredWeeks, ["Ð½ÐµÐ´ÐµÐ»Ñ", "Ð½ÐµÐ´ÐµÐ»Ð¸", "Ð½ÐµÐ´ÐµÐ»Ñ"])})`;
+      timeEstimateStr = `~${requiredDays} ${declOfNum(requiredDays, ["день", "дня", "дней"])} (${requiredWeeks} ${declOfNum(requiredWeeks, ["неделя", "недели", "недель"])})`;
     } else if (requiredWeeks < 8) {
-      timeEstimateStr = `~${requiredWeeks} ${declOfNum(requiredWeeks, ["Ð½ÐµÐ´ÐµÐ»Ñ", "Ð½ÐµÐ´ÐµÐ»Ð¸", "Ð½ÐµÐ´ÐµÐ»Ñ"])} (~${requiredMonths} Ð¼ÐµÑ)`;
+      timeEstimateStr = `~${requiredWeeks} ${declOfNum(requiredWeeks, ["неделя", "недели", "недель"])} (~${requiredMonths} мес)`;
     } else {
-      timeEstimateStr = `~${requiredMonths} ${declOfNum(Math.round(Number(requiredMonths)), ["Ð¼ÐµÑÑÑ", "Ð¼ÐµÑÑÑÐ°", "Ð¼ÐµÑÑÑÐµÐ²"])} (${requiredWeeks} Ð½ÐµÐ´.)`;
+      timeEstimateStr = `~${requiredMonths} ${declOfNum(Math.round(Number(requiredMonths)), ["месяц", "месяца", "месяцев"])} (${requiredWeeks} нед.)`;
     }
 
     if (el.savingsTimeEstimateLabel) {
@@ -1402,7 +1402,7 @@
 
     // Progress bar and labels
     if (el.savingsProgressPaceLabel) {
-      el.savingsProgressPaceLabel.textContent = `~${formatMoneyRub(weeklyDeposit)} / Ð½ÐµÐ´.`;
+      el.savingsProgressPaceLabel.textContent = `~${formatMoneyRub(weeklyDeposit)} / нед.`;
     }
     if (el.savingsProgressTargetLabel) {
       el.savingsProgressTargetLabel.textContent = formatMoneyRub(targetAmount);
@@ -1429,7 +1429,7 @@
       const acceleratedDays = Math.ceil((requiredShifts / extraShiftsPerWeek) * 7);
       const daysSaved = Math.max(1, requiredDays - acceleratedDays);
       el.savingsAccelerationTip.innerHTML = `
-        ð¡ <strong>Ð£ÑÐºÐ¾ÑÐµÐ½Ð¸Ðµ ÑÐµÐ»Ð¸:</strong> +1 Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸ÑÐµÐ»ÑÐ½Ð°Ñ ÑÐ¼ÐµÐ½Ð° Ð² Ð½ÐµÐ´ÐµÐ»Ñ (${extraShiftsPerWeek} Ð²Ð¼ÐµÑÑÐ¾ ${shiftsPerWeek}) ÑÐ¾ÐºÑÐ°ÑÐ¸Ñ ÑÑÐ¾Ðº Ð½Ð°ÐºÐ¾Ð¿Ð»ÐµÐ½Ð¸Ñ Ð½Ð° <strong>${daysSaved} ${declOfNum(daysSaved, ["Ð´ÐµÐ½Ñ", "Ð´Ð½Ñ", "Ð´Ð½ÐµÐ¹"])}</strong>!
+        💡 <strong>Ускорение цели:</strong> +1 дополнительная смена в неделю (${extraShiftsPerWeek} вместо ${shiftsPerWeek}) сократит срок накопления на <strong>${daysSaved} ${declOfNum(daysSaved, ["день", "дня", "дней"])}</strong>!
       `;
     }
   }
@@ -1438,7 +1438,7 @@
     const button = event?.currentTarget;
     if (
       !requireValues(
-        [{ id: "restaurantBusinessName", label: "Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ" }],
+        [{ id: "restaurantBusinessName", label: "название заведения" }],
         el.restaurantProfileMessage
       )
     ) {
@@ -1459,7 +1459,7 @@
           profilePayload.contact_person ||
           state.profile?.name ||
           state.user.email ||
-          "ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ",
+          "Заведение",
         city: profilePayload.city || state.profile?.city || "",
         ...contactPayload,
         auth_provider: state.profile?.auth_provider || (state.user.phone && !state.user.email ? "phone" : "email"),
@@ -1481,8 +1481,8 @@
     setMessage(
       el.restaurantProfileMessage,
       errors.length
-        ? `ÐÑÐ¸Ð±ÐºÐ°: ${errors.map((item) => item.message).join("; ")}`
-        : "ÐÑÐ¾ÑÐ¸Ð»Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½."
+        ? `Ошибка: ${errors.map((item) => item.message).join("; ")}`
+        : "Профиль заведения сохранен."
     );
     setBusy(button, false);
   }
@@ -1504,11 +1504,11 @@
     const city = value("shiftCity");
 
     if (!title || !profession || !city) {
-      setMessage(el.shiftPostMessage, "ÐÐ°Ð¿Ð¾Ð»Ð½Ð¸ÑÐµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÑÐ¼ÐµÐ½Ñ, Ð¿ÑÐ¾ÑÐµÑÑÐ¸Ñ Ð¸ Ð³Ð¾ÑÐ¾Ð´.");
+      setMessage(el.shiftPostMessage, "Заполните название смены, профессию и город.");
       return;
     }
 
-    setBusy(button, true, "ÐÑÐ±Ð»Ð¸ÐºÑÐµÐ¼...");
+    setBusy(button, true, "Публикуем...");
     const { error } = await insertRow("shift_posts", {
       restaurant_id: state.user.id,
       title,
@@ -1526,7 +1526,7 @@
       updated_at: new Date().toISOString(),
     });
 
-    setMessage(el.shiftPostMessage, error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð¡Ð¼ÐµÐ½Ð° Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð°.");
+    setMessage(el.shiftPostMessage, error ? `Ошибка: ${error.message}` : "Смена опубликована.");
     setBusy(button, false);
     if (!error) {
       [
@@ -1556,7 +1556,7 @@
     );
 
     if (error) {
-      setMessage(el.shiftPostMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.shiftPostMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -1584,7 +1584,7 @@
     el.restaurantShiftPostsList.innerHTML = "";
 
     if (!state.restaurantShifts.length) {
-      showEmpty(el.restaurantShiftPostsList, "Ð¡Ð¼ÐµÐ½Ñ ÐµÑÐµ Ð½Ðµ Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ñ");
+      showEmpty(el.restaurantShiftPostsList, "Смены еще не опубликованы");
       return;
     }
 
@@ -1594,20 +1594,20 @@
       const counts = applicationCounts.get(shift.id) || { total: 0, pending: 0, accepted: 0 };
       const isOpen = shift.status === "open";
       const node = card(
-        shift.title || "Ð¡Ð¼ÐµÐ½Ð°",
+        shift.title || "Смена",
         `
           <p>${escapeHtml(shift.profession || "-")} / ${escapeHtml(shift.city || "-")}</p>
           <p>${escapeHtml(shift.date_from || "")} ${escapeHtml(shift.time_from || "")}-${escapeHtml(shift.time_to || "")}</p>
-          <p>Ð¡ÑÐ°Ð²ÐºÐ°: ${escapeHtml(money(shift.rate))}</p>
-          <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(shift.status))}</p>
-          <p>ÐÑÐºÐ»Ð¸ÐºÐ¸: ${counts.total}, Ð¶Ð´ÑÑ: ${counts.pending}, Ð¿ÑÐ¸Ð½ÑÑÐ¾: ${counts.accepted}</p>
+          <p>Ставка: ${escapeHtml(money(shift.rate))}</p>
+          <p>Статус: ${escapeHtml(statusText(shift.status))}</p>
+          <p>Отклики: ${counts.total}, ждут: ${counts.pending}, принято: ${counts.accepted}</p>
         `,
         `
-          <button class="btn" type="button" data-action="view-shift-applications">ÐÑÐºÐ»Ð¸ÐºÐ¸</button>
-          <button class="btn primary" type="button" data-action="publish-to-telegram" style="background:#229ED9; border-color:#229ED9; color:#fff;">ð Ð Telegram</button>
+          <button class="btn" type="button" data-action="view-shift-applications">Отклики</button>
+          <button class="btn primary" type="button" data-action="publish-to-telegram" style="background:#229ED9; border-color:#229ED9; color:#fff;">🚀 В Telegram</button>
           ${
             isOpen
-              ? '<button type="button" data-shift-status="closed">ÐÐ°ÐºÑÑÑÑ</button><button class="btn" type="button" data-shift-status="cancelled">ÐÑÐ¼ÐµÐ½Ð¸ÑÑ</button>'
+              ? '<button type="button" data-shift-status="closed">Закрыть</button><button class="btn" type="button" data-shift-status="cancelled">Отменить</button>'
               : ""
           }
           <p class="message"></p>
@@ -1647,7 +1647,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð¡ÑÐ°ÑÑÑ ÑÐ¼ÐµÐ½Ñ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½."
+      error ? `Ошибка: ${error.message}` : "Статус смены обновлен."
     );
 
     if (error) {
@@ -1661,7 +1661,7 @@
   async function loadShiftApplications(filterShiftId = "") {
     const selectedShiftId = typeof filterShiftId === "string" ? filterShiftId : "";
     state.restaurantApplicationFilter = selectedShiftId;
-    setMessage(el.shiftPostMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¾ÑÐºÐ»Ð¸ÐºÐ¸ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð²...");
+    setMessage(el.shiftPostMessage, "Загружаем отклики работников...");
     const { data, error } = await selectRowsWithFallback(
       "shift_applications",
       { restaurant_id: state.user.id },
@@ -1673,7 +1673,7 @@
     );
 
     if (error) {
-      setMessage(el.shiftPostMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.shiftPostMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -1695,11 +1695,11 @@
     if (!applications.length) {
       showEmpty(
         el.shiftApplicationsList,
-        selectedShiftId ? "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ ÑÑÐ¾Ð¹ ÑÐ¼ÐµÐ½Ðµ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ" : "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ"
+        selectedShiftId ? "Откликов по этой смене пока нет" : "Откликов работников пока нет"
       );
       setMessage(
         el.shiftPostMessage,
-        selectedShiftId ? "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ Ð²ÑÐ±ÑÐ°Ð½Ð½Ð¾Ð¹ ÑÐ¼ÐµÐ½Ðµ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ." : "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ."
+        selectedShiftId ? "Откликов по выбранной смене пока нет." : "Откликов работников пока нет."
       );
       return;
     }
@@ -1718,17 +1718,17 @@
       if (pending) {
         actionHtml = `
           <div style="display:flex; gap:8px; margin-top:8px;">
-            <button type="button" data-status="accepted" class="btn primary">ÐÑÐ¸Ð½ÑÑÑ</button>
-            <button class="btn" type="button" data-status="declined">ÐÑÐºÐ»Ð¾Ð½Ð¸ÑÑ</button>
+            <button type="button" data-status="accepted" class="btn primary">Принять</button>
+            <button class="btn" type="button" data-status="declined">Отклонить</button>
           </div>
           <p class="message"></p>
         `;
       } else {
         actionHtml = `
           <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:10px;">
-            ${isAccepted ? `<button type="button" class="btn primary" data-action="complete-app" style="font-size:13px; padding:6px 12px;">â ÐÐ°Ð²ÐµÑÑÐ¸ÑÑ ÑÐ¼ÐµÐ½Ñ</button>` : `<span class="worker-badge-trust" style="color:#059669;background:#ecfdf5;border-color:#a7f3d0;font-size:11.5px;padding:4px 8px;">â Ð¡Ð¼ÐµÐ½Ð° Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð°</span>`}
+            ${isAccepted ? `<button type="button" class="btn primary" data-action="complete-app" style="font-size:13px; padding:6px 12px;">✅ Завершить смену</button>` : `<span class="worker-badge-trust" style="color:#059669;background:#ecfdf5;border-color:#a7f3d0;font-size:11.5px;padding:4px 8px;">✓ Смена завершена</span>`}
             <button type="button" class="btn" data-action="toggle-review-box" style="font-size:13px; padding:6px 12px;">
-              ${existingReview ? `â­ï¸ ÐÑÐ·ÑÐ² (${existingReview.rating}â) â¢ ÐÐ·Ð¼ÐµÐ½Ð¸ÑÑ` : `â­ï¸ ÐÑÐµÐ½Ð¸ÑÑ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ° / ÐÑÐ·ÑÐ²`}
+              ${existingReview ? `⭐️ Отзыв (${existingReview.rating}★) • Изменить` : `⭐️ Оценить работника / Отзыв`}
             </button>
           </div>
           <p class="message"></p>
@@ -1737,44 +1737,44 @@
 
       const reviewBoxHtml = `
         <div class="restaurant-review-box" data-review-container style="display: none; margin-top: 14px;">
-          <h5 style="margin: 0 0 6px; font-size: 15px; color: var(--green);">â­ï¸ ÐÑÐµÐ½ÐºÐ° ÑÐ°Ð±Ð¾ÑÑ: ${escapeHtml(workerName)}</h5>
-          <p style="margin: 0 0 10px; font-size: 13px; color: #64748b;">Ð¡Ð¼ÐµÐ½Ð°: ${escapeHtml(shift.profession || shift.title || "Ð¡Ð¼ÐµÐ½Ð°")}</p>
+          <h5 style="margin: 0 0 6px; font-size: 15px; color: var(--green);">⭐️ Оценка работы: ${escapeHtml(workerName)}</h5>
+          <p style="margin: 0 0 10px; font-size: 13px; color: #64748b;">Смена: ${escapeHtml(shift.profession || shift.title || "Смена")}</p>
           
           <div style="margin-bottom: 10px;">
-            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">ÐÐ°ÑÐ° Ð¾ÑÐµÐ½ÐºÐ° ÑÐ¼ÐµÐ½Ñ:</div>
+            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">Ваша оценка смены:</div>
             <div class="rating-stars-input" data-stars-input>
-              <button type="button" class="rating-star-btn active" data-rating="1">â</button>
-              <button type="button" class="rating-star-btn active" data-rating="2">â</button>
-              <button type="button" class="rating-star-btn active" data-rating="3">â</button>
-              <button type="button" class="rating-star-btn active" data-rating="4">â</button>
-              <button type="button" class="rating-star-btn active" data-rating="5">â</button>
-              <span class="rating-score-label" data-score-label>5/5 â ÐÑÐ»Ð¸ÑÐ½Ð¾, ÑÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑÐµÐ¼!</span>
+              <button type="button" class="rating-star-btn active" data-rating="1">★</button>
+              <button type="button" class="rating-star-btn active" data-rating="2">★</button>
+              <button type="button" class="rating-star-btn active" data-rating="3">★</button>
+              <button type="button" class="rating-star-btn active" data-rating="4">★</button>
+              <button type="button" class="rating-star-btn active" data-rating="5">★</button>
+              <span class="rating-score-label" data-score-label>5/5 — Отлично, рекомендуем!</span>
             </div>
           </div>
 
           <div style="margin-bottom: 10px;">
-            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">Ð¡Ð¸Ð»ÑÐ½ÑÐµ ÑÑÐ¾ÑÐ¾Ð½Ñ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ°:</div>
+            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">Сильные стороны работника:</div>
             <div class="rating-tags-selector" data-tags-selector>
-              <button type="button" class="rating-tag-chip active" data-tag="â¡ï¸ ÐÑÐ½ÐºÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑ">â¡ï¸ ÐÑÐ½ÐºÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑ</button>
-              <button type="button" class="rating-tag-chip active" data-tag="ðª Ð§ÐµÑÐºÐ¾ Ð¿Ð¾ Ð¢Ð¢Ð">ðª Ð§ÐµÑÐºÐ¾ Ð¿Ð¾ Ð¢Ð¢Ð</button>
-              <button type="button" class="rating-tag-chip active" data-tag="â¨ Ð§Ð¸ÑÑÐ¾ÑÐ° ÑÑÐ°Ð½ÑÐ¸Ð¸">â¨ Ð§Ð¸ÑÑÐ¾ÑÐ° ÑÑÐ°Ð½ÑÐ¸Ð¸</button>
-              <button type="button" class="rating-tag-chip" data-tag="ð¤ ÐÐ¾Ð¼Ð°Ð½Ð´Ð½Ð°Ñ ÑÐ°Ð±Ð¾ÑÐ°">ð¤ ÐÐ¾Ð¼Ð°Ð½Ð´Ð½Ð°Ñ ÑÐ°Ð±Ð¾ÑÐ°</button>
-              <button type="button" class="rating-tag-chip" data-tag="ð¥ ÐÑÑÐ¾ÐºÐ°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ">ð¥ ÐÑÑÐ¾ÐºÐ°Ñ ÑÐºÐ¾ÑÐ¾ÑÑÑ</button>
-              <button type="button" class="rating-tag-chip" data-tag="ð³ ÐÐ°ÑÐµÑÑÐ²Ð¾ Ð¾ÑÐ´Ð°ÑÐ¸">ð³ ÐÐ°ÑÐµÑÑÐ²Ð¾ Ð¾ÑÐ´Ð°ÑÐ¸</button>
+              <button type="button" class="rating-tag-chip active" data-tag="⚡️ Пунктуальность">⚡️ Пунктуальность</button>
+              <button type="button" class="rating-tag-chip active" data-tag="🔪 Четко по ТТК">🔪 Четко по ТТК</button>
+              <button type="button" class="rating-tag-chip active" data-tag="✨ Чистота станции">✨ Чистота станции</button>
+              <button type="button" class="rating-tag-chip" data-tag="🤝 Командная работа">🤝 Командная работа</button>
+              <button type="button" class="rating-tag-chip" data-tag="🔥 Высокая скорость">🔥 Высокая скорость</button>
+              <button type="button" class="rating-tag-chip" data-tag="🍳 Качество отдачи">🍳 Качество отдачи</button>
             </div>
           </div>
 
           <div style="margin-bottom: 12px;">
-            <label style="font-size: 12.5px; font-weight: 750; color: #334155; display: block; margin-bottom: 4px;">Ð¢ÐµÐºÑÑÐ¾Ð²ÑÐ¹ Ð¾ÑÐ·ÑÐ² Ð¾Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ:</label>
-            <textarea rows="3" data-review-text placeholder="ÐÐ°Ð¿Ð¸ÑÐ¸ÑÐµ Ð¿Ð°ÑÑ ÑÐ»Ð¾Ð²: ÑÐºÐ¾ÑÐ¾ÑÑÑ Ð½Ð° ÑÐµÐºÐ°Ñ, Ð°ÐºÐºÑÑÐ°ÑÐ½Ð¾ÑÑÑ, Ð¿ÑÐ½ÐºÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑ, Ð¾ÑÐ½Ð¾ÑÐµÐ½Ð¸Ðµ Ðº ÑÐ°Ð±Ð¾ÑÐµ..." style="width: 100%; box-sizing: border-box; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 13.5px; font-family: inherit;">${existingReview ? escapeHtml(existingReview.comment) : ""}</textarea>
+            <label style="font-size: 12.5px; font-weight: 750; color: #334155; display: block; margin-bottom: 4px;">Текстовый отзыв от заведения:</label>
+            <textarea rows="3" data-review-text placeholder="Напишите пару слов: скорость на чеках, аккуратность, пунктуальность, отношение к работе..." style="width: 100%; box-sizing: border-box; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 13.5px; font-family: inherit;">${existingReview ? escapeHtml(existingReview.comment) : ""}</textarea>
           </div>
 
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <button type="button" class="btn primary" data-action="save-review" style="padding: 7px 16px; font-size: 13.5px;">
-              ð¾ Ð¡Ð¾ÑÑÐ°Ð½Ð¸ÑÑ Ð¾ÑÐ·ÑÐ²
+              💾 Сохранить отзыв
             </button>
             <button type="button" class="btn" data-action="close-review" style="padding: 7px 14px; font-size: 13px;">
-              Ð¡ÐºÑÑÑÑ
+              Скрыть
             </button>
             <span class="message" data-review-msg style="margin: 0; font-size: 13px;"></span>
           </div>
@@ -1782,8 +1782,8 @@
       `;
 
       const node = card(
-        shift.title || "ÐÑÐºÐ»Ð¸Ðº ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ°",
-        `<p>Ð Ð°Ð±Ð¾ÑÐ½Ð¸Ðº: ${escapeHtml(workerName)}</p><p>${escapeHtml(workerPlace || shift.city || "-")}</p><p>Ð¡Ð¼ÐµÐ½Ð°: ${escapeHtml(shift.profession || application.shift_id || "-")}</p><p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(application.status))}</p><p>${escapeHtml(application.message || "")}</p>`,
+        shift.title || "Отклик работника",
+        `<p>Работник: ${escapeHtml(workerName)}</p><p>${escapeHtml(workerPlace || shift.city || "-")}</p><p>Смена: ${escapeHtml(shift.profession || application.shift_id || "-")}</p><p>Статус: ${escapeHtml(statusText(application.status))}</p><p>${escapeHtml(application.message || "")}</p>`,
         actionHtml + reviewBoxHtml
       );
 
@@ -1821,11 +1821,11 @@
       const scoreLabel = node.querySelector("[data-score-label]");
 
       const ratingLabels = {
-        1: "1/5 â ÐÑÐ»Ð¸ ÑÐµÑÑÐµÐ·Ð½ÑÐµ Ð·Ð°Ð¼ÐµÑÐ°Ð½Ð¸Ñ",
-        2: "2/5 â ÐÐ¸Ð¶Ðµ Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ð¹ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ",
-        3: "3/5 â ÐÐ¾ÑÐ¼Ð°Ð»ÑÐ½Ð¾, ÑÑÐ°Ð½Ð´Ð°ÑÑÐ½Ð°Ñ ÑÐ¼ÐµÐ½Ð°",
-        4: "4/5 â Ð¥Ð¾ÑÐ¾ÑÐ¾, ÐºÐ°ÑÐµÑÑÐ²ÐµÐ½Ð½Ð°Ñ ÑÐ°Ð±Ð¾ÑÐ°",
-        5: "5/5 â ÐÑÐ»Ð¸ÑÐ½Ð¾, ÑÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑÐµÐ¼ ÐºÐ¾Ð»Ð»ÐµÐ³Ð°Ð¼!",
+        1: "1/5 — Были серьезные замечания",
+        2: "2/5 — Ниже ожиданий заведения",
+        3: "3/5 — Нормально, стандартная смена",
+        4: "4/5 — Хорошо, качественная работа",
+        5: "5/5 — Отлично, рекомендуем коллегам!",
       };
 
       function updateStarsUI(val) {
@@ -1872,10 +1872,10 @@
       // Save Review action
       node.querySelector("[data-action='save-review']")?.addEventListener("click", async (event) => {
         const saveBtn = event.currentTarget;
-        setBusy(saveBtn, true, "Ð¡Ð¾ÑÑÐ°Ð½ÑÐµÐ¼...");
+        setBusy(saveBtn, true, "Сохраняем...");
         const msgEl = node.querySelector("[data-review-msg]");
         const commentInput = node.querySelector("[data-review-text]");
-        const comment = (commentInput?.value || "").trim() || "Ð¡Ð¼ÐµÐ½Ð° Ð²ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð° ÐºÐ°ÑÐµÑÑÐ²ÐµÐ½Ð½Ð¾ Ð¸ Ð² Ð¿Ð¾Ð»Ð½Ð¾Ð¼ ÑÐ¾Ð¾ÑÐ²ÐµÑÑÑÐ²Ð¸Ð¸ Ñ Ð¢Ð¢Ð.";
+        const comment = (commentInput?.value || "").trim() || "Смена выполнена качественно и в полном соответствии с ТТК.";
 
         const selectedTags = Array.from(
           node.querySelectorAll("[data-tags-selector] .rating-tag-chip.active")
@@ -1885,16 +1885,16 @@
           state.profile?.business_name ||
           state.profile?.name ||
           state.user?.email ||
-          "Ð ÐµÑÑÐ¾ÑÐ°Ð½ ÐÐ¾ÑÐºÐ²Ñ";
+          "Ресторан Москвы";
 
         const reviewPayload = {
           id: existingReview?.id || `rev-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
           worker_id: application.worker_id,
           restaurant_id: state.user.id,
           restaurant_name: restName,
-          restaurant_city: state.profile?.city || "ÐÐ¾ÑÐºÐ²Ð°",
+          restaurant_city: state.profile?.city || "Москва",
           shift_id: application.shift_id || null,
-          shift_title: shift.profession || shift.title || "Ð¡Ð¼ÐµÐ½Ð° Ð² Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸",
+          shift_title: shift.profession || shift.title || "Смена в заведении",
           rating: currentRating,
           tags: selectedTags,
           comment,
@@ -1916,9 +1916,9 @@
         saveStoredWorkerReviews(filtered);
 
         setBusy(saveBtn, false);
-        setMessage(msgEl, "â ÐÑÐ·ÑÐ² ÑÑÐ¿ÐµÑÐ½Ð¾ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½!");
+        setMessage(msgEl, "✅ Отзыв успешно сохранен!");
         if (toggleReviewBtn) {
-          toggleReviewBtn.textContent = `â­ï¸ ÐÑÐ·ÑÐ² (${currentRating}â) â¢ ÐÐ·Ð¼ÐµÐ½Ð¸ÑÑ`;
+          toggleReviewBtn.textContent = `⭐️ Отзыв (${currentRating}★) • Изменить`;
         }
 
         setTimeout(() => {
@@ -1933,8 +1933,8 @@
     setMessage(
       el.shiftPostMessage,
       selectedShiftId
-        ? `ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ ÑÐ¼ÐµÐ½Ðµ: ${applications.length}`
-        : `ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð²: ${applications.length}`
+        ? `Откликов по смене: ${applications.length}`
+        : `Откликов работников: ${applications.length}`
     );
   }
 
@@ -1950,7 +1950,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾."
+      error ? `Ошибка: ${error.message}` : "Решение сохранено."
     );
 
     if (error) {
@@ -1962,7 +1962,7 @@
   }
 
   async function loadWorkers() {
-    setMessage(el.workersMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð°Ð½ÐºÐµÑÑ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð²...");
+    setMessage(el.workersMessage, "Загружаем анкеты работников...");
     const { data, error } = await selectRowsWithFallback(
       "worker_profiles",
       {},
@@ -1973,7 +1973,7 @@
     );
 
     if (error) {
-      setMessage(el.workersMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.workersMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -1989,8 +1989,8 @@
     el.workersList.innerHTML = "";
 
     if (!workers.length) {
-      showEmpty(el.workersList, "ÐÐ½ÐºÐµÑ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ", "ÐÐ¾Ð´ÑÐ¾Ð´ÑÑÐ¸Ñ Ð°Ð½ÐºÐµÑ Ð½ÐµÑ.");
-      setMessage(el.workersMessage, "ÐÐ¾Ð´ÑÐ¾Ð´ÑÑÐ¸Ñ Ð°Ð½ÐºÐµÑ Ð½ÐµÑ.");
+      showEmpty(el.workersList, "Анкет работников пока нет", "Подходящих анкет нет.");
+      setMessage(el.workersMessage, "Подходящих анкет нет.");
       return;
     }
 
@@ -2003,8 +2003,8 @@
         .map((shift) => `<option value="${escapeHtml(shift.id)}">${escapeHtml(shiftSummary(shift))}</option>`)
         .join("");
       const inviteActions = openShifts.length
-        ? `<label class="invite-shift-label">Ð¡Ð¼ÐµÐ½Ð°<select data-invite-shift>${shiftOptions}</select></label><button type="button" data-action="invite-worker">ÐÑÐ¸Ð³Ð»Ð°ÑÐ¸ÑÑ</button><p class="message"></p>`
-        : '<p class="message">Ð¡Ð½Ð°ÑÐ°Ð»Ð° Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÑÐ¹ÑÐµ Ð¾ÑÐºÑÑÑÑÑ ÑÐ¼ÐµÐ½Ñ, ÑÑÐ¾Ð±Ñ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐ¸ÑÑ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ°.</p>';
+        ? `<label class="invite-shift-label">Смена<select data-invite-shift>${shiftOptions}</select></label><button type="button" data-action="invite-worker">Пригласить</button><p class="message"></p>`
+        : '<p class="message">Сначала опубликуйте открытую смену, чтобы пригласить работника.</p>';
 
       const workerReviews = getWorkerReviewsList(worker.user_id);
       const avgRating = workerReviews.length
@@ -2012,17 +2012,17 @@
         : "5.0";
       const reviewsCount = workerReviews.length;
 
-      const workerTitle = `${displayName(profile, professions === "-" ? "Ð Ð°Ð±Ð¾ÑÐ½Ð¸Ðº" : professions)} <span class="worker-rating-badge-mini">â­ ${avgRating} (${reviewsCount} ${declOfNum(reviewsCount, ["Ð¾ÑÐ·ÑÐ²", "Ð¾ÑÐ·ÑÐ²Ð°", "Ð¾ÑÐ·ÑÐ²Ð¾Ð²"])})</span>`;
+      const workerTitle = `${displayName(profile, professions === "-" ? "Работник" : professions)} <span class="worker-rating-badge-mini">⭐ ${avgRating} (${reviewsCount} ${declOfNum(reviewsCount, ["отзыв", "отзыва", "отзывов"])})</span>`;
 
       const node = card(
         workerTitle,
         `
           <p>${escapeHtml(professions)}</p>
-          <p>${escapeHtml(place || "ÐÐ¾ÑÐ¾Ð´ Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½")}</p>
-          <p>${escapeHtml(worker.experience || "ÐÐ¿ÑÑ Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½")}</p>
-          <p>ÐÐ½Ð¸: ${escapeHtml(listText(worker.available_days))}</p>
-          <p>Ð¡ÑÐ°Ð²ÐºÐ°: ${escapeHtml(money(worker.min_rate))}</p>
-          <p>${worker.can_travel ? "ÐÐ¾ÑÐ¾Ð² Ðº Ð²ÑÐµÐ·Ð´Ñ" : "ÐÐµÐ· Ð²ÑÐµÐ·Ð´Ð°"}</p>
+          <p>${escapeHtml(place || "Город не указан")}</p>
+          <p>${escapeHtml(worker.experience || "Опыт не указан")}</p>
+          <p>Дни: ${escapeHtml(listText(worker.available_days))}</p>
+          <p>Ставка: ${escapeHtml(money(worker.min_rate))}</p>
+          <p>${worker.can_travel ? "Готов к выезду" : "Без выезда"}</p>
         `,
         inviteActions
       );
@@ -2037,21 +2037,21 @@
       el.workersList.appendChild(node);
     });
 
-    setMessage(el.workersMessage, `ÐÐ½ÐºÐµÑ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾: ${workers.length}`);
+    setMessage(el.workersMessage, `Анкет найдено: ${workers.length}`);
   }
 
   async function inviteWorker(worker, node, button) {
     if (!worker.user_id) {
-      setMessage(node.querySelector(".message"), "Ð£ Ð°Ð½ÐºÐµÑÑ Ð½ÐµÑ user_id, Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ Ð½Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾.");
+      setMessage(node.querySelector(".message"), "У анкеты нет user_id, приглашение не отправлено.");
       return;
     }
 
-    setBusy(button, true, "ÐÑÐ¿ÑÐ°Ð²Ð»ÑÐµÐ¼...");
+    setBusy(button, true, "Отправляем...");
     const message = node.querySelector(".message");
     const shiftId = node.querySelector("[data-invite-shift]")?.value || "";
     const shift = state.restaurantShifts.find((item) => item.id === shiftId);
     if (!shiftId || !shift) {
-      setMessage(message, "ÐÑÐ±ÐµÑÐ¸ÑÐµ Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½ÑÑ ÑÐ¼ÐµÐ½Ñ Ð´Ð»Ñ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ñ.");
+      setMessage(message, "Выберите опубликованную смену для приглашения.");
       setBusy(button, false);
       return;
     }
@@ -2064,14 +2064,14 @@
     });
 
     if (duplicate.error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${duplicate.error.message}`);
+      setMessage(message, `Ошибка: ${duplicate.error.message}`);
       setBusy(button, false);
       return;
     }
 
     if (duplicate.exists) {
-      setMessage(message, "ÐÐºÑÐ¸Ð²Ð½Ð¾Ðµ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ ÑÑÐ¾Ð¼Ñ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÑ ÑÐ¶Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾.");
-      button.textContent = "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ ÑÐ¶Ðµ ÐµÑÑÑ";
+      setMessage(message, "Активное приглашение этому работнику уже отправлено.");
+      button.textContent = "Приглашение уже есть";
       button.disabled = true;
       return;
     }
@@ -2080,26 +2080,26 @@
       restaurant_id: state.user.id,
       worker_id: worker.user_id,
       shift_id: shiftId,
-      message: `ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ Ð½Ð° ÑÐ¼ÐµÐ½Ñ: ${shiftSummary(shift)}`,
+      message: `Приглашение на смену: ${shiftSummary(shift)}`,
       status: "pending",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 
     if (error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${errorText(error, "Ð°ÐºÑÐ¸Ð²Ð½Ð¾Ðµ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ ÑÑÐ¾Ð¼Ñ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÑ ÑÐ¶Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾")}`);
+      setMessage(message, `Ошибка: ${errorText(error, "активное приглашение этому работнику уже отправлено")}`);
       setBusy(button, false);
       return;
     }
 
-    setMessage(message, "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÑ.");
-    button.textContent = "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¾";
+    setMessage(message, "Приглашение отправлено работнику.");
+    button.textContent = "Приглашение отправлено";
     button.disabled = true;
     await loadRestaurantInvites();
   }
 
   async function loadRestaurantInvites() {
-    setMessage(el.restaurantInvitesMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ñ...");
+    setMessage(el.restaurantInvitesMessage, "Загружаем приглашения...");
     const { data, error } = await selectRowsWithFallback(
       "shift_invites",
       { restaurant_id: state.user.id },
@@ -2111,7 +2111,7 @@
     );
 
     if (error) {
-      setMessage(el.restaurantInvitesMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.restaurantInvitesMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2120,8 +2120,8 @@
     el.restaurantInvitesList.innerHTML = "";
 
     if (!state.restaurantInvites.length) {
-      showEmpty(el.restaurantInvitesList, "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ", "ÐÐ°Ð¹Ð´Ð¸ÑÐµ ÑÐ°Ð±Ð¾ÑÐ½Ð¸ÐºÐ° Ð¸ Ð¾ÑÐ¿ÑÐ°Ð²ÑÑÐµ Ð¿ÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ðµ.");
-      setMessage(el.restaurantInvitesMessage, "ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      showEmpty(el.restaurantInvitesList, "Приглашений пока нет", "Найдите работника и отправьте приглашение.");
+      setMessage(el.restaurantInvitesMessage, "Приглашений пока нет.");
       return;
     }
 
@@ -2137,13 +2137,13 @@
       const shift = relatedProfile(invite, "shift");
       el.restaurantInvitesList.appendChild(
         card(
-          displayName(worker, "Ð Ð°Ð±Ð¾ÑÐ½Ð¸Ðº"),
-          `<p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(invite.status))}</p><p>${escapeHtml(displayPlace(worker) || "-")}</p><p>Ð¡Ð¼ÐµÐ½Ð°: ${escapeHtml(shiftSummary(shift))}</p><p>${escapeHtml(invite.message || "")}</p>`
+          displayName(worker, "Работник"),
+          `<p>Статус: ${escapeHtml(statusText(invite.status))}</p><p>${escapeHtml(displayPlace(worker) || "-")}</p><p>Смена: ${escapeHtml(shiftSummary(shift))}</p><p>${escapeHtml(invite.message || "")}</p>`
         )
       );
     });
 
-    setMessage(el.restaurantInvitesMessage, `ÐÑÐ¸Ð³Ð»Ð°ÑÐµÐ½Ð¸Ð¹: ${state.restaurantInvites.length}`);
+    setMessage(el.restaurantInvitesMessage, `Приглашений: ${state.restaurantInvites.length}`);
   }
 
   async function createSupplyRequest(event) {
@@ -2151,11 +2151,11 @@
     const title = value("supplyRequestTitle");
 
     if (!title) {
-      setMessage(el.supplyRequestMessageBox, "ÐÐ°Ð¿Ð¾Ð»Ð½Ð¸ÑÐµ, ÑÑÐ¾ Ð½ÑÐ¶Ð½Ð¾ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ.");
+      setMessage(el.supplyRequestMessageBox, "Заполните, что нужно заведению.");
       return;
     }
 
-    setBusy(button, true, "ÐÑÐ±Ð»Ð¸ÐºÑÐµÐ¼...");
+    setBusy(button, true, "Публикуем...");
     const { error } = await insertRow("supply_requests", {
       restaurant_id: state.user.id,
       title,
@@ -2171,7 +2171,7 @@
 
     setMessage(
       el.supplyRequestMessageBox,
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "ÐÐ°Ð¿ÑÐ¾Ñ Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½ Ð´Ð»Ñ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²."
+      error ? `Ошибка: ${error.message}` : "Запрос опубликован для поставщиков."
     );
     setBusy(button, false);
     if (!error) {
@@ -2188,7 +2188,7 @@
   }
 
   async function loadRestaurantSupplyRequests() {
-    setMessage(el.restaurantSupplyRequestsMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð²Ð°ÑÐ¸ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°Ð¼...");
+    setMessage(el.restaurantSupplyRequestsMessage, "Загружаем ваши запросы поставщикам...");
     const { data, error } = await selectRows(
       "supply_requests",
       { restaurant_id: state.user.id },
@@ -2196,7 +2196,7 @@
     );
 
     if (error) {
-      setMessage(el.restaurantSupplyRequestsMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.restaurantSupplyRequestsMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2217,10 +2217,10 @@
     if (!state.restaurantSupplyRequests.length) {
       showEmpty(
         el.restaurantSupplyRequestsList,
-        "ÐÐ°Ð¿ÑÐ¾ÑÐ¾Ð² Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°Ð¼ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ",
-        "ÐÐ¿ÑÐ±Ð»Ð¸ÐºÑÐ¹ÑÐµ Ð·Ð°Ð¿ÑÐ¾Ñ, Ð¸ Ð¾Ð½ Ð¿Ð¾ÑÐ²Ð¸ÑÑÑ Ñ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð² ÐºÐ°Ð±Ð¸Ð½ÐµÑÐµ."
+        "Запросов поставщикам пока нет",
+        "Опубликуйте запрос, и он появится у поставщиков в кабинете."
       );
-      setMessage(el.restaurantSupplyRequestsMessage, "ÐÐ°Ð¿ÑÐ¾ÑÐ¾Ð² Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°Ð¼ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      setMessage(el.restaurantSupplyRequestsMessage, "Запросов поставщикам пока нет.");
       return;
     }
 
@@ -2228,17 +2228,17 @@
       const isOpen = request.status === "open";
       const responseCount = responsesByRequest.get(request.id) || 0;
       const node = card(
-        request.title || "ÐÐ°Ð¿ÑÐ¾Ñ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÑ",
+        request.title || "Запрос поставщику",
         `
-          <p>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ: ${escapeHtml(request.category || "-")}</p>
-          <p>ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾: ${escapeHtml(request.quantity || "-")}</p>
-          <p>ÐÑÐ´Ð¶ÐµÑ: ${escapeHtml(request.budget || "-")}</p>
-          <p>ÐÐ¾ÑÐ¾Ð´: ${escapeHtml(request.city || "-")}</p>
-          <p>ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²: ${escapeHtml(responseCount)}</p>
-          <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(request.status))}</p>
+          <p>Категория: ${escapeHtml(request.category || "-")}</p>
+          <p>Количество: ${escapeHtml(request.quantity || "-")}</p>
+          <p>Бюджет: ${escapeHtml(request.budget || "-")}</p>
+          <p>Город: ${escapeHtml(request.city || "-")}</p>
+          <p>Откликов поставщиков: ${escapeHtml(responseCount)}</p>
+          <p>Статус: ${escapeHtml(statusText(request.status))}</p>
           <p>${escapeHtml(request.message || "")}</p>
         `,
-        isOpen ? '<button class="btn" type="button" data-action="close-supply-request">ÐÐ°ÐºÑÑÑÑ Ð·Ð°Ð¿ÑÐ¾Ñ</button><p class="message"></p>' : ""
+        isOpen ? '<button class="btn" type="button" data-action="close-supply-request">Закрыть запрос</button><p class="message"></p>' : ""
       );
 
       node.querySelector("[data-action='close-supply-request']")?.addEventListener("click", () => {
@@ -2248,7 +2248,7 @@
       el.restaurantSupplyRequestsList.appendChild(node);
     });
 
-    setMessage(el.restaurantSupplyRequestsMessage, `ÐÐ°ÑÐ¸Ñ Ð·Ð°Ð¿ÑÐ¾ÑÐ¾Ð²: ${state.restaurantSupplyRequests.length}`);
+    setMessage(el.restaurantSupplyRequestsMessage, `Ваших запросов: ${state.restaurantSupplyRequests.length}`);
   }
 
   async function closeSupplyRequest(id, node) {
@@ -2263,7 +2263,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "ÐÐ°Ð¿ÑÐ¾Ñ Ð·Ð°ÐºÑÑÑ."
+      error ? `Ошибка: ${error.message}` : "Запрос закрыт."
     );
 
     if (error) {
@@ -2275,7 +2275,7 @@
   }
 
   async function loadSupplierOffers() {
-    setMessage(el.supplyRequestMessageBox, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²...");
+    setMessage(el.supplyRequestMessageBox, "Загружаем предложения поставщиков...");
     const { data, error } = await selectRowsWithFallback(
       "supplier_offers",
       { status: "active" },
@@ -2286,7 +2286,7 @@
     );
 
     if (error) {
-      setMessage(el.supplyRequestMessageBox, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplyRequestMessageBox, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2302,7 +2302,7 @@
     el.supplierOffersList.innerHTML = "";
 
     if (!offers.length) {
-      showEmpty(el.supplierOffersList, "ÐÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ");
+      showEmpty(el.supplierOffersList, "Предложений поставщиков пока нет");
       return;
     }
 
@@ -2310,15 +2310,15 @@
       const supplier = relatedProfile(offer, "supplier");
       const delivery = listText(offer.delivery_cities);
       const node = card(
-        offer.title || "ÐÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ",
+        offer.title || "Предложение",
         `
-          <p>ÐÐ¾ÑÑÐ°Ð²ÑÐ¸Ðº: ${escapeHtml(displayName(supplier, "Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½"))}</p>
+          <p>Поставщик: ${escapeHtml(displayName(supplier, "не указан"))}</p>
           <p>${escapeHtml(offer.category || "-")} / ${escapeHtml(money(offer.price))} ${escapeHtml(offer.unit || "")}</p>
-          <p>ÐÐ¸Ð½Ð¸Ð¼ÑÐ¼: ${escapeHtml(offer.min_order || "-")}</p>
-          <p>ÐÐ¾ÑÑÐ°Ð²ÐºÐ°: ${escapeHtml(delivery === "-" ? supplier.city || "-" : delivery)}</p>
+          <p>Минимум: ${escapeHtml(offer.min_order || "-")}</p>
+          <p>Доставка: ${escapeHtml(delivery === "-" ? supplier.city || "-" : delivery)}</p>
           <p>${escapeHtml(offer.description || "")}</p>
         `,
-        '<button type="button" data-action="send-supplier-inquiry">ÐÑÐ¿ÑÐ°Ð²Ð¸ÑÑ Ð·Ð°Ð¿ÑÐ¾Ñ</button><p class="message"></p>'
+        '<button type="button" data-action="send-supplier-inquiry">Отправить запрос</button><p class="message"></p>'
       );
 
       node.querySelector("[data-action='send-supplier-inquiry']")?.addEventListener("click", (event) => {
@@ -2330,7 +2330,7 @@
   }
 
   async function sendSupplierInquiry(offer, node, button) {
-    setBusy(button, true, "ÐÑÐ¿ÑÐ°Ð²Ð»ÑÐµÐ¼...");
+    setBusy(button, true, "Отправляем...");
     const message = node.querySelector(".message");
     const duplicate = await rowExists("supplier_inquiries", {
       offer_id: offer.id,
@@ -2338,14 +2338,14 @@
     });
 
     if (duplicate.error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${duplicate.error.message}`);
+      setMessage(message, `Ошибка: ${duplicate.error.message}`);
       setBusy(button, false);
       return;
     }
 
     if (duplicate.exists) {
-      setMessage(message, "ÐÐ°Ð¿ÑÐ¾Ñ Ð¿Ð¾ ÑÑÐ¾Ð¼Ñ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ ÑÐ¶Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½.");
-      button.textContent = "ÐÐ°Ð¿ÑÐ¾Ñ ÑÐ¶Ðµ ÐµÑÑÑ";
+      setMessage(message, "Запрос по этому предложению уже отправлен.");
+      button.textContent = "Запрос уже есть";
       button.disabled = true;
       return;
     }
@@ -2354,25 +2354,25 @@
       offer_id: offer.id,
       restaurant_id: state.user.id,
       supplier_id: offer.supplier_id,
-      message: value("supplyRequestMessage") || "ÐÐ°Ð¿ÑÐ¾Ñ Ð¾Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ",
+      message: value("supplyRequestMessage") || "Запрос от заведения",
       status: "new",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 
     if (error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${errorText(error, "Ð·Ð°Ð¿ÑÐ¾Ñ Ð¿Ð¾ ÑÑÐ¾Ð¼Ñ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ ÑÐ¶Ðµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½")}`);
+      setMessage(message, `Ошибка: ${errorText(error, "запрос по этому предложению уже отправлен")}`);
       setBusy(button, false);
       return;
     }
 
-    setMessage(message, "ÐÐ°Ð¿ÑÐ¾Ñ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÑ.");
-    button.textContent = "ÐÐ°Ð¿ÑÐ¾Ñ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½";
+    setMessage(message, "Запрос отправлен поставщику.");
+    button.textContent = "Запрос отправлен";
     button.disabled = true;
   }
 
   async function loadSupplyResponses() {
-    setMessage(el.supplyResponsesMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð¾ÑÐºÐ»Ð¸ÐºÐ¸ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²...");
+    setMessage(el.supplyResponsesMessage, "Загружаем отклики поставщиков...");
     const { data, error } = await selectRowsWithFallback(
       "supplier_responses",
       { restaurant_id: state.user.id },
@@ -2384,7 +2384,7 @@
     );
 
     if (error) {
-      setMessage(el.supplyResponsesMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplyResponsesMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2398,8 +2398,8 @@
     el.supplyResponsesList.innerHTML = "";
 
     if (!state.supplierResponses.length) {
-      showEmpty(el.supplyResponsesList, "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ");
-      setMessage(el.supplyResponsesMessage, "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      showEmpty(el.supplyResponsesList, "Откликов поставщиков пока нет");
+      setMessage(el.supplyResponsesMessage, "Откликов поставщиков пока нет.");
       return;
     }
 
@@ -2408,11 +2408,11 @@
       const supplier = relatedProfile(response, "supplier");
       const request = relatedProfile(response, "request");
       const node = card(
-        request.title || "ÐÑÐºÐ»Ð¸Ðº Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°",
-        `<p>ÐÐ¾ÑÑÐ°Ð²ÑÐ¸Ðº: ${escapeHtml(displayName(supplier, response.supplier_id))}</p><p>ÐÐ°Ð¿ÑÐ¾Ñ: ${escapeHtml(request.category || response.category || "-")} / ${escapeHtml(request.quantity || "-")}</p><p>${escapeHtml(response.message || "")}</p><p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(response.status))}</p>`,
+        request.title || "Отклик поставщика",
+        `<p>Поставщик: ${escapeHtml(displayName(supplier, response.supplier_id))}</p><p>Запрос: ${escapeHtml(request.category || response.category || "-")} / ${escapeHtml(request.quantity || "-")}</p><p>${escapeHtml(response.message || "")}</p><p>Статус: ${escapeHtml(statusText(response.status))}</p>`,
         pending
-          ? '<button type="button" data-status="accepted">ÐÑÐ¸Ð½ÑÑÑ</button><button class="btn" type="button" data-status="declined">ÐÑÐºÐ»Ð¾Ð½Ð¸ÑÑ</button><p class="message"></p>'
-          : '<p class="message">Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¶Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾.</p>'
+          ? '<button type="button" data-status="accepted">Принять</button><button class="btn" type="button" data-status="declined">Отклонить</button><p class="message"></p>'
+          : '<p class="message">Решение уже сохранено.</p>'
       );
 
       node.querySelectorAll("[data-status]").forEach((button) => {
@@ -2424,7 +2424,7 @@
       el.supplyResponsesList.appendChild(node);
     });
 
-    setMessage(el.supplyResponsesMessage, `ÐÑÐºÐ»Ð¸ÐºÐ¾Ð²: ${state.supplierResponses.length}`);
+    setMessage(el.supplyResponsesMessage, `Откликов: ${state.supplierResponses.length}`);
   }
 
   async function updateSupplierResponse(response, status, node) {
@@ -2441,7 +2441,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾."
+      error ? `Ошибка: ${error.message}` : "Решение сохранено."
     );
 
     if (error) {
@@ -2459,7 +2459,7 @@
       if (requestError) {
         setMessage(
           node.querySelector(".message"),
-          `Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾, Ð½Ð¾ Ð·Ð°Ð¿ÑÐ¾Ñ Ð½Ðµ Ð·Ð°ÐºÑÑÑ: ${requestError.message}`
+          `Решение сохранено, но запрос не закрыт: ${requestError.message}`
         );
         buttons.forEach((button) => (button.disabled = false));
         await loadSupplyResponses();
@@ -2474,7 +2474,7 @@
     const button = event?.currentTarget;
     if (
       !requireValues(
-        [{ id: "supplierCompanyName", label: "Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸" }],
+        [{ id: "supplierCompanyName", label: "название компании" }],
         el.supplierProfileMessage
       )
     ) {
@@ -2495,7 +2495,7 @@
           profilePayload.contact_person ||
           state.profile?.name ||
           state.user.email ||
-          "ÐÐ¾ÑÑÐ°Ð²ÑÐ¸Ðº",
+          "Поставщик",
         city: profilePayload.city || state.profile?.city || "",
         ...contactPayload,
         auth_provider: state.profile?.auth_provider || (state.user.phone && !state.user.email ? "phone" : "email"),
@@ -2517,8 +2517,8 @@
     setMessage(
       el.supplierProfileMessage,
       errors.length
-        ? `ÐÑÐ¸Ð±ÐºÐ°: ${errors.map((item) => item.message).join("; ")}`
-        : "ÐÑÐ¾ÑÐ¸Ð»Ñ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ° ÑÐ¾ÑÑÐ°Ð½ÐµÐ½."
+        ? `Ошибка: ${errors.map((item) => item.message).join("; ")}`
+        : "Профиль поставщика сохранен."
     );
     setBusy(button, false);
   }
@@ -2539,18 +2539,18 @@
     const category = value("supplierOfferCategory");
 
     if (!title || !category) {
-      setMessage(el.supplierOfferMessageBox, "ÐÐ°Ð¿Ð¾Ð»Ð½Ð¸ÑÐµ ÑÐ¾Ð²Ð°Ñ/ÑÑÐ»ÑÐ³Ñ Ð¸ ÐºÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ.");
+      setMessage(el.supplierOfferMessageBox, "Заполните товар/услугу и категорию.");
       return;
     }
 
-    setBusy(button, true, "ÐÑÐ±Ð»Ð¸ÐºÑÐµÐ¼...");
+    setBusy(button, true, "Публикуем...");
     const { error } = await insertRow("supplier_offers", {
       supplier_id: state.user.id,
       title,
       category,
       product_name: title,
       price: numberValue("supplierOfferPrice"),
-      unit: "ÑÑÐ±.",
+      unit: "руб.",
       min_order: value("supplierOfferQuantity"),
       delivery_cities: listValue("supplierOfferCity"),
       description: value("supplierOfferMessage"),
@@ -2561,7 +2561,7 @@
 
     setMessage(
       el.supplierOfferMessageBox,
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "ÐÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð¾Ð¿ÑÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð¾ Ð´Ð»Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¹."
+      error ? `Ошибка: ${error.message}` : "Предложение опубликовано для заведений."
     );
     setBusy(button, false);
     if (!error) await loadSupplierOwnOffers();
@@ -2575,7 +2575,7 @@
     );
 
     if (error) {
-      setMessage(el.supplierOfferMessageBox, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplierOfferMessageBox, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2589,7 +2589,7 @@
     el.supplierOwnOffersList.innerHTML = "";
 
     if (!state.ownSupplierOffers.length) {
-      showEmpty(el.supplierOwnOffersList, "ÐÐ°ÑÐ¸Ñ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ");
+      showEmpty(el.supplierOwnOffersList, "Ваших предложений пока нет");
       return;
     }
 
@@ -2597,21 +2597,21 @@
       const active = offer.status === "active";
       const paused = offer.status === "paused";
       const node = card(
-        offer.title || "ÐÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ",
+        offer.title || "Предложение",
         `
           <p>${escapeHtml(offer.category || "-")} / ${escapeHtml(money(offer.price))} ${escapeHtml(offer.unit || "")}</p>
-          <p>ÐÐ¸Ð½Ð¸Ð¼ÑÐ¼: ${escapeHtml(offer.min_order || "-")}</p>
-          <p>ÐÐ¾ÑÑÐ°Ð²ÐºÐ°: ${escapeHtml(listText(offer.delivery_cities))}</p>
-          <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(offer.status))}</p>
+          <p>Минимум: ${escapeHtml(offer.min_order || "-")}</p>
+          <p>Доставка: ${escapeHtml(listText(offer.delivery_cities))}</p>
+          <p>Статус: ${escapeHtml(statusText(offer.status))}</p>
           <p>${escapeHtml(offer.description || "")}</p>
         `,
         `
-          <button class="btn" type="button" data-action="view-offer-inquiries">ÐÐ°ÑÐ²ÐºÐ¸</button>
-          ${active ? '<button type="button" data-offer-status="paused">ÐÐ°ÑÐ·Ð°</button>' : ""}
-          ${paused ? '<button type="button" data-offer-status="active">ÐÐºÑÐ¸Ð²Ð¸ÑÐ¾Ð²Ð°ÑÑ</button>' : ""}
+          <button class="btn" type="button" data-action="view-offer-inquiries">Заявки</button>
+          ${active ? '<button type="button" data-offer-status="paused">Пауза</button>' : ""}
+          ${paused ? '<button type="button" data-offer-status="active">Активировать</button>' : ""}
           ${
             offer.status !== "closed"
-              ? '<button class="btn" type="button" data-offer-status="closed">ÐÐ°ÐºÑÑÑÑ</button>'
+              ? '<button class="btn" type="button" data-offer-status="closed">Закрыть</button>'
               : ""
           }
           <p class="message"></p>
@@ -2645,7 +2645,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð¡ÑÐ°ÑÑÑ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½."
+      error ? `Ошибка: ${error.message}` : "Статус предложения обновлен."
     );
 
     if (error) {
@@ -2658,7 +2658,7 @@
   }
 
   async function loadSupplyRequests() {
-    setMessage(el.supplierOfferMessageBox, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¹...");
+    setMessage(el.supplierOfferMessageBox, "Загружаем запросы заведений...");
     const { data, error } = await selectRowsWithFallback(
       "supply_requests",
       { status: "open" },
@@ -2669,7 +2669,7 @@
     );
 
     if (error) {
-      setMessage(el.supplierOfferMessageBox, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplierOfferMessageBox, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2688,7 +2688,7 @@
     el.supplyRequestsList.innerHTML = "";
 
     if (!requests.length) {
-      showEmpty(el.supplyRequestsList, "ÐÐ°Ð¿ÑÐ¾ÑÐ¾Ð² Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ");
+      showEmpty(el.supplyRequestsList, "Запросов заведений пока нет");
       return;
     }
 
@@ -2696,17 +2696,17 @@
       const restaurant = relatedProfile(request, "restaurant");
       const response = responsesByRequest.get(request.id);
       const node = card(
-        request.title || "ÐÐ°Ð¿ÑÐ¾Ñ",
+        request.title || "Запрос",
         `
-          <p>ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ: ${escapeHtml(displayName(restaurant, "Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½Ð¾"))}</p>
+          <p>Заведение: ${escapeHtml(displayName(restaurant, "не указано"))}</p>
           <p>${escapeHtml(request.category || "-")} / ${escapeHtml(request.quantity || "-")}</p>
-          <p>ÐÑÐ´Ð¶ÐµÑ: ${escapeHtml(request.budget || "-")}</p>
-          <p>ÐÐ¾ÑÐ¾Ð´: ${escapeHtml(request.city || restaurant.city || "-")}</p>
+          <p>Бюджет: ${escapeHtml(request.budget || "-")}</p>
+          <p>Город: ${escapeHtml(request.city || restaurant.city || "-")}</p>
           <p>${escapeHtml(request.message || "")}</p>
         `,
         response
-          ? `<p class="message">ÐÑ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ½ÑÐ»Ð¸ÑÑ. Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(response.status))}</p>`
-          : '<button type="button" data-action="respond-supply-request">ÐÑÐºÐ»Ð¸ÐºÐ½ÑÑÑÑÑ</button><p class="message"></p>'
+          ? `<p class="message">Вы уже откликнулись. Статус: ${escapeHtml(statusText(response.status))}</p>`
+          : '<button type="button" data-action="respond-supply-request">Откликнуться</button><p class="message"></p>'
       );
 
       node.querySelector("[data-action='respond-supply-request']")?.addEventListener("click", (event) => {
@@ -2718,7 +2718,7 @@
   }
 
   async function respondToSupplyRequest(request, node, button) {
-    setBusy(button, true, "ÐÑÐ¿ÑÐ°Ð²Ð»ÑÐµÐ¼...");
+    setBusy(button, true, "Отправляем...");
     const message = node.querySelector(".message");
     const duplicate = await rowExists("supplier_responses", {
       request_id: request.id,
@@ -2726,14 +2726,14 @@
     });
 
     if (duplicate.error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${duplicate.error.message}`);
+      setMessage(message, `Ошибка: ${duplicate.error.message}`);
       setBusy(button, false);
       return;
     }
 
     if (duplicate.exists) {
-      setMessage(message, "ÐÑ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ°Ð»Ð¸ÑÑ Ð½Ð° ÑÑÐ¾Ñ Ð·Ð°Ð¿ÑÐ¾Ñ.");
-      button.textContent = "ÐÑÐºÐ»Ð¸Ðº ÑÐ¶Ðµ ÐµÑÑÑ";
+      setMessage(message, "Вы уже откликались на этот запрос.");
+      button.textContent = "Отклик уже есть";
       button.disabled = true;
       return;
     }
@@ -2743,27 +2743,27 @@
       restaurant_id: request.restaurant_id,
       supplier_id: state.user.id,
       category: value("supplierOfferCategory") || request.category,
-      message: value("supplierOfferMessage") || "ÐÑÐºÐ»Ð¸Ðº Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ°",
+      message: value("supplierOfferMessage") || "Отклик поставщика",
       status: "new",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });
 
     if (error) {
-      setMessage(message, `ÐÑÐ¸Ð±ÐºÐ°: ${errorText(error, "Ð²Ñ ÑÐ¶Ðµ Ð¾ÑÐºÐ»Ð¸ÐºÐ°Ð»Ð¸ÑÑ Ð½Ð° ÑÑÐ¾Ñ Ð·Ð°Ð¿ÑÐ¾Ñ")}`);
+      setMessage(message, `Ошибка: ${errorText(error, "вы уже откликались на этот запрос")}`);
       setBusy(button, false);
       return;
     }
 
-    setMessage(message, "ÐÑÐºÐ»Ð¸Ðº Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ.");
-    button.textContent = "ÐÑÐºÐ»Ð¸Ðº Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½";
+    setMessage(message, "Отклик отправлен заведению.");
+    button.textContent = "Отклик отправлен";
     button.disabled = true;
     await loadSupplierOwnResponses();
     renderSupplyRequests();
   }
 
   async function loadSupplierOwnResponses() {
-    setMessage(el.supplierResponsesMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð²Ð°ÑÐ¸ Ð¾ÑÐºÐ»Ð¸ÐºÐ¸...");
+    setMessage(el.supplierResponsesMessage, "Загружаем ваши отклики...");
     const { data, error } = await selectRowsWithFallback(
       "supplier_responses",
       { supplier_id: state.user.id },
@@ -2775,7 +2775,7 @@
     );
 
     if (error) {
-      setMessage(el.supplierResponsesMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplierResponsesMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2790,10 +2790,10 @@
     if (!state.ownSupplierResponses.length) {
       showEmpty(
         el.supplierResponsesList,
-        "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð½Ð° Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ",
-        "ÐÑÐºÐ»Ð¸ÐºÐ½Ð¸ÑÐµÑÑ Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ, Ð¸ ÑÑÐ°ÑÑÑ Ð¿Ð¾ÑÐ²Ð¸ÑÑÑ Ð·Ð´ÐµÑÑ."
+        "Откликов на запросы пока нет",
+        "Откликнитесь на запрос заведения, и статус появится здесь."
       );
-      setMessage(el.supplierResponsesMessage, "ÐÑÐºÐ»Ð¸ÐºÐ¾Ð² Ð½Ð° Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ.");
+      setMessage(el.supplierResponsesMessage, "Откликов на запросы пока нет.");
       return;
     }
 
@@ -2802,25 +2802,25 @@
       const restaurant = relatedProfile(response, "restaurant");
       el.supplierResponsesList.appendChild(
         card(
-          request.title || "ÐÑÐºÐ»Ð¸Ðº Ð½Ð° Ð·Ð°Ð¿ÑÐ¾Ñ",
+          request.title || "Отклик на запрос",
           `
-            <p>ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ: ${escapeHtml(displayName(restaurant, response.restaurant_id))}</p>
-            <p>ÐÐ°Ð¿ÑÐ¾Ñ: ${escapeHtml(request.category || response.category || "-")} / ${escapeHtml(request.quantity || "-")}</p>
-            <p>ÐÐ¾ÑÐ¾Ð´: ${escapeHtml(request.city || restaurant.city || "-")}</p>
-            <p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(response.status))}</p>
+            <p>Заведение: ${escapeHtml(displayName(restaurant, response.restaurant_id))}</p>
+            <p>Запрос: ${escapeHtml(request.category || response.category || "-")} / ${escapeHtml(request.quantity || "-")}</p>
+            <p>Город: ${escapeHtml(request.city || restaurant.city || "-")}</p>
+            <p>Статус: ${escapeHtml(statusText(response.status))}</p>
             <p>${escapeHtml(response.message || "")}</p>
           `
         )
       );
     });
 
-    setMessage(el.supplierResponsesMessage, `ÐÐ°ÑÐ¸Ñ Ð¾ÑÐºÐ»Ð¸ÐºÐ¾Ð²: ${state.ownSupplierResponses.length}`);
+    setMessage(el.supplierResponsesMessage, `Ваших откликов: ${state.ownSupplierResponses.length}`);
   }
 
   async function loadSupplierInquiries(filterOfferId = "") {
     const selectedOfferId = typeof filterOfferId === "string" ? filterOfferId : "";
     state.supplierInquiryFilter = selectedOfferId;
-    setMessage(el.supplierInquiriesMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð²ÑÐ¾Ð´ÑÑÐ¸Ðµ Ð·Ð°ÑÐ²ÐºÐ¸...");
+    setMessage(el.supplierInquiriesMessage, "Загружаем входящие заявки...");
     const { data, error } = await selectRowsWithFallback(
       "supplier_inquiries",
       { supplier_id: state.user.id },
@@ -2832,7 +2832,7 @@
     );
 
     if (error) {
-      setMessage(el.supplierInquiriesMessage, `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}`);
+      setMessage(el.supplierInquiriesMessage, `Ошибка: ${error.message}`);
       return;
     }
 
@@ -2853,11 +2853,11 @@
     if (!inquiries.length) {
       showEmpty(
         el.supplierInquiriesList,
-        selectedOfferId ? "ÐÐ°ÑÐ²Ð¾Ðº Ð¿Ð¾ ÑÑÐ¾Ð¼Ñ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ" : "ÐÑÐ¾Ð´ÑÑÐ¸Ñ Ð·Ð°ÑÐ²Ð¾Ðº Ð¿Ð¾ÐºÐ° Ð½ÐµÑ"
+        selectedOfferId ? "Заявок по этому предложению пока нет" : "Входящих заявок пока нет"
       );
       setMessage(
         el.supplierInquiriesMessage,
-        selectedOfferId ? "ÐÐ°ÑÐ²Ð¾Ðº Ð¿Ð¾ Ð²ÑÐ±ÑÐ°Ð½Ð½Ð¾Ð¼Ñ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ." : "ÐÑÐ¾Ð´ÑÑÐ¸Ñ Ð·Ð°ÑÐ²Ð¾Ðº Ð¿Ð¾ÐºÐ° Ð½ÐµÑ."
+        selectedOfferId ? "Заявок по выбранному предложению пока нет." : "Входящих заявок пока нет."
       );
       return;
     }
@@ -2867,11 +2867,11 @@
       const restaurant = relatedProfile(inquiry, "restaurant");
       const offer = relatedProfile(inquiry, "offer");
       const node = card(
-        offer.title || "ÐÐ°ÑÐ²ÐºÐ° Ð¾Ñ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ",
-        `<p>ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ: ${escapeHtml(displayName(restaurant, "Ð½Ðµ ÑÐºÐ°Ð·Ð°Ð½Ð¾"))}</p><p>${escapeHtml(offer.category || "-")}</p><p>${escapeHtml(inquiry.message || "ÐÐ°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð·Ð°Ð¸Ð½ÑÐµÑÐµÑÐ¾Ð²Ð°Ð»Ð¾ÑÑ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸ÐµÐ¼.")}</p><p>Ð¡ÑÐ°ÑÑÑ: ${escapeHtml(statusText(inquiry.status))}</p>`,
+        offer.title || "Заявка от заведения",
+        `<p>Заведение: ${escapeHtml(displayName(restaurant, "не указано"))}</p><p>${escapeHtml(offer.category || "-")}</p><p>${escapeHtml(inquiry.message || "Заведение заинтересовалось предложением.")}</p><p>Статус: ${escapeHtml(statusText(inquiry.status))}</p>`,
         pending
-          ? '<button type="button" data-status="accepted">ÐÑÐ¸Ð½ÑÑÑ</button><button class="btn" type="button" data-status="declined">ÐÑÐºÐ»Ð¾Ð½Ð¸ÑÑ</button><p class="message"></p>'
-          : '<p class="message">Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¶Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾.</p>'
+          ? '<button type="button" data-status="accepted">Принять</button><button class="btn" type="button" data-status="declined">Отклонить</button><p class="message"></p>'
+          : '<p class="message">Решение уже сохранено.</p>'
       );
 
       node.querySelectorAll("[data-status]").forEach((button) => {
@@ -2885,7 +2885,7 @@
 
     setMessage(
       el.supplierInquiriesMessage,
-      selectedOfferId ? `ÐÐ°ÑÐ²Ð¾Ðº Ð¿Ð¾ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ: ${inquiries.length}` : `ÐÐ°ÑÐ²Ð¾Ðº: ${inquiries.length}`
+      selectedOfferId ? `Заявок по предложению: ${inquiries.length}` : `Заявок: ${inquiries.length}`
     );
   }
 
@@ -2901,7 +2901,7 @@
 
     setMessage(
       node.querySelector(".message"),
-      error ? `ÐÑÐ¸Ð±ÐºÐ°: ${error.message}` : "Ð ÐµÑÐµÐ½Ð¸Ðµ ÑÐ¾ÑÑÐ°Ð½ÐµÐ½Ð¾."
+      error ? `Ошибка: ${error.message}` : "Решение сохранено."
     );
 
     if (error) {
@@ -2930,16 +2930,16 @@
 
     if (!el.adminDataList) return;
     el.adminDataList.innerHTML = "";
-    setMessage(el.adminMessage, "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½ÑÐµ...");
+    setMessage(el.adminMessage, "Загружаем данные...");
 
     for (const table of tables) {
       const { data, error } = await db.from(table).select("*").limit(50);
       el.adminDataList.appendChild(
-        card(table, `<p>${error ? escapeHtml(error.message) : `ÐÐ°Ð¿Ð¸ÑÐµÐ¹ Ð² Ð²ÑÐ±Ð¾ÑÐºÐµ: ${(data || []).length}`}</p>`)
+        card(table, `<p>${error ? escapeHtml(error.message) : `Записей в выборке: ${(data || []).length}`}</p>`)
       );
     }
 
-    setMessage(el.adminMessage, "ÐÐ°Ð½Ð½ÑÐµ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ñ.");
+    setMessage(el.adminMessage, "Данные обновлены.");
   }
 
   async function loadProfile() {
@@ -2960,7 +2960,7 @@
       .maybeSingle();
 
     if (readError) {
-      setMessage(el.userInfo, `ÐÑÐ¸Ð±ÐºÐ° Ð¿ÑÐ¾ÑÐ¸Ð»Ñ: ${readError.message}`);
+      setMessage(el.userInfo, `Ошибка профиля: ${readError.message}`);
       return null;
     }
 
@@ -2975,7 +2975,7 @@
     const payload = {
       id: state.user.id,
       role: fallbackRole,
-      name: metadata.name || state.user.email || state.user.phone || "ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ñ",
+      name: metadata.name || state.user.email || state.user.phone || "Пользователь",
       email: state.user.email || metadata.email || null,
       phone: state.user.phone || metadata.phone || null,
       city: metadata.city || null,
@@ -2986,7 +2986,7 @@
 
     const { error } = await db.from("profiles").upsert(payload, { onConflict: "id" });
     if (error) {
-      setMessage(el.userInfo, `ÐÑÐ¾ÑÐ¸Ð»Ñ Ð½Ðµ ÑÐ¾Ð·Ð´Ð°Ð½: ${error.message}`);
+      setMessage(el.userInfo, `Профиль не создан: ${error.message}`);
       state.profile = payload;
       return payload;
     }
@@ -3015,13 +3015,13 @@
 
   async function openCabinet(profile) {
     const label = {
-      worker: "ÑÐ°Ð±Ð¾ÑÐ½Ð¸Ðº",
-      restaurant: "Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ",
-      supplier: "Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸Ðº",
-      admin: "Ð°Ð´Ð¼Ð¸Ð½",
+      worker: "работник",
+      restaurant: "заведение",
+      supplier: "поставщик",
+      admin: "админ",
     }[profile.role] || profile.role;
 
-    setMessage(el.userInfo, `${state.user.email || profile.name || "ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ñ"} / ${label}`);
+    setMessage(el.userInfo, `${state.user.email || profile.name || "Пользователь"} / ${label}`);
     showRolePanel(profile.role);
 
     if (profile.role === "worker") {
@@ -3064,7 +3064,7 @@
     if (!list) return;
 
     if (stats) {
-      stats.innerHTML = `<span class="tg-feed-stats-text">ÐÐ°Ð³ÑÑÐ·ÐºÐ° Ð¾ÑÐºÑÑÑÑÑ ÑÐ¼ÐµÐ½...</span>`;
+      stats.innerHTML = `<span class="tg-feed-stats-text">Загрузка открытых смен...</span>`;
     }
 
     try {
@@ -3091,10 +3091,10 @@
       if (stats) {
         stats.innerHTML = `
           <span class="tg-feed-stats-text">
-            ÐÐ°Ð¹Ð´ÐµÐ½Ð¾ Ð¿ÑÐ¾Ð²ÐµÑÐµÐ½Ð½ÑÑ Ð¿ÑÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹: <strong>${state.workerLiveShifts.length}</strong>
+            Найдено проверенных предложений: <strong>${state.workerLiveShifts.length}</strong>
           </span>
           <span class="tg-feed-stats-text" style="color: var(--muted); font-size: 13px;">
-            ÐÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾: ${new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+            Обновлено: ${new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
           </span>
         `;
       }
@@ -3103,13 +3103,13 @@
       if (list) {
         list.innerHTML = `
           <div style="grid-column: 1 / -1; padding: 24px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; text-align: center;">
-            <p style="margin: 0 0 12px; color: #f87171;">ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°Ð³ÑÑÐ·Ð¸ÑÑ Ð»ÐµÐ½ÑÑ ÑÐ¼ÐµÐ½. ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ Ð¾Ð±Ð½Ð¾Ð²Ð¸ÑÑ.</p>
-            <button id="retryWorkerShiftsBtn" class="btn" type="button">ÐÐ¾Ð²ÑÐ¾ÑÐ¸ÑÑ Ð¿Ð¾Ð¿ÑÑÐºÑ</button>
+            <p style="margin: 0 0 12px; color: #f87171;">Не удалось загрузить ленту смен. Попробуйте обновить.</p>
+            <button id="retryWorkerShiftsBtn" class="btn" type="button">Повторить попытку</button>
           </div>
         `;
         byId("retryWorkerShiftsBtn")?.addEventListener("click", () => loadWorkerLiveShifts(true));
       }
-      if (stats) stats.innerHTML = `<span style="color: #f87171;">ÐÑÐ¸Ð±ÐºÐ° Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ</span>`;
+      if (stats) stats.innerHTML = `<span style="color: #f87171;">Ошибка обновления</span>`;
     }
   }
 
@@ -3121,10 +3121,10 @@
     if (!items.length) {
       list.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 36px 20px; text-align: center; background: rgba(255,255,255,0.02); border: 1px dashed var(--line); border-radius: 14px;">
-          <div style="font-size: 32px; margin-bottom: 12px;">ð</div>
-          <h4 style="margin: 0 0 8px; font-size: 18px;">ÐÐ¾Ð´ÑÐ¾Ð´ÑÑÐ¸Ñ ÑÐ¼ÐµÐ½ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾</h4>
-          <p style="color: var(--muted); margin: 0 0 16px; font-size: 14px;">ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ ÑÐ¼ÑÐ³ÑÐ¸ÑÑ ÑÐ¸Ð»ÑÑÑÑ Ð¸Ð»Ð¸ Ð²ÑÐ±ÑÐ°ÑÑ Ð´ÑÑÐ³Ð¾Ð¹ ÑÐµÑ.</p>
-          <button id="resetWorkerFiltersBtn" class="btn" type="button">Ð¡Ð±ÑÐ¾ÑÐ¸ÑÑ ÑÐ¸Ð»ÑÑÑÑ</button>
+          <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
+          <h4 style="margin: 0 0 8px; font-size: 18px;">Подходящих смен не найдено</h4>
+          <p style="color: var(--muted); margin: 0 0 16px; font-size: 14px;">Попробуйте смягчить фильтры или выбрать другой цех.</p>
+          <button id="resetWorkerFiltersBtn" class="btn" type="button">Сбросить фильтры</button>
         </div>
       `;
       byId("resetWorkerFiltersBtn")?.addEventListener("click", () => {
@@ -3153,28 +3153,28 @@
         <article class="vacancy-card ${isFeatured ? 'vacancy-card-featured' : ''}" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px;">
-              <span class="vacancy-role-tag">${escapeHtml(job.role || 'ÐÐ¾Ð²Ð°Ñ')}</span>
+              <span class="vacancy-role-tag">${escapeHtml(job.role || 'Повар')}</span>
               <span style="font-size: 12px; color: var(--muted); white-space: nowrap;">${formattedDate}</span>
             </div>
 
             <h3 class="vacancy-title" style="font-size: 20px; line-height: 1.35; margin-bottom: 12px;">${escapeHtml(job.title)}</h3>
 
             <div class="vacancy-rate-box" style="padding: 10px 14px; margin-bottom: 14px;">
-              <span class="vacancy-rate-label">ÐÐ¿Ð»Ð°ÑÐ° / Ð¡Ð¼ÐµÐ½Ð°</span>
+              <span class="vacancy-rate-label">Оплата / Смена</span>
               <span class="vacancy-rate-val" style="font-size: 22px;">${escapeHtml(job.rateText)}</span>
             </div>
 
             <div class="tg-job-meta" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-              ${job.metro ? `<span class="tg-meta-item">ð ${escapeHtml(job.metro)}</span>` : ''}
-              ${job.schedule ? `<span class="tg-meta-item">â° ${escapeHtml(job.schedule)}</span>` : ''}
-              <span class="tg-meta-item" style="color: #34d399; background: rgba(52, 211, 153, 0.1);">â ÐÑÐ¾Ð²ÐµÑÐµÐ½Ð¾</span>
+              ${job.metro ? `<span class="tg-meta-item">📍 ${escapeHtml(job.metro)}</span>` : ''}
+              ${job.schedule ? `<span class="tg-meta-item">⏰ ${escapeHtml(job.schedule)}</span>` : ''}
+              <span class="tg-meta-item" style="color: #34d399; background: rgba(52, 211, 153, 0.1);">✓ Проверено</span>
             </div>
 
             ${benefitsHtml}
 
             ${rawTextExcerpt ? `
               <details style="margin: 10px 0 14px; font-size: 13px; color: var(--muted);">
-                <summary style="cursor: pointer; color: var(--gold); user-select: none;">ÐÐ¾ÐºÐ°Ð·Ð°ÑÑ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ ÑÐ¼ÐµÐ½Ñ</summary>
+                <summary style="cursor: pointer; color: var(--gold); user-select: none;">Показать описание смены</summary>
                 <div style="margin-top: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; color: var(--text);">
                   ${escapeHtml(job.rawText)}
                 </div>
@@ -3185,16 +3185,16 @@
           <div class="vacancy-actions" style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
             ${job.contacts && job.contacts.telegram ? `
               <a class="btn primary" href="https://t.me/${job.contacts.telegram.replace(/^@/, '')}" target="_blank" rel="noopener" style="flex: 1 1 auto; text-align: center;">
-                ð¬ ÐÑÐºÐ»Ð¸ÐºÐ½ÑÑÑÑÑ Ð² Telegram
+                💬 Откликнуться в Telegram
               </a>
             ` : ''}
             ${job.contacts && job.contacts.phone ? `
               <a class="btn" href="tel:${job.contacts.phone}" style="flex: 1 1 auto; text-align: center;">
-                ð ${escapeHtml(job.contacts.phone)}
+                📞 ${escapeHtml(job.contacts.phone)}
               </a>
             ` : ''}
             ${(!job.contacts || (!job.contacts.telegram && !job.contacts.phone)) ? `
-              <span class="tg-meta-item" style="color: var(--muted); font-size: 13px;">ÐÐ¾Ð½ÑÐ°ÐºÑÑ ÑÑÐ¾ÑÐ½ÑÑÑÑÑ ÑÐµÑÐµÐ· Ð¿Ð¾Ð´Ð´ÐµÑÐ¶ÐºÑ</span>
+              <span class="tg-meta-item" style="color: var(--muted); font-size: 13px;">Контакты уточняются через поддержку</span>
             ` : ''}
           </div>
         </article>
@@ -3203,7 +3203,7 @@
   }
 
   function formatLiveShiftDate(dateStr) {
-    if (!dateStr) return 'Ð¡ÐµÐ³Ð¾Ð´Ð½Ñ';
+    if (!dateStr) return 'Сегодня';
     try {
       const d = new Date(dateStr);
       const now = new Date();
@@ -3211,12 +3211,12 @@
       const diffMinutes = Math.floor(diffMs / (1000 * 60));
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
 
-      if (diffMinutes < 5) return 'Ð¢Ð¾Ð»ÑÐºÐ¾ ÑÑÐ¾';
-      if (diffMinutes < 60) return `${diffMinutes} Ð¼Ð¸Ð½. Ð½Ð°Ð·Ð°Ð´`;
-      if (diffHours < 24) return `${diffHours} Ñ. Ð½Ð°Ð·Ð°Ð´`;
+      if (diffMinutes < 5) return 'Только что';
+      if (diffMinutes < 60) return `${diffMinutes} мин. назад`;
+      if (diffHours < 24) return `${diffHours} ч. назад`;
       return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
     } catch {
-      return 'Ð¡Ð²ÐµÐ¶Ð°Ñ';
+      return 'Свежая';
     }
   }
 
@@ -3267,20 +3267,20 @@
   async function fetchB2BSuppliers() {
     const msgEl = byId("b2bSuppliersMessage");
     const container = byId("b2bSuppliersContainer");
-    if (msgEl) msgEl.textContent = "ÐÐ°Ð³ÑÑÐ¶Ð°ÐµÐ¼ ÐºÐ°ÑÐ°Ð»Ð¾Ð³ Ð¾Ð¿ÑÐ¾Ð²ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿ÑÐ¾Ð´ÑÐºÑÐ¾Ð²...";
+    if (msgEl) msgEl.textContent = "Загружаем каталог оптовых поставщиков продуктов...";
     
     try {
       const res = await fetch("/api/suppliers");
       const json = await res.json();
       if (json.success && Array.isArray(json.suppliers)) {
         b2bSuppliersCache = json.suppliers;
-        if (msgEl) msgEl.textContent = `ÐÐ¾ÑÑÑÐ¿Ð½Ð¾ ${b2bSuppliersCache.length} Ð¿ÑÐ¾Ð²ÐµÑÐµÐ½Ð½ÑÑ Ð¾Ð¿ÑÐ¾Ð²ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð´Ð»Ñ Ð¾Ð±ÑÐµÐ¿Ð¸ÑÐ°`;
+        if (msgEl) msgEl.textContent = `Доступно ${b2bSuppliersCache.length} проверенных оптовых поставщиков для общепита`;
         renderB2BSuppliers();
       } else {
-        if (msgEl) msgEl.textContent = "ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°Ð³ÑÑÐ·Ð¸ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð².";
+        if (msgEl) msgEl.textContent = "Не удалось загрузить поставщиков.";
       }
     } catch (e) {
-      if (msgEl) msgEl.textContent = "ÐÑÐ¸Ð±ÐºÐ° Ð¿ÑÐ¸ Ð·Ð°Ð³ÑÑÐ·ÐºÐµ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²: " + e.message;
+      if (msgEl) msgEl.textContent = "Ошибка при загрузке поставщиков: " + e.message;
     }
   }
 
@@ -3312,15 +3312,15 @@
     }
 
     if (msgEl) {
-      msgEl.textContent = `ÐÐ°Ð¹Ð´ÐµÐ½Ð¾ Ð¿Ð¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð²: ${filtered.length}`;
+      msgEl.textContent = `Найдено поставщиков: ${filtered.length}`;
     }
 
     if (filtered.length === 0) {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed var(--line);">
-          <div style="font-size: 32px; margin-bottom: 12px;">ð</div>
-          <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">ÐÐ¾ÑÑÐ°Ð²ÑÐ¸ÐºÐ¾Ð² Ð¿Ð¾ Ð·Ð°Ð¿ÑÐ¾ÑÑ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾</h4>
-          <p style="margin: 0; color: #64748b; font-size: 14px;">ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ ÑÐ±ÑÐ¾ÑÐ¸ÑÑ ÑÐ¸Ð»ÑÑÑÑ Ð¸Ð»Ð¸ Ð²ÑÐ±ÑÐ°ÑÑ Ð´ÑÑÐ³ÑÑ ÐºÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ Ð¿ÑÐ¾Ð´ÑÐºÑÐ¾Ð².</p>
+          <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
+          <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">Поставщиков по запросу не найдено</h4>
+          <p style="margin: 0; color: #64748b; font-size: 14px;">Попробуйте сбросить фильтры или выбрать другую категорию продуктов.</p>
         </div>
       `;
       return;
@@ -3341,7 +3341,7 @@
       `).join("");
 
       const badgesHtml = (supplier.badges || []).map(b => `
-        <span class="b2b-mini-badge">â ${escapeHtml(b)}</span>
+        <span class="b2b-mini-badge">✓ ${escapeHtml(b)}</span>
       `).join("");
 
       return `
@@ -3350,9 +3350,9 @@
             <div>
               <div class="b2b-sup-cat">${escapeHtml(supplier.category_label)}</div>
               <h4 class="b2b-sup-name">${escapeHtml(supplier.company_name)}</h4>
-              <div style="font-size: 12px; color: #64748b;">ÐÑÑÐ¾ÑÐ½Ð¸Ðº: ${escapeHtml(supplier.source)}</div>
+              <div style="font-size: 12px; color: #64748b;">Источник: ${escapeHtml(supplier.source)}</div>
             </div>
-            <div class="b2b-rating-pill">â­ ${supplier.rating} (${supplier.reviews_count})</div>
+            <div class="b2b-rating-pill">⭐ ${supplier.rating} (${supplier.reviews_count})</div>
           </div>
 
           <p class="b2b-sup-desc">${escapeHtml(supplier.description)}</p>
@@ -3361,19 +3361,19 @@
 
           <div class="b2b-sup-meta">
             <div class="b2b-meta-row">
-              <span class="b2b-meta-label">ÐÐ¸Ð½. Ð·Ð°ÐºÐ°Ð·:</span>
+              <span class="b2b-meta-label">Мин. заказ:</span>
               <span class="b2b-meta-value">${money(supplier.min_order_rub)}</span>
             </div>
             <div class="b2b-meta-row">
-              <span class="b2b-meta-label">ÐÑÐ°ÑÐ¸Ðº Ð´Ð¾ÑÑÐ°Ð²ÐºÐ¸:</span>
+              <span class="b2b-meta-label">График доставки:</span>
               <span class="b2b-meta-value">${escapeHtml(supplier.delivery_schedule)}</span>
             </div>
             <div class="b2b-meta-row">
-              <span class="b2b-meta-label">ÐÐ¿Ð»Ð°ÑÐ°:</span>
+              <span class="b2b-meta-label">Оплата:</span>
               <span class="b2b-meta-value" style="font-size: 12px;">${escapeHtml(supplier.payment_terms)}</span>
             </div>
             <div class="b2b-meta-row">
-              <span class="b2b-meta-label">Ð¡ÐºÐ»Ð°Ð´:</span>
+              <span class="b2b-meta-label">Склад:</span>
               <span class="b2b-meta-value" style="font-size: 12px;">${escapeHtml(supplier.warehouse)}</span>
             </div>
           </div>
@@ -3382,16 +3382,16 @@
             var list = this.nextElementSibling;
             if (list.classList.contains('expanded')) {
               list.classList.remove('expanded');
-              this.innerHTML = 'ð ÐÐ¾ÐºÐ°Ð·Ð°ÑÑ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ Ð¾Ð¿ÑÐ¾Ð²ÑÑ ÑÐµÐ½ (' + ${supplier.products.length} + ') â¼';
+              this.innerHTML = '📋 Показать прайс-лист оптовых цен (' + ${supplier.products.length} + ') ▼';
             } else {
               list.classList.add('expanded');
-              this.innerHTML = 'ð Ð¡ÐºÑÑÑÑ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ Ð¾Ð¿ÑÐ¾Ð²ÑÑ ÑÐµÐ½ â²';
+              this.innerHTML = '📋 Скрыть прайс-лист оптовых цен ▲';
             }
           ">
-            ð ÐÐ¾ÐºÐ°Ð·Ð°ÑÑ Ð¿ÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ Ð¾Ð¿ÑÐ¾Ð²ÑÑ ÑÐµÐ½ (${supplier.products.length}) â¼
+            📋 Показать прайс-лист оптовых цен (${supplier.products.length}) ▼
           </button>
           <div class="b2b-products-list">
-            <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">ÐÑÐ°Ð¹Ñ-Ð»Ð¸ÑÑ Ð´Ð»Ñ HoReCa (Ñ ÐÐÐ¡)</div>
+            <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Прайс-лист для HoReCa (с НДС)</div>
             ${productsHtml}
           </div>
 
@@ -3399,7 +3399,7 @@
             <div class="b2b-action-row">
               ${supplier.website ? `
                 <a href="${escapeHtml(supplier.website)}" target="_blank" rel="noopener" class="b2b-btn-web">
-                  ð Ð¡Ð°Ð¹Ñ
+                  🌐 Сайт
                 </a>
               ` : ''}
               <a href="${tgLink}" target="_blank" rel="noopener" class="b2b-btn-tg">
@@ -3407,7 +3407,7 @@
                 Telegram
               </a>
               <a href="${phoneLink}" class="b2b-btn-phone">
-                ð ÐÐ²Ð¾Ð½Ð¾Ðº
+                📞 Звонок
               </a>
             </div>
             <button type="button" class="b2b-btn-order" onclick="
@@ -3415,14 +3415,14 @@
               const catInput = document.getElementById('supplyRequestCategory');
               const cityInput = document.getElementById('supplyRequestCity');
               const msgInput = document.getElementById('supplyRequestMessage');
-              if (reqInput) reqInput.value = 'ÐÐ°ÐºÐ°Ð· ÑÐ¾Ð²Ð°ÑÐ¾Ð² Ñ ${escapeHtml(supplier.short_name)}';
+              if (reqInput) reqInput.value = 'Заказ товаров у ${escapeHtml(supplier.short_name)}';
               if (catInput) catInput.value = '${escapeHtml(supplier.category_label)}';
-              if (cityInput) cityInput.value = 'ÐÐ¾ÑÐºÐ²Ð°';
-              if (msgInput) msgInput.value = 'ÐÐ´ÑÐ°Ð²ÑÑÐ²ÑÐ¹ÑÐµ! Ð¥Ð¾ÑÐ¸Ð¼ Ð·Ð°Ð¿ÑÐ¾ÑÐ¸ÑÑ Ð¿Ð¾ÑÑÐ°Ð²ÐºÑ Ð² Ð½Ð°ÑÐµ Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ (${escapeHtml(supplier.company_name)}).';
+              if (cityInput) cityInput.value = 'Москва';
+              if (msgInput) msgInput.value = 'Здравствуйте! Хотим запросить поставку в наше заведение (${escapeHtml(supplier.company_name)}).';
               document.getElementById('supplyRequestTitle')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
               document.getElementById('supplyRequestTitle')?.focus();
             ">
-              â¡ï¸ ÐÑÐ¾ÑÐ¼Ð¸ÑÑ Ð·Ð°ÑÐ²ÐºÑ ÑÐµÑÐµÐ· GastroConnect
+              ⚡️ Оформить заявку через GastroConnect
             </button>
           </div>
         </div>
@@ -3513,7 +3513,7 @@
 
   async function init() {
     if (!db) {
-      setMessage(el.userInfo, "Supabase Ð½Ðµ Ð·Ð°Ð³ÑÑÐ·Ð¸Ð»ÑÑ. ÐÐ±Ð½Ð¾Ð²Ð¸ÑÐµ ÑÑÑÐ°Ð½Ð¸ÑÑ.");
+      setMessage(el.userInfo, "Supabase не загрузился. Обновите страницу.");
       return;
     }
 

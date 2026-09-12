@@ -35,13 +35,13 @@ startSchedulerTimer(async (scrapeResult) => {
       await publishToTelegram({
         type: 'job',
         role: topShift.title,
-        rate: `${topShift.rate} â½ / ÑÐ¼ÐµÐ½Ð°`,
-        metro: topShift.metro || 'ÐÐ¾ÑÐºÐ²Ð°',
-        schedule: topShift.schedule || 'Ð¡Ð¼ÐµÐ½Ð° 12 ÑÐ°ÑÐ¾Ð²',
-        urgency: 'ÐÐ¾ÑÑÑÐ°Ñ ÑÐ¼ÐµÐ½Ð° Ð½Ð° ÑÐµÐ³Ð¾Ð´Ð½Ñ',
-        perks: 'ÐÐ¸ÑÐ°Ð½Ð¸Ðµ, ÑÐ¾ÑÐ¼Ð°, ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½ÑÐµ Ð²ÑÐ¿Ð»Ð°ÑÑ',
-        tasks: topShift.description || 'Ð Ð°Ð±Ð¾ÑÐ° Ð½Ð° Ð¿Ð¾Ð·Ð¸ÑÐ¸Ð¸ Ð¿Ð¾ Ð¢Ð¢Ð Ð·Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ñ',
-        requirements: 'ÐÐ¿ÑÑ ÑÐ°Ð±Ð¾ÑÑ, Ð¼ÐµÐ´ÐºÐ½Ð¸Ð¶ÐºÐ° Ð Ð¤',
+        rate: `${topShift.rate} ₽ / смена`,
+        metro: topShift.metro || 'Москва',
+        schedule: topShift.schedule || 'Смена 12 часов',
+        urgency: 'Горящая смена на сегодня',
+        perks: 'Питание, форма, ежедневные выплаты',
+        tasks: topShift.description || 'Работа на позиции по ТТК заведения',
+        requirements: 'Опыт работы, медкнижка РФ',
         contacts: topShift.contacts || ''
       });
     } catch (e) {
@@ -135,7 +135,7 @@ app.get(['/api/vacancies', '/api/telegram/jobs'], async (req, res) => {
       rawText: item.rawText,
       date: item.date,
       verified: true,
-      badge: 'ÐÑÐ¾Ð²ÐµÑÐµÐ½Ð¾ GastroConnect',
+      badge: 'Проверено GastroConnect',
       contacts: item.contacts || {}
     }));
 

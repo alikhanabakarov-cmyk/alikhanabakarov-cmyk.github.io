@@ -103,13 +103,13 @@
     feedState.isLoading = true;
     if (refreshBtn) {
       refreshBtn.disabled = true;
-      refreshBtn.textContent = 'â³ Ð¡Ð¸Ð½ÑÑÐ¾Ð½Ð¸Ð·Ð°ÑÐ¸Ñ...';
+      refreshBtn.textContent = '⏳ Синхронизация...';
     }
 
     listContainer.innerHTML = `
       <div class="tg-loading-spinner" style="grid-column: 1 / -1;">
         <div class="tg-spinner-icon"></div>
-        <span>ÐÐ¾Ð´ÐºÐ»ÑÑÐµÐ½Ð¸Ðµ Ðº Ð¿Ð¾ÑÐ¾ÐºÑ @${feedState.channel} Ð¸ ÑÐ°Ð·Ð±Ð¾Ñ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¹...</span>
+        <span>Подключение к потоку @${feedState.channel} и разбор вакансий...</span>
       </div>
     `;
 
@@ -137,7 +137,7 @@
       } else {
         listContainer.innerHTML = `
           <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--muted);">
-            ÐÐµ ÑÐ´Ð°Ð»Ð¾ÑÑ Ð·Ð°Ð³ÑÑÐ·Ð¸ÑÑ Ð´Ð°Ð½Ð½ÑÐµ Ð¸Ð· Telegram: ${data.message || 'ÐÑÐ¸Ð±ÐºÐ° ÑÐµÑÐ¸'}
+            Не удалось загрузить данные из Telegram: ${data.message || 'Ошибка сети'}
           </div>
         `;
       }
@@ -145,52 +145,52 @@
       console.error('Failed to load telegram jobs:', err);
       listContainer.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--muted);">
-          ÐÑÐ¸Ð±ÐºÐ° ÑÐ¸Ð½ÑÑÐ¾Ð½Ð¸Ð·Ð°ÑÐ¸Ð¸ Ñ ÐºÐ°Ð½Ð°Ð»Ð¾Ð¼ @${feedState.channel}. ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ Ð¾Ð±Ð½Ð¾Ð²Ð¸ÑÑ ÑÑÑÐ°Ð½Ð¸ÑÑ.
+          Ошибка синхронизации с каналом @${feedState.channel}. Попробуйте обновить страницу.
         </div>
       `;
     } finally {
       feedState.isLoading = false;
       if (refreshBtn) {
         refreshBtn.disabled = false;
-        refreshBtn.textContent = 'ð ÐÐ±Ð½Ð¾Ð²Ð¸ÑÑ Ð¸Ð· TG';
+        refreshBtn.textContent = '🔄 Обновить из TG';
       }
     }
   }
 
   function renderStats(container, data) {
     if (!container) return;
-    const timeFormatted = data.lastUpdated ? new Date(data.lastUpdated).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : 'ÑÐµÐ¹ÑÐ°Ñ';
+    const timeFormatted = data.lastUpdated ? new Date(data.lastUpdated).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : 'сейчас';
     container.innerHTML = `
       <span class="tg-feed-stats-text">
-        ÐÐ°Ð¹Ð´ÐµÐ½Ð¾: <strong>${data.filteredCount}</strong> Ð¸Ð· ${data.totalCount} Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¹ â¢ ÐÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð² ${timeFormatted}
+        Найдено: <strong>${data.filteredCount}</strong> из ${data.totalCount} вакансий • Обновлено в ${timeFormatted}
       </span>
       <span style="font-size: 13px; color: var(--muted); font-weight: 700;">
-        ÐÑÑÐ¾ÑÐ½Ð¸Ðº: <a href="https://t.me/${data.channel}" target="_blank" rel="noopener" style="color: #2aabee; font-weight: 800;">@${data.channel}</a>
+        Источник: <a href="https://t.me/${data.channel}" target="_blank" rel="noopener" style="color: #2aabee; font-weight: 800;">@${data.channel}</a>
       </span>
     `;
   }
 
   function formatTimeAgo(dateString) {
-    if (!dateString) return 'ÑÐ¾Ð»ÑÐºÐ¾ ÑÑÐ¾';
+    if (!dateString) return 'только что';
     const diffMs = Date.now() - new Date(dateString).getTime();
     const diffMins = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMins / 60);
     const diffDays = Math.floor(diffHours / 24);
 
-    if (diffMins < 5) return 'Ð¢Ð¾Ð»ÑÐºÐ¾ ÑÑÐ¾';
-    if (diffMins < 60) return `${diffMins} Ð¼Ð¸Ð½ Ð½Ð°Ð·Ð°Ð´`;
-    if (diffHours < 24) return `${diffHours} Ñ Ð½Ð°Ð·Ð°Ð´`;
-    if (diffDays === 1) return 'ÐÑÐµÑÐ°';
-    return `${diffDays} Ð´Ð½ Ð½Ð°Ð·Ð°Ð´`;
+    if (diffMins < 5) return 'Только что';
+    if (diffMins < 60) return `${diffMins} мин назад`;
+    if (diffHours < 24) return `${diffHours} ч назад`;
+    if (diffDays === 1) return 'Вчера';
+    return `${diffDays} дн назад`;
   }
 
   function renderTelegramCards(items, container) {
     if (!items || items.length === 0) {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; background: var(--card); border: 1px dashed var(--line); border-radius: 20px; padding: 48px 24px; text-align: center;">
-          <h4 style="margin: 0 0 8px; color: var(--green); font-size: 20px; font-weight: 900;">ÐÐ¾ Ð²Ð°ÑÐ¸Ð¼ ÐºÑÐ¸ÑÐµÑÐ¸ÑÐ¼ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¹ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾</h4>
-          <p style="margin: 0 0 16px; color: var(--muted); font-size: 15px;">ÐÐ¾Ð¿ÑÐ¾Ð±ÑÐ¹ÑÐµ ÑÐ±ÑÐ¾ÑÐ¸ÑÑ ÑÐ¸Ð»ÑÑÑÑ ÑÐµÑÐ° Ð¸Ð»Ð¸ Ð¸Ð·Ð¼ÐµÐ½Ð¸ÑÑ Ð¿Ð¾Ð¸ÑÐºÐ¾Ð²ÑÐ¹ Ð·Ð°Ð¿ÑÐ¾Ñ.</p>
-          <button class="btn primary" onclick="window.resetTgFilters()" type="button">Ð¡Ð±ÑÐ¾ÑÐ¸ÑÑ Ð²ÑÐµ ÑÐ¸Ð»ÑÑÑÑ</button>
+          <h4 style="margin: 0 0 8px; color: var(--green); font-size: 20px; font-weight: 900;">По вашим критериям вакансий не найдено</h4>
+          <p style="margin: 0 0 16px; color: var(--muted); font-size: 15px;">Попробуйте сбросить фильтры цеха или изменить поисковый запрос.</p>
+          <button class="btn primary" onclick="window.resetTgFilters()" type="button">Сбросить все фильтры</button>
         </div>
       `;
       return;
@@ -221,9 +221,9 @@
             </div>
 
             <div class="tg-meta-tags">
-              <span class="tg-meta-tag">ð ${escapeHtml(item.metro)}</span>
-              <span class="tg-meta-tag">â° ${escapeHtml(item.schedule)}</span>
-              <span class="tg-meta-tag" style="background: rgba(6, 76, 59, 0.08); color: var(--green);">ð·ï¸ ${escapeHtml(item.role)}</span>
+              <span class="tg-meta-tag">📍 ${escapeHtml(item.metro)}</span>
+              <span class="tg-meta-tag">⏰ ${escapeHtml(item.schedule)}</span>
+              <span class="tg-meta-tag" style="background: rgba(6, 76, 59, 0.08); color: var(--green);">🏷️ ${escapeHtml(item.role)}</span>
             </div>
 
             <ul class="tg-benefits-list">
@@ -231,7 +231,7 @@
             </ul>
 
             <button class="tg-accordion-toggle" onclick="window.toggleTgRawText('${cardId}')" type="button">
-              ð ÐÐ¾ÐºÐ°Ð·Ð°ÑÑ ÑÐµÐºÑÑ Ð¿Ð¾ÑÑÐ° Ð¸Ð· Telegram
+              📄 Показать текст поста из Telegram
             </button>
 
             <div class="tg-raw-text" id="${cardId}-raw">${escapeHtml(item.rawText)}</div>
@@ -239,15 +239,15 @@
 
           <div class="tg-job-actions">
             <a class="btn btn-contact-tg" href="${tgLink}" target="_blank" rel="noopener">
-              ð¬ ÐÐ°Ð¿Ð¸ÑÐ°ÑÑ Ð² TG
+              💬 Написать в TG
             </a>
             ${phoneLink ? `
               <a class="btn" href="${phoneLink}">
-                ð ${item.contacts.phone}
+                📞 ${item.contacts.phone}
               </a>
             ` : `
               <a class="btn" href="${item.postUrl || tgLink}" target="_blank" rel="noopener">
-                âï¸ ÐÑÐºÑÑÑÑ Ð¿Ð¾ÑÑ
+                ↗️ Открыть пост
               </a>
             `}
           </div>
