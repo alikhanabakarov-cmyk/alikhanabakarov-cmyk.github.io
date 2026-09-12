@@ -69,6 +69,16 @@
             <button id="showRegisterBtn" type="button">Регистрация</button>
           </div>
 
+          <div class="auth-telegram" id="tgAuthBox" hidden>
+            <div class="auth-tg-title">Быстрый вход через Telegram</div>
+            <div class="auth-tg-widget" id="tgWidget"></div>
+            <p class="auth-tg-note">
+              Без пароля. При первом входе Telegram привяжется к вашему email, а
+              для входа придёт код в письме.
+            </p>
+            <div class="auth-divider"><span>или</span></div>
+          </div>
+
           <h2 id="authFormTitle">Регистрация</h2>
           <p id="authModeHint" class="message auth-mode-hint"></p>
 
@@ -126,6 +136,21 @@
               <option value="supplier">Поставщик</option>
             </select>
           </label>
+
+          <div id="otpBlock" hidden>
+            <label
+              >Код из письма<input
+                id="otpCode"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="6 цифр"
+            /></label>
+            <div class="form-actions">
+              <button id="otpSubmitBtn" type="button">Подтвердить код</button>
+              <button id="otpResendBtn" class="btn" type="button">Отправить ещё раз</button>
+            </div>
+          </div>
 
           <div class="cabinet-actions form-actions">
             <button id="registerBtn" type="button">Создать аккаунт</button>
@@ -193,6 +218,10 @@ const SUPABASE_ANON_KEY = 'sb_publishable_0F-CDySnOiJYUdAr8khcJA_QiZc6J2y';
 window.__gcSupabaseConfig = {
   url: SUPABASE_URL,
   key: SUPABASE_ANON_KEY,
+};
+
+window.__gcTelegramConfig = {
+  bot: "GastroConnect_Bot",
 };
 
 if (window.supabase?.createClient) {
@@ -1231,10 +1260,211 @@ if (window.supabase?.createClient) {
       });
   }
 
+  function initTelegramAuthPage() {
+    const cfg = window.__gcTelegramConfig || {};
+    const bot = (cfg.bot || "").trim().replace(/^@/, "");
+    const authBox = document.getElementById("tgAuthBox");
+    const tgWidget = document.getElementById("tgWidget");
+    if (!authBox || !tgWidget || !bot) return;
+    authBox.hidden = false;
+
+    const widget = document.createElement("script");
+    widget.async = true;
+    widget.src = "https://telegram.org/js/telegram-widget.js?22";
+    widget.dataset.telegramLogin = bot;
+    widget.dataset.size = "large";
+    widget.dataset.radius = "10";
+    widget.dataset.onauth = "onTelegramAuth";
+    tgWidget.appendChild(widget);
+
+    const message = document.getElementById("authMessage");
+    const consent = document.getElementById("authConsent");
+    const otpBlock = document.getElementById("otpBlock");
+    const otpCode = document.getElementById("otpCode");
+    const otpSubmitBtn = document.getElementById("otpSubmitBtn");
+    const otpResendBtn = document.getElementById("otpResendBtn");
+    let pending = null;
+
+    function showOtp(email, text) {
+      if (otpBlock) otpBlock.hidden = false;
+      if (otpCode) otpCode.value = "";
+      if (message) message.textContent = text;
+      if (otpCode) otpCode.focus();
+    }
+
+    async function sendOtp(email, metadata) {
+      const { error } = await window.supabaseClient.auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: true, data: metadata },
+      });
+      if (error) throw error;
+    }
+
+    async function finishAuth(user, info) {
+      const prev = info.profile || {};
+      const role = ["worker", "restaurant", "supplier"].includes(info.role) ? info.role : "worker";
+      const candidateName = [info.first_name, info.last_name].filter(Boolean).join(" ").trim();
+      const name = prev.name || candidateName || user.email || "Пользователь";
+      const city = String(document.getElementById("city")?.value || "").trim() || prev.city || null;
+      const profilePayload = {
+        id: user.id,
+        role,
+        name,
+        city,
+        email: user.email || info.email || null,
+        phone: user.phone || null,
+        auth_provider: "telegram",
+        telegram_id: info.telegram_id,
+        telegram_username: info.telegram_username || null,
+        telegram_first_name: info.first_name || null,
+        telegram_last_name: info.last_name || null,
+        telegram_photo_url: info.photo_url || null,
+        status: "active",
+        updated_at: new Date().toISOString(),
+      };
+      const adminPayload = {
+        ...profilePayload,
+        user_id: user.id,
+        personal_data_consent: true,
+        personal_data_consent_date: new Date().toISOString(),
+        user_agent: navigator.userAgent || "",
+        ip_address: "",
+      };
+      const { error: profileError } = await window.supabaseClient
+        .from("profiles")
+        .upsert(profilePayload, { onConflict: "id" });
+      if (profileError) throw profileError;
+      const { error: adminError } = await window.supabaseClient
+        .from("admin_user_accounts")
+        .upsert(adminPayload, { onConflict: "user_id" });
+      if (adminError && /personal_data_consent|personal_data_consent_date|user_agent|ip_address/i.test(adminError.message || "")) {
+        await window.supabaseClient.from("admin_user_accounts").upsert(profilePayload, { onConflict: "user_id" });
+      }
+      await window.supabaseClient.auth.updateUser({
+        data: {
+          role,
+          telegram_id: info.telegram_id,
+          telegram_username: info.telegram_username || "",
+          telegram_provider: "telegram",
+          personalDataConsent: true,
+        },
+      });
+      window.location.href = `/cabinet/?role=${encodeURIComponent(role)}`;
+    }
+
+    window.onTelegramAuth = async function onTelegramAuth(user) {
+      if (!user || !window.supabaseClient) {
+        if (message) message.textContent = "Не удалось получить данные Telegram. Попробуйте ещё раз.";
+        return;
+      }
+      const tgId = parseInt(String(user.id), 10);
+      if (!tgId || tgId <= 0 || !user.auth_date) {
+        if (message) message.textContent = "Не удалось получить данные Telegram. Попробуйте ещё раз.";
+        return;
+      }
+      const loginMode = document.getElementById("showLoginBtn")?.classList.contains("is-active") === true;
+      if (!loginMode && consent && !consent.checked) {
+        if (message) message.textContent = "Нужно принять документы и дать согласие на обработку персональных данных.";
+        return;
+      }
+      if (message) message.textContent = "Проверяем ваш Telegram...";
+      const info = {
+        telegram_id: tgId,
+        telegram_username: String(user.username || "").trim(),
+        first_name: String(user.first_name || "").trim(),
+        last_name: String(user.last_name || "").trim(),
+        photo_url: String(user.photo_url || "").trim(),
+      };
+      try {
+        let existing = null;
+        try {
+          const { data, error } = await window.supabaseClient.rpc("telegram_profile", { tg: tgId });
+          if (!error) existing = Array.isArray(data) && data[0] ? data[0] : null;
+        } catch {}
+        if (!existing) {
+          const { data } = await window.supabaseClient
+            .from("profiles")
+            .select("id, email, phone, name, city, role, telegram_id")
+            .eq("telegram_id", tgId)
+            .maybeSingle();
+          existing = data || null;
+        }
+        if (existing && existing.email) {
+          if (!loginMode) {
+            if (message) message.textContent = "Этот Telegram уже привязан к аккаунту. Переключитесь на вкладку «Вход».";
+            return;
+          }
+          info.type = "login";
+          info.email = existing.email;
+          info.role = existing.role || "worker";
+          info.profile = existing;
+          await sendOtp(info.email, { telegram_id: tgId, telegram_provider: "telegram" });
+          pending = info;
+          showOtp(info.email, `Код отправлен на ${info.email}. Введите его, чтобы войти.`);
+          return;
+        }
+        if (loginMode) {
+          if (message) message.textContent = "Этот Telegram ещё не привязан к аккаунту. Откройте вкладку «Регистрация».";
+          return;
+        }
+        const role = String(document.getElementById("role")?.value || "worker").trim();
+        const email = String(document.getElementById("email")?.value || "").trim().toLowerCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          if (message) message.textContent = "Укажите email в форме — на него придёт код для завершения регистрации.";
+          return;
+        }
+        info.type = "signup";
+        info.email = email;
+        info.role = ["worker", "restaurant", "supplier"].includes(role) ? role : "worker";
+        await sendOtp(email, { role: info.role, telegram_id: tgId, telegram_provider: "telegram" });
+        pending = info;
+        showOtp(email, "Код отправлен на email. Введите его, чтобы создать аккаунт.");
+      } catch (error) {
+        if (message) message.textContent = "Ошибка Telegram-входа: " + (error?.message || error);
+      }
+    };
+
+    if (otpSubmitBtn) otpSubmitBtn.addEventListener("click", async () => {
+      if (!pending) return;
+      const code = String(otpCode?.value || "").trim();
+      if (!/^\d{4,8}$/.test(code)) {
+        if (message) message.textContent = "Введите код из письма.";
+        return;
+      }
+      try {
+        if (message) message.textContent = "Подтверждаем...";
+        const { data, error } = await window.supabaseClient.auth.verifyOtp({
+          email: pending.email,
+          token: code,
+          type: "email",
+        });
+        if (error) throw error;
+        try {
+          await finishAuth(data.user, pending);
+        } catch (profileError) {
+          if (message) message.textContent = "Код верный, но не удалось сохранить профиль: " + (profileError?.message || profileError);
+        }
+      } catch (error) {
+        if (message) message.textContent = "Код не подошёл: " + (error?.message || error);
+      }
+    });
+
+    if (otpResendBtn) otpResendBtn.addEventListener("click", async () => {
+      if (!pending) return;
+      try {
+        await sendOtp(pending.email, { telegram_id: pending.telegram_id, telegram_provider: "telegram" });
+        if (message) message.textContent = `Новый код отправлен на ${pending.email}.`;
+      } catch (error) {
+        if (message) message.textContent = "Не удалось отправить код: " + (error?.message || error);
+      }
+    });
+  }
+
   applySettings(readJson(SETTINGS_KEY, {}));
   scheduleBackgrounds();
   initPublicForms();
   initAuthPage();
+  initTelegramAuthPage();
   initReviewsCarousel();
   initPublicB2BCatalog();
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });

@@ -1689,6 +1689,49 @@ label:has(input.is-valid) .field-valid-icon {
   margin: 0 0 18px;
 }
 
+.auth-tg-title {
+  margin: 0 0 10px;
+  font-weight: 750;
+  color: var(--ink);
+  text-align: center;
+}
+
+.auth-tg-widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  margin: 4px 0 6px;
+}
+
+.auth-tg-widget iframe {
+  max-width: 100%;
+}
+
+.auth-tg-note {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
 .role-panel {
   display: none;
 }
