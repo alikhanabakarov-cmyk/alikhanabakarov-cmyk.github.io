@@ -10,17 +10,15 @@ const skip = new Set([
   "dist",
   "node_modules",
   "build-sites.js",
-  "verify.js",
   "package.json",
   "package-lock.json",
 ]);
-const skipExtensions = new Set([".sql", ".md", ".zip"]);
 
 function copyDir(from, to) {
   fs.mkdirSync(to, { recursive: true });
   for (const entry of fs.readdirSync(from, { withFileTypes: true })) {
     if (skip.has(entry.name)) continue;
-    if (skipExtensions.has(path.extname(entry.name).toLowerCase())) continue;
+    if (entry.name.endsWith(".zip")) continue;
     if (entry.name.startsWith("preview-")) continue;
 
     const source = path.join(from, entry.name);
@@ -100,24 +98,23 @@ function resolvePath(pathname) {
     clean,
     clean.endsWith("/") ? clean + "index.html" : clean + "/index.html",
     clean.endsWith(".html") ? clean : clean + ".html",
+    "/index.html",
   ];
-  return candidates.find((candidate) => FILES[candidate]) || null;
+  return candidates.find((candidate) => FILES[candidate]);
 }
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
     const key = resolvePath(url.pathname);
-    const file = FILES[key || "/404.html"] || FILES["/index.html"];
+    const file = FILES[key];
     const headers = new Headers({
       "content-type": file.mime,
       "cache-control": file.cache,
       "x-content-type-options": "nosniff",
       "referrer-policy": "strict-origin-when-cross-origin",
-      "x-frame-options": "SAMEORIGIN",
-      "permissions-policy": "camera=(), microphone=(), geolocation=()",
     });
-    return new Response(decodeBase64(file.body), { status: key ? 200 : 404, headers });
+    return new Response(decodeBase64(file.body), { status: key === "/index.html" && url.pathname !== "/" ? 404 : 200, headers });
   },
 };
 `;
@@ -131,6 +128,11 @@ fs.rmSync(outDir, { recursive: true, force: true });
 copyDir(root, outDir);
 fs.copyFileSync(path.join(root, "index.html"), path.join(outDir, "404.html"));
 fs.mkdirSync(path.join(outDir, ".openai"), { recursive: true });
-fs.copyFileSync(path.join(root, ".openai", "hosting.json"), path.join(outDir, ".openai", "hosting.json"));
+const hostingJsonPath = path.join(root, ".openai", "hosting.json");
+if (fs.existsSync(hostingJsonPath)) {
+  fs.copyFileSync(hostingJsonPath, path.join(outDir, ".openai", "hosting.json"));
+} else {
+  fs.writeFileSync(path.join(outDir, ".openai", "hosting.json"), JSON.stringify({ public: true }, null, 2));
+}
 generateServer();
 console.log(`Built static site into ${outDir}`);

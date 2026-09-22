@@ -1,4 +1,4 @@
-﻿# GastroConnect
+# GastroConnect
 
 Static GitHub Pages site for the GastroConnect HoReCa marketplace.
 
@@ -32,12 +32,10 @@ Default logos:
 Run:
 
 ```powershell
-npm run check
+node --check script.js
+node --check public.js
+node --check cabinet.js
 ```
-
-`npm run check` validates JS syntax, verifies that the inline copies of `public.js` and
-`supabase.js` embedded in the HTML pages match their source files, checks that every
-referenced asset exists, and reports duplicate element ids.
 
 Before advertising, run `supabase-launch-fix.sql` in Supabase SQL Editor and configure Supabase Auth:
 

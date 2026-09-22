@@ -1,6 +1,13 @@
-User-agent: *
+User-agent: Googlebot
 Allow: /
-
+Allow: /assets/
+Allow: /style.css
+Allow: /*.css
+Allow: /*.js
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.ico
 Disallow: /admin.html
 Disallow: /admin/
 Disallow: /manage.html
@@ -9,6 +16,19 @@ Disallow: /cabinet.html
 Disallow: /cabinet/
 Disallow: /auth.html
 Disallow: /auth/
+Disallow: /api/
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /manage.html
+Disallow: /manage/
+Disallow: /cabinet.html
+Disallow: /cabinet/
+Disallow: /auth.html
+Disallow: /auth/
+Disallow: /api/
 
 Host: gastroconnect.ru
 Sitemap: https://gastroconnect.ru/sitemap.xml

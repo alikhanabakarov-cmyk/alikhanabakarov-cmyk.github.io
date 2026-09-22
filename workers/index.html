@@ -9,6 +9,7 @@
       name="description"
       content="Подработка в HoReCa в Москве и Московской области: смены для официантов, поваров, бариста, хостес и администраторов."
     />
+    <meta name="keywords" content="подработка horeca москва, работа в ресторане, смены для поваров, работа официантом москва, бариста вакансии москва, подработка с ежедневной оплатой, гибкий график общепит, работа в кафе москва, подработка для студентов horeca, gastroconnect работники" />
     <meta name="theme-color" content="#064c3b" />
     <link rel="canonical" href="https://gastroconnect.ru/workers/" />
     <meta property="og:type" content="website" />
@@ -19,10 +20,7 @@
       property="og:title"
       content="Подработка HoReCa в Москве — смены для работников"
     />
-    <meta
-      property="og:description"
-      content="Смены для официантов, поваров, бариста, хостес и администраторов в Москве и Московской области."
-    />
+    <meta property="og:description" content="Срочные смены и подработка в HoReCa по всей Москве и МО: вакансии для поваров, официантов, бариста и барменов с ежедневными выплатами и гибким графиком." />
     <meta
       property="og:image"
       content="https://gastroconnect.ru/assets/og-gastroconnect.webp"
@@ -32,10 +30,7 @@
       name="twitter:title"
       content="Подработка HoReCa в Москве — смены для работников"
     />
-    <meta
-      name="twitter:description"
-      content="Смены для официантов, поваров, бариста, хостес и администраторов в Москве и Московской области."
-    />
+    <meta name="twitter:description" content="Срочные смены и подработка в HoReCa по всей Москве и МО: вакансии для поваров, официантов, бариста и барменов с ежедневными выплатами и гибким графиком." />
     <meta
       name="twitter:image"
       content="https://gastroconnect.ru/assets/og-gastroconnect.webp"
@@ -43,7 +38,260 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/style.css?v=1031" />
+    <link rel="stylesheet" href="/style.css?v=1033" />
+    <style id="workers-vacancies-hover-anim">
+      .vacancies-grid .vacancy-card {
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.3s ease;
+        will-change: transform, box-shadow;
+        position: relative;
+      }
+      .vacancies-grid .vacancy-card:hover {
+        transform: scale(1.035) translateY(-4px);
+        box-shadow: 0 26px 64px rgba(42, 33, 18, 0.16);
+        z-index: 2;
+      }
+      /* Status indicator pills & badges on vacancy cards */
+      .vacancy-status-bar {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-size: 12.5px;
+        font-weight: 800;
+        line-height: 1.3;
+        transition: all 0.25s ease;
+      }
+      .vacancy-status-bar.is-visible {
+        display: flex;
+      }
+      .vacancy-status-bar.status-applied {
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #065f46;
+      }
+      .vacancy-status-bar.status-viewed {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #1e40af;
+      }
+      .vacancy-status-bar.status-accepted {
+        background: #fefce8;
+        border: 1px solid #fde047;
+        color: #854d0e;
+      }
+      .vacancy-status-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .vacancy-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        display: inline-block;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+      }
+      .vacancy-status-bar.status-applied .vacancy-status-dot {
+        background: #10b981;
+        animation: statusPulse 2s infinite;
+      }
+      .vacancy-status-bar.status-viewed .vacancy-status-dot {
+        background: #3b82f6;
+      }
+      .vacancy-status-bar.status-accepted .vacancy-status-dot {
+        background: #eab308;
+      }
+      .vacancy-status-date {
+        font-size: 11.5px;
+        font-weight: 600;
+        opacity: 0.85;
+      }
+      /* Applied card visual accent */
+      .vacancy-card.is-applied {
+        border-color: #10b981;
+        background: linear-gradient(180deg, #fafffd 0%, #f4fbf7 100%);
+      }
+      .vacancy-card.is-applied-viewed {
+        border-color: #3b82f6;
+        background: linear-gradient(180deg, #f8faff 0%, #f1f6fe 100%);
+      }
+      .vacancy-corner-badge {
+        display: none;
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 3px 9px;
+        border-radius: 999px;
+        letter-spacing: 0.02em;
+        z-index: 3;
+      }
+      .vacancy-card.is-applied .vacancy-corner-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #10b981;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.28);
+      }
+      .vacancy-card.is-applied-viewed .vacancy-corner-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      }
+      @keyframes statusPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.55; transform: scale(1.18); }
+      }
+      /* Shift card "Get alerts" button */
+      .btn-shift-alert {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 13.5px;
+        font-weight: 800;
+        cursor: pointer;
+        border: 1.5px solid #229ed9;
+        background: #f0f9ff;
+        color: #0284c7;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+        text-decoration: none;
+        line-height: 1.2;
+      }
+      .btn-shift-alert:hover {
+        background: #e0f2fe;
+        border-color: #0284c7;
+        color: #0369a1;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(34, 158, 217, 0.18);
+      }
+      .btn-shift-alert:active {
+        transform: translateY(0);
+      }
+      .btn-shift-alert-icon {
+        font-size: 14px;
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+      .btn-shift-alert:hover .btn-shift-alert-icon {
+        transform: rotate(15deg) scale(1.1);
+      }
+      .btn-shift-alert-tg-badge {
+        font-size: 10.5px;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        background: rgba(34, 158, 217, 0.16);
+        color: #0284c7;
+        padding: 2px 7px;
+        border-radius: 999px;
+        margin-left: 2px;
+      }
+      /* Subscribed / Active state */
+      .btn-shift-alert.is-subscribed {
+        background: #ecfdf5;
+        border-color: #10b981;
+        color: #065f46;
+      }
+      .btn-shift-alert.is-subscribed:hover {
+        background: #d1fae5;
+        border-color: #059669;
+        color: #047857;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+      }
+      .btn-shift-alert.is-subscribed .btn-shift-alert-tg-badge {
+        background: rgba(16, 185, 129, 0.2);
+        color: #065f46;
+      }
+
+      /* Alert Modal styles */
+      .gc-alert-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(4px);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .gc-alert-modal-dialog {
+        background: #ffffff;
+        border-radius: 20px;
+        max-width: 520px;
+        width: 100%;
+        padding: 30px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        position: relative;
+        animation: modalEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes modalEnter {
+        from { opacity: 0; transform: scale(0.95) translateY(8px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+      .gc-alert-modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        border: none;
+        font-size: 15px;
+        color: #64748b;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+      .gc-alert-modal-close:hover {
+        background: #e2e8f0;
+        color: #1e293b;
+      }
+      .gc-alert-modal-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .gc-alert-modal-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #e0f2fe;
+        color: #0284c7;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .vacancies-grid .vacancy-card {
+          transition: none !important;
+        }
+        .vacancies-grid .vacancy-card:hover {
+          transform: none !important;
+        }
+        .vacancy-status-bar.status-applied .vacancy-status-dot {
+          animation: none;
+        }
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -141,6 +389,7 @@
             </div>
           </div>
           <div class="poster-visual poster-visual-workers" data-site-bg="workers.hero" data-bg-default="/assets/hero-workers.webp" aria-label="Смены и подработки для HoReCa">
+            <img class="poster-hero-image" src="/assets/hero-workers.webp" alt="Смены и подработки для HoReCa" loading="eager" decoding="async" fetchpriority="high" />
           </div>
         </section>
 
@@ -154,10 +403,20 @@
             </p>
           </div>
 
-          <div class="vacancies-grid">
+          <div class="vacancies-grid" id="vacanciesGrid">
             <!-- Смена 1: Су-шеф -->
-            <article class="vacancy-card vacancy-card-featured">
+            <article class="vacancy-card vacancy-card-featured" id="vacancyCard-sous-chef" data-vacancy-id="shift-sous-chef" data-vacancy-role="sous-chef">
+              <span class="vacancy-corner-badge" id="cornerBadge-sous-chef">
+                <span>✓</span> Отклик отправлен
+              </span>
               <div>
+                <div class="vacancy-status-bar" id="statusBar-sous-chef" role="status">
+                  <span class="vacancy-status-indicator">
+                    <span class="vacancy-status-dot"></span>
+                    <span class="vacancy-status-text">Отклик отправлен</span>
+                  </span>
+                  <span class="vacancy-status-date">в обработке</span>
+                </div>
                 <span class="vacancy-role-tag">Шеф / Руководство</span>
                 <h3 class="vacancy-title">Су-шеф в ресторан авторской кухни</h3>
                 <div class="vacancy-rate-box">
@@ -174,16 +433,31 @@
                   <li>Выплаты каждые 2 недели + премии от шефа</li>
                 </ul>
               </div>
-              <div class="vacancy-actions">
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
                 <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
                   🔒 Открыть смену и откликнуться
                 </a>
+                <button type="button" class="btn btn-shift-alert" id="btnAlert-sous-chef" data-action="get-alerts" data-role="Су-шеф в ресторан авторской кухни" data-role-category="sous-chef">
+                  <span class="btn-shift-alert-icon">🔔</span>
+                  <span class="btn-shift-alert-label">Get alerts</span>
+                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+                </button>
               </div>
             </article>
 
             <!-- Смена 2: Повар горячего цеха -->
-            <article class="vacancy-card">
+            <article class="vacancy-card" id="vacancyCard-hot-cook" data-vacancy-id="shift-hot-cook" data-vacancy-role="hot-cook">
+              <span class="vacancy-corner-badge" id="cornerBadge-hot-cook">
+                <span>✓</span> Отклик отправлен
+              </span>
               <div>
+                <div class="vacancy-status-bar" id="statusBar-hot-cook" role="status">
+                  <span class="vacancy-status-indicator">
+                    <span class="vacancy-status-dot"></span>
+                    <span class="vacancy-status-text">Отклик отправлен</span>
+                  </span>
+                  <span class="vacancy-status-date">в обработке</span>
+                </div>
                 <span class="vacancy-role-tag">Кухня / Горячий цех</span>
                 <h3 class="vacancy-title">Повар горячего цеха (Италия, гриль)</h3>
                 <div class="vacancy-rate-box">
@@ -200,16 +474,31 @@
                   <li>Дружная команда и комфортные условия</li>
                 </ul>
               </div>
-              <div class="vacancy-actions">
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
                 <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
                   🔒 Открыть смену и откликнуться
                 </a>
+                <button type="button" class="btn btn-shift-alert" id="btnAlert-hot-cook" data-action="get-alerts" data-role="Повар горячего цеха (Италия, гриль)" data-role-category="hot-cook">
+                  <span class="btn-shift-alert-icon">🔔</span>
+                  <span class="btn-shift-alert-label">Get alerts</span>
+                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+                </button>
               </div>
             </article>
 
             <!-- Смена 3: Повар холодного цеха -->
-            <article class="vacancy-card">
+            <article class="vacancy-card" id="vacancyCard-cold-cook" data-vacancy-id="shift-cold-cook" data-vacancy-role="cold-cook">
+              <span class="vacancy-corner-badge" id="cornerBadge-cold-cook">
+                <span>✓</span> Отклик отправлен
+              </span>
               <div>
+                <div class="vacancy-status-bar" id="statusBar-cold-cook" role="status">
+                  <span class="vacancy-status-indicator">
+                    <span class="vacancy-status-dot"></span>
+                    <span class="vacancy-status-text">Отклик отправлен</span>
+                  </span>
+                  <span class="vacancy-status-date">в обработке</span>
+                </div>
                 <span class="vacancy-role-tag">Кухня / Холодный цех</span>
                 <h3 class="vacancy-title">Повар холодного цеха в бистро</h3>
                 <div class="vacancy-rate-box">
@@ -226,12 +515,93 @@
                   <li>Быстрый карьерный рост до су-шефа</li>
                 </ul>
               </div>
-              <div class="vacancy-actions">
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
                 <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
                   🔒 Открыть смену и откликнуться
                 </a>
+                <button type="button" class="btn btn-shift-alert" id="btnAlert-cold-cook" data-action="get-alerts" data-role="Повар холодного цеха в бистро" data-role-category="cold-cook">
+                  <span class="btn-shift-alert-icon">🔔</span>
+                  <span class="btn-shift-alert-label">Get alerts</span>
+                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+                </button>
               </div>
             </article>
+          </div>
+
+          <!-- Alert Subscription Modal -->
+          <div id="shiftAlertModal" class="gc-alert-modal-backdrop" aria-hidden="true" style="display: none;">
+            <div class="gc-alert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="shiftAlertModalTitle">
+              <button type="button" class="gc-alert-modal-close" id="shiftAlertModalClose" aria-label="Закрыть">✕</button>
+              <div class="gc-alert-modal-head">
+                <div class="gc-alert-modal-icon">🔔</div>
+                <div>
+                  <h3 id="shiftAlertModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #1e293b;">
+                    Telegram-алерты на смены
+                  </h3>
+                  <p style="margin: 4px 0 0; font-size: 13px; color: #64748b;">
+                    Специальность: <strong id="shiftAlertModalRoleName" style="color: #0284c7;">Су-шеф</strong>
+                  </p>
+                </div>
+              </div>
+              
+              <div id="shiftAlertModalSubscribeView">
+                <p style="font-size: 14px; line-height: 1.5; color: #334155; margin: 16px 0 14px;">
+                  Получайте моментальные персональные оповещения в Telegram, как только заведения Москвы открывают новую подтверждённую смену для вашей специальности.
+                </p>
+                <form id="shiftAlertForm">
+                  <input type="hidden" id="shiftAlertRoleCategory" value="" />
+                  <input type="hidden" id="shiftAlertRoleTitle" value="" />
+                  <div style="margin-bottom: 14px;">
+                    <label for="shiftAlertTgInput" style="display: block; font-size: 12.5px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                      Ваш Telegram (@username или телефон)
+                    </label>
+                    <input 
+                      type="text" 
+                      id="shiftAlertTgInput" 
+                      name="telegram" 
+                      placeholder="@username или +7 (999) 000-00-00" 
+                      required
+                      style="width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14.5px; font-weight: 600; outline: none; transition: border-color 0.2s;"
+                    />
+                    <span style="display: block; font-size: 11.5px; color: #64748b; margin-top: 4px;">
+                      Бот пришлёт уведомление с прямой ставкой и контактами шефа без спама.
+                    </span>
+                  </div>
+
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+                    <button type="submit" id="shiftAlertSubmitBtn" class="btn primary" style="flex: 1; min-width: 180px; justify-content: center; background: #229ed9; border-color: #229ed9; font-weight: 900; padding: 13px 18px;">
+                      ⚡️ Включить алерты
+                    </button>
+                    <a id="shiftAlertBotLink" href="https://t.me/GastroConnect_Bot" target="_blank" rel="noopener" class="btn" style="background: #f8fafc; border: 1.5px solid #cbd5e1; color: #334155; font-weight: 800; padding: 13px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                      🤖 Бот @GastroConnect_Bot
+                    </a>
+                  </div>
+                </form>
+              </div>
+
+              <div id="shiftAlertModalSuccessView" style="display: none; padding-top: 8px;">
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                  <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <span style="font-size: 20px;">✅</span>
+                    <strong style="color: #065f46; font-size: 15px;">Алерты успешно активированы!</strong>
+                  </div>
+                  <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #047857;" id="shiftAlertSuccessMessage">
+                    Вы подписаны на уведомления о новых сменах для этой роли. Мы пришлем алерт в Telegram, как только заведение опубликует заявку.
+                  </p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <a id="shiftAlertOpenBotBtn" href="https://t.me/GastroConnect_Bot" target="_blank" rel="noopener" class="btn primary" style="flex: 1; justify-content: center; background: #229ed9; border-color: #229ed9; font-weight: 900; padding: 12px 18px;">
+                    📲 Открыть @GastroConnect_Bot
+                  </a>
+                  <button type="button" id="shiftAlertTestBtn" class="btn" style="background: #f1f5f9; border-color: #cbd5e1; color: #1e293b; font-weight: 800; padding: 12px 16px;">
+                    🔔 Тестовый алерт
+                  </button>
+                  <button type="button" id="shiftAlertUnsubBtn" class="btn" style="background: transparent; border-color: transparent; color: #ef4444; font-size: 13px; font-weight: 700; padding: 12px 14px; cursor: pointer;">
+                    Отключить алерты
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- VIP Баннер авторизации -->
@@ -420,7 +790,7 @@
           <span class="brand-text">GastroConnect</span>
         </div>
         <div class="footer-links">
-          <a href="tel:+79104334729">+7 910 433-47-29</a>
+          
           <a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
           <a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a>
           <a href="/privacy/">Политика конфиденциальности</a>
@@ -429,7 +799,8 @@
         </div>
       </footer>
     </div>
-    <script>(function () {
+    <script>
+(function () {
   const SETTINGS_KEY = "gc_site_settings";
   const SETTINGS_ROW = "public_site";
   const SUBMISSIONS_KEY = "gc_public_submissions";
@@ -622,6 +993,9 @@
     const rows = readSubmissions();
     rows.unshift(row);
     writeJson(SUBMISSIONS_KEY, rows.slice(0, 100));
+    try {
+      window.dispatchEvent(new CustomEvent("gc_submission_saved", { detail: row }));
+    } catch {}
   }
 
   function createSubmissionId() {
@@ -768,145 +1142,20 @@
   }
   function initPublicForms() {
     document.querySelectorAll("form[data-form-type]").forEach((form) => {
-      function getOrCreateErrorBadge(input) {
-        const parent = input.closest("label") || input.parentElement;
-        let badge = parent.querySelector(".field-error-msg");
-        if (!badge) {
-          badge = document.createElement("span");
-          badge.className = "field-error-msg";
-          parent.appendChild(badge);
-        }
-        return badge;
-      }
-
-      function validateField(input, isBlur = false) {
-        if (!input || input.type === "hidden" || input.type === "submit") return true;
-        const val = input.value.trim();
-        const badge = getOrCreateErrorBadge(input);
-        let isValid = true;
-        let errorMsg = "";
-
-        if (input.name === "name") {
-          if (!val) {
-            isValid = false;
-            errorMsg = "Пожалуйста, укажите имя";
-          } else if (val.length < 2) {
-            isValid = false;
-            errorMsg = "Имя должно содержать от 2 символов";
-          }
-        } else if (input.name === "phone" || input.type === "tel") {
-          const digits = val.replace(/\D/g, "");
-          if (!val) {
-            isValid = false;
-            errorMsg = "Укажите номер телефона для связи";
-          } else if (digits.length < 10) {
-            isValid = false;
-            errorMsg = "Введите корректный номер (10–11 цифр)";
-          }
-        } else if (input.name === "email" || input.type === "email") {
-          if (input.required && !val) {
-            isValid = false;
-            errorMsg = "Укажите email";
-          } else if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            isValid = false;
-            errorMsg = "Некорректный формат email";
-          }
-        } else if (input.required && !val) {
-          isValid = false;
-          errorMsg = "Обязательное поле для заполнения";
-        }
-
-        if (isValid) {
-          input.classList.remove("is-invalid");
-          if (val.length > 0) input.classList.add("is-valid");
-          else input.classList.remove("is-valid");
-          badge.classList.remove("show");
-          badge.textContent = "";
-        } else {
-          input.classList.remove("is-valid");
-          if (isBlur || input.dataset.touched === "true") {
-            input.classList.add("is-invalid");
-            badge.textContent = errorMsg;
-            badge.classList.add("show");
-          }
-        }
-        return isValid;
-      }
-
-      form.querySelectorAll("input, select, textarea").forEach((input) => {
-        if (input.type === "hidden" || input.type === "submit") return;
-
-        if (input.name === "phone" || input.type === "tel") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            let raw = input.value.replace(/\D/g, "");
-            if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-            if (raw.length > 0) {
-              let formatted = "+7 (";
-              formatted += raw.slice(0, 3);
-              if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-              if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-              if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-              input.value = formatted;
-            }
-            validateField(input);
-          });
-        } else if (input.type !== "checkbox") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            validateField(input);
-          });
-        }
-
-        input.addEventListener("blur", () => {
-          input.dataset.touched = "true";
-          validateField(input, true);
-        });
-      });
-
-      const consentBox = form.querySelector('input[name="personalDataConsent"]');
-      if (consentBox) {
-        consentBox.addEventListener("change", () => {
-          const wrapper = consentBox.closest(".consent-checkbox") || consentBox.parentElement;
-          if (consentBox.checked) {
-            wrapper.classList.remove("is-invalid");
-          }
-        });
-      }
-
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = form.querySelector('button[type="submit"], input[type="submit"]');
         const box = form.querySelector(".success");
-
-        let formIsValid = true;
-        let firstInvalid = null;
-
-        form.querySelectorAll("input, select, textarea").forEach((input) => {
-          if (input.type === "hidden" || input.type === "submit" || input.type === "checkbox") return;
-          input.dataset.touched = "true";
-          const valid = validateField(input, true);
-          if (!valid) {
-            formIsValid = false;
-            if (!firstInvalid) firstInvalid = input;
-          }
-        });
-
-        const consent = form.querySelector('input[name="personalDataConsent"]');
-        if (consent && !consent.checked) {
-          formIsValid = false;
-          const wrapper = consent.closest(".consent-checkbox") || consent.parentElement;
-          wrapper.classList.add("is-invalid");
-          if (!firstInvalid) firstInvalid = consent;
-        }
-
-        if (!formIsValid) {
-          if (firstInvalid) firstInvalid.focus();
-          return;
-        }
-
         if (button) button.disabled = true;
         const rawData = Object.fromEntries(new FormData(form).entries());
+        if (rawData.personalDataConsent !== "true" && rawData.personalDataConsent !== "on") {
+          if (box) {
+            box.textContent = "\u041d\u0443\u0436\u043d\u043e \u043f\u0440\u0438\u043d\u044f\u0442\u044c \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438 \u0434\u0430\u0442\u044c \u0441\u043e\u0433\u043b\u0430\u0441\u0438\u0435 \u043d\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0443 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445.";
+            box.style.display = "block";
+          }
+          if (button) button.disabled = false;
+          return;
+        }
         rawData.personalDataConsentDate = new Date().toISOString();
         rawData.userAgent = navigator.userAgent || "";
         rawData.ipAddress = "";
@@ -918,20 +1167,18 @@
             box.setAttribute("role", "status");
             box.textContent =
               form.dataset.formType === "callback"
-                ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
+                ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0437\u0432\u043e\u043d\u043e\u043a \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c\u0443 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443."
                 : form.dataset.formType === "feedback"
-                  ? "Обращение отправлено. Мы ответим по указанным контактам."
+                  ? "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e. \u041c\u044b \u043e\u0442\u0432\u0435\u0442\u0438\u043c \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u043c \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c."
                   : form.dataset.formType === "telegram_bot"
-                    ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
-                    : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
+                    ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 Telegram-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f."
+                    : "\u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0438 \u0432\u0430\u0448\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u0438 \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
           }
         } catch {
-          if (box) box.textContent = "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
+          if (box) box.textContent = "\u0417\u0430\u044f\u0432\u043a\u0430 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0430 \u0432 \u044d\u0442\u043e\u043c \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435. \u0415\u0441\u043b\u0438 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u0438\u043b\u0438 \u0431\u0430\u0437\u0430 \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b, \u043f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0443 \u043f\u043e\u0437\u0436\u0435.";
         } finally {
           if (box) box.style.display = "block";
           form.reset();
-          form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
-          form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
           if (button) button.disabled = false;
         }
       });
@@ -1298,160 +1545,389 @@
     });
   }
 
-  function initPublicB2BCatalog() {
-    const grid = document.getElementById("publicB2BGrid");
-    const msgEl = document.getElementById("publicB2BMsg");
-    if (!grid) return;
-
-    let suppliersData = [];
-    let activeCat = "all";
-
-    const searchInput = document.getElementById("publicB2BSearch");
-    const minOrderSelect = document.getElementById("publicB2BMinOrder");
-    const applyBtn = document.getElementById("publicB2BApplyBtn");
-    const chips = document.querySelectorAll("#publicB2BCatChips button");
-
-    function money(v) {
-      return v || v === 0 ? Number(v).toLocaleString("ru-RU") + " ₽" : "-";
+  function getVacancyStatusDetails(submission) {
+    if (!submission) return null;
+    const status = String(submission.status || "new").toLowerCase();
+    const createdAt = submission.created_at || submission.createdAt || submission.personalDataConsentDate;
+    let formattedDate = "";
+    if (createdAt) {
+      try {
+        const d = new Date(createdAt);
+        if (!isNaN(d.getTime())) {
+          formattedDate = d.toLocaleDateString("ru-RU", { day: "numeric", month: "short" });
+        }
+      } catch {}
     }
 
-    function render() {
-      const q = (searchInput?.value || "").trim().toLowerCase();
-      const minOrderMax = parseInt(minOrderSelect?.value || "0", 10);
+    if (status === "viewed" || status === "read" || status === "reviewing") {
+      return {
+        key: "viewed",
+        text: "Просмотрено заведением",
+        badge: "Просмотрено",
+        date: formattedDate ? `просмотрено ${formattedDate}` : "просмотрено шефом",
+        cssClass: "status-viewed",
+        cardClass: "is-applied-viewed",
+      };
+    }
 
-      let filtered = [...suppliersData];
-      if (activeCat !== "all") {
-        filtered = filtered.filter(s => s.category === activeCat);
-      }
-      if (minOrderMax > 0) {
-        filtered = filtered.filter(s => s.min_order_rub <= minOrderMax);
-      }
-      if (q) {
-        filtered = filtered.filter(s =>
-          s.company_name.toLowerCase().includes(q) ||
-          s.category_label.toLowerCase().includes(q) ||
-          s.description.toLowerCase().includes(q) ||
-          (s.products && s.products.some(p => p.name.toLowerCase().includes(q)))
+    if (status === "accepted" || status === "approved" || status === "confirmed") {
+      return {
+        key: "accepted",
+        text: "Заявка одобрена",
+        badge: "Одобрено",
+        date: formattedDate ? `одобрено ${formattedDate}` : "ждёт вас на смене",
+        cssClass: "status-accepted",
+        cardClass: "is-applied",
+      };
+    }
+
+    // Default active application state
+    return {
+      key: "applied",
+      text: "Отклик отправлен",
+      badge: "Отклик отправлен",
+      date: formattedDate ? `отправлено ${formattedDate}` : "в обработке",
+      cssClass: "status-applied",
+      cardClass: "is-applied",
+    };
+  }
+
+  async function updateVacanciesApplicationStatus() {
+    const cards = document.querySelectorAll(".vacancies-grid .vacancy-card[data-vacancy-id]");
+    if (!cards.length) return;
+
+    // 1. Check local submissions first (from localStorage)
+    const localSubmissions = readSubmissions();
+    const workerSubmissions = (localSubmissions || []).filter(
+      (s) => s.type === "worker" || s.type === "shift" || s.type === "callback",
+    );
+
+    // 2. Check if user is authenticated and has Supabase applications
+    let remoteApps = [];
+    const client = window.supabaseClient;
+    if (client && client.auth) {
+      try {
+        const { data: sessionData } = await client.auth.getSession();
+        const user = sessionData?.session?.user;
+        if (user) {
+          const { data: dbApps } = await client
+            .from("shift_applications")
+            .select("id, shift_id, status, created_at")
+            .eq("worker_id", user.id)
+            .order("created_at", { ascending: false });
+          if (Array.isArray(dbApps)) {
+            remoteApps = dbApps;
+          }
+        }
+      } catch {}
+    }
+
+    // Map each vacancy card
+    cards.forEach((card) => {
+      const vacancyId = card.dataset.vacancyId;
+      const role = card.dataset.vacancyRole;
+      const statusBar = card.querySelector(".vacancy-status-bar");
+      const cornerBadge = card.querySelector(".vacancy-corner-badge");
+      const actionLink = card.querySelector(".vacancy-actions a");
+
+      // Check remote match first
+      let matchedApp = remoteApps.find(
+        (a) => a.shift_id === vacancyId || (role && a.shift_id && a.shift_id.includes(role)),
+      );
+
+      // Or match from submitted forms (if worker already sent an application on the site)
+      if (!matchedApp && workerSubmissions.length > 0) {
+        // Look for targeted shift submission, or most recent worker application
+        const targeted = workerSubmissions.find(
+          (s) => (s.data && s.data.vacancy_id === vacancyId) ||
+                 (s.data && s.data.shift_id === vacancyId) ||
+                 (role && s.data && s.data.role && s.data.role.toLowerCase().includes(role)),
         );
+        matchedApp = targeted || workerSubmissions[0];
       }
 
-      if (msgEl) {
-        msgEl.textContent = `Найдено поставщиков: ${filtered.length}`;
+      if (matchedApp) {
+        const details = getVacancyStatusDetails(matchedApp);
+        if (details) {
+          card.classList.remove("is-applied", "is-applied-viewed");
+          card.classList.add(details.cardClass);
+
+          if (statusBar) {
+            statusBar.className = `vacancy-status-bar is-visible ${details.cssClass}`;
+            const textElem = statusBar.querySelector(".vacancy-status-text");
+            const dateElem = statusBar.querySelector(".vacancy-status-date");
+            if (textElem) textElem.textContent = details.text;
+            if (dateElem) dateElem.textContent = details.date;
+          }
+
+          if (cornerBadge) {
+            cornerBadge.innerHTML = `<span>✓</span> ${escapeText(details.badge)}`;
+            cornerBadge.style.display = "inline-flex";
+          }
+
+          if (actionLink) {
+            actionLink.textContent = "✓ Заявка подана (Перейти в кабинет)";
+            actionLink.href = "/cabinet/";
+            actionLink.style.background = details.key === "viewed" ? "#2563eb" : "#064c3b";
+            actionLink.style.borderColor = details.key === "viewed" ? "#2563eb" : "#064c3b";
+          }
+        }
       }
+    });
+  }
 
-      if (!filtered.length) {
-        grid.innerHTML = `
-          <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed var(--line);">
-            <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
-            <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">Поставщиков по запросу не найдено</h4>
-            <p style="margin: 0; color: #64748b; font-size: 14px;">Попробуйте изменить запрос или выбрать другую категорию продуктов.</p>
-          </div>
-        `;
-        return;
+  // Hook into form submissions to update status dynamically without page reload
+  window.addEventListener("gc_submission_saved", () => {
+    updateVacanciesApplicationStatus();
+  });
+
+  // Telegram Shift Alerts for Workers
+  function initShiftAlerts() {
+    const ALERTS_STORAGE_KEY = "gc_shift_telegram_alerts";
+    const modal = document.getElementById("shiftAlertModal");
+    if (!modal) return;
+
+    const modalClose = document.getElementById("shiftAlertModalClose");
+    const modalRoleName = document.getElementById("shiftAlertModalRoleName");
+    const catInput = document.getElementById("shiftAlertRoleCategory");
+    const titleInput = document.getElementById("shiftAlertRoleTitle");
+    const tgInput = document.getElementById("shiftAlertTgInput");
+    const subView = document.getElementById("shiftAlertModalSubscribeView");
+    const successView = document.getElementById("shiftAlertModalSuccessView");
+    const successMsg = document.getElementById("shiftAlertSuccessMessage");
+    const submitBtn = document.getElementById("shiftAlertSubmitBtn");
+    const form = document.getElementById("shiftAlertForm");
+    const botLink = document.getElementById("shiftAlertBotLink");
+    const openBotBtn = document.getElementById("shiftAlertOpenBotBtn");
+    const testBtn = document.getElementById("shiftAlertTestBtn");
+    const unsubBtn = document.getElementById("shiftAlertUnsubBtn");
+
+    function getStoredAlerts() {
+      try {
+        const raw = localStorage.getItem(ALERTS_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
       }
-
-      grid.innerHTML = filtered.map(s => {
-        const tgUser = (s.telegram || "").replace(/^@/, "");
-        const tgUrl = tgUser ? `https://t.me/${tgUser}` : "https://t.me/gastroconnect";
-        const phoneUrl = `tel:${s.phone.replace(/[^\d+]/g, "")}`;
-        const prodHtml = (s.products || []).map(p => `
-          <div class="b2b-prod-item">
-            <div>
-              <div style="font-weight: 750; color: var(--ink);">${escapeText(p.name)}</div>
-              <div style="font-size: 11.5px; color: #64748b;">${escapeText(p.spec || "")}</div>
-            </div>
-            <div class="b2b-prod-price">${money(p.price)} / ${escapeText(p.unit)}</div>
-          </div>
-        `).join("");
-
-        const badges = (s.badges || []).map(b => `<span class="b2b-mini-badge">✓ ${escapeText(b)}</span>`).join("");
-
-        return `
-          <div class="b2b-supplier-card">
-            <div class="b2b-card-top">
-              <div>
-                <div class="b2b-sup-cat">${escapeText(s.category_label)}</div>
-                <h4 class="b2b-sup-name">${escapeText(s.company_name)}</h4>
-                <div style="font-size: 12px; color: #64748b;">Источник: ${escapeText(s.source)}</div>
-              </div>
-              <div class="b2b-rating-pill">⭐ ${s.rating} (${s.reviews_count})</div>
-            </div>
-
-            <p class="b2b-sup-desc">${escapeText(s.description)}</p>
-            <div class="b2b-badges-wrap">${badges}</div>
-
-            <div class="b2b-sup-meta">
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">Мин. заказ:</span>
-                <span class="b2b-meta-value">${money(s.min_order_rub)}</span>
-              </div>
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">График доставки:</span>
-                <span class="b2b-meta-value">${escapeText(s.delivery_schedule)}</span>
-              </div>
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">Оплата:</span>
-                <span class="b2b-meta-value" style="font-size: 12px;">${escapeText(s.payment_terms)}</span>
-              </div>
-            </div>
-
-            <button type="button" class="b2b-products-toggle" onclick="
-              var l = this.nextElementSibling;
-              if (l.classList.contains('expanded')) {
-                l.classList.remove('expanded');
-                this.innerHTML = '📋 Оптовый прайс-лист (' + ${s.products.length} + ') ▼';
-              } else {
-                l.classList.add('expanded');
-                this.innerHTML = '📋 Скрыть прайс-лист ▲';
-              }
-            ">
-              📋 Оптовый прайс-лист (${s.products.length}) ▼
-            </button>
-            <div class="b2b-products-list">
-              <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Прайс-лист для заведений</div>
-              ${prodHtml}
-            </div>
-
-            <div class="b2b-card-actions">
-              <div class="b2b-action-row">
-                ${s.website ? `<a href="${escapeText(s.website)}" target="_blank" rel="noopener" class="b2b-btn-web">🌐 Сайт</a>` : ''}
-                <a href="${tgUrl}" target="_blank" rel="noopener" class="b2b-btn-tg">Telegram</a>
-                <a href="${phoneUrl}" class="b2b-btn-phone">📞 Позвонить</a>
-              </div>
-              <a href="/auth/?role=restaurant" class="b2b-btn-order" style="text-align:center; text-decoration:none; display:block;">
-                ⚡️ Заказать поставку через кабинет
-              </a>
-            </div>
-          </div>
-        `;
-      }).join("");
     }
 
-    chips.forEach(c => {
-      c.addEventListener("click", () => {
-        chips.forEach(ch => ch.classList.remove("active"));
-        c.classList.add("active");
-        activeCat = c.dataset.pubCat || "all";
-        render();
+    function saveStoredAlert(cat, data) {
+      const all = getStoredAlerts();
+      all[cat] = data;
+      try {
+        localStorage.setItem(ALERTS_STORAGE_KEY, JSON.stringify(all));
+      } catch {}
+      updateAlertButtons();
+    }
+
+    function removeStoredAlert(cat) {
+      const all = getStoredAlerts();
+      delete all[cat];
+      try {
+        localStorage.setItem(ALERTS_STORAGE_KEY, JSON.stringify(all));
+      } catch {}
+      updateAlertButtons();
+    }
+
+    function getKnownUserContact() {
+      // 1. Check worker submissions from localStorage
+      const submissions = readSubmissions();
+      for (const s of submissions) {
+        if (s.data && (s.data.telegram || s.data.phone)) {
+          return s.data.telegram || s.data.phone;
+        }
+      }
+      // 2. Check profile in localStorage
+      try {
+        const profileRaw = localStorage.getItem("gc_user_profile");
+        if (profileRaw) {
+          const prof = JSON.parse(profileRaw);
+          if (prof.telegram) return prof.telegram;
+          if (prof.phone) return prof.phone;
+        }
+      } catch {}
+      return "";
+    }
+
+    function updateAlertButtons() {
+      const stored = getStoredAlerts();
+      const buttons = document.querySelectorAll(".btn-shift-alert[data-role-category]");
+      buttons.forEach((btn) => {
+        const cat = btn.dataset.roleCategory;
+        const sub = stored[cat];
+        if (sub) {
+          btn.classList.add("is-subscribed");
+          btn.innerHTML = `<span class="btn-shift-alert-icon">✓</span> <span class="btn-shift-alert-label">Alerts active</span> <span class="btn-shift-alert-tg-badge">Telegram</span>`;
+          btn.title = `Вы подписаны на алерты для этой роли (${sub.telegram || "Telegram"}). Нажмите для управления.`;
+        } else {
+          btn.classList.remove("is-subscribed");
+          btn.innerHTML = `<span class="btn-shift-alert-icon">🔔</span> <span class="btn-shift-alert-label">Get alerts</span> <span class="btn-shift-alert-tg-badge">Telegram</span>`;
+          btn.title = "Получать мгновенные уведомления о новых сменах в Telegram";
+        }
+      });
+    }
+
+    function openModal(role, category) {
+      catInput.value = category;
+      titleInput.value = role;
+      modalRoleName.textContent = role;
+
+      const deepLink = `https://t.me/GastroConnect_Bot?start=alert_${encodeURIComponent(category)}`;
+      if (botLink) botLink.href = deepLink;
+      if (openBotBtn) openBotBtn.href = deepLink;
+
+      const stored = getStoredAlerts();
+      const sub = stored[category];
+
+      if (sub) {
+        subView.style.display = "none";
+        successView.style.display = "block";
+        successMsg.innerHTML = `Вы уже подписаны на уведомления для роли «<b>${escapeText(role)}</b>» на контакт <b>${escapeText(sub.telegram || "Telegram")}</b>.<br>При появлении новой проверенной смены вам придёт мгновенный алерт в Telegram.`;
+      } else {
+        subView.style.display = "block";
+        successView.style.display = "none";
+        if (!tgInput.value) {
+          tgInput.value = getKnownUserContact();
+        }
+        setTimeout(() => tgInput.focus(), 100);
+      }
+
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Attach click listeners to cards
+    document.querySelectorAll(".btn-shift-alert[data-action='get-alerts']").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const role = btn.dataset.role || "Повар";
+        const cat = btn.dataset.roleCategory || "cook";
+        openModal(role, cat);
       });
     });
 
-    searchInput?.addEventListener("input", render);
-    minOrderSelect?.addEventListener("change", render);
-    applyBtn?.addEventListener("click", render);
+    // Form submit: subscribe
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const contactVal = tgInput.value.trim();
+      const cat = catInput.value;
+      const role = titleInput.value;
+      if (!contactVal) return;
 
-    fetch("/api/suppliers")
-      .then(r => r.json())
-      .then(res => {
-        if (res.success && Array.isArray(res.suppliers)) {
-          suppliersData = res.suppliers;
-          if (msgEl) msgEl.textContent = `Доступно проверенных поставщиков: ${suppliersData.length}`;
-          render();
-        }
-      })
-      .catch(err => {
-        if (msgEl) msgEl.textContent = "Ошибка загрузки каталога.";
-      });
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "Подключаем алерты...";
+
+      try {
+        const res = await fetch("/api/telegram/alerts/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            role,
+            roleCategory: cat,
+            telegram: contactVal
+          })
+        });
+        const data = await res.json();
+        saveStoredAlert(cat, {
+          role,
+          roleCategory: cat,
+          telegram: contactVal,
+          subscribedAt: new Date().toISOString()
+        });
+
+        subView.style.display = "none";
+        successView.style.display = "block";
+        successMsg.innerHTML = `Вы успешно подписаны на уведомления для роли «<b>${escapeText(role)}</b>» на контакт <b>${escapeText(contactVal)}</b>.<br>Как только появится подходящая смена, вы получите мгновенный алерт с прямой ставкой и контактами шефа.`;
+      } catch (err) {
+        // Fallback local save in case network fails
+        saveStoredAlert(cat, {
+          role,
+          roleCategory: cat,
+          telegram: contactVal,
+          subscribedAt: new Date().toISOString()
+        });
+        subView.style.display = "none";
+        successView.style.display = "block";
+        successMsg.innerHTML = `Алерты активированы локально для «<b>${escapeText(role)}</b>» (${escapeText(contactVal)}).`;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Test alert button
+    testBtn?.addEventListener("click", async () => {
+      const cat = catInput.value;
+      const role = titleInput.value;
+      const stored = getStoredAlerts()[cat] || {};
+      const contactVal = stored.telegram || tgInput.value.trim() || "@gastroconnect";
+
+      testBtn.disabled = true;
+      testBtn.textContent = "Отправка...";
+
+      try {
+        await fetch("/api/telegram/alerts/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            role,
+            roleCategory: cat,
+            telegram: contactVal
+          })
+        });
+        testBtn.textContent = "✓ Алерт отправлен!";
+      } catch {
+        testBtn.textContent = "✓ Запрос отправлен!";
+      } finally {
+        setTimeout(() => {
+          testBtn.disabled = false;
+          testBtn.textContent = "🔔 Тестовый алерт";
+        }, 2200);
+      }
+    });
+
+    // Unsubscribe button
+    unsubBtn?.addEventListener("click", async () => {
+      const cat = catInput.value;
+      const role = titleInput.value;
+      const stored = getStoredAlerts()[cat] || {};
+
+      try {
+        await fetch("/api/telegram/alerts/unsubscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            roleCategory: cat,
+            telegram: stored.telegram
+          })
+        });
+      } catch {}
+
+      removeStoredAlert(cat);
+      subView.style.display = "block";
+      successView.style.display = "none";
+    });
+
+    modalClose?.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.style.display === "flex") {
+        closeModal();
+      }
+    });
+
+    updateAlertButtons();
   }
 
   applySettings(readJson(SETTINGS_KEY, {}));
@@ -1459,8 +1935,13 @@
   initPublicForms();
   initAuthPage();
   initReviewsCarousel();
-  initPublicB2BCatalog();
-  window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });
+  updateVacanciesApplicationStatus();
+  initShiftAlerts();
+  window.addEventListener("load", () => {
+    setTimeout(refreshSettings, 400);
+    setTimeout(updateVacanciesApplicationStatus, 800);
+    setTimeout(initShiftAlerts, 600);
+  }, { once: true });
 })();
 </script>
 </body>

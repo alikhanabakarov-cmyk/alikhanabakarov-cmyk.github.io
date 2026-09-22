@@ -554,6 +554,7 @@
 
     state.shifts = data || [];
     renderShiftPosts();
+    updateWorkerKpiWidgets();
   }
 
   function renderShiftPosts() {
@@ -662,6 +663,7 @@
 
     state.workerApplications = data || [];
     renderWorkerApplications();
+    updateWorkerKpiWidgets();
   }
 
   function renderWorkerApplications() {
@@ -697,6 +699,328 @@
     });
 
     setMessage(el.workerApplicationsMessage, `Ваших откликов: ${state.workerApplications.length}`);
+  }
+
+  function updateWorkerKpiWidgets() {
+    if (!byId("workerKpiDashboard")) return;
+
+    // 1. Active open shifts count
+    const openShifts = (state.shifts || []).filter((s) => s.status === "open" || !s.status);
+    const activeCount = openShifts.length || (state.workerLiveShifts || []).length || 0;
+    if (byId("workerKpiActiveShifts")) {
+      byId("workerKpiActiveShifts").textContent = activeCount;
+    }
+
+    // Minimum rate calculation
+    const rates = (state.shifts || [])
+      .map((s) => Number(s.rate))
+      .filter((r) => r > 0 && !isNaN(r));
+    const minRate = rates.length ? Math.min(...rates) : 4800;
+    if (byId("workerKpiAvgRatePill")) {
+      byId("workerKpiAvgRatePill").textContent = `от ${minRate.toLocaleString("ru-RU")} ₽ / смена`;
+    }
+
+    // 2. Worker applications status breakdown
+    const apps = state.workerApplications || [];
+    const totalApps = apps.length;
+    const pendingApps = apps.filter((a) => a.status === "pending" || a.status === "new");
+    const acceptedApps = apps.filter((a) => a.status === "accepted");
+    const doneApps = apps.filter((a) => a.status === "done");
+    const declinedApps = apps.filter((a) => a.status === "declined" || a.status === "cancelled");
+
+    if (byId("workerKpiTotalApplications")) byId("workerKpiTotalApplications").textContent = totalApps;
+    if (byId("workerKpiPendingCount")) byId("workerKpiPendingCount").textContent = pendingApps.length;
+    if (byId("workerKpiAcceptedCount")) byId("workerKpiAcceptedCount").textContent = acceptedApps.length;
+    if (byId("workerKpiDoneCount")) byId("workerKpiDoneCount").textContent = doneApps.length;
+    if (byId("workerKpiDeclinedCount")) byId("workerKpiDeclinedCount").textContent = declinedApps.length;
+
+    // Confirmed shifts count
+    const confirmedCount = acceptedApps.length + doneApps.length;
+    if (byId("workerKpiConfirmedShiftsPill")) {
+      byId("workerKpiConfirmedShiftsPill").textContent = `${confirmedCount} подтвержденных`;
+    }
+
+    // 3. Conversion / Acceptance rate
+    const conversionPct = totalApps > 0 ? Math.min(100, Math.round((confirmedCount / totalApps) * 100)) : (confirmedCount > 0 ? 100 : 0);
+    if (byId("workerKpiAcceptanceRate")) {
+      byId("workerKpiAcceptanceRate").textContent = `${conversionPct}%`;
+    }
+    if (byId("workerKpiProgressFill")) {
+      byId("workerKpiProgressFill").style.width = `${conversionPct}%`;
+    }
+    if (byId("workerKpiAdvice")) {
+      if (totalApps === 0) {
+        byId("workerKpiAdvice").textContent = "Откликайтесь на горячие смены для первого подтверждения";
+      } else if (conversionPct >= 70) {
+        byId("workerKpiAdvice").textContent = "Отличная репутация! Заведения одобряют большинство откликов";
+      } else if (conversionPct >= 40) {
+        byId("workerKpiAdvice").textContent = "Хороший темп. Заполните медкнижку для роста одобрений";
+      } else {
+        byId("workerKpiAdvice").textContent = "Заполните опыт и профиль для ускорения согласования";
+      }
+    }
+
+    // 4. Latest application card
+    if (totalApps > 0 && apps[0]) {
+      const latest = apps[0];
+      const shift = relatedProfile(latest, "shift") || {};
+      const rest = relatedProfile(latest, "restaurant") || {};
+      if (byId("workerKpiRecentTitle")) {
+        byId("workerKpiRecentTitle").textContent = shift.title || shift.profession || "Смена в HoReCa";
+      }
+      if (byId("workerKpiRecentSub")) {
+        const restName = displayName(rest, latest.restaurant_id) || "Заведение";
+        const dateStr = shift.date_from ? ` • ${shift.date_from}` : "";
+        const rateStr = shift.rate ? ` • ${money(shift.rate)}` : "";
+        byId("workerKpiRecentSub").textContent = `${restName}${dateStr}${rateStr}`;
+      }
+      if (byId("workerKpiRecentStatus")) {
+        const badge = byId("workerKpiRecentStatus");
+        if (latest.status === "accepted") {
+          badge.textContent = "✅ Одобрено заведением";
+          badge.style.background = "#ecfdf5";
+          badge.style.color = "#065f46";
+        } else if (latest.status === "done") {
+          badge.textContent = "🏆 Смена отработана";
+          badge.style.background = "#f0fdf4";
+          badge.style.color = "#166534";
+        } else if (latest.status === "declined" || latest.status === "cancelled") {
+          badge.textContent = "❌ Отклонено";
+          badge.style.background = "#fff1f2";
+          badge.style.color = "#9f1239";
+        } else {
+          badge.textContent = "⏳ В ожидании ответа";
+          badge.style.background = "#fffbeb";
+          badge.style.color = "#92400e";
+        }
+      }
+    } else {
+      if (byId("workerKpiRecentTitle")) {
+        byId("workerKpiRecentTitle").textContent = activeCount > 0 ? `${activeCount} смен ждут отклика` : "Смены пока не выбраны";
+      }
+      if (byId("workerKpiRecentSub")) {
+        byId("workerKpiRecentSub").textContent = "Выберите смену из каталога ниже и отправьте отклик";
+      }
+      if (byId("workerKpiRecentStatus")) {
+        const badge = byId("workerKpiRecentStatus");
+        badge.textContent = "⚡️ Свободен для выхода";
+        badge.style.background = "#f1f5f9";
+        badge.style.color = "#475569";
+      }
+    }
+
+    // Sync status timestamp
+    if (byId("workerKpiSyncStatus")) {
+      const timeStr = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+      byId("workerKpiSyncStatus").textContent = `🟢 Синхронизировано (${timeStr})`;
+    }
+  }
+
+  function updateRestaurantKpiWidgets() {
+    if (!byId("restaurantKpiDashboard")) return;
+
+    // 1. Restaurant active shifts
+    const shifts = state.restaurantShifts || [];
+    const openShifts = shifts.filter((s) => s.status === "open" || !s.status);
+    const closedShifts = shifts.filter((s) => s.status === "closed" || s.status === "cancelled");
+
+    if (byId("restaurantKpiActiveShifts")) {
+      byId("restaurantKpiActiveShifts").textContent = openShifts.length;
+    }
+    if (byId("restaurantKpiTotalShiftsPill")) {
+      byId("restaurantKpiTotalShiftsPill").textContent = `${shifts.length} всего смен`;
+    }
+    if (byId("restaurantKpiClosedShiftsPill")) {
+      byId("restaurantKpiClosedShiftsPill").textContent = `${closedShifts.length} закрыто`;
+    }
+
+    // 2. Incoming applications breakdown
+    const apps = state.restaurantApplications || [];
+    const totalApps = apps.length;
+    const pendingApps = apps.filter((a) => a.status === "pending" || a.status === "new");
+    const acceptedApps = apps.filter((a) => a.status === "accepted");
+    const doneApps = apps.filter((a) => a.status === "done");
+    const declinedApps = apps.filter((a) => a.status === "declined" || a.status === "cancelled");
+
+    if (byId("restaurantKpiTotalApplications")) byId("restaurantKpiTotalApplications").textContent = totalApps;
+    if (byId("restaurantKpiPendingCount")) byId("restaurantKpiPendingCount").textContent = pendingApps.length;
+    if (byId("restaurantKpiAcceptedCount")) byId("restaurantKpiAcceptedCount").textContent = acceptedApps.length;
+    if (byId("restaurantKpiDoneCount")) byId("restaurantKpiDoneCount").textContent = doneApps.length;
+    if (byId("restaurantKpiDeclinedCount")) byId("restaurantKpiDeclinedCount").textContent = declinedApps.length;
+
+    // 3. Fill rate
+    const confirmedCount = acceptedApps.length + doneApps.length + closedShifts.length;
+    const totalBenchmark = Math.max(shifts.length, totalApps || 1);
+    const fillPct = shifts.length > 0 ? Math.min(100, Math.round((confirmedCount / totalBenchmark) * 100)) : 0;
+
+    if (byId("restaurantKpiFillRate")) {
+      byId("restaurantKpiFillRate").textContent = `${fillPct}%`;
+    }
+    if (byId("restaurantKpiProgressFill")) {
+      byId("restaurantKpiProgressFill").style.width = `${fillPct}%`;
+    }
+    if (byId("restaurantKpiAdvice")) {
+      if (shifts.length === 0) {
+        byId("restaurantKpiAdvice").textContent = "Создайте первую смену для получения откликов от поваров и бариста";
+      } else if (fillPct >= 80) {
+        byId("restaurantKpiAdvice").textContent = "Отличная укомплектованность! Смены закрываются вовремя";
+      } else {
+        byId("restaurantKpiAdvice").textContent = "Публикуйте смены заранее для привлечения опытных специалистов";
+      }
+    }
+
+    // 4. Latest candidate application
+    if (totalApps > 0 && apps[0]) {
+      const latest = apps[0];
+      const worker = relatedProfile(latest, "worker") || {};
+      const shift = relatedProfile(latest, "shift") || {};
+      if (byId("restaurantKpiRecentTitle")) {
+        byId("restaurantKpiRecentTitle").textContent = displayName(worker, latest.worker_id) || "Кандидат";
+      }
+      if (byId("restaurantKpiRecentSub")) {
+        const shiftTitle = shift.title || shift.profession || "Смена";
+        const dateStr = shift.date_from ? ` • ${shift.date_from}` : "";
+        byId("restaurantKpiRecentSub").textContent = `${shiftTitle}${dateStr}`;
+      }
+      if (byId("restaurantKpiRecentStatus")) {
+        const badge = byId("restaurantKpiRecentStatus");
+        if (latest.status === "accepted") {
+          badge.textContent = "✅ Кандидат принят";
+          badge.style.background = "#ecfdf5";
+          badge.style.color = "#065f46";
+        } else if (latest.status === "done") {
+          badge.textContent = "🏆 Смена отработана";
+          badge.style.background = "#f0fdf4";
+          badge.style.color = "#166534";
+        } else if (latest.status === "declined" || latest.status === "cancelled") {
+          badge.textContent = "❌ Отклонен";
+          badge.style.background = "#fff1f2";
+          badge.style.color = "#9f1239";
+        } else {
+          badge.textContent = "⏳ Требует решения";
+          badge.style.background = "#fffbeb";
+          badge.style.color = "#92400e";
+        }
+      }
+    } else {
+      if (byId("restaurantKpiRecentTitle")) {
+        byId("restaurantKpiRecentTitle").textContent = "Новых откликов нет";
+      }
+      if (byId("restaurantKpiRecentSub")) {
+        byId("restaurantKpiRecentSub").textContent = "Опубликуйте смену выше для поиска персонала";
+      }
+      if (byId("restaurantKpiRecentStatus")) {
+        const badge = byId("restaurantKpiRecentStatus");
+        badge.textContent = "Ожидание кандидатов";
+        badge.style.background = "#f1f5f9";
+        badge.style.color = "#475569";
+      }
+    }
+
+    // Sync status timestamp
+    if (byId("restaurantKpiSyncStatus")) {
+      const timeStr = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+      byId("restaurantKpiSyncStatus").textContent = `🟢 Синхронизировано (${timeStr})`;
+    }
+  }
+
+  async function fetchLiveSupabaseKpiCounts() {
+    if (!db) return;
+    try {
+      const { data, count, error } = await db
+        .from("shift_posts")
+        .select("rate, status", { count: "exact" })
+        .eq("status", "open")
+        .limit(100);
+
+      if (!error && data) {
+        const activeCount = typeof count === "number" ? count : data.length;
+        if (byId("workerKpiActiveShifts") && (!state.shifts || state.shifts.length === 0)) {
+          byId("workerKpiActiveShifts").textContent = activeCount;
+        }
+        if (data.length > 0 && byId("workerKpiAvgRatePill")) {
+          const rates = data.map((d) => Number(d.rate)).filter((r) => r > 0 && !isNaN(r));
+          if (rates.length) {
+            const minRate = Math.min(...rates);
+            byId("workerKpiAvgRatePill").textContent = `от ${minRate.toLocaleString("ru-RU")} ₽ / смена`;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("fetchLiveSupabaseKpiCounts error:", err);
+    }
+  }
+
+  function initKpiInteractivity() {
+    // Worker refresh button
+    byId("refreshWorkerKpiBtn")?.addEventListener("click", async () => {
+      const btn = byId("refreshWorkerKpiBtn");
+      const tag = byId("workerKpiSyncStatus");
+      btn?.classList.add("is-spinning");
+      if (tag) tag.textContent = "🔄 Синхронизация...";
+      try {
+        await Promise.all([
+          loadShiftPosts(),
+          loadWorkerApplications(),
+          typeof loadWorkerLiveShifts === "function" ? loadWorkerLiveShifts(true) : Promise.resolve(),
+        ]);
+        updateWorkerKpiWidgets();
+      } catch (err) {
+        console.warn("Worker KPI refresh error:", err);
+      } finally {
+        btn?.classList.remove("is-spinning");
+      }
+    });
+
+    // Restaurant refresh button
+    byId("refreshRestaurantKpiBtn")?.addEventListener("click", async () => {
+      const btn = byId("refreshRestaurantKpiBtn");
+      const tag = byId("restaurantKpiSyncStatus");
+      btn?.classList.add("is-spinning");
+      if (tag) tag.textContent = "🔄 Синхронизация...";
+      try {
+        await Promise.all([loadRestaurantShiftPosts(), loadShiftApplications()]);
+        updateRestaurantKpiWidgets();
+      } catch (err) {
+        console.warn("Restaurant KPI refresh error:", err);
+      } finally {
+        btn?.classList.remove("is-spinning");
+      }
+    });
+
+    // Worker click chips -> smooth scroll to applications
+    const scrollWorkerApps = () => {
+      const target = byId("workerApplicationsList") || byId("workerApplicationsMessage");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    byId("workerCardApplications")?.addEventListener("click", scrollWorkerApps);
+    byId("workerChipPending")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
+    byId("workerChipAccepted")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
+    byId("workerChipDone")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
+    byId("workerChipDeclined")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
+
+    // Worker shifts card click -> smooth scroll to shifts list
+    byId("workerCardShifts")?.addEventListener("click", () => {
+      const target = byId("shiftPostsList") || byId("workerLiveShiftsList");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // Restaurant click chips -> smooth scroll to applications
+    const scrollRestApps = () => {
+      const target = byId("restaurantApplicationsList") || byId("restaurantApplicationFilterSelect");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    byId("restaurantCardApplications")?.addEventListener("click", scrollRestApps);
+    byId("restaurantChipPending")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
+    byId("restaurantChipAccepted")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
+    byId("restaurantChipDone")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
+    byId("restaurantChipDeclined")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
+
+    // Restaurant shifts card click -> smooth scroll to shifts list
+    byId("restaurantCardShifts")?.addEventListener("click", () => {
+      const target = byId("restaurantShiftPostsList") || byId("restaurantShiftPostsMessage");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   async function loadWorkerInvites() {
@@ -1563,6 +1887,7 @@
     state.restaurantShifts = data || [];
     if (state.workers.length) renderWorkers();
     renderRestaurantShiftPosts();
+    updateRestaurantKpiWidgets();
   }
 
   function restaurantApplicationCounts() {
@@ -1680,6 +2005,7 @@
     state.restaurantApplications = data || [];
     renderShiftApplications(selectedShiftId);
     if (state.restaurantShifts.length) renderRestaurantShiftPosts();
+    updateRestaurantKpiWidgets();
   }
 
   function renderShiftApplications(filterShiftId = state.restaurantApplicationFilter) {
@@ -3029,12 +3355,14 @@
       await Promise.all([loadWorkerInvites(), loadWorkerApplications(), loadWorkerReviews(), loadWorkerEarnings()]);
       await loadShiftPosts();
       await loadWorkerLiveShifts();
+      updateWorkerKpiWidgets();
       return;
     }
 
     if (profile.role === "restaurant") {
       await loadRestaurantProfile();
       await loadRestaurantWorkspace();
+      updateRestaurantKpiWidgets();
       return;
     }
 
@@ -3087,6 +3415,7 @@
 
       state.workerLiveShifts = data.items || [];
       renderWorkerLiveShifts();
+      updateWorkerKpiWidgets();
 
       if (stats) {
         stats.innerHTML = `
@@ -3497,6 +3826,9 @@
     // B2B Verified Suppliers Controller
     initB2BSuppliers();
 
+    // Supabase Visual KPI Interactivity
+    initKpiInteractivity();
+
     el.logoutBtn?.addEventListener("click", async () => {
       await db.auth.signOut();
       window.location.href = "/auth/";
@@ -3518,6 +3850,9 @@
     }
 
     bindEvents();
+    fetchLiveSupabaseKpiCounts();
+    updateWorkerKpiWidgets();
+    updateRestaurantKpiWidgets();
     const profile = await loadProfile();
     if (profile) await openCabinet(profile);
   }

@@ -18,7 +18,18 @@ const {
   TELEGRAM_CHAT_URL,
   SITE_REGISTER_URL
 } = require('./telegram-publisher');
+const { 
+  startAutopilot, 
+  runAutopilotCycle, 
+  getAutopilotStatus 
+} = require('./telegram-autopilot');
 const { VERIFIED_SUPPLIERS, getSuppliers } = require('./suppliers-data');
+const {
+  subscribeAlert,
+  unsubscribeAlert,
+  loadAlerts,
+  BOT_USERNAME
+} = require('./telegram-alerts');
 
 const app = express();
 const PORT = 3000;
@@ -26,29 +37,11 @@ const rootDir = __dirname;
 
 app.use(express.json());
 
-// Start the 4-times daily automated scraper scheduler (09:00, 13:00, 17:00, 22:00 MSK)
-startSchedulerTimer(async (scrapeResult) => {
-  if (scrapeResult && scrapeResult.items && scrapeResult.items.length > 0) {
-    const topShift = scrapeResult.items[0];
-    console.log(`[Auto-Publisher] Auto-broadcasting top verified shift to Telegram: ${topShift.title}`);
-    try {
-      await publishToTelegram({
-        type: 'job',
-        role: topShift.title,
-        rate: `${topShift.rate} ₽ / смена`,
-        metro: topShift.metro || 'Москва',
-        schedule: topShift.schedule || 'Смена 12 часов',
-        urgency: 'Горящая смена на сегодня',
-        perks: 'Питание, форма, ежедневные выплаты',
-        tasks: topShift.description || 'Работа на позиции по ТТК заведения',
-        requirements: 'Опыт работы, медкнижка РФ',
-        contacts: topShift.contacts || ''
-      });
-    } catch (e) {
-      console.error('[Auto-Publisher] Error auto-publishing shift:', e.message);
-    }
-  }
-});
+// Запуск автоматического фонового парсера и автопилота публикаций
+// Расписание автопилота: каждые 3 часа (08:00, 11:00, 14:00, 17:00, 20:00 МСК)
+// Тихий режим: с 21:00 до 07:00 МСК
+startSchedulerTimer();
+startAutopilot();
 
 // API routes
 app.get('/api/health', (req, res) => {
@@ -238,6 +231,76 @@ app.post('/api/telegram/publish', async (req, res) => {
       error: 'Failed to publish to Telegram',
       message: error.message
     });
+  }
+});
+
+// Статус и управление автопилотом с расписанием каждые 3 часа
+app.get('/api/autopilot/status', (req, res) => {
+  res.json(getAutopilotStatus());
+});
+
+// Ручной запуск внеочередного цикла автопилота
+app.post('/api/autopilot/run-now', async (req, res) => {
+  try {
+    const result = await runAutopilotCycle('manual_api_trigger');
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Telegram Shift Alerts API (@gastroconnect & @GastroConnect_Bot)
+app.post('/api/telegram/alerts/subscribe', async (req, res) => {
+  try {
+    const { role, roleCategory, telegram, phone, userId, chatId } = req.body || {};
+    if (!role && !roleCategory) {
+      return res.status(400).json({ success: false, error: 'Укажите роль или категорию для подписки на алерты' });
+    }
+    const result = await subscribeAlert({
+      role: role || roleCategory,
+      roleCategory: roleCategory || role,
+      telegram: telegram || '',
+      phone: phone || '',
+      userId: userId || null,
+      chatId: chatId || null
+    });
+    res.json(result);
+  } catch (error) {
+    console.error('Error subscribing to shift alerts:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.post('/api/telegram/alerts/unsubscribe', (req, res) => {
+  try {
+    const { id, roleCategory, telegram } = req.body || {};
+    const result = unsubscribeAlert({ id, roleCategory, telegram });
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.get('/api/telegram/alerts/subscriptions', (req, res) => {
+  try {
+    const { telegram, roleCategory } = req.query || {};
+    const all = loadAlerts();
+    let filtered = all.filter(a => a.active);
+    if (telegram) {
+      const clean = telegram.toLowerCase().replace('@', '');
+      filtered = filtered.filter(a => (a.telegram || '').toLowerCase().includes(clean));
+    }
+    if (roleCategory) {
+      filtered = filtered.filter(a => a.roleCategory === roleCategory);
+    }
+    res.json({
+      success: true,
+      botUsername: BOT_USERNAME,
+      totalActive: filtered.length,
+      subscriptions: filtered
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 

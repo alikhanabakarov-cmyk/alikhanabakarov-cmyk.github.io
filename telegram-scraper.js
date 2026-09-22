@@ -2,7 +2,24 @@ const cheerio = require('cheerio');
 
 // Target Telegram Channels Database (Sorted & Categorized, duplicates eliminated)
 const TARGET_CHANNELS = [
-  // 1. Повара, Шефы и Кухня (Москва / Общее)
+  // 1. Топовые живые каналы HoReCa и Worki (проверенный активный парсинг)
+  {
+    username: 'workiobshepit',
+    title: 'WORKI | Работа в общепите',
+    category: 'general_horeca',
+    categoryName: 'WORKI Общепит',
+    priority: 1,
+    url: 'https://t.me/workiobshepit'
+  },
+  {
+    username: 'horeca_moscow',
+    title: 'HoReCa Москва',
+    category: 'general_horeca',
+    categoryName: 'HoReCa Москва',
+    priority: 1,
+    url: 'https://t.me/horeca_moscow'
+  },
+  // 2. Повара, Шефы и Кухня (Москва / Общее)
   {
     username: 'Povaramoscow',
     title: 'Повара Москвы',
@@ -221,9 +238,11 @@ const schedulerState = {
 // Clean text helper: completely removes any source channel watermarks, external URLs or channel ads
 function cleanRawText(text) {
   if (!text) return '';
-  let cleaned = text
-    // Remove telegram channel links
-    .replace(/https?:\/\/t\.me\/[a-zA-Z0-9_+/]+/gi, '');
+  // Replace keycap digit emojis (0️⃣-9️⃣) with regular numbers
+  let cleaned = text.replace(/[\u0030-\u0039]\uFE0F?\u20E3/g, (m) => m[0]);
+
+  // Strip telegram channel links
+  cleaned = cleaned.replace(/https?:\/\/t\.me\/[a-zA-Z0-9_+/]+/gi, '');
 
   // Strip all target channel usernames and titles
   TARGET_CHANNELS.forEach(ch => {
@@ -238,6 +257,9 @@ function cleanRawText(text) {
     .replace(/(?:источник|канал|подписывайтесь|реклама\s*в\s*канале|наш\s*канал|переходите\s*в\s*канал)[^\n]*/gi, '')
     // Clean excessive blank lines
     .replace(/\n{3,}/g, '\n\n')
+    .toWellFormed()
+    .replace(/[\uD800-\uDFFF]/g, '')
+    .replace(/\uFFFD/g, '')
     .trim();
 }
 
@@ -555,120 +577,209 @@ TG: @meat_kitchen_msk
   }
 ];
 
+const MOSCOW_STATIONS = [
+  'Лубянка', 'Тверская', 'Маяковская', 'Некрасовка', 'Белорусская', 'Китай-город',
+  'Охотный ряд', 'Театральная', 'Арбатская', 'Смоленская', 'Новослободская',
+  'Менделеевская', 'Курская', 'Таганская', 'Павелецкая', 'Добрынинская',
+  'Октябрьская', 'Парк культуры', 'Кропоткинская', 'Александровский сад',
+  'Деловой центр', 'Выставочная', 'Международная', 'Шелепиха', 'ЦСКА',
+  'Савёловская', 'Савеловская', 'Дмитровская', 'Тимирязевская', 'ВДНХ',
+  'Проспект Мира', 'Сухаревская', 'Тургеневская', 'Чистые пруды', 'Сретенский бульвар',
+  'Кузнецкий Мост', 'Третьяковская', 'Новокузнецкая', 'Бауманская', 'Электрозаводская',
+  'Сокол', 'Аэропорт', 'Динамо', 'Баррикадная', 'Краснопресненская', 'Полежаевская',
+  'Беговая', 'Улица 1905 года', 'Мытищи', 'Красногорск', 'Химки', 'Люберцы', 'Одинцово',
+  'Реутов', 'Балашиха', 'Котельники', 'Коммунарка', 'Саларьево', 'Юго-Западная', 'Университет'
+];
+
+function extractPhones(raw) {
+  if (!raw) return [];
+  const regex = /(?:(?:\+7|8)[\s(.-]*\d{3}[\s).-]*\d{3}[\s.-]*\d{2}[\s.-]*\d{2}|\b8\d{10}\b|\b\+7\d{10}\b)/g;
+  const matches = [...raw.matchAll(regex)];
+  const phones = [];
+  for (const m of matches) {
+    const digits = m[0].replace(/\D/g, '');
+    if (digits.length === 11 && (digits.startsWith('7') || digits.startsWith('8'))) {
+      const formatted = `+7 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`;
+      if (!phones.includes(formatted)) phones.push(formatted);
+    }
+  }
+  return phones;
+}
+
+function extractTelegramHandles(raw) {
+  if (!raw) return [];
+  const regex = /(?:@|(?:telegram|тг|tg|телега|связь|отклик)[:\s]+@?|t\.me\/)([a-zA-Z0-9_]{4,32})/gi;
+  const matches = [...raw.matchAll(regex)];
+  const ignore = new Set(['gastroconnect', 'workiobshepit', 'horeca_moscow', 'povaramoscow', 'joinchat', 'workirestaurants', 'worki_vakansy', 'navigatorworki', 'obppersonal']);
+  const tgs = [];
+  for (const m of matches) {
+    const h = m[1].toLowerCase();
+    if (!ignore.has(h) && !tgs.includes('@' + m[1])) {
+      tgs.push('@' + m[1]);
+    }
+  }
+  return tgs;
+}
+
+function extractContactName(raw) {
+  if (!raw) return '';
+  const nameMatch = raw.match(/(?:контактное\s*лицо|контакт|связь|писать|звонить|шеф|куратор|hr|менеджер)[:\s]+([А-ЯЁ][а-яё]+)/i) ||
+                    raw.match(/(?:[—–-]\s*|:\s*)([А-ЯЁ][а-яё]{2,15})(?:\s*\(|\s*[—–-]\s*|\s*тел|\s*\+7|\s*8)/i);
+  if (nameMatch) {
+    const candidate = nameMatch[1].trim();
+    if (!/^(для|связи|отклика|резюме|работы|вопросов|информации|номер|телефон|смену|график|опыт|время|день|москва)$/i.test(candidate)) {
+      return candidate;
+    }
+  }
+  return '';
+}
+
+function extractMetro(text) {
+  for (const st of MOSCOW_STATIONS) {
+    const reg = new RegExp(`(?<![А-Яа-яЁё])${st}(?![А-Яа-яЁё])`, 'i');
+    if (reg.test(text)) {
+      if (['Мытищи', 'Красногорск', 'Химки', 'Люберцы', 'Одинцово', 'Реутов', 'Балашиха', 'Котельники'].includes(st)) {
+        return `г. ${st}`;
+      }
+      return `м. ${st}`;
+    }
+  }
+  const genericMatch = text.match(/(?:🚇|м\.|метро|ст\.)\s*([«"А-Яа-яЁё0-9\-\s]+?)(?=[,.\n(/]|$)/i);
+  if (genericMatch) {
+    const candidate = genericMatch[1].trim().replace(/[«»"]/g, '').trim();
+    if (candidate && candidate.length > 2 && candidate.length < 25 && !/^(близко|рядом|пешком|минут|ветка|линия|смена|график|опыт|работа)$/i.test(candidate)) {
+      return `м. ${candidate}`;
+    }
+  }
+  return 'Москва';
+}
+
+function extractVenueAndRole(text) {
+  let venue = '';
+  const quotesMatch = text.match(/[«"“]([A-Za-zА-Яа-яЁё0-9\s-]{2,30})[»"”]/);
+  if (quotesMatch && !/^(запары|опыт|кухни|работы|смена|шеф|меню|заведения|гости|блюда|ресторан|кафе)$/i.test(quotesMatch[1].trim())) {
+    venue = quotesMatch[1].trim();
+  } else {
+    const vMatch = text.match(/(?:ресторан|кафе|паб|бистро|бар|пиццерия|пекарня|кофейня)\s+([А-ЯЁA-Z][а-яёa-z0-9A-Z\s-]{2,25})/i) ||
+                   text.match(/([A-Za-zА-Яа-яЁё0-9\s-]{3,20})\s+(?:бистро|паб|ресторан|кафе|бар)/i);
+    if (vMatch) venue = vMatch[0].trim();
+  }
+
+  let role = '';
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  for (const line of lines) {
+    if (line.includes('#')) continue;
+    const m = line.match(/(повар-хинкальщик|хинкальщик|повар-заготовщик|заготовщик|повар-сушист|сушист|пиццайоло|пиццмейкер|пекарь|кондитер|повар\s*г\/ц|повар\s*х\/ц|повар\s*горячего\s*цеха|повар\s*холодного\s*цеха|повар-универсал|повар|су-?шеф|шеф-?повар|официант|бариста|бармен|ранер|посудомойщица|посудомойщик|уборщица|котломойщик|мангальщик|хостес)/i);
+    if (m) {
+      role = m[0].replace(/^[^\p{L}\d]+/u, '').replace(/[:!]+$/, '').trim();
+      break;
+    }
+  }
+  if (!role) {
+    if (/су-?шеф/i.test(text)) role = 'Су-шеф';
+    else if (/шеф-повар/i.test(text)) role = 'Шеф-повар';
+    else if (/горяч/i.test(text)) role = 'Повар горячего цеха';
+    else if (/холодн/i.test(text)) role = 'Повар холодного цеха';
+    else if (/суши/i.test(text) && /пицца/i.test(text)) role = 'Сушист / Пиццамейкер';
+    else if (/суши/i.test(text)) role = 'Повар-сушист';
+    else if (/пицца/i.test(text)) role = 'Пиццайоло';
+    else if (/заготов/i.test(text)) role = 'Повар-заготовщик';
+    else if (/кондитер|пекар/i.test(text)) role = 'Кондитер / Пекарь';
+    else if (/официант/i.test(text)) role = 'Официант';
+    else if (/бариста/i.test(text)) role = 'Бариста';
+    else if (/бармен/i.test(text)) role = 'Бармен';
+    else if (/посудомой|уборщ/i.test(text)) role = 'Посудомойщица-уборщица';
+    else role = 'Повар на смену';
+  }
+  role = role.charAt(0).toUpperCase() + role.slice(1);
+  return { role, venue };
+}
+
 // Helper: Extract details from raw message text without any external watermark leaks
 function extractVacancyDetails(rawText, postId, dateStr) {
+  // Extract contacts from pristine rawText FIRST before any cleaning
+  const phones = extractPhones(rawText);
+  const tgs = extractTelegramHandles(rawText);
+  const contactName = extractContactName(rawText);
+  const hasDirectContact = phones.length > 0 || tgs.length > 0;
+
   const text = cleanRawText(rawText);
-  
-  // 1. Role extraction
-  let role = 'Повар';
+  const { role, venue } = extractVenueAndRole(text);
+
   let roleCategory = 'all';
-  let title = '';
+  const roleLower = role.toLowerCase();
+  if (/су-?шеф|шеф/.test(roleLower)) roleCategory = 'chef';
+  else if (/горяч/.test(roleLower)) roleCategory = 'hot';
+  else if (/холодн/.test(roleLower)) roleCategory = 'cold';
+  else if (/пицца/.test(roleLower)) roleCategory = 'pizza';
+  else if (/суши/.test(roleLower)) roleCategory = 'sushi';
+  else if (/кондитер|пекар/.test(roleLower)) roleCategory = 'pastry';
+  else if (/заготов|мяс/.test(roleLower)) roleCategory = 'prep';
+  else if (/бариста/.test(roleLower)) roleCategory = 'barista';
+  else if (/официант|бармен|ранер/.test(roleLower)) roleCategory = 'waiter';
+  else if (/мойщи|котломой|уборщи|горнич/.test(roleLower)) roleCategory = 'cleaning';
+  else roleCategory = 'cook_chef';
 
-  const lower = text.toLowerCase();
-
-  if (/су-?шеф/i.test(lower)) {
-    role = 'Су-шеф';
-    roleCategory = 'chef';
-  } else if (/шеф-повар/i.test(lower)) {
-    role = 'Шеф-повар';
-    roleCategory = 'chef';
-  } else if (/горяч(его|ий)\s*цех|гц/i.test(lower)) {
-    role = 'Повар горячего цеха';
-    roleCategory = 'hot';
-  } else if (/холодн(ого|ый)\s*цех|хц/i.test(lower)) {
-    role = 'Повар холодного цеха';
-    roleCategory = 'cold';
-  } else if (/пицца|пиццайоло|пиццмейкер/i.test(lower)) {
-    role = 'Пиццайоло';
-    roleCategory = 'pizza';
-  } else if (/суши|сушист|ролл/i.test(lower)) {
-    role = 'Повар-сушист';
-    roleCategory = 'sushi';
-  } else if (/кондитер|пекарь|пекарн/i.test(lower)) {
-    role = 'Кондитер / Пекарь';
-    roleCategory = 'pastry';
-  } else if (/заготов|мясн(ой|ик)/i.test(lower)) {
-    role = 'Повар-заготовщик';
-    roleCategory = 'prep';
-  } else if (/универсал/i.test(lower)) {
-    role = 'Повар-универсал';
-    roleCategory = 'universal';
-  } else if (/бариста/i.test(lower)) {
-    role = 'Бариста';
-    roleCategory = 'barista';
-  } else if (/официант/i.test(lower)) {
-    role = 'Официант';
-    roleCategory = 'waiter';
-  }
-
-  // Derive display title
-  const firstLines = text.split('\n').filter(l => l.trim().length > 3);
-  title = firstLines[0]?.replace(/[🔥⚡️🍳👨‍🍳🥗🍕🍣🍰🔪📍💰⏰]/g, '').trim() || `${role} в заведение Москвы`;
-  if (title.length > 50) {
-    title = `${role} — свежая смена`;
-  }
+  const title = venue ? `${role} | ${venue}` : `${role} в заведение`;
 
   // 2. Salary / Rate extraction
-  let rateText = 'По договоренности';
+  let rateText = 'Ставка договорная';
   let rateNumeric = 0;
   let rateMin = 0;
   let rateMax = 0;
   let rateType = 'shift';
 
-  const rateMatch = text.match(/(?:ставка|оплата|зп|доход|зарплата|выплаты)?[^\d]{0,10}(\d[\d\s]{2,5})(?:\s*[-–—]\s*(\d[\d\s]{2,5}))?\s*(?:руб|р|₽|т\.р|тыс)?(?:\s*\/\s*(смен\w*|час\w*|мес\w*|вых\w*))?/i);
+  const rateMatch = text.match(/(?:ставка|доход|зп|оплата|выход|зарплата)[:\s–-]*((?:от\s*)?\d+[\s\d]*(?:–|-)?\d*[\s\d]*\s*(?:₽|руб|р|т\s*р)?(?:\s*\/\s*смена|\s*\/\s*час|\s*\/\s*мес|\s*в\s*месяц|\s*за\s*смену)?)/i) ||
+                    text.match(/((?:от\s*)?\d+[\s\d]*(?:–|-)?\d*[\s\d]*\s*(?:₽|руб)(?:\s*\/\s*смена|\s*\/\s*час|\s*\/\s*мес|\s*в\s*месяц|\s*за\s*смену)?)/i) ||
+                    text.match(/(\d{3,6}\s*(?:₽|руб))/i);
+
   if (rateMatch) {
-    const rawVal1 = parseInt(rateMatch[1].replace(/\s+/g, ''), 10);
-    const rawVal2 = rateMatch[2] ? parseInt(rateMatch[2].replace(/\s+/g, ''), 10) : null;
-
-    if (!isNaN(rawVal1) && rawVal1 >= 200 && rawVal1 <= 350000) {
-      rateMin = rawVal1;
-      rateMax = rawVal2 || rawVal1;
-
-      if (rateMin > 30000) {
-        rateType = 'month';
-        rateNumeric = Math.round((rateMin + rateMax) / 2 / 20);
-        rateText = rawVal2 ? `${rateMin.toLocaleString('ru-RU')} – ${rateMax.toLocaleString('ru-RU')} ₽ / мес` : `от ${rateMin.toLocaleString('ru-RU')} ₽ / мес`;
-      } else if (rateMin < 1000) {
-        rateType = 'hour';
-        rateNumeric = rateMin * 12;
-        rateText = rawVal2 ? `${rateMin} – ${rateMax} ₽ / час` : `${rateMin} ₽ / час`;
-      } else {
-        rateType = 'shift';
-        rateNumeric = Math.round((rateMin + rateMax) / 2);
-        rateText = rawVal2 ? `${rateMin.toLocaleString('ru-RU')} – ${rateMax.toLocaleString('ru-RU')} ₽ / смена` : `${rateMin.toLocaleString('ru-RU')} ₽ / смена`;
+    let rawRate = rateMatch[1].trim();
+    const numbers = rawRate.match(/\d[\d\s]*/g);
+    if (numbers && numbers.length > 0) {
+      const num1 = parseInt(numbers[0].replace(/\s+/g, ''), 10);
+      const num2 = numbers[1] ? parseInt(numbers[1].replace(/\s+/g, ''), 10) : null;
+      if (!isNaN(num1) && num1 >= 250 && num1 <= 350000) {
+        rateMin = num1;
+        rateMax = num2 || num1;
+        if (rateMin > 30000) {
+          rateType = 'month';
+          rateNumeric = Math.round((rateMin + rateMax) / 2 / 20);
+          rateText = num2 ? `${rateMin.toLocaleString('ru-RU')} – ${rateMax.toLocaleString('ru-RU')} ₽ / мес` : `от ${rateMin.toLocaleString('ru-RU')} ₽ / мес`;
+        } else if (rateMin < 1000) {
+          rateType = 'hour';
+          rateNumeric = rateMin * 12;
+          rateText = num2 ? `${rateMin} – ${rateMax} ₽ / час` : `${rateMin} ₽ / час`;
+        } else {
+          rateType = 'shift';
+          rateNumeric = Math.round((rateMin + rateMax) / 2);
+          rateText = num2 ? `${rateMin.toLocaleString('ru-RU')} – ${rateMax.toLocaleString('ru-RU')} ₽ / смена` : `${rateMin.toLocaleString('ru-RU')} ₽ / смена`;
+        }
       }
     }
   }
 
   // 3. Metro station extraction
-  let metro = '';
-  const metroList = [];
-  const metroMatches = [...text.matchAll(/(?:м\.|метро|ст\.)\s*([А-Яа-яЁё\s\-]+?)(?=[,\.\n\(\)\/]|$)/g)];
-  for (const m of metroMatches) {
-    const station = m[1].trim().replace(/\s+(пешком|минут|мин|ветка|линия).*$/i, '').trim();
-    if (station && station.length > 2 && station.length < 30) {
-      metroList.push(station);
-      if (!metro) metro = `м. ${station}`;
-    }
-  }
-  if (!metro) {
-    if (/центр|цао/i.test(text)) metro = 'Москва (Центр)';
-    else metro = 'Москва';
-  }
+  const metro = extractMetro(text);
+  const metroList = [metro.replace(/^(м\.|г\.)\s*/, '')];
 
   // 4. Schedule extraction
   let schedule = 'Сменный график';
-  if (/5\/2/i.test(text)) schedule = '5/2';
+  const schedMatch = text.match(/(?:график|смена|режим\s*работы)[\s\w]*[:\s–-]\s*([^\n.,]{3,40})/i);
+  if (schedMatch && !/^(часов|смена|работы)$/i.test(schedMatch[1].trim())) {
+    schedule = schedMatch[1].trim();
+    if (schedule.length > 50) schedule = Array.from(schedule).slice(0, 47).join('').toWellFormed().replace(/[\uD800-\uDFFF]/g, '').replace(/\uFFFD/g, '').trim() + '...';
+  } else if (/5\/2/i.test(text)) schedule = '5/2';
   else if (/2\/2/i.test(text)) schedule = '2/2';
   else if (/3\/3/i.test(text)) schedule = '3/3';
   else if (/6\/1/i.test(text)) schedule = '6/1';
-  else if (/подработк|разов|банкет/i.test(text)) schedule = 'Подработка / Свободный график';
+  else if (/12\s*часов/i.test(text)) schedule = 'Смены по 12 часов';
 
   // 5. Benefits extraction
   const benefits = [];
   if (/питани/i.test(text)) benefits.push('Бесплатное питание');
   if (/выплат.*(2|два|кажд|раз|нед)/i.test(text)) benefits.push('Стабильные выплаты 2 р/мес');
-  if (/сразу|в конце смен/i.test(text)) benefits.push('Выплата сразу после смены');
+  if (/сразу|в конце смен|на следующий день/i.test(text)) benefits.push('Выплата сразу после смены');
   if (/оформлен|тк рф|официальн/i.test(text)) benefits.push('Официальное оформление');
   if (/форм|униформ/i.test(text)) benefits.push('Бесплатная униформа');
   if (/рост|карьер/i.test(text)) benefits.push('Карьерный рост');
@@ -679,28 +790,8 @@ function extractVacancyDetails(rawText, postId, dateStr) {
     benefits.push('Питание и форма', 'Своевременная оплата');
   }
 
-  // 6. Contacts extraction
-  let telegram = '';
-  let phone = '';
-  let contactName = 'Шеф / Управляющий';
-
-  const tgMatch = text.match(/@([a-zA-Z0-9_]{4,32})/);
-  if (tgMatch) {
-    const rawTg = tgMatch[1].toLowerCase();
-    if (rawTg !== 'povaramoscow') {
-      telegram = tgMatch[1];
-    }
-  }
-
-  const phoneMatch = text.match(/(?:\+7|8)[\s\-]?\(?(\d{3})\)?[\s\-]?(\d{3})[\s\-]?(\d{2})[\s\-]?(\d{2})/);
-  if (phoneMatch) {
-    phone = `+7${phoneMatch[1]}${phoneMatch[2]}${phoneMatch[3]}${phoneMatch[4]}`;
-  }
-
-  const nameMatch = text.match(/(?:контакт|связь|писать|звонить|шеф|куратор|hr|менеджер)[^\n:]*?:\s*([А-Яа-яA-Za-z]+)/i);
-  if (nameMatch && nameMatch[1].length > 2) {
-    contactName = nameMatch[1];
-  }
+  const primaryPhone = phones[0] || '';
+  const primaryTg = tgs[0] ? tgs[0].replace(/^@/, '') : '';
 
   return {
     id: postId || `gc-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
@@ -711,6 +802,7 @@ function extractVacancyDetails(rawText, postId, dateStr) {
     rawText: text,
     title,
     role,
+    venue,
     roleCategory,
     rateText,
     rateMin,
@@ -721,59 +813,73 @@ function extractVacancyDetails(rawText, postId, dateStr) {
     metroList,
     schedule,
     benefits,
+    hasDirectContact,
     contacts: {
-      telegram: telegram || '',
-      phone: phone || '',
+      telegram: primaryTg,
+      phone: primaryPhone,
+      phones,
+      tgs,
       name: contactName || ''
     }
   };
 }
 
-// Helper to fetch vacancies from a single channel
-async function fetchSingleChannelRaw(channelUsername) {
+// Helper to fetch vacancies from a single channel with pagination support
+async function fetchSingleChannelRaw(channelUsername, maxPages = 2) {
   try {
     const cleanUsername = channelUsername.replace(/^@/, '');
-    const targetUrl = `https://t.me/s/${cleanUsername}`;
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-    const response = await fetch(targetUrl, {
-      signal: controller.signal,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'ru,en;q=0.9'
-      }
-    });
-    clearTimeout(timeoutId);
-
-    if (!response.ok) return [];
-
-    const html = await response.text();
-    const $ = cheerio.load(html);
     const parsed = [];
+    let nextUrl = `https://t.me/s/${cleanUsername}`;
 
-    $('.tgme_widget_message').each((i, el) => {
-      const $msg = $(el);
-      const postData = $msg.attr('data-post') || '';
-      const postId = `gc-${postData.replace('/', '-')}`;
+    for (let page = 0; page < maxPages; page++) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
 
-      const textElem = $msg.find('.tgme_widget_message_text');
-      if (!textElem.length) return;
+      const response = await fetch(nextUrl, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'ru,en;q=0.9'
+        }
+      });
+      clearTimeout(timeoutId);
 
-      textElem.find('br').replaceWith('\n');
-      const rawText = textElem.text().trim();
-      if (rawText.length < 30) return;
+      if (!response.ok) break;
 
-      const cleaned = cleanRawText(rawText);
-      if (cleaned.length < 25) return;
+      const html = await response.text();
+      const $ = cheerio.load(html);
+      const msgs = $('.tgme_widget_message');
+      if (msgs.length === 0) break;
 
-      const timeElem = $msg.find('time');
-      const datetimeStr = timeElem.attr('datetime') || new Date().toISOString();
+      msgs.each((i, el) => {
+        const $msg = $(el);
+        const postData = $msg.attr('data-post') || '';
+        const postId = `gc-${postData.replace('/', '-')}`;
 
-      const item = extractVacancyDetails(cleaned, postId, datetimeStr);
-      parsed.unshift(item);
-    });
+        const textElem = $msg.find('.tgme_widget_message_text');
+        if (!textElem.length) return;
+
+        textElem.find('br').replaceWith('\n');
+        const rawText = textElem.text().trim();
+        if (rawText.length < 30) return;
+
+        const timeElem = $msg.find('time');
+        const datetimeStr = timeElem.attr('datetime') || new Date().toISOString();
+
+        const item = extractVacancyDetails(rawText, postId, datetimeStr);
+        // Only keep vacancies that have valid direct contacts from employer
+        if (item.hasDirectContact) {
+          parsed.unshift(item);
+        }
+      });
+
+      const firstPost = msgs.first().attr('data-post');
+      if (!firstPost) break;
+      const postNum = parseInt(firstPost.split('/')[1], 10);
+      if (isNaN(postNum) || postNum <= 1) break;
+      nextUrl = `https://t.me/s/${cleanUsername}?before=${postNum}`;
+    }
 
     return parsed;
   } catch (err) {
@@ -856,10 +962,12 @@ async function fetchAllChannelsVacancies(options = {}) {
 
   for (const ch of channelsToScrape) {
     try {
-      const channelItems = await fetchSingleChannelRaw(ch.username);
-      const topItems = channelItems.slice(0, limitPerChannel);
+      const isMasterChannel = ch.username === 'workiobshepit';
+      const pagesToFetch = isMasterChannel ? 7 : 2;
+      const channelItems = await fetchSingleChannelRaw(ch.username, pagesToFetch);
+      const topItems = channelItems.slice(0, isMasterChannel ? 150 : limitPerChannel);
       for (const item of topItems) {
-        const key = `${item.title}_${item.rateNumeric}_${item.metro}`.toLowerCase();
+        const key = `${item.title}_${item.rateNumeric}_${item.metro}_${item.contacts?.phone || ''}`.toLowerCase();
         if (!seenTitles.has(key)) {
           seenTitles.add(key);
           allItems.push({
@@ -874,18 +982,20 @@ async function fetchAllChannelsVacancies(options = {}) {
     }
   }
 
-  // Merge with curated base
-  fallbackPovarJobs.forEach(fb => {
-    const key = `${fb.title}_${fb.rateNumeric}_${fb.metro}`.toLowerCase();
-    if (!seenTitles.has(key)) {
-      seenTitles.add(key);
-      allItems.push({
-        ...fb,
-        sourceCategory: 'Повара и Шеф-повара',
-        channelRef: 'GastroConnect'
-      });
-    }
-  });
+  // Merge with curated base ONLY if zero live items were retrieved
+  if (allItems.length === 0) {
+    fallbackPovarJobs.forEach(fb => {
+      const key = `${fb.title}_${fb.rateNumeric}_${fb.metro}`.toLowerCase();
+      if (!seenTitles.has(key)) {
+        seenTitles.add(key);
+        allItems.push({
+          ...fb,
+          sourceCategory: 'Повара и Шеф-повара',
+          channelRef: 'GastroConnect'
+        });
+      }
+    });
+  }
 
   // Sort by date desc
   allItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -1023,6 +1133,7 @@ function getScheduleStatus() {
 module.exports = {
   TARGET_CHANNELS,
   SCRAPING_SCHEDULE_HOURS,
+  fetchSingleChannelRaw,
   fetchChannelVacancies,
   fetchAllChannelsVacancies,
   runScheduledScrape,

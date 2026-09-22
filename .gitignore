@@ -9,3 +9,7 @@ node_modules/
 .env.local
 .openai/
 dist/
+autopilot-state.json
+autopilot-published.json
+telegram-alerts.json
+

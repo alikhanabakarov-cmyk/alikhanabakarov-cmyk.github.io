@@ -2,8 +2,6 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  X-Frame-Options: SAMEORIGIN
-  Content-Security-Policy: frame-ancestors 'self'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -16,6 +14,9 @@
 
 /*.html
   Cache-Control: public, max-age=300
+
+/supabase-launch-fix.sql
+  Cache-Control: no-store
 
 /contacts/*
   Cache-Control: no-store

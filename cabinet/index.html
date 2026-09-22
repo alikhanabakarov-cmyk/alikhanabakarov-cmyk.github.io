@@ -1,15 +1,123 @@
 <!doctype html><html lang="ru"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="yandex-verification" content="7809b97f5ab8ab49" /><title>Кабинет — GastroConnect</title><meta name="robots" content="noindex,nofollow" /><meta
       name="description"
       content="Личный кабинет GastroConnect для профилей, смен, приглашений и заявок по ролям."
-    /><meta name="theme-color" content="#064c3b" /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1037" /></head><body><div class="page-shell"><header class="site-header"><a class="brand" href="/" aria-label="GastroConnect"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></a><nav class="main-nav" aria-label="Главное меню"><a href="/workers/">Сотрудникам</a><a href="/restaurants/">Заведениям</a><a href="/suppliers/">Поставщикам</a><a href="/contacts/">Контакты</a></nav><button id="logoutBtn" type="button">Выйти</button></header><main class="cabinet-page service-page"><section class="service-hero service-hero-cabinet"><div class="service-hero-copy"><p class="eyebrow" data-site-setting="cabinet.eyebrow">
+    />
+    <meta property="og:description" content="Личный кабинет пользователя GastroConnect: управление профилем, отклики на смены, приглашения кандидатов и мониторинг заявок." />
+    <meta name="keywords" content="личный кабинет gastroconnect, кабинет соискателя horeca, кабинет заведения москва, управление сменами gastroconnect" /><meta name="theme-color" content="#064c3b" /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1037" /></head><body><div class="page-shell"><header class="site-header"><a class="brand" href="/" aria-label="GastroConnect"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></a><nav class="main-nav" aria-label="Главное меню"><a href="/workers/">Сотрудникам</a><a href="/restaurants/">Заведениям</a><a href="/suppliers/">Поставщикам</a><a href="/contacts/">Контакты</a></nav><button id="logoutBtn" type="button">Выйти</button></header><main class="cabinet-page service-page"><section class="service-hero service-hero-cabinet"><div class="service-hero-copy"><p class="eyebrow" data-site-setting="cabinet.eyebrow">
               Рабочее пространство
             </p><h1 data-site-setting="cabinet.title">Кабинет GastroConnect</h1><p data-site-setting="cabinet.lead">
               Профили, смены, приглашения и заявки собраны в одном месте для
               каждой роли.
-            </p><p id="userInfo" class="message">Проверяем вход...</p></div><div class="service-hero-media service-hero-media-home" data-site-bg="cabinet.hero" data-bg-default="/assets/hero-home.webp" aria-hidden="true"></div></section><section id="workerCabinet" class="role-panel"><h2>Кабинет работника</h2><p>
+            </p><p id="userInfo" class="message">Проверяем вход...</p></div><div class="service-hero-media service-hero-media-home" data-site-bg="cabinet.hero" data-bg-default="/assets/hero-home.webp" aria-hidden="true">
+            <img class="poster-hero-image" src="/assets/hero-home.webp" alt="Личный кабинет GastroConnect" loading="eager" decoding="async" fetchpriority="high" />
+          </div></section><section id="workerCabinet" class="role-panel"><h2>Кабинет работника</h2><p>
             Заполните профиль, чтобы заведения понимали, кого они приглашают на
             смену.
-          </p><div class="cabinet-grid"><label
+          </p>
+          <!-- Визуальные виджеты: Активные смены и Статус заявок (Supabase) -->
+          <div class="gc-kpi-dashboard" id="workerKpiDashboard">
+            <div class="gc-kpi-header">
+              <div>
+                <div class="gc-kpi-badge"><span class="gc-pulse-dot"></span> Оперативные данные Supabase</div>
+                <h3 class="gc-kpi-title">Сводка: Смены и Заявки</h3>
+              </div>
+              <div class="gc-kpi-header-actions">
+                <span class="gc-kpi-sync-tag" id="workerKpiSyncStatus">🟢 Синхронизировано</span>
+                <button type="button" class="gc-kpi-refresh-btn" id="refreshWorkerKpiBtn" title="Обновить данные из Supabase">
+                  <span class="gc-spin-icon">🔄</span> Обновить
+                </button>
+              </div>
+            </div>
+
+            <div class="gc-kpi-grid">
+              <!-- Карточка 1: Активные смены -->
+              <div class="gc-kpi-card gc-kpi-shifts-card" id="workerCardShifts">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">⚡️</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-green">Открыты к выходу</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="workerKpiActiveShifts">0</span>
+                  <span class="gc-kpi-unit">активных смен</span>
+                </div>
+                <div class="gc-kpi-label">Доступные смены в Москве и МО</div>
+                <div class="gc-kpi-subtext">Открытые предложения заведений, готовые к моментальному отклику</div>
+                <div class="gc-kpi-meta-pills">
+                  <span class="gc-mini-pill" id="workerKpiConfirmedShiftsPill">0 подтвержденных</span>
+                  <span class="gc-mini-pill" id="workerKpiAvgRatePill">от 4 800 ₽ / смена</span>
+                </div>
+              </div>
+
+              <!-- Карточка 2: Статус заявок -->
+              <div class="gc-kpi-card gc-kpi-applications-card" id="workerCardApplications">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">📋</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-gold">Мои заявки</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="workerKpiTotalApplications">0</span>
+                  <span class="gc-kpi-unit">откликов</span>
+                </div>
+                <div class="gc-kpi-label">Статусы рассмотрения заведениями</div>
+                <div class="gc-status-chips-grid">
+                  <div class="gc-status-chip chip-pending" id="workerChipPending" title="Показать отклики в ожидании">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">В ожидании:</span>
+                    <strong class="chip-num" id="workerKpiPendingCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-accepted" id="workerChipAccepted" title="Показать одобренные отклики">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Одобрено:</span>
+                    <strong class="chip-num" id="workerKpiAcceptedCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-done" id="workerChipDone" title="Показать завершенные смены">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Завершено:</span>
+                    <strong class="chip-num" id="workerKpiDoneCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-declined" id="workerChipDeclined" title="Показать отклоненные отклики">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Отклонено:</span>
+                    <strong class="chip-num" id="workerKpiDeclinedCount">0</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Карточка 3: Конверсия и надежность -->
+              <div class="gc-kpi-card gc-kpi-rate-card" id="workerCardConversion">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">📊</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-blue">Конверсия</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="workerKpiAcceptanceRate">0%</span>
+                  <span class="gc-kpi-unit">успешность</span>
+                </div>
+                <div class="gc-kpi-label">Индекс подтверждения откликов</div>
+                <div class="gc-kpi-progress-wrap">
+                  <div class="gc-kpi-progress-bar">
+                    <div class="gc-kpi-progress-fill" id="workerKpiProgressFill" style="width: 0%;"></div>
+                  </div>
+                </div>
+                <div class="gc-kpi-subtext" id="workerKpiAdvice">Заполните профиль полностью для ускорения согласования</div>
+              </div>
+
+              <!-- Карточка 4: Ближайшая смена / Последний отклик -->
+              <div class="gc-kpi-card gc-kpi-recent-card" id="workerCardRecent">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">🎯</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-neutral" id="workerKpiRecentBadge">Последняя заявка</span>
+                </div>
+                <div class="gc-kpi-recent-body" id="workerKpiRecentBody">
+                  <div class="gc-kpi-recent-title" id="workerKpiRecentTitle">Заявок пока нет</div>
+                  <div class="gc-kpi-recent-subtitle" id="workerKpiRecentSub">Выберите смену из каталога ниже</div>
+                  <div class="gc-kpi-recent-status" id="workerKpiRecentStatus">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cabinet-grid"><label
               >Имя
               <input
                 id="workerName"
@@ -490,7 +598,111 @@
 <p id="shiftPostsMessage" class="message"></p></section><section id="restaurantCabinet" class="role-panel"><h2>Кабинет заведения</h2><p>
             Здесь заведение ведет профиль, публикует смены, смотрит анкеты
             работников и отправляет заявки поставщикам.
-          </p><h3>Профиль заведения</h3><div class="cabinet-grid"><label
+          </p>
+          <!-- Визуальные виджеты: Активные смены и Статус заявок заведения (Supabase) -->
+          <div class="gc-kpi-dashboard" id="restaurantKpiDashboard">
+            <div class="gc-kpi-header">
+              <div>
+                <div class="gc-kpi-badge"><span class="gc-pulse-dot"></span> Оперативные данные заведения</div>
+                <h3 class="gc-kpi-title">Сводка: Смены и Заявки кандидатов</h3>
+              </div>
+              <div class="gc-kpi-header-actions">
+                <span class="gc-kpi-sync-tag" id="restaurantKpiSyncStatus">🟢 Синхронизировано</span>
+                <button type="button" class="gc-kpi-refresh-btn" id="refreshRestaurantKpiBtn" title="Обновить данные из Supabase">
+                  <span class="gc-spin-icon">🔄</span> Обновить
+                </button>
+              </div>
+            </div>
+
+            <div class="gc-kpi-grid">
+              <!-- Карточка 1: Активные смены заведения -->
+              <div class="gc-kpi-card gc-kpi-shifts-card" id="restaurantCardShifts">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">🏪</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-green">В эфире</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="restaurantKpiActiveShifts">0</span>
+                  <span class="gc-kpi-unit">активных смен</span>
+                </div>
+                <div class="gc-kpi-label">Открытые смены заведения</div>
+                <div class="gc-kpi-subtext">Кандидаты могут откликаться на них прямо сейчас</div>
+                <div class="gc-kpi-meta-pills">
+                  <span class="gc-mini-pill" id="restaurantKpiTotalShiftsPill">0 всего смен</span>
+                  <span class="gc-mini-pill" id="restaurantKpiClosedShiftsPill">0 закрыто</span>
+                </div>
+              </div>
+
+              <!-- Карточка 2: Статус входящих заявок -->
+              <div class="gc-kpi-card gc-kpi-applications-card" id="restaurantCardApplications">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">👥</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-gold">Входящие заявки</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="restaurantKpiTotalApplications">0</span>
+                  <span class="gc-kpi-unit">откликов</span>
+                </div>
+                <div class="gc-kpi-label">Статусы откликов кандидатов</div>
+                <div class="gc-status-chips-grid">
+                  <div class="gc-status-chip chip-pending" id="restaurantChipPending" title="Показать отклики в ожидании">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Ждут ответа:</span>
+                    <strong class="chip-num" id="restaurantKpiPendingCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-accepted" id="restaurantChipAccepted" title="Показать принятые отклики">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Принято:</span>
+                    <strong class="chip-num" id="restaurantKpiAcceptedCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-done" id="restaurantChipDone" title="Показать отработанные смены">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Отработано:</span>
+                    <strong class="chip-num" id="restaurantKpiDoneCount">0</strong>
+                  </div>
+                  <div class="gc-status-chip chip-declined" id="restaurantChipDeclined" title="Показать отклоненные отклики">
+                    <span class="chip-dot"></span>
+                    <span class="chip-text">Отклонено:</span>
+                    <strong class="chip-num" id="restaurantKpiDeclinedCount">0</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Карточка 3: Укомплектованность смен -->
+              <div class="gc-kpi-card gc-kpi-rate-card" id="restaurantCardFillRate">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">📈</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-blue">Укомплектованность</span>
+                </div>
+                <div class="gc-kpi-value-row">
+                  <span class="gc-kpi-num" id="restaurantKpiFillRate">0%</span>
+                  <span class="gc-kpi-unit">закрыто</span>
+                </div>
+                <div class="gc-kpi-label">Укомплектованность штата</div>
+                <div class="gc-kpi-progress-wrap">
+                  <div class="gc-kpi-progress-bar">
+                    <div class="gc-kpi-progress-fill" id="restaurantKpiProgressFill" style="width: 0%;"></div>
+                  </div>
+                </div>
+                <div class="gc-kpi-subtext" id="restaurantKpiAdvice">Публикуйте смены заранее для привлечения опытных шефов</div>
+              </div>
+
+              <!-- Карточка 4: Свежий отклик кандидата -->
+              <div class="gc-kpi-card gc-kpi-recent-card" id="restaurantCardRecent">
+                <div class="gc-kpi-card-head">
+                  <span class="gc-kpi-icon">⚡️</span>
+                  <span class="gc-kpi-tag gc-kpi-tag-neutral" id="restaurantKpiRecentBadge">Новый отклик</span>
+                </div>
+                <div class="gc-kpi-recent-body" id="restaurantKpiRecentBody">
+                  <div class="gc-kpi-recent-title" id="restaurantKpiRecentTitle">Новых откликов нет</div>
+                  <div class="gc-kpi-recent-subtitle" id="restaurantKpiRecentSub">Опубликуйте смену, чтобы получить отклики</div>
+                  <div class="gc-kpi-recent-status" id="restaurantKpiRecentStatus">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Профиль заведения</h3><div class="cabinet-grid"><label
               >Название заведения
               <input
                 id="restaurantBusinessName"
@@ -647,7 +859,7 @@
         </div>
         <div class="tg-job-only-field full">
           <label for="tgPostContacts">Контакт для отклика</label>
-          <input id="tgPostContacts" type="text" placeholder="@username или телефон" value="@gastroconnect (+7 910 433-47-29)" />
+          <input id="tgPostContacts" type="text" placeholder="@username или телефон" value="" />
         </div>
 
         <div class="tg-custom-only-field full" style="display: none;">
@@ -864,7 +1076,7 @@
               >Открыть отдельную админку</a
             ></div><h3>Данные платформы</h3><div class="cabinet-actions"><button id="loadAdminDataBtn" type="button">Обновить данные</button></div><p id="adminMessage" class="message"></p><div id="adminDataList" class="list-grid"></div></section><section id="unknownRole" class="role-panel"><h2>Роль не найдена</h2><p>
             Профиль пользователя пока не найден. Пожалуйста, обновите страницу или зарегистрируйтесь заново.
-          </p></section></main><footer class="footer" id="contacts"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">GC</span><div><span class="brand-text">GastroConnect</span><p>Бесплатная платформа для работников, заведений и поставщиков HoReCa.</p></div></div><div class="footer-links"><div class="footer-group"><span>Связь</span><a href="tel:+79104334729">+7 910 433-47-29</a><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a><a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a></div><div class="footer-group"><span>Документы</span><a href="/privacy/">Политика конфиденциальности</a><a href="/terms/">Пользовательское соглашение</a><a href="/personal-data-consent/">Согласие на обработку данных</a></div><div class="footer-group"><span>Регион</span><p>Москва и Московская область</p><a href="/contacts/">Контакты</a></div></div></footer></div><script>
+          </p></section></main><footer class="footer" id="contacts"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">GC</span><div><span class="brand-text">GastroConnect</span><p>Бесплатная платформа для работников, заведений и поставщиков HoReCa.</p></div></div><div class="footer-links"><div class="footer-group"><span>Связь</span><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a><a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a></div><div class="footer-group"><span>Документы</span><a href="/privacy/">Политика конфиденциальности</a><a href="/terms/">Пользовательское соглашение</a><a href="/personal-data-consent/">Согласие на обработку данных</a></div><div class="footer-group"><span>Регион</span><p>Москва и Московская область</p><a href="/contacts/">Контакты</a></div></div></footer></div><script>
 /**
  * Minified by jsDelivr using Terser v5.48.0.
  * Original file: /npm/@supabase/supabase-js@2.107.0/dist/umd/supabase.js
@@ -896,7 +1108,8 @@ if (window.supabase?.createClient) {
   console.error('Supabase library did not load.');
 }
 
-</script><script>(function () {
+</script><script>
+(function () {
   const SETTINGS_KEY = "gc_site_settings";
   const SETTINGS_ROW = "public_site";
   const SUBMISSIONS_KEY = "gc_public_submissions";
@@ -1315,6 +1528,8 @@ if (window.supabase?.createClient) {
               if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
               if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
               input.value = formatted;
+            } else {
+              input.value = "";
             }
             validateField(input);
           });
@@ -1446,6 +1661,120 @@ if (window.supabase?.createClient) {
       return digits ? `+${digits}` : "";
     }
 
+    function getOrCreateAuthBadge(input) {
+      const parent = input.closest("label") || input.parentElement;
+      let badge = parent.querySelector(".field-error-msg");
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className = "field-error-msg";
+        badge.setAttribute("role", "alert");
+        badge.setAttribute("aria-live", "polite");
+        parent.appendChild(badge);
+      }
+      return badge;
+    }
+
+    function formatAuthPhone(val) {
+      let raw = String(val || "").replace(/\D/g, "");
+      if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
+      if (raw.length === 0) return "";
+      let formatted = "+7 (";
+      formatted += raw.slice(0, 3);
+      if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
+      if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
+      if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
+      return formatted;
+    }
+
+    function validateAuthEmail(isBlur = false) {
+      if (!emailInput || (emailField && emailField.hidden)) {
+        if (emailInput) {
+          emailInput.classList.remove("is-invalid", "is-valid");
+          const b = getOrCreateAuthBadge(emailInput);
+          b.classList.remove("show");
+          b.textContent = "";
+        }
+        return true;
+      }
+      const val = emailValue();
+      const badge = getOrCreateAuthBadge(emailInput);
+      const isPhoneMethod = methodInput.value === "phone";
+      const isRequired = mode === "login" ? !isPhoneMethod : !isPhoneMethod;
+      let isValid = true;
+      let errorMsg = "";
+
+      if (!val) {
+        if (isRequired) {
+          isValid = false;
+          errorMsg = "Пожалуйста, укажите email";
+        }
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        isValid = false;
+        errorMsg = "Некорректный формат email (например, name@mail.ru)";
+      }
+
+      if (isValid) {
+        emailInput.classList.remove("is-invalid");
+        if (val.length > 0) emailInput.classList.add("is-valid");
+        else emailInput.classList.remove("is-valid");
+        badge.classList.remove("show");
+        badge.textContent = "";
+      } else {
+        emailInput.classList.remove("is-valid");
+        if (isBlur || emailInput.dataset.touched === "true") {
+          emailInput.classList.add("is-invalid");
+          badge.textContent = errorMsg;
+          badge.classList.add("show");
+        }
+      }
+      return isValid;
+    }
+
+    function validateAuthPhone(isBlur = false) {
+      if (!phoneInput || (phoneField && phoneField.hidden)) {
+        if (phoneInput) {
+          phoneInput.classList.remove("is-invalid", "is-valid");
+          const b = getOrCreateAuthBadge(phoneInput);
+          b.classList.remove("show");
+          b.textContent = "";
+        }
+        return true;
+      }
+      const val = phoneInput.value.trim();
+      const digits = val.replace(/\D/g, "");
+      const badge = getOrCreateAuthBadge(phoneInput);
+      const isPhoneMethod = methodInput.value === "phone";
+      const isRequired = mode === "login" ? isPhoneMethod : isPhoneMethod;
+      let isValid = true;
+      let errorMsg = "";
+
+      if (!val || digits.length === 0) {
+        if (isRequired) {
+          isValid = false;
+          errorMsg = "Укажите номер телефона";
+        }
+      } else if (digits.length < 10) {
+        isValid = false;
+        errorMsg = "Введите корректный номер (10–11 цифр)";
+      }
+
+      if (isValid) {
+        phoneInput.classList.remove("is-invalid");
+        if (digits.length >= 10) phoneInput.classList.add("is-valid");
+        else phoneInput.classList.remove("is-valid");
+        badge.classList.remove("show");
+        badge.textContent = "";
+      } else {
+        phoneInput.classList.remove("is-valid");
+        if (isBlur || phoneInput.dataset.touched === "true") {
+          phoneInput.classList.add("is-invalid");
+          badge.textContent = errorMsg;
+          badge.classList.add("show");
+        }
+      }
+      return isValid;
+    }
+
     function emailValue() {
       return emailInput.value.trim().toLowerCase();
     }
@@ -1484,6 +1813,18 @@ if (window.supabase?.createClient) {
       phoneInput.required = loginMode ? byPhone : methodInput.value === "phone";
       emailInput.placeholder = byPhone ? "Можно указать дополнительно" : "example@mail.ru";
       phoneInput.placeholder = byPhone ? "+7 910 000-00-00" : "Можно указать дополнительно";
+      if (emailField && emailField.hidden) {
+        emailInput.classList.remove("is-invalid", "is-valid");
+        const b = getOrCreateAuthBadge(emailInput);
+        b.classList.remove("show");
+        b.textContent = "";
+      }
+      if (phoneField && phoneField.hidden) {
+        phoneInput.classList.remove("is-invalid", "is-valid");
+        const b = getOrCreateAuthBadge(phoneInput);
+        b.classList.remove("show");
+        b.textContent = "";
+      }
       if (updateUrl) updateHistory();
     }
 
@@ -1627,6 +1968,30 @@ if (window.supabase?.createClient) {
     registerBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
+      emailInput.dataset.touched = "true";
+      phoneInput.dataset.touched = "true";
+      const emailOk = validateAuthEmail(true);
+      const phoneOk = validateAuthPhone(true);
+      if (method === "email" && !emailOk) {
+        emailInput.focus();
+        message.textContent = "Пожалуйста, укажите корректный email.";
+        return;
+      }
+      if (method === "phone" && !phoneOk) {
+        phoneInput.focus();
+        message.textContent = "Пожалуйста, укажите корректный номер телефона.";
+        return;
+      }
+      if (!emailOk) {
+        emailInput.focus();
+        message.textContent = "Пожалуйста, исправьте ошибки в поле email.";
+        return;
+      }
+      if (!phoneOk) {
+        phoneInput.focus();
+        message.textContent = "Пожалуйста, исправьте ошибки в поле телефона.";
+        return;
+      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
@@ -1693,6 +2058,20 @@ if (window.supabase?.createClient) {
     loginBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
+      emailInput.dataset.touched = "true";
+      phoneInput.dataset.touched = "true";
+      const emailOk = validateAuthEmail(true);
+      const phoneOk = validateAuthPhone(true);
+      if (method === "email" && !emailOk) {
+        emailInput.focus();
+        message.textContent = "Пожалуйста, введите корректный email.";
+        return;
+      }
+      if (method === "phone" && !phoneOk) {
+        phoneInput.focus();
+        message.textContent = "Пожалуйста, введите корректный номер телефона.";
+        return;
+      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
@@ -1715,6 +2094,25 @@ if (window.supabase?.createClient) {
         setBusy(false);
         message.textContent = `Вход выполнен, но профиль не открылся: ${profileError.message}. Пожалуйста, напишите в поддержку.`;
       }
+    });
+
+    emailInput?.addEventListener("input", () => {
+      emailInput.dataset.touched = "true";
+      validateAuthEmail(false);
+    });
+    emailInput?.addEventListener("blur", () => {
+      emailInput.dataset.touched = "true";
+      validateAuthEmail(true);
+    });
+
+    phoneInput?.addEventListener("input", () => {
+      phoneInput.dataset.touched = "true";
+      phoneInput.value = formatAuthPhone(phoneInput.value);
+      validateAuthPhone(false);
+    });
+    phoneInput?.addEventListener("blur", () => {
+      phoneInput.dataset.touched = "true";
+      validateAuthPhone(true);
     });
 
     showLoginBtn?.addEventListener("click", () => setMode("login"));
@@ -1765,168 +2163,11 @@ if (window.supabase?.createClient) {
     });
   }
 
-  function initPublicB2BCatalog() {
-    const grid = document.getElementById("publicB2BGrid");
-    const msgEl = document.getElementById("publicB2BMsg");
-    if (!grid) return;
-
-    let suppliersData = [];
-    let activeCat = "all";
-
-    const searchInput = document.getElementById("publicB2BSearch");
-    const minOrderSelect = document.getElementById("publicB2BMinOrder");
-    const applyBtn = document.getElementById("publicB2BApplyBtn");
-    const chips = document.querySelectorAll("#publicB2BCatChips button");
-
-    function money(v) {
-      return v || v === 0 ? Number(v).toLocaleString("ru-RU") + " ₽" : "-";
-    }
-
-    function render() {
-      const q = (searchInput?.value || "").trim().toLowerCase();
-      const minOrderMax = parseInt(minOrderSelect?.value || "0", 10);
-
-      let filtered = [...suppliersData];
-      if (activeCat !== "all") {
-        filtered = filtered.filter(s => s.category === activeCat);
-      }
-      if (minOrderMax > 0) {
-        filtered = filtered.filter(s => s.min_order_rub <= minOrderMax);
-      }
-      if (q) {
-        filtered = filtered.filter(s =>
-          s.company_name.toLowerCase().includes(q) ||
-          s.category_label.toLowerCase().includes(q) ||
-          s.description.toLowerCase().includes(q) ||
-          (s.products && s.products.some(p => p.name.toLowerCase().includes(q)))
-        );
-      }
-
-      if (msgEl) {
-        msgEl.textContent = `Найдено поставщиков: ${filtered.length}`;
-      }
-
-      if (!filtered.length) {
-        grid.innerHTML = `
-          <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed var(--line);">
-            <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
-            <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">Поставщиков по запросу не найдено</h4>
-            <p style="margin: 0; color: #64748b; font-size: 14px;">Попробуйте изменить запрос или выбрать другую категорию продуктов.</p>
-          </div>
-        `;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(s => {
-        const tgUser = (s.telegram || "").replace(/^@/, "");
-        const tgUrl = tgUser ? `https://t.me/${tgUser}` : "https://t.me/gastroconnect";
-        const phoneUrl = `tel:${s.phone.replace(/[^\d+]/g, "")}`;
-        const prodHtml = (s.products || []).map(p => `
-          <div class="b2b-prod-item">
-            <div>
-              <div style="font-weight: 750; color: var(--ink);">${escapeText(p.name)}</div>
-              <div style="font-size: 11.5px; color: #64748b;">${escapeText(p.spec || "")}</div>
-            </div>
-            <div class="b2b-prod-price">${money(p.price)} / ${escapeText(p.unit)}</div>
-          </div>
-        `).join("");
-
-        const badges = (s.badges || []).map(b => `<span class="b2b-mini-badge">✓ ${escapeText(b)}</span>`).join("");
-
-        return `
-          <div class="b2b-supplier-card">
-            <div class="b2b-card-top">
-              <div>
-                <div class="b2b-sup-cat">${escapeText(s.category_label)}</div>
-                <h4 class="b2b-sup-name">${escapeText(s.company_name)}</h4>
-                <div style="font-size: 12px; color: #64748b;">Источник: ${escapeText(s.source)}</div>
-              </div>
-              <div class="b2b-rating-pill">⭐ ${s.rating} (${s.reviews_count})</div>
-            </div>
-
-            <p class="b2b-sup-desc">${escapeText(s.description)}</p>
-            <div class="b2b-badges-wrap">${badges}</div>
-
-            <div class="b2b-sup-meta">
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">Мин. заказ:</span>
-                <span class="b2b-meta-value">${money(s.min_order_rub)}</span>
-              </div>
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">График доставки:</span>
-                <span class="b2b-meta-value">${escapeText(s.delivery_schedule)}</span>
-              </div>
-              <div class="b2b-meta-row">
-                <span class="b2b-meta-label">Оплата:</span>
-                <span class="b2b-meta-value" style="font-size: 12px;">${escapeText(s.payment_terms)}</span>
-              </div>
-            </div>
-
-            <button type="button" class="b2b-products-toggle" onclick="
-              var l = this.nextElementSibling;
-              if (l.classList.contains('expanded')) {
-                l.classList.remove('expanded');
-                this.innerHTML = '📋 Оптовый прайс-лист (' + ${s.products.length} + ') ▼';
-              } else {
-                l.classList.add('expanded');
-                this.innerHTML = '📋 Скрыть прайс-лист ▲';
-              }
-            ">
-              📋 Оптовый прайс-лист (${s.products.length}) ▼
-            </button>
-            <div class="b2b-products-list">
-              <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Прайс-лист для заведений</div>
-              ${prodHtml}
-            </div>
-
-            <div class="b2b-card-actions">
-              <div class="b2b-action-row">
-                ${s.website ? `<a href="${escapeText(s.website)}" target="_blank" rel="noopener" class="b2b-btn-web">🌐 Сайт</a>` : ''}
-                <a href="${tgUrl}" target="_blank" rel="noopener" class="b2b-btn-tg">Telegram</a>
-                <a href="${phoneUrl}" class="b2b-btn-phone">📞 Позвонить</a>
-              </div>
-              <a href="/auth/?role=restaurant" class="b2b-btn-order" style="text-align:center; text-decoration:none; display:block;">
-                ⚡️ Заказать поставку через кабинет
-              </a>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    chips.forEach(c => {
-      c.addEventListener("click", () => {
-        chips.forEach(ch => ch.classList.remove("active"));
-        c.classList.add("active");
-        activeCat = c.dataset.pubCat || "all";
-        render();
-      });
-    });
-
-    searchInput?.addEventListener("input", render);
-    minOrderSelect?.addEventListener("change", render);
-    applyBtn?.addEventListener("click", render);
-
-    fetch("/api/suppliers")
-      .then(r => r.json())
-      .then(res => {
-        if (res.success && Array.isArray(res.suppliers)) {
-          suppliersData = res.suppliers;
-          if (msgEl) msgEl.textContent = `Доступно проверенных поставщиков: ${suppliersData.length}`;
-          render();
-        }
-      })
-      .catch(err => {
-        if (msgEl) msgEl.textContent = "Ошибка загрузки каталога.";
-      });
-  }
-
   applySettings(readJson(SETTINGS_KEY, {}));
   scheduleBackgrounds();
   initPublicForms();
   initAuthPage();
   initReviewsCarousel();
-  initPublicB2BCatalog();
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });
 })();
 </script>

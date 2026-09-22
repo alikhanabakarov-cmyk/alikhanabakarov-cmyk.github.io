@@ -1,6 +1,6 @@
 {
   "name": "GastroConnect",
-  "description": "Платформа гибкой занятости и поставок для HoReCa в Москве: смены, персонал и заведения",
+  "description": "GastroConnect — платформа гибкой занятости и поставок HoReCa в Москве и МО. Быстрый подбор поваров, официантов, бариста на смену и проверенные B2B-поставщики.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

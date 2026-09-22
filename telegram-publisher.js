@@ -1,13 +1,21 @@
-﻿// GastroConnect Telegram Publisher & Community Engine
+// GastroConnect Telegram Publisher & Community Engine
 // Designed for @gastroconnect channel & community
 
 const DEFAULT_CHANNEL = '@gastroconnect';
-const DEFAULT_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || 'REPLACE_ME';
+const DEFAULT_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8692318442:AAHSI6lUSeZG_hDepBhfJBE43LIuSjrubVU';
 const DEFAULT_CHAT_ID = null;
 const SITE_URL = 'https://gastroconnect.ru';
 const SITE_WORKERS_URL = 'https://gastroconnect.ru/workers/';
 const SITE_REGISTER_URL = 'https://gastroconnect.ru/workers/';
-const TELEGRAM_CHAT_URL = 'https://t.me/gastroconnect';
+function getValidChatUrl() {
+  const envUrl = process.env.TELEGRAM_CHAT_URL;
+  if (envUrl && typeof envUrl === 'string' && (envUrl.startsWith('https://t.me/') || envUrl.startsWith('http'))) {
+    return envUrl;
+  }
+  return 'https://t.me/+36JFPwh5x3w4NThi';
+}
+
+const TELEGRAM_CHAT_URL = getValidChatUrl();
 
 const TEMPLATES = [
   {
@@ -110,8 +118,23 @@ function formatTelegramPost(rawPayload = {}) {
     const perks = payload.perks || 'Питание, форма, своевременные выплаты';
     const tasks = payload.tasks || payload.description || 'Работа на позиции по стандартам заведения';
     const requirements = payload.requirements || 'Опыт работы, действующая медкнижка';
-    const contacts = payload.contacts ? String(payload.contacts).trim() : '';
-    const urgency = payload.urgency ? `⚡️ <b>${escapeHtml(payload.urgency)}</b>\n` : '';
+    let contactStr = '';
+    if (typeof payload.contacts === 'string') {
+      contactStr = payload.contacts.trim();
+    } else if (payload.contacts && typeof payload.contacts === 'object') {
+      const parts = [];
+      if (payload.contacts.phone) parts.push(payload.contacts.phone);
+      if (payload.contacts.telegram) {
+        const tg = payload.contacts.telegram.startsWith('@') ? payload.contacts.telegram : `@${payload.contacts.telegram}`;
+        parts.push(tg);
+      }
+      if (payload.contacts.whatsapp) parts.push('WA: ' + payload.contacts.whatsapp);
+      if (payload.contacts.name) parts.push(payload.contacts.name);
+      contactStr = parts.join(' | ');
+    }
+    if (!contactStr) {
+      contactStr = '@gastroconnect';
+    }
 
     // Emoji icon according to role
     let roleEmoji = '👨‍🍳';
@@ -124,32 +147,53 @@ function formatTelegramPost(rawPayload = {}) {
     else if (rLower.includes('кондит') || rLower.includes('пекар')) roleEmoji = '🥐';
     else if (rLower.includes('бариста') || rLower.includes('бар')) roleEmoji = '☕️';
 
-    // Tags
-    hashtags = [
-      '#' + role.replace(/[^a-zA-Zа-яА-Я0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, ''),
-      '#РаботаМосква',
-      '#Смена',
-      '#GastroConnect'
-    ];
-    if (metro && metro !== 'Москва') {
-      const cleanMetro = metro.split(/[,(]/)[0].trim().replace(/[^a-zA-Zа-яА-Я0-9]/g, '_');
-      hashtags.push('#м_' + cleanMetro);
+    // Smart SEO-Hashtags algorithm for maximum Telegram reach and global search discovery
+    const roleSlug = '#' + role.replace(/[^a-zA-Zа-яА-Я0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 32);
+    
+    // Core high-volume search tags for Telegram HoReCa
+    const coreTags = ['#РаботаМосква', '#Смена', '#HoReCa', '#GastroConnect'];
+    
+    // Role-specific organic search tags
+    const extraCategoryTags = [];
+    if (rLower.includes('повар') || rLower.includes('шеф') || rLower.includes('кухн')) {
+      extraCategoryTags.push('#ПоварМосква', '#РаботаНаКухне');
+    } else if (rLower.includes('суши') || rLower.includes('ролл')) {
+      extraCategoryTags.push('#Сушист', '#СушистМосква');
+    } else if (rLower.includes('пицц')) {
+      extraCategoryTags.push('#Пиццайоло', '#Пиццмейкер');
+    } else if (rLower.includes('пекар') || rLower.includes('кондит')) {
+      extraCategoryTags.push('#Пекарь', '#КондитерМосква');
+    } else if (rLower.includes('бариста') || rLower.includes('кофе')) {
+      extraCategoryTags.push('#БаристаМосква', '#Кофейня');
+    } else if (rLower.includes('официант') || rLower.includes('раннер') || rLower.includes('зал')) {
+      extraCategoryTags.push('#ОфициантМосква', '#РаботаВЗале');
+    } else if (rLower.includes('бармен')) {
+      extraCategoryTags.push('#БарменМосква', '#Бар');
     }
 
-    const contactsHtml = contacts ? `\n📱 <b>Прямой контакт для отклика:</b>\n👉 <b>${escapeHtml(contacts)}</b>\n` : '';
+    if (metro && metro !== 'Москва') {
+      const cleanMetro = metro.replace(/^(м\.|г\.)\s*/i, '').split(/[,(]/)[0].trim().replace(/[^a-zA-Zа-яА-Я0-9]/g, '_');
+      if (cleanMetro) extraCategoryTags.push('#м_' + cleanMetro);
+    }
 
-    // Compact, punchy, beautiful format: Position, Rate, Location, Contact
+    // Combine tags cleanly (deduplicated, limited to 5-6 top resonant tags to prevent clutter)
+    const combinedSet = new Set([roleSlug, ...extraCategoryTags, ...coreTags]);
+    hashtags = Array.from(combinedSet).filter(t => t && t.length > 2).slice(0, 6);
+
+    const contactsHtml = contactStr 
+      ? `\n📞 <b>Контакты для отклика:</b>\nЗвонки / WhatsApp / Telegram: <b>${escapeHtml(contactStr)}</b>`
+      : '';
+
+    // Strict format according to channel standards
     html = `${roleEmoji} <b>${escapeHtml(role)}</b>
 
-💰 <b>${escapeHtml(rate)}</b>
-📍 ${escapeHtml(metro)}
-⏰ ${escapeHtml(schedule)}
-🎁 ${escapeHtml(perks)}
+💰 <b>ЗП / Ставка:</b> <b>${escapeHtml(rate)}</b>
+📍 <b>Локация:</b> ${escapeHtml(metro)}
+⏰ <b>График:</b> ${escapeHtml(schedule)}
+🎁 <b>Условия / Бонусы:</b> ${escapeHtml(perks)}
+${contactsHtml}
 
-${contactsHtml}⚡️ <b><a href="${registerLink}">Забрать смену / Откликнуться</a></b>
-💬 <b><a href="${chatLink}">Чат поваров @gastroconnect</a></b>
-
-${hashtags.slice(0, 3).join(' ')}`;
+${hashtags.join(' ')}`;
 
   } else if (type === 'tip') {
     const headline = payload.headline || payload.title || 'Лайфхак шеф-повара';
@@ -164,7 +208,7 @@ ${hashtags.slice(0, 3).join(' ')}`;
 ${body}
 
 ━━━━━━━━━━━━━━━━━━━━
-💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат @gastroconnect</a>
+💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат сообщества GastroConnect</a>
 🌐 <b>Наш сайт:</b> <a href="${registerLink}">GastroConnect.ru</a>
 
 ${hashtags.join(' ')}`;
@@ -185,7 +229,7 @@ ${escapeHtml(intro)}
 ${options.map(opt => `<b>${escapeHtml(opt)}</b>`).join('\n')}
 
 ━━━━━━━━━━━━━━━━━━━━
-💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат @gastroconnect</a>
+💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат сообщества GastroConnect</a>
 🌐 <b>Наш сайт:</b> <a href="${registerLink}">GastroConnect.ru</a>
 
 ${hashtags.join(' ')}`;
@@ -203,7 +247,7 @@ ${hashtags.join(' ')}`;
 ${body}
 
 ━━━━━━━━━━━━━━━━━━━━
-💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат @gastroconnect</a>
+💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат сообщества GastroConnect</a>
 🌐 <b>Наш сайт:</b> <a href="${registerLink}">GastroConnect.ru</a>
 
 ${hashtags.join(' ')}`;
@@ -217,18 +261,19 @@ ${hashtags.join(' ')}`;
 ${text}
 
 ━━━━━━━━━━━━━━━━━━━━
-💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат @gastroconnect</a>
+💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат сообщества GastroConnect</a>
 🌐 <b>Наш сайт:</b> <a href="${registerLink}">GastroConnect.ru</a>
 
 ${hashtags.join(' ')}`;
   }
 
   // Create clean plain text version (stripping HTML tags)
-  const plainText = html.replace(/<[^>]*>/g, '');
+  const sanitizedHtml = html.toWellFormed().replace(/[\uD800-\uDFFF]/g, '').replace(/\uFFFD/g, '');
+  const plainText = sanitizedHtml.replace(/<[^>]*>/g, '');
 
   return {
     type,
-    html,
+    html: sanitizedHtml,
     plainText,
     hashtags,
     previewChannel: DEFAULT_CHANNEL
@@ -240,8 +285,11 @@ ${hashtags.join(' ')}`;
  */
 async function publishToTelegram(postData, botToken = null, targetChannel = null) {
   const token = botToken || process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
-  // If targetChannel is not explicitly provided, always target the public channel @gastroconnect
-  const channel = targetChannel || '@gastroconnect';
+  // If targetChannel is not explicitly provided or is user ID, always target the public channel @gastroconnect
+  let channel = targetChannel || '@gastroconnect';
+  if (channel === '1049156324' || channel === 1049156324) {
+    channel = '@gastroconnect';
+  }
   
   const formatted = formatTelegramPost(postData);
 
@@ -269,26 +317,26 @@ async function publishToTelegram(postData, botToken = null, targetChannel = null
 
     if (postData.type === 'job') {
       inline_keyboard.push([
-        { text: '⚡️ Зарегистрироваться и откликнуться', url: 'https://gastroconnect.ru/workers/' }
+        { text: '⚡️ Зарегистрироваться и откликнуться', url: SITE_WORKERS_URL }
       ]);
       inline_keyboard.push([
         { text: '💬 Чат сообщества @gastroconnect', url: 'https://t.me/gastroconnect' }
       ]);
     } else {
       inline_keyboard.push([
-        { text: '🌐 GastroConnect.ru', url: 'https://gastroconnect.ru/' },
-        { text: '💬 Чат @gastroconnect', url: 'https://t.me/gastroconnect' }
+        { text: '🌐 GastroConnect.ru', url: SITE_URL },
+        { text: '💬 Чат сообщества @gastroconnect', url: 'https://t.me/gastroconnect' }
       ]);
     }
 
-    let htmlToSend = formatted.html;
+    let htmlToSend = formatted.html.toWellFormed().replace(/[\uD800-\uDFFF]/g, '').replace(/\uFFFD/g, '');
     if (postData.customHtml) {
-      htmlToSend = postData.customHtml;
+      htmlToSend = postData.customHtml.toWellFormed().replace(/[\uD800-\uDFFF]/g, '').replace(/\uFFFD/g, '');
     }
 
     const response = await fetch(telegramApiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
         chat_id: channel,
         text: htmlToSend,

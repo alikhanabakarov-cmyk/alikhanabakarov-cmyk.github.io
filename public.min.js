@@ -1,260 +1,3 @@
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="google-site-verification" content="GastroConnect-SearchConsole-Verify" />
-    <meta name="yandex-verification" content="7809b97f5ab8ab49" />
-    <title>Контакты GastroConnect — Москва и Московская область</title>
-    <meta
-      name="description"
-      content="Контакты GastroConnect: обратная связь, заказ звонка и Telegram-уведомления для работников, заведений и поставщиков HoReCa."
-    />
-    <meta name="keywords" content="gastroconnect контакты, поддержка horeca платформы, служба поддержки gastroconnect москва, телефон gastroconnect, связь с администрацией gastroconnect" />
-    <meta name="theme-color" content="#064c3b" />
-    <link rel="canonical" href="https://gastroconnect.ru/contacts/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="GastroConnect" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:url" content="https://gastroconnect.ru/contacts/" />
-    <meta property="og:title" content="Контакты GastroConnect" />
-    <meta property="og:description" content="Контакты GastroConnect: телефон, email и Telegram-канал службы поддержки сервиса смен и поставок для заведений HoReCa в Москве и Московской области." />
-    <meta property="og:image" content="https://gastroconnect.ru/assets/og-gastroconnect.webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/webp" />
-    <meta property="og:image:alt" content="Контакты GastroConnect" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
-    <link rel="alternate icon" href="/favicon.ico" sizes="any" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/style.css?v=1038" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Главная",
-                "item": "https://gastroconnect.ru/"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Контакты",
-                "item": "https://gastroconnect.ru/contacts/"
-              }
-            ]
-          },
-          {
-            "@type": "ContactPage",
-            "name": "Контакты GastroConnect",
-            "url": "https://gastroconnect.ru/contacts/",
-            "mainEntity": {
-              "@type": "Organization",
-              "name": "GastroConnect",
-              "legalName": "Индивидуальный предприниматель Лыонг Хонг Ван",
-              "taxID": "771877375737",
-              "identifier": "ОГРНИП 322774600180990",
-              "url": "https://gastroconnect.ru/",
-              "email": "info@gastroconnect.ru",
-              "telephone": "+",
-              "areaServed": ["Москва", "Московская область"],
-              "sameAs": ["https://t.me/gastroconnect"]
-            }
-          }
-        ]
-      }
-    </script>
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="site-header">
-        <a class="brand" href="/" aria-label="GastroConnect">
-          <span class="brand-mark" aria-hidden="true">GC</span>
-          <span class="brand-text">GastroConnect</span>
-        </a>
-        <nav class="main-nav" aria-label="Главное меню">
-          <a href="/workers/">Сотрудникам</a>
-          <a href="/restaurants/">Заведениям</a>
-          <a href="/suppliers/">Поставщикам</a>
-          <a href="/contacts/">Контакты</a>
-        </nav>
-        <a class="header-cta" href="/auth/?mode=signup">Войти / регистрация</a>
-      </header>
-
-      <main>
-        <section class="contact-hero">
-          <div>
-            <p class="eyebrow">Связь с GastroConnect</p>
-            <h1>Поможем настроить смены, заявки и поставки без лишней суеты</h1>
-            <p>
-              Работаем по Москве и Московской области. Напишите, позвоните или
-              оставьте форму — мы разберём задачу и подскажем самый короткий путь.
-            </p>
-          </div>
-          <div class="contact-card contact-card-accent">
-            <span>Приоритет</span>
-            <strong>Ответ в Telegram или по телефону</strong>
-            <p>Для заведений, сотрудников и поставщиков HoReCa.</p>
-          </div>
-        </section>
-
-        <section class="contact-grid" aria-label="Контактные каналы">
-          <article class="contact-card">
-            <span>Телефон</span>
-            <h2></h2>
-            <p>Звонок или WhatsApp/Telegram по номеру, если нужно быстро обсудить задачу.</p>
-          </article>
-          <article class="contact-card">
-            <span>Email</span>
-            <h2><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a></h2>
-            <p>Юридические вопросы, партнёрство, документы и обращения по данным.</p>
-          </article>
-          <article class="contact-card">
-            <span>Telegram</span>
-            <h2>
-              <a href="https://t.me/gastroconnect" target="_blank" rel="noopener"
-                >@gastroconnect</a
-              >
-            </h2>
-            <p>Самый удобный канал для быстрых уведомлений и поддержки.</p>
-          </article>
-        </section>
-        <section class="contact-grid" aria-label="Реквизиты">
-          <article class="contact-card">
-            <span>Юридическое лицо</span>
-            <h2>Индивидуальный предприниматель Лыонг Хонг Ван</h2>
-            <p>ИНН 771877375737. ОГРНИП 322774600180990. Руководитель: Лыонг Хонг Ван.</p>
-          </article>
-          <article class="contact-card">
-            <span>Адрес</span>
-            <h2>Юридический адрес</h2>
-            <p>107143, г. Москва, ул. Николая Химушина, д. 11, корп. 2, кв. 1</p>
-          </article>
-          <article class="contact-card">
-            <span>Банковские реквизиты</span>
-            <h2>Филиал “Центральный” Банка ВТБ (ПАО)</h2>
-            <p>Р/с 40802810104270000807<br />К/с 30101810145250000411<br />БИК 044525411</p>
-          </article>
-        </section>
-
-        <section class="telegram-panel">
-          <div>
-            <p class="eyebrow">Telegram-уведомления</p>
-            <h2>Бот будет сообщать о новых заявках и откликах</h2>
-            <p>
-              Для MVP мы фиксируем подключение через форму. После подключения
-              BotFather-токена бот сможет отправлять уведомления о новых
-              заявках, откликах работников, приглашениях и запросах поставщикам.
-            </p>
-          </div>
-          <form class="telegram-connect-form" data-form-type="telegram_bot">
-            <div class="form-grid">
-              <label
-                >Имя
-                <input name="name" type="text" placeholder="Имя или название компании" required />
-              </label>
-              <label
-                >Telegram
-                <input name="telegram" type="text" placeholder="@username" required />
-              </label>
-              <label class="full"
-                >Что уведомлять
-                <select name="request">
-                  <option>Новые заявки с сайта</option>
-                  <option>Отклики работников</option>
-                  <option>Запросы поставщикам</option>
-                  <option>Все события GastroConnect</option>
-                </select>
-              </label>
-            </div>
-              <label class="consent-checkbox">
-                <input type="checkbox" name="personalDataConsent" value="true" required />
-                <span>Я согласен с <a href="/privacy/">Политикой конфиденциальности</a>, <a href="/terms/">Пользовательским соглашением</a> и даю <a href="/personal-data-consent/">согласие на обработку персональных данных</a>.</span>
-              </label>
-              <button class="primary" type="submit">Подключить уведомления</button>
-            <p class="success" role="status"></p>
-          </form>
-        </section>
-
-        <section class="form-section contact-feedback" id="feedback">
-          <div class="form-info">
-            <p class="eyebrow">Форма обратной связи</p>
-            <h2>Опишите задачу</h2>
-            <p>
-              Напишите, кто вы: заведение, работник или поставщик. Мы получим
-              обращение в админке и свяжемся с вами.
-            </p>
-          </div>
-
-          <div class="form-card">
-            <form data-form-type="feedback">
-              <div class="form-grid">
-                <label
-                  >Имя
-                  <input name="name" type="text" placeholder="Как к вам обращаться" required />
-                </label>
-                <label
-                  >Телефон
-                  <input name="phone" type="tel" placeholder="+7 (999) 000-00-00" required />
-                </label>
-                <label
-                  >Email
-                  <input name="email" type="email" placeholder="info@gastroconnect.ru" />
-                </label>
-                <label
-                  >Роль
-                  <select name="role">
-                    <option>Заведение</option>
-                    <option>Работник</option>
-                    <option>Поставщик</option>
-                    <option>Партнёр</option>
-                  </select>
-                </label>
-                <label class="full"
-                  >Сообщение
-                  <textarea
-                    name="message"
-                    placeholder="Например: нужен повар на смены, хочу подключить поставки или протестировать кабинет"
-                    required
-                  ></textarea>
-                </label>
-              </div>
-              <input type="hidden" name="city" value="Москва и Московская область" />
-              <label class="consent-checkbox">
-                <input type="checkbox" name="personalDataConsent" value="true" required />
-                <span>Я согласен с <a href="/privacy/">Политикой конфиденциальности</a>, <a href="/terms/">Пользовательским соглашением</a> и даю <a href="/personal-data-consent/">согласие на обработку персональных данных</a>.</span>
-              </label>
-              <button class="primary" type="submit">Отправить обращение</button>
-              <p class="success" role="status"></p>
-            </form>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer" id="contacts">
-        <div class="footer-brand">
-          <span class="brand-mark" aria-hidden="true">GC</span>
-          <span class="brand-text">GastroConnect</span>
-        </div>
-        <div class="footer-links">
-          
-          <a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
-          <a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a>
-          <a href="/privacy/">Политика конфиденциальности</a>
-          <a href="/terms/">Пользовательское соглашение</a>
-          <a href="/personal-data-consent/">Согласие на обработку персональных данных</a>
-        </div>
-      </footer>
-    </div>
-    <script>
 (function () {
   const SETTINGS_KEY = "gc_site_settings";
   const SETTINGS_ROW = "public_site";
@@ -594,147 +337,20 @@
   }
   function initPublicForms() {
     document.querySelectorAll("form[data-form-type]").forEach((form) => {
-      function getOrCreateErrorBadge(input) {
-        const parent = input.closest("label") || input.parentElement;
-        let badge = parent.querySelector(".field-error-msg");
-        if (!badge) {
-          badge = document.createElement("span");
-          badge.className = "field-error-msg";
-          parent.appendChild(badge);
-        }
-        return badge;
-      }
-
-      function validateField(input, isBlur = false) {
-        if (!input || input.type === "hidden" || input.type === "submit") return true;
-        const val = input.value.trim();
-        const badge = getOrCreateErrorBadge(input);
-        let isValid = true;
-        let errorMsg = "";
-
-        if (input.name === "name") {
-          if (!val) {
-            isValid = false;
-            errorMsg = "Пожалуйста, укажите имя";
-          } else if (val.length < 2) {
-            isValid = false;
-            errorMsg = "Имя должно содержать от 2 символов";
-          }
-        } else if (input.name === "phone" || input.type === "tel") {
-          const digits = val.replace(/\D/g, "");
-          if (!val) {
-            isValid = false;
-            errorMsg = "Укажите номер телефона для связи";
-          } else if (digits.length < 10) {
-            isValid = false;
-            errorMsg = "Введите корректный номер (10–11 цифр)";
-          }
-        } else if (input.name === "email" || input.type === "email") {
-          if (input.required && !val) {
-            isValid = false;
-            errorMsg = "Укажите email";
-          } else if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            isValid = false;
-            errorMsg = "Некорректный формат email";
-          }
-        } else if (input.required && !val) {
-          isValid = false;
-          errorMsg = "Обязательное поле для заполнения";
-        }
-
-        if (isValid) {
-          input.classList.remove("is-invalid");
-          if (val.length > 0) input.classList.add("is-valid");
-          else input.classList.remove("is-valid");
-          badge.classList.remove("show");
-          badge.textContent = "";
-        } else {
-          input.classList.remove("is-valid");
-          if (isBlur || input.dataset.touched === "true") {
-            input.classList.add("is-invalid");
-            badge.textContent = errorMsg;
-            badge.classList.add("show");
-          }
-        }
-        return isValid;
-      }
-
-      form.querySelectorAll("input, select, textarea").forEach((input) => {
-        if (input.type === "hidden" || input.type === "submit") return;
-
-        if (input.name === "phone" || input.type === "tel") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            let raw = input.value.replace(/\D/g, "");
-            if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-            if (raw.length > 0) {
-              let formatted = "+7 (";
-              formatted += raw.slice(0, 3);
-              if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-              if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-              if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-              input.value = formatted;
-            } else {
-              input.value = "";
-            }
-            validateField(input);
-          });
-        } else if (input.type !== "checkbox") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            validateField(input);
-          });
-        }
-
-        input.addEventListener("blur", () => {
-          input.dataset.touched = "true";
-          validateField(input, true);
-        });
-      });
-
-      const consentBox = form.querySelector('input[name="personalDataConsent"]');
-      if (consentBox) {
-        consentBox.addEventListener("change", () => {
-          const wrapper = consentBox.closest(".consent-checkbox") || consentBox.parentElement;
-          if (consentBox.checked) {
-            wrapper.classList.remove("is-invalid");
-          }
-        });
-      }
-
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = form.querySelector('button[type="submit"], input[type="submit"]');
         const box = form.querySelector(".success");
-
-        let formIsValid = true;
-        let firstInvalid = null;
-
-        form.querySelectorAll("input, select, textarea").forEach((input) => {
-          if (input.type === "hidden" || input.type === "submit" || input.type === "checkbox") return;
-          input.dataset.touched = "true";
-          const valid = validateField(input, true);
-          if (!valid) {
-            formIsValid = false;
-            if (!firstInvalid) firstInvalid = input;
-          }
-        });
-
-        const consent = form.querySelector('input[name="personalDataConsent"]');
-        if (consent && !consent.checked) {
-          formIsValid = false;
-          const wrapper = consent.closest(".consent-checkbox") || consent.parentElement;
-          wrapper.classList.add("is-invalid");
-          if (!firstInvalid) firstInvalid = consent;
-        }
-
-        if (!formIsValid) {
-          if (firstInvalid) firstInvalid.focus();
-          return;
-        }
-
         if (button) button.disabled = true;
         const rawData = Object.fromEntries(new FormData(form).entries());
+        if (rawData.personalDataConsent !== "true" && rawData.personalDataConsent !== "on") {
+          if (box) {
+            box.textContent = "\u041d\u0443\u0436\u043d\u043e \u043f\u0440\u0438\u043d\u044f\u0442\u044c \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438 \u0434\u0430\u0442\u044c \u0441\u043e\u0433\u043b\u0430\u0441\u0438\u0435 \u043d\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0443 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445.";
+            box.style.display = "block";
+          }
+          if (button) button.disabled = false;
+          return;
+        }
         rawData.personalDataConsentDate = new Date().toISOString();
         rawData.userAgent = navigator.userAgent || "";
         rawData.ipAddress = "";
@@ -746,20 +362,18 @@
             box.setAttribute("role", "status");
             box.textContent =
               form.dataset.formType === "callback"
-                ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
+                ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0437\u0432\u043e\u043d\u043e\u043a \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c\u0443 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443."
                 : form.dataset.formType === "feedback"
-                  ? "Обращение отправлено. Мы ответим по указанным контактам."
+                  ? "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e. \u041c\u044b \u043e\u0442\u0432\u0435\u0442\u0438\u043c \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u043c \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c."
                   : form.dataset.formType === "telegram_bot"
-                    ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
-                    : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
+                    ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 Telegram-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f."
+                    : "\u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0438 \u0432\u0430\u0448\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u0438 \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
           }
         } catch {
-          if (box) box.textContent = "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
+          if (box) box.textContent = "\u0417\u0430\u044f\u0432\u043a\u0430 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0430 \u0432 \u044d\u0442\u043e\u043c \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435. \u0415\u0441\u043b\u0438 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u0438\u043b\u0438 \u0431\u0430\u0437\u0430 \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b, \u043f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0443 \u043f\u043e\u0437\u0436\u0435.";
         } finally {
           if (box) box.style.display = "block";
           form.reset();
-          form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
-          form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
           if (button) button.disabled = false;
         }
       });
@@ -807,120 +421,6 @@
       return digits ? `+${digits}` : "";
     }
 
-    function getOrCreateAuthBadge(input) {
-      const parent = input.closest("label") || input.parentElement;
-      let badge = parent.querySelector(".field-error-msg");
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className = "field-error-msg";
-        badge.setAttribute("role", "alert");
-        badge.setAttribute("aria-live", "polite");
-        parent.appendChild(badge);
-      }
-      return badge;
-    }
-
-    function formatAuthPhone(val) {
-      let raw = String(val || "").replace(/\D/g, "");
-      if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-      if (raw.length === 0) return "";
-      let formatted = "+7 (";
-      formatted += raw.slice(0, 3);
-      if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-      if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-      if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-      return formatted;
-    }
-
-    function validateAuthEmail(isBlur = false) {
-      if (!emailInput || (emailField && emailField.hidden)) {
-        if (emailInput) {
-          emailInput.classList.remove("is-invalid", "is-valid");
-          const b = getOrCreateAuthBadge(emailInput);
-          b.classList.remove("show");
-          b.textContent = "";
-        }
-        return true;
-      }
-      const val = emailValue();
-      const badge = getOrCreateAuthBadge(emailInput);
-      const isPhoneMethod = methodInput.value === "phone";
-      const isRequired = mode === "login" ? !isPhoneMethod : !isPhoneMethod;
-      let isValid = true;
-      let errorMsg = "";
-
-      if (!val) {
-        if (isRequired) {
-          isValid = false;
-          errorMsg = "Пожалуйста, укажите email";
-        }
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-        isValid = false;
-        errorMsg = "Некорректный формат email (например, name@mail.ru)";
-      }
-
-      if (isValid) {
-        emailInput.classList.remove("is-invalid");
-        if (val.length > 0) emailInput.classList.add("is-valid");
-        else emailInput.classList.remove("is-valid");
-        badge.classList.remove("show");
-        badge.textContent = "";
-      } else {
-        emailInput.classList.remove("is-valid");
-        if (isBlur || emailInput.dataset.touched === "true") {
-          emailInput.classList.add("is-invalid");
-          badge.textContent = errorMsg;
-          badge.classList.add("show");
-        }
-      }
-      return isValid;
-    }
-
-    function validateAuthPhone(isBlur = false) {
-      if (!phoneInput || (phoneField && phoneField.hidden)) {
-        if (phoneInput) {
-          phoneInput.classList.remove("is-invalid", "is-valid");
-          const b = getOrCreateAuthBadge(phoneInput);
-          b.classList.remove("show");
-          b.textContent = "";
-        }
-        return true;
-      }
-      const val = phoneInput.value.trim();
-      const digits = val.replace(/\D/g, "");
-      const badge = getOrCreateAuthBadge(phoneInput);
-      const isPhoneMethod = methodInput.value === "phone";
-      const isRequired = mode === "login" ? isPhoneMethod : isPhoneMethod;
-      let isValid = true;
-      let errorMsg = "";
-
-      if (!val || digits.length === 0) {
-        if (isRequired) {
-          isValid = false;
-          errorMsg = "Укажите номер телефона";
-        }
-      } else if (digits.length < 10) {
-        isValid = false;
-        errorMsg = "Введите корректный номер (10–11 цифр)";
-      }
-
-      if (isValid) {
-        phoneInput.classList.remove("is-invalid");
-        if (digits.length >= 10) phoneInput.classList.add("is-valid");
-        else phoneInput.classList.remove("is-valid");
-        badge.classList.remove("show");
-        badge.textContent = "";
-      } else {
-        phoneInput.classList.remove("is-valid");
-        if (isBlur || phoneInput.dataset.touched === "true") {
-          phoneInput.classList.add("is-invalid");
-          badge.textContent = errorMsg;
-          badge.classList.add("show");
-        }
-      }
-      return isValid;
-    }
-
     function emailValue() {
       return emailInput.value.trim().toLowerCase();
     }
@@ -959,18 +459,6 @@
       phoneInput.required = loginMode ? byPhone : methodInput.value === "phone";
       emailInput.placeholder = byPhone ? "Можно указать дополнительно" : "example@mail.ru";
       phoneInput.placeholder = byPhone ? "+7 910 000-00-00" : "Можно указать дополнительно";
-      if (emailField && emailField.hidden) {
-        emailInput.classList.remove("is-invalid", "is-valid");
-        const b = getOrCreateAuthBadge(emailInput);
-        b.classList.remove("show");
-        b.textContent = "";
-      }
-      if (phoneField && phoneField.hidden) {
-        phoneInput.classList.remove("is-invalid", "is-valid");
-        const b = getOrCreateAuthBadge(phoneInput);
-        b.classList.remove("show");
-        b.textContent = "";
-      }
       if (updateUrl) updateHistory();
     }
 
@@ -1114,30 +602,6 @@
     registerBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
-      emailInput.dataset.touched = "true";
-      phoneInput.dataset.touched = "true";
-      const emailOk = validateAuthEmail(true);
-      const phoneOk = validateAuthPhone(true);
-      if (method === "email" && !emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, укажите корректный email.";
-        return;
-      }
-      if (method === "phone" && !phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, укажите корректный номер телефона.";
-        return;
-      }
-      if (!emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, исправьте ошибки в поле email.";
-        return;
-      }
-      if (!phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, исправьте ошибки в поле телефона.";
-        return;
-      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
@@ -1204,20 +668,6 @@
     loginBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
-      emailInput.dataset.touched = "true";
-      phoneInput.dataset.touched = "true";
-      const emailOk = validateAuthEmail(true);
-      const phoneOk = validateAuthPhone(true);
-      if (method === "email" && !emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, введите корректный email.";
-        return;
-      }
-      if (method === "phone" && !phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, введите корректный номер телефона.";
-        return;
-      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
@@ -1240,25 +690,6 @@
         setBusy(false);
         message.textContent = `Вход выполнен, но профиль не открылся: ${profileError.message}. Пожалуйста, напишите в поддержку.`;
       }
-    });
-
-    emailInput?.addEventListener("input", () => {
-      emailInput.dataset.touched = "true";
-      validateAuthEmail(false);
-    });
-    emailInput?.addEventListener("blur", () => {
-      emailInput.dataset.touched = "true";
-      validateAuthEmail(true);
-    });
-
-    phoneInput?.addEventListener("input", () => {
-      phoneInput.dataset.touched = "true";
-      phoneInput.value = formatAuthPhone(phoneInput.value);
-      validateAuthPhone(false);
-    });
-    phoneInput?.addEventListener("blur", () => {
-      phoneInput.dataset.touched = "true";
-      validateAuthPhone(true);
     });
 
     showLoginBtn?.addEventListener("click", () => setMode("login"));
@@ -1316,9 +747,3 @@
   initReviewsCarousel();
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });
 })();
-</script>
-</body>
-</html>
-
-
-
