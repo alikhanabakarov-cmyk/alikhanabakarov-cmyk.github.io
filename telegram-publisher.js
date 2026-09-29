@@ -85,6 +85,18 @@ const TEMPLATES = [
     }
   },
   {
+    id: 'promo_video',
+    type: 'promo_video',
+    title: '🎬 Мульт-ролик: Шеф-Лев, Кот и GastroConnect',
+    category: 'Видео & Промо',
+    data: {
+      headline: 'СМЕНЫ В РЕСТОРАНАХ МОСКВЫ ЗА 1 КЛИК',
+      videoUrl: 'https://gastroconnect.ru/assets/videos/01-lion-sos.mp4',
+      body: `🚨 <b>В пятницу вечером запара, а повар не вышел?</b>\nХватит обзванивать чаты! На <b>gastroconnect.ru</b> проверенные повара, су-шефы, бариста и официанты Москвы выезжают на смену за 30–45 минут.\n\n💰 <b>Для сменщиков:</b> от 5 100 до 7 500 ₽ за смену, расчет сразу на карту или на руки!\n🤝 <b>Для заведений:</b> гарантия выхода с паспортом GastroPass.`,
+      tags: ['#GastroConnect', '#РаботаМосква', '#ПоварМосква', '#СменыHoReCa', '#Общепит']
+    }
+  },
+  {
     id: 'techcard_sauce',
     type: 'techcard',
     title: 'Разбор техкарты: Идеальный соус Демиглас за 4 часа',
@@ -180,20 +192,26 @@ function formatTelegramPost(rawPayload = {}) {
     const combinedSet = new Set([roleSlug, ...extraCategoryTags, ...coreTags]);
     hashtags = Array.from(combinedSet).filter(t => t && t.length > 2).slice(0, 6);
 
+    // Role & Venue formatted as: ROLE | VENUE
+    let titleLine = role;
+    if (payload.venue && !role.toLowerCase().includes(payload.venue.toLowerCase())) {
+      titleLine = `${role} | ${payload.venue}`;
+    } else if (payload.title && payload.title.includes('|')) {
+      titleLine = payload.title;
+    }
+
     const contactsHtml = contactStr 
       ? `\n📞 <b>Контакты для отклика:</b>\nЗвонки / WhatsApp / Telegram: <b>${escapeHtml(contactStr)}</b>`
       : '';
 
-    // Strict format according to channel standards
-    html = `${roleEmoji} <b>${escapeHtml(role)}</b>
+    // Strict format according to channel standards (RULE[AGENTS_md] & RULE[GEMINI_md])
+    html = `${roleEmoji} <b>${escapeHtml(titleLine)}</b>
 
 💰 <b>ЗП / Ставка:</b> <b>${escapeHtml(rate)}</b>
 📍 <b>Локация:</b> ${escapeHtml(metro)}
 ⏰ <b>График:</b> ${escapeHtml(schedule)}
 🎁 <b>Условия / Бонусы:</b> ${escapeHtml(perks)}
-${contactsHtml}
-
-${hashtags.join(' ')}`;
+${contactsHtml}`;
 
   } else if (type === 'tip') {
     const headline = payload.headline || payload.title || 'Лайфхак шеф-повара';
@@ -249,6 +267,21 @@ ${body}
 ━━━━━━━━━━━━━━━━━━━━
 💬 <b>Обсудить в чате:</b> <a href="${chatLink}">Чат сообщества GastroConnect</a>
 🌐 <b>Наш сайт:</b> <a href="${registerLink}">GastroConnect.ru</a>
+
+${hashtags.join(' ')}`;
+
+  } else if (type === 'promo_video' || type === 'video') {
+    const headline = payload.headline || 'СМЕНЫ В РЕСТОРАНАХ МОСКВЫ ЗА 1 КЛИК';
+    const body = payload.body || payload.description || '';
+    hashtags = payload.tags || ['#GastroConnect', '#РаботаМосква', '#СменыHoReCa', '#Общепит'];
+
+    html = `🎬 <b>${escapeHtml(headline)}</b>
+━━━━━━━━━━━━━━━━━━━━
+${body}
+
+━━━━━━━━━━━━━━━━━━━━
+⚡️ <b>Сайт:</b> <a href="${registerLink}">gastroconnect.ru</a>
+💬 <b>Чат:</b> <a href="${chatLink}">@gastroconnect</a>
 
 ${hashtags.join(' ')}`;
 
@@ -308,8 +341,6 @@ async function publishToTelegram(postData, botToken = null, targetChannel = null
   }
 
   try {
-    const telegramApiUrl = `https://api.telegram.org/bot${token}/sendMessage`;
-    
     // Inline keyboard for interactions
     const inline_keyboard = [];
     const registerLink = postData.registerUrl || SITE_REGISTER_URL;
@@ -334,16 +365,32 @@ async function publishToTelegram(postData, botToken = null, targetChannel = null
       htmlToSend = postData.customHtml.toWellFormed().replace(/[\uD800-\uDFFF]/g, '').replace(/\uFFFD/g, '');
     }
 
+    const videoUrl = postData.videoUrl || (postData.data && postData.data.videoUrl);
+    const isVideo = Boolean(videoUrl);
+    const telegramApiUrl = isVideo
+      ? `https://api.telegram.org/bot${token}/sendVideo`
+      : `https://api.telegram.org/bot${token}/sendMessage`;
+
+    const payloadBody = isVideo
+      ? {
+          chat_id: channel,
+          video: videoUrl,
+          caption: htmlToSend,
+          parse_mode: 'HTML',
+          reply_markup: { inline_keyboard }
+        }
+      : {
+          chat_id: channel,
+          text: htmlToSend,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+          reply_markup: { inline_keyboard }
+        };
+
     const response = await fetch(telegramApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        chat_id: channel,
-        text: htmlToSend,
-        parse_mode: 'HTML',
-        disable_web_page_preview: true,
-        reply_markup: { inline_keyboard }
-      })
+      body: JSON.stringify(payloadBody)
     });
 
     const data = await response.json();

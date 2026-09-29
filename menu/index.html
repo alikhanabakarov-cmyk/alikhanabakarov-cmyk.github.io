@@ -1,0 +1,2209 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Меню и технологические карты (ТТК) блюд и напитков — GastroConnect</title>
+  <meta
+    name="description"
+    content="Интерактивная база технологических карт (ТТК) блюд и напитков HoReCa в Москве: калькуляция себестоимости сырья (Food Cost), пошаговое приготовление, нормы СанПиН, КБЖУ и печать бланков для поваров и барменов."
+  />
+  <meta
+    name="keywords"
+    content="технологические карты блюд, ттк ресторана, меню блюд и напитков, калькуляция себестоимости блюда, food cost калькулятор, как готовить рибай, рецепты с граммовками для ресторанов, техкарты напитков бариста, gastroconnect"
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#064c3b" />
+  <link rel="canonical" href="https://gastroconnect.ru/menu/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GastroConnect" />
+  <meta property="og:title" content="Меню и технологические карты (ТТК) блюд и напитков — GastroConnect" />
+  <meta property="og:description" content="Полные технико-технологические карты (ТТК) для ресторанов, кафе и баров: граммовки брутто/нетто, расчет фудкоста, тайминги и пошаговые инструкции." />
+  <meta property="og:image" content="https://gastroconnect.ru/assets/og-gastroconnect.webp" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
+  <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="/style.css?v=1039" />
+  <style>
+    /* Styling for Tech Cards & Culinary Hub */
+    .menu-hero {
+      padding: 48px 24px 36px;
+      background: linear-gradient(135deg, rgba(6, 76, 59, 0.06) 0%, rgba(201, 154, 63, 0.08) 100%);
+      border-bottom: 1px solid rgba(201, 154, 63, 0.2);
+    }
+    .menu-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .menu-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .menu-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+    .menu-subtitle {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 780px;
+      margin: 0 0 28px;
+    }
+    .menu-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .menu-stat-box {
+      background: #ffffff;
+      border: 1px solid rgba(201, 154, 63, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 14px rgba(42, 33, 18, 0.04);
+    }
+    .menu-stat-value {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .menu-stat-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Filters & Search Toolbar */
+    .menu-toolbar {
+      background: #ffffff;
+      border: 1px solid rgba(201, 154, 63, 0.25);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(42, 33, 18, 0.06);
+      margin-bottom: 32px;
+    }
+    .menu-search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .menu-search-input {
+      flex: 1 1 300px;
+      height: 48px;
+      padding: 0 16px 0 44px;
+      border: 1.5px solid rgba(201, 154, 63, 0.35);
+      border-radius: 10px;
+      font-size: 15px;
+      background: #fffdf8 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%236b6258" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>') no-repeat 16px center;
+      transition: all 0.2s;
+    }
+    .menu-search-input:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(6, 76, 59, 0.12);
+    }
+    .menu-select-filter {
+      height: 48px;
+      padding: 0 36px 0 14px;
+      border: 1.5px solid rgba(201, 154, 63, 0.35);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      background: #fffdf8;
+      cursor: pointer;
+    }
+    .btn-create-ttk {
+      height: 48px;
+      padding: 0 22px;
+      background: var(--green);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-create-ttk:hover {
+      background: var(--green-2);
+      transform: translateY(-1px);
+    }
+
+    /* Category Buttons Strip */
+    .menu-cats-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cat-pill-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #f6ecdf;
+      color: var(--ink);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .cat-pill-btn:hover {
+      background: #ecdcc8;
+    }
+    .cat-pill-btn.active {
+      background: var(--green);
+      color: #ffffff;
+      border-color: var(--green);
+    }
+
+    /* Cards Grid */
+    .ttk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .ttk-card {
+      background: #ffffff;
+      border: 1px solid rgba(201, 154, 63, 0.22);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(42, 33, 18, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .ttk-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(42, 33, 18, 0.12);
+      border-color: var(--gold);
+    }
+    .ttk-card-visual {
+      background: #181d22;
+      position: relative;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .ttk-card-visual svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ttk-badge-foodcost {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(6, 76, 59, 0.9);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(201, 154, 63, 0.4);
+    }
+    .ttk-badge-number {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(16, 19, 18, 0.85);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(201, 154, 63, 0.3);
+    }
+    .ttk-badge-cuisine {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(16, 19, 18, 0.88);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(201, 154, 63, 0.4);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ttk-badge-cuisine:hover {
+      background: var(--green);
+      border-color: var(--gold);
+    }
+    .ttk-badge-type {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(201, 154, 63, 0.92);
+      color: #101312;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ttk-badge-type:hover {
+      background: #dfaa47;
+      transform: scale(1.03);
+    }
+    .btn-reset-filters {
+      height: 48px;
+      padding: 0 16px;
+      background: #f6ecdf;
+      color: var(--ink);
+      border: 1.5px solid rgba(201, 154, 63, 0.35);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-reset-filters:hover {
+      background: #ecdcc8;
+      border-color: var(--gold);
+    }
+    .ttk-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .ttk-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .ttk-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.35;
+      margin: 0 0 10px;
+    }
+    .ttk-card-desc {
+      font-size: 13.5px;
+      color: #4b5563;
+      line-height: 1.5;
+      margin: 0 0 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+    .ttk-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #fffbf5;
+      border: 1px solid rgba(201, 154, 63, 0.2);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+    .ttk-metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .ttk-metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .ttk-metric-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .ttk-metric-val.green {
+      color: var(--green);
+    }
+    .ttk-card-footer {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .btn-view-ttk {
+      flex: 1;
+      height: 42px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-view-ttk:hover {
+      background: var(--green-2);
+    }
+    .btn-print-quick {
+      width: 42px;
+      height: 42px;
+      background: #f6ecdf;
+      border: 1px solid rgba(201, 154, 63, 0.3);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.15s;
+    }
+    .btn-print-quick:hover {
+      background: #eedbc2;
+      border-color: var(--gold);
+    }
+
+    /* Modal / Drawer for detailed TTK */
+    .ttk-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 19, 18, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .ttk-modal-backdrop.open {
+      display: flex;
+    }
+    .ttk-modal {
+      background: #ffffff;
+      border: 1px solid var(--gold);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 920px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .ttk-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(201, 154, 63, 0.25);
+      background: #fffdf8;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .ttk-modal-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green);
+      margin: 4px 0 6px;
+    }
+    .ttk-modal-meta {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .ttk-close-btn {
+      background: #f6ecdf;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      transition: background 0.15s;
+    }
+    .ttk-close-btn:hover {
+      background: #ecdcc8;
+    }
+    /* Tab Switcher */
+    .ttk-modal-tabs {
+      display: flex;
+      gap: 10px;
+      padding: 12px 24px;
+      background: #faf5ee;
+      border-bottom: 2px solid rgba(201, 154, 63, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .ttk-tab-btn {
+      padding: 10px 18px;
+      font-size: 13.5px;
+      font-weight: 800;
+      border-radius: 8px;
+      border: 1.5px solid rgba(201, 154, 63, 0.4);
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .ttk-tab-btn:hover {
+      background: #f6ecdf;
+    }
+    .ttk-tab-btn.active {
+      background: var(--green);
+      color: #ffffff;
+      border-color: var(--green);
+      box-shadow: 0 2px 8px rgba(6, 76, 59, 0.25);
+    }
+    .btn-view-calc {
+      background: #fdfaf4;
+      border: 1px solid rgba(201, 154, 63, 0.4);
+      color: var(--ink);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+    .btn-view-calc:hover {
+      background: #f6ecdf;
+    }
+    .ttk-badge-yield {
+      background: #fef08a;
+      color: #854d0e;
+      border: 1px solid #eab308;
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .supplier-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .supplier-link-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      text-decoration: none;
+    }
+    .supplier-link-btn.supplier-equip {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .supplier-link-btn.supplier-equip:hover {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #d97706;
+    }
+    .ttk-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Scaling Portions Bar */
+    .portion-scaler-box {
+      background: #fdfaf4;
+      border: 1.5px solid rgba(201, 154, 63, 0.35);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .scaler-label {
+      font-weight: 800;
+      color: var(--green);
+      font-size: 15px;
+    }
+    .scaler-buttons {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-portion {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(201, 154, 63, 0.4);
+      background: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-portion:hover {
+      background: #f6ecdf;
+    }
+    .btn-portion.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    /* Table styling for TTK ingredients */
+    .ttk-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 28px;
+      border: 1px solid rgba(201, 154, 63, 0.25);
+      border-radius: 12px;
+    }
+    .ttk-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+    .ttk-table th {
+      background: #f6ecdf;
+      color: var(--green);
+      font-weight: 800;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(201, 154, 63, 0.3);
+    }
+    .ttk-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(201, 154, 63, 0.15);
+      color: var(--ink);
+    }
+    .ttk-table tr:last-child td {
+      border-bottom: none;
+    }
+    .ttk-table tr:hover td {
+      background: #fffbf5;
+    }
+    .ttk-table tfoot td {
+      font-weight: 800;
+      background: #faf5ee;
+      border-top: 2px solid var(--gold);
+    }
+
+    /* Steps Section & Cooking Timers */
+    .step-card {
+      background: #fffdf8;
+      border: 1px solid rgba(201, 154, 63, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-number-badge {
+      width: 32px;
+      height: 32px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .step-timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-timer-display {
+      font-family: monospace;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--green);
+      background: #f6ecdf;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .btn-step-timer {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--gold);
+      color: #101312;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.15s;
+    }
+    .btn-step-timer:hover {
+      opacity: 0.9;
+    }
+
+    /* Print-Only Viewport Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        color: #000;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Header -->
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="GastroConnect">
+        <span class="brand-mark" aria-hidden="true">GC</span>
+        <span class="brand-text">GastroConnect</span>
+      </a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="/workers/">👨‍🍳 Соискателям</a>
+        <a href="/restaurants/">🏛️ Заведениям</a>
+        <a href="/suppliers/">🚚 Поставщикам</a>
+        <a href="/menu/" style="color: var(--gold); font-weight: 800; border-bottom: 2px solid var(--gold);">📋 Меню и техкарты</a>
+        <a href="/telegram-app" style="color: #229ed9; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+          <span>📱 Telegram App</span>
+          <span style="background: #229ed9; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">NEW</span>
+        </a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn header-login" href="/auth/?mode=login">Войти</a>
+        <a class="header-cta" href="/auth/?mode=signup">Регистрация</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="menu-hero">
+        <div class="menu-hero-inner">
+          <div class="menu-kicker">
+            <span>⚡️ Профессиональный инжиниринг меню</span>
+            <span>·</span>
+            <span>Стандарты ГОСТ & ХАССП</span>
+          </div>
+          <h1 class="menu-title">
+            Технологические карты блюд и напитков HoReCa
+          </h1>
+          <p class="menu-subtitle">
+            Готовые технико-технологические карты (ТТК) для ресторанов, гастробаров, кофеен и кондитерских Москвы. Полный расчет сырья (брутто/нетто), себестоимости (Food Cost), тайминги, оборудование и пошаговые инструкции от шеф-поваров и шеф-бариста.
+          </p>
+
+          <!-- Key Metrics / Stats Row -->
+          <div class="menu-stats-row">
+            <div class="menu-stat-box">
+              <div class="menu-stat-value" id="statCardsCount">10 ТТК</div>
+              <div class="menu-stat-label">Проверенных рецептур в базе</div>
+            </div>
+            <div class="menu-stat-box">
+              <div class="menu-stat-value" id="statAvgFoodCost">23.8%</div>
+              <div class="menu-stat-label">Средний Food Cost блюд</div>
+            </div>
+            <div class="menu-stat-box">
+              <div class="menu-stat-value">от 320%</div>
+              <div class="menu-stat-label">Маржинальная наценка заведения</div>
+            </div>
+            <div class="menu-stat-box">
+              <div class="menu-stat-value">100%</div>
+              <div class="menu-stat-label">ГОСТ-совместимый бланк печати</div>
+            </div>
+          </div>
+
+          <!-- Toolbar: Search, Filters & Action -->
+          <div class="menu-toolbar">
+            <div class="menu-search-row">
+              <input
+                type="search"
+                id="menuSearch"
+                class="menu-search-input"
+                placeholder="Поиск блюда, напитка или ингредиента (лосось, римская пицца, мортаделла, фондан, борщ, палома)..."
+                aria-label="Поиск по базе ТТК"
+              />
+
+              <!-- Filter by Cuisine (По кухне) -->
+              <select id="filterCuisine" class="menu-select-filter" aria-label="Фильтр по кухне">
+                <option value="all">🌍 Все кухни мира</option>
+                <option value="italian">🇮🇹 Итальянская</option>
+                <option value="caucasian">🇬🇪 Кавказская / Грузинская</option>
+                <option value="panasian">🥢 Паназиатская / Японская</option>
+                <option value="french">🇫🇷 Французская</option>
+                <option value="russian">🇷🇺 Русская / Сибирская</option>
+                <option value="european">🇪🇺 Европейская классика</option>
+                <option value="american">🇺🇸 Американская / Гриль</option>
+                <option value="coffee_culture">☕ Кофейная культура</option>
+                <option value="mixology">🍸 Барная миксология</option>
+              </select>
+
+              <!-- Filter by Dish Type (По виду) -->
+              <select id="filterDishType" class="menu-select-filter" aria-label="Фильтр по виду блюда">
+                <option value="all">🍽️ Все виды блюд</option>
+                <option value="meat">🥩 Мясо и стейки</option>
+                <option value="seafood">🐟 Рыба и морепродукты</option>
+                <option value="poultry">🍗 Птица</option>
+                <option value="vegetarian">🥑 Овощи и вегетарианское</option>
+                <option value="soup">🥣 Супы и бульоны</option>
+                <option value="dough_baking">🍕 Паста и римская пицца</option>
+                <option value="sweet_dessert">🍰 Десерты и выпечка</option>
+                <option value="hot_drink">☕ Горячие напитки & кофе</option>
+                <option value="cold_drink">🍹 Холодные коктейли & спритцы</option>
+              </select>
+
+              <!-- Sorting (Сортировка) -->
+              <select id="filterSortBy" class="menu-select-filter" aria-label="Сортировка блюд">
+                <option value="default">⭐️ Рекомендуемые шефом</option>
+                <option value="name_asc">🔤 Название: А → Я</option>
+                <option value="name_desc">🔤 Название: Я → А</option>
+                <option value="cost_asc">💰 Себестоимость: дешевле</option>
+                <option value="cost_desc">💰 Себестоимость: дороже</option>
+                <option value="margin_desc">📈 Маржинальность (₽ прибыль)</option>
+                <option value="markup_desc">🚀 Наценка (% маржи)</option>
+                <option value="time_asc">⏱️ Время готовки: быстрые</option>
+                <option value="time_desc">⏱️ Время готовки: долгие</option>
+                <option value="foodcost_asc">📉 Food Cost %: низкий (выгодные)</option>
+                <option value="calories_asc">🔥 Калорийность: легкие (меньше ккал)</option>
+              </select>
+
+              <select id="filterStation" class="menu-select-filter" aria-label="Фильтр по станции">
+                <option value="all">Все цеха и станции</option>
+                <option value="горячий">Горячий цех</option>
+                <option value="холодный">Холодный цех</option>
+                <option value="пицца">Пицца-станция / Пекарня</option>
+                <option value="бар">Коктейльный бар</option>
+                <option value="кофей">Кофейная станция</option>
+                <option value="кондитер">Кондитерский цех</option>
+              </select>
+
+              <select id="filterMaxCost" class="menu-select-filter" aria-label="Фильтр по себестоимости">
+                <option value="">Любая себестоимость</option>
+                <option value="120">До 120 ₽ (кофе/десерты)</option>
+                <option value="250">До 250 ₽ (салаты/супы)</option>
+                <option value="500">До 500 ₽ (горячее/пицца)</option>
+                <option value="1000">До 1 000 ₽ (стейки)</option>
+              </select>
+
+              <button type="button" class="btn-reset-filters" id="btnResetFilters" title="Сбросить все фильтры">
+                <span>🔄</span>
+                <span>Сброс</span>
+              </button>
+
+              <button type="button" class="btn-create-ttk" id="btnOpenCreateModal">
+                <span>➕</span>
+                <span>Добавить свою ТТК</span>
+              </button>
+            </div>
+
+            <!-- Category Pills Navigation -->
+            <div class="menu-cats-nav" id="catsNav">
+              <button type="button" class="cat-pill-btn active" data-cat="all">Все позиции</button>
+              <button type="button" class="cat-pill-btn" data-cat="hot_dishes">🥩 Горячие блюда</button>
+              <button type="button" class="cat-pill-btn" data-cat="salads_starters">🥗 Закуски и салаты</button>
+              <button type="button" class="cat-pill-btn" data-cat="soups">🍲 Супы</button>
+              <button type="button" class="cat-pill-btn" data-cat="breakfast">🍳 Завтраки и бранчи</button>
+              <button type="button" class="cat-pill-btn" data-cat="pasta_pizza">🍕 Паста и римская пицца</button>
+              <button type="button" class="cat-pill-btn" data-cat="coffee_tea">☕ Кофейная карта & чай</button>
+              <button type="button" class="cat-pill-btn" data-cat="bar_cocktails">🍹 Авторский бар & моктейли</button>
+              <button type="button" class="cat-pill-btn" data-cat="desserts">🍰 Кондитерская & десерты</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Cards Grid Section -->
+      <section style="max-width: 1200px; margin: 0 auto; padding: 0 24px 60px;">
+        <div id="ttkCountBadge" style="font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 20px;">
+          Найдено позиций: 10
+        </div>
+        <div class="ttk-grid" id="ttkGrid">
+          <!-- Cards rendered by JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal for Detailed TTK & Cooking -->
+    <div class="ttk-modal-backdrop" id="ttkModalBackdrop">
+      <div class="ttk-modal" id="ttkModal">
+        <div class="ttk-modal-header">
+          <div>
+            <div class="ttk-modal-meta">
+              <span id="modalTtkNum" style="color: var(--gold); font-weight: 800;">ТТК-КУХ-01</span>
+              <span>·</span>
+              <span id="modalCuisine" style="background: rgba(201, 154, 63, 0.2); padding: 2px 8px; border-radius: 4px; font-weight: 700; color: var(--green);">Европейская</span>
+              <span>·</span>
+              <span id="modalDishType" style="background: #f6ecdf; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: var(--ink);">Блюдо</span>
+              <span>·</span>
+              <span id="modalStation">Горячий цех</span>
+              <span>·</span>
+              <span id="modalDifficulty">Средняя сложность</span>
+            </div>
+            <h2 class="ttk-modal-title" id="modalTitle">Название блюда</h2>
+            <div style="font-size: 14px; color: var(--muted);" id="modalPortionYield">
+              Выход: 260 г
+            </div>
+          </div>
+          <button type="button" class="ttk-close-btn" id="modalCloseBtn" aria-label="Закрыть">✕</button>
+        </div>
+
+        <!-- Tab Switcher between Chef Kitchen Card (PDF Standard) and Full GOST Calculation -->
+        <div class="ttk-modal-tabs">
+          <button type="button" id="tabChefCardBtn" class="ttk-tab-btn active" onclick="window.gcSwitchModalTab('chef')">
+            <span>🔪</span>
+            <span>Цеховая станционная карта (Формат PDF / Стандарт кухни)</span>
+          </button>
+          <button type="button" id="tabFullCalcBtn" class="ttk-tab-btn" onclick="window.gcSwitchModalTab('calc')">
+            <span>📊</span>
+            <span>Бухгалтерская калькуляция (ХАССП, ГОСТ, КБЖУ, Себестоимость)</span>
+          </button>
+        </div>
+
+        <div class="ttk-modal-body">
+          <!-- 1. CHEF STATION CARD (EXACT PDF FORMAT) -->
+          <div id="chefCardTabContent">
+            <div style="background: #ffffff; border: 2.5px solid #000000; border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+              <!-- Top bar with dish title -->
+              <div style="background: #ffffff; padding: 14px 20px; border-bottom: 2.5px solid #000000; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <h2 id="chefDishTitle" style="margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; color: #000000; letter-spacing: 0.5px;">
+                  РОЛЛ С КРЕВЕТКОЙ
+                </h2>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <span id="chefStationBadge" style="background: #000000; color: #ffffff; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">
+                    СУШИ-СТАНЦИЯ
+                  </span>
+                  <span id="chefTtkNumber" style="border: 1.5px solid #000000; color: #000000; font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">
+                    ТТК-МАКИ-01
+                  </span>
+                </div>
+              </div>
+
+              <!-- 2 Columns like in the user's PDF -->
+              <div style="display: grid; grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr); background: #ffffff;">
+                <!-- Left column: Table of ingredients -->
+                <div style="border-right: 2.5px solid #000000; display: flex; flex-direction: column; justify-content: space-between;">
+                  <table style="width: 100%; border-collapse: collapse; font-family: 'Arial', sans-serif;">
+                    <thead>
+                      <tr style="background: #ffffff; border-bottom: 2px solid #000000;">
+                        <th style="padding: 10px 14px; text-align: left; font-size: 13px; font-weight: 900; color: #000000; border-right: 2px solid #000000; text-transform: lowercase;">
+                          наименование
+                        </th>
+                        <th style="padding: 10px 14px; text-align: right; font-size: 13px; font-weight: 900; color: #000000; text-transform: lowercase; width: 105px;">
+                          кол.
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="chefIngredientsBody">
+                      <!-- Injected rows -->
+                    </tbody>
+                  </table>
+
+                  <!-- Yellow bottom row: ВЫХОД ГП -->
+                  <div id="chefYieldBar" style="background: #facc15; border-top: 2.5px solid #000000; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 16px; font-weight: 900; color: #000000;">
+                    <span>ВЫХОД ГП</span>
+                    <span id="chefYieldVal" style="font-size: 18px;">95гр</span>
+                  </div>
+                </div>
+
+                <!-- Right column: Cut / Plated Photo -->
+                <div id="chefPhotoBox" style="background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 16px; min-height: 220px;">
+                  <!-- Injected SVG / photo -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Numbered Technological Process (like in PDF) -->
+            <div style="background: #ffffff; border: 2.5px solid #000000; border-radius: 8px; padding: 20px 24px; margin-bottom: 20px;">
+              <h3 style="margin: 0 0 14px; font-size: 16px; font-weight: 900; color: #000000; text-transform: uppercase; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 8px;">
+                Технологический процесс приготовления:
+              </h3>
+              <ol id="chefStepsOrderedList" style="margin: 0; padding-left: 24px; font-size: 15px; line-height: 1.75; color: #0f172a; font-style: italic;">
+                <!-- Steps injected -->
+              </ol>
+            </div>
+
+            <!-- Delivery standard box in Chef Card -->
+            <div style="background: #f0fdf4; border: 2.5px solid #16a34a; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px;">
+              <h3 style="margin: 0 0 8px; font-size: 15px; font-weight: 900; color: #166534; text-transform: uppercase; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <span>📦 Регламент сборки и упаковки на доставку (Takeaway / Курьер):</span>
+                <a id="chefDeliverySupplierLink" href="https://klenmarket.ru/search/?q=упаковка+для+доставки" target="_blank" rel="noopener" class="supplier-link-btn supplier-equip" title="Заказать сертифицированную эко-упаковку у поставщика в РФ">
+                  🛒 Поставщик эко-упаковки в РФ ↗
+                </a>
+              </h3>
+              <p id="chefDeliveryText" style="margin: 0; font-size: 14px; line-height: 1.6; color: #14532d; font-weight: 600;"></p>
+            </div>
+
+            <!-- Action buttons for Chef Card -->
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+              <button type="button" class="btn primary" id="btnPrintChefPdfCard" style="display: inline-flex; align-items: center; gap: 8px; background: #000000; color: #ffffff; font-weight: 800; padding: 12px 20px; border-radius: 8px; cursor: pointer;">
+                <span>🖨️</span>
+                <span>Печать цеховой карты (А5 / Для ламинации)</span>
+              </button>
+              <button type="button" class="btn" id="btnCopyChefCardText" style="display: inline-flex; align-items: center; gap: 8px; background: #f8fafc; border: 1.5px solid #cbd5e1; font-weight: 800; padding: 12px 18px; border-radius: 8px; cursor: pointer;">
+                <span>📋</span>
+                <span>Скопировать ТТК для повара</span>
+              </button>
+              <button type="button" class="btn" onclick="window.gcSwitchModalTab('calc')" style="display: inline-flex; align-items: center; gap: 8px; background: #fffdf8; border: 1.5px solid var(--gold); font-weight: 800; padding: 12px 18px; border-radius: 8px; cursor: pointer; color: var(--green);">
+                <span>📊</span>
+                <span>Перейти к полной калькуляции и ХАССП →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. FULL GOST CALCULATION & HACCP -->
+          <div id="fullCalcTabContent" style="display: none;">
+          <!-- Visual & Summary banner -->
+          <div style="display: grid; grid-template-columns: minmax(280px, 340px) 1fr; gap: 24px; margin-bottom: 24px;">
+            <div id="modalVisual" style="background: #181d22; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 220px; border: 1px solid rgba(201, 154, 63, 0.3);">
+              <!-- Svg will be injected here -->
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <p id="modalDesc" style="font-size: 15px; line-height: 1.6; color: var(--ink); margin: 0 0 16px;">
+                Описание блюда
+              </p>
+              
+              <!-- Economics Block -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; background: #fffbf5; border: 1.5px solid rgba(201, 154, 63, 0.3); border-radius: 10px; padding: 14px;">
+                <div>
+                  <div style="font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase;">Себестоимость</div>
+                  <div style="font-size: 18px; font-weight: 900; color: var(--green);" id="modalCostRub">420 ₽</div>
+                </div>
+                <div>
+                  <div style="font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase;">Цена в меню</div>
+                  <div style="font-size: 18px; font-weight: 900; color: var(--ink);" id="modalMenuPrice">1 480 ₽</div>
+                </div>
+                <div>
+                  <div style="font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase;">Food Cost</div>
+                  <div style="font-size: 18px; font-weight: 900; color: var(--green);" id="modalFoodCost">28.5%</div>
+                </div>
+                <div>
+                  <div style="font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase;">Маржа с порции</div>
+                  <div style="font-size: 18px; font-weight: 900; color: var(--gold);" id="modalMargin">1 060 ₽</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portions Scaler Box -->
+          <div class="portion-scaler-box">
+            <div>
+              <div class="scaler-label">⚖️ Масштабирование раскладки ингредиентов:</div>
+              <div style="font-size: 12px; color: var(--muted);">Автоматический пересчет брутто/нетто и себестоимости под размер заказа или заготовки:</div>
+            </div>
+            <div class="scaler-buttons" id="scalerBtnGroup">
+              <button type="button" class="btn-portion active" data-scale="1">1 порция</button>
+              <button type="button" class="btn-portion" data-scale="3">3 порции</button>
+              <button type="button" class="btn-portion" data-scale="5">5 порций</button>
+              <button type="button" class="btn-portion" data-scale="10">10 порций</button>
+              <button type="button" class="btn-portion" data-scale="25">25 (Банкет)</button>
+            </div>
+          </div>
+
+          <!-- Ingredients Table -->
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--green); margin: 0 0 12px;">
+            📋 Таблица закладки сырья и калькуляция
+          </h3>
+          <div class="ttk-table-wrap">
+            <table class="ttk-table" id="modalTable">
+              <thead>
+                <tr>
+                  <th>Наименование сырья</th>
+                  <th>Брутто (г/мл)</th>
+                  <th>% отходов</th>
+                  <th>Нетто (г/мл)</th>
+                  <th>Цена за 1 кг/л</th>
+                  <th>Стоимость</th>
+                </tr>
+              </thead>
+              <tbody id="modalTableBody">
+                <!-- Dynamically filled -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>ИТОГО на порцию:</td>
+                  <td id="tfootTotalBrutto">-</td>
+                  <td>-</td>
+                  <td id="tfootTotalNetto">-</td>
+                  <td>-</td>
+                  <td id="tfootTotalCost" style="color: var(--green);">-</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- Step-by-Step Cooking Technology & Timers -->
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--green); margin: 0 0 12px;">
+            👨‍🍳 Пошаговая технология приготовления
+          </h3>
+          <div id="modalStepsList" style="margin-bottom: 28px;">
+            <!-- Steps injected by JS -->
+          </div>
+
+          <!-- Equipment & Storage Rules -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <div style="background: #fdfaf4; border: 1px solid rgba(201, 154, 63, 0.25); border-radius: 12px; padding: 16px;">
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--green); margin: 0 0 8px;">
+                🔪 Инвентарь и оборудование:
+              </h4>
+              <ul id="modalEquipmentList" style="margin: 0; padding-left: 20px; font-size: 13.5px; color: #374151; line-height: 1.6;">
+              </ul>
+            </div>
+            <div style="background: #fdfaf4; border: 1px solid rgba(201, 154, 63, 0.25); border-radius: 12px; padding: 16px;">
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--green); margin: 0 0 8px;">
+                🍽️ Посуда и подача шефа:
+              </h4>
+              <p id="modalTableware" style="margin: 0 0 10px; font-size: 13.5px; color: #374151; line-height: 1.5;"></p>
+              <h4 style="font-size: 14px; font-weight: 800; color: var(--green); margin: 0 0 4px;">
+                ❄️ Хранение по СанПиН:
+              </h4>
+              <p id="modalStorage" style="margin: 0 0 10px; font-size: 13px; color: var(--muted); line-height: 1.5;"></p>
+              <h4 style="font-size: 14px; font-weight: 800; color: #0284c7; margin: 10px 0 4px;">
+                📦 Стандарт упаковки на доставку (Takeaway / Delivery):
+              </h4>
+              <p id="modalDelivery" style="margin: 0; font-size: 13px; color: #1e293b; line-height: 1.5;"></p>
+            </div>
+          </div>
+
+          <!-- KBJU Box -->
+          <div style="background: #ffffff; border: 1px dashed rgba(201, 154, 63, 0.4); border-radius: 10px; padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; font-size: 13px;">
+            <span style="font-weight: 800; color: var(--green);">Пищевая ценность (КБЖУ на 100 г):</span>
+            <span>Калории: <strong id="kbjuCal">178 ккал</strong></span>
+            <span>Белки: <strong id="kbjuProt">18.2 г</strong></span>
+            <span>Жиры: <strong id="kbjuFat">10.4 г</strong></span>
+            <span>Углеводы: <strong id="kbjuCarb">4.1 г</strong></span>
+          </div>
+
+          <!-- Action buttons inside modal -->
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(201, 154, 63, 0.2);">
+            <button type="button" class="btn primary" id="btnPrintModalTtk" style="display: inline-flex; align-items: center; gap: 8px;">
+              <span>🖨️</span>
+              <span>Печать официального бланка ТТК (ГОСТ)</span>
+            </button>
+            <button type="button" class="btn" id="btnCopyRecipe" style="display: inline-flex; align-items: center; gap: 8px;">
+              <span>📋</span>
+              <span>Копировать для повара/бармена</span>
+            </button>
+          </div>
+          </div> <!-- /#fullCalcTabContent -->
+        </div> <!-- /.ttk-modal-body -->
+      </div>
+    </div>
+
+    <!-- Modal for Creating New Custom TTK -->
+    <div class="ttk-modal-backdrop" id="createModalBackdrop">
+      <div class="ttk-modal" style="max-width: 760px;">
+        <div class="ttk-modal-header">
+          <div>
+            <h2 class="ttk-modal-title" style="margin: 0 0 4px;">➕ Добавить технологическую карту (ТТК)</h2>
+            <div style="font-size: 13px; color: var(--muted);">Конструктор ресторанных техкарт с автоматическим расчетом фудкоста</div>
+          </div>
+          <button type="button" class="ttk-close-btn" id="closeCreateModalBtn">✕</button>
+        </div>
+        <form id="createTtkForm" class="ttk-modal-body">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Название блюда / напитка *</label>
+              <input type="text" id="newTitle" required placeholder="Например: Салат с уткой и инжиром" style="width: 100%; height: 42px; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 0 12px;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Категория *</label>
+              <select id="newCategory" required style="width: 100%; height: 42px; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 0 10px;">
+                <option value="hot_dishes">🥩 Горячие блюда</option>
+                <option value="salads_starters">🥗 Закуски и салаты</option>
+                <option value="soups">🍲 Супы</option>
+                <option value="breakfast">🍳 Завтраки</option>
+                <option value="pasta_pizza">🍕 Паста и пицца</option>
+                <option value="coffee_tea">☕ Кофе и чай</option>
+                <option value="bar_cocktails">🍹 Бар и коктейли</option>
+                <option value="desserts">🍰 Десерты</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Станция / Цех</label>
+              <input type="text" id="newStation" placeholder="Горячий цех / Бар" style="width: 100%; height: 42px; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 0 12px;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Выход порции</label>
+              <input type="text" id="newYield" placeholder="280 г / 350 мл" style="width: 100%; height: 42px; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 0 12px;" />
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Цена в меню (₽)</label>
+              <input type="number" id="newMenuPrice" placeholder="790" style="width: 100%; height: 42px; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 0 12px;" />
+            </div>
+          </div>
+
+          <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Краткое описание подачи</label>
+          <textarea id="newDesc" rows="2" placeholder="Вкусовой профиль, особенности соуса, текстура..." style="width: 100%; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 10px; margin-bottom: 20px; font-family: inherit;"></textarea>
+
+          <!-- Ingredients Dynamic List -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="font-size: 14px; font-weight: 800; color: var(--green);">Ингредиенты и раскладка сырья:</label>
+            <button type="button" class="btn" id="btnAddIngredientRow" style="padding: 4px 12px; font-size: 12px; font-weight: 700;">+ Добавить строку</button>
+          </div>
+          <div id="newIngredientsRows" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+            <!-- Rows injected by JS -->
+          </div>
+
+          <label style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">Технология приготовления (опишите пошагово)</label>
+          <textarea id="newSteps" rows="4" placeholder="1. Подготовка заготовок...&#10;2. Термообработка при t=180°C...&#10;3. Сборка соуса и сервировка..." style="width: 100%; border: 1px solid rgba(201,154,63,0.35); border-radius: 8px; padding: 10px; margin-bottom: 20px; font-family: inherit;"></textarea>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid rgba(201,154,63,0.2); padding-top: 16px;">
+            <button type="button" class="btn" id="btnCancelCreate">Отмена</button>
+            <button type="submit" class="btn primary" id="btnSubmitCreate">Сохранить карту</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hidden Printable Blank Area -->
+    <div id="printArea" class="no-screen" style="display: none;"></div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacts">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">GC</span>
+        <span class="brand-text">GastroConnect</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
+        <a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram @gastroconnect</a>
+        <a href="/privacy/">Политика конфиденциальности</a>
+        <a href="/terms/">Пользовательское соглашение</a>
+        <a href="/personal-data-consent/">Согласие на обработку персональных данных</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Tech Cards Client Script -->
+  <script src="/tech-cards-data.js"></script>
+  <script>
+    (function() {
+      let currentCards = [];
+      let activeCard = null;
+      let currentScale = 1;
+      let activeTimers = {}; // { stepNum: { intervalId, remainingSec } }
+
+      // Audio notification using Web Audio API for timer finish
+      function playTimerBeep() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, ctx.currentTime); // A5 note
+          osc.frequency.setValueAtTime(1174.66, ctx.currentTime + 0.15); // D6 note
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.6);
+        } catch (e) {
+          console.log('Audio notification fallback');
+        }
+      }
+
+      async function loadCards() {
+        try {
+          const res = await fetch('/api/tech-cards');
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.cards)) {
+            currentCards = data.cards;
+          } else if (typeof getAllTechCards === 'function') {
+            currentCards = getAllTechCards();
+          }
+        } catch (e) {
+          if (typeof getAllTechCards === 'function') {
+            currentCards = getAllTechCards();
+          }
+        }
+        renderCards(currentCards);
+        updateStats();
+      }
+
+      function updateStats() {
+        const count = currentCards.length;
+        document.getElementById('statCardsCount').textContent = count + ' ТТК';
+        if (count > 0) {
+          const avgFc = currentCards.reduce((acc, c) => acc + (c.foodCostPercent || 25), 0) / count;
+          document.getElementById('statAvgFoodCost').textContent = avgFc.toFixed(1) + '%';
+        }
+      }
+
+      let visibleLimit = 48;
+      let lastFilteredList = [];
+
+      function renderCards(list, append = false) {
+        lastFilteredList = list;
+        const grid = document.getElementById('ttkGrid');
+        const badge = document.getElementById('ttkCountBadge');
+        badge.textContent = `Найдено позиций: ${list.length}`;
+
+        if (!list || list.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 48px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed rgba(201,154,63,0.4);">
+              <div style="font-size: 32px; margin-bottom: 8px;">🍽️</div>
+              <h3 style="color: var(--green); margin: 0 0 6px;">Позиций не найдено</h3>
+              <p style="color: var(--muted); margin: 0;">Попробуйте изменить параметры поиска или сбросить фильтры.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const visibleItems = list.slice(0, visibleLimit);
+        const hasMore = list.length > visibleLimit;
+
+        const cardsHtml = visibleItems.map(c => `
+          <div class="ttk-card" data-id="${c.id}">
+            <div class="ttk-card-visual">
+              ${c.illustrationSvg || '<div style="color: var(--gold); font-size: 40px;">🍽️</div>'}
+              <span class="ttk-badge-number">${c.ttkNumber || 'ТТК'}</span>
+              <span class="ttk-badge-foodcost">FC: ${c.foodCostPercent || 25}%</span>
+              <span class="ttk-badge-cuisine" title="Фильтр по кухне" onclick="window.gcFilterByCuisine('${c.cuisine || 'all'}', event)">${c.cuisineLabel || 'Европейская'}</span>
+              <span class="ttk-badge-type" title="Фильтр по виду" onclick="window.gcFilterByType('${c.dishType || 'all'}', event)">${c.dishTypeLabel || 'Блюдо'}</span>
+            </div>
+            <div class="ttk-card-body">
+              <div class="ttk-card-meta">
+                <span>${c.categoryLabel || 'Блюдо'}</span>
+                <span>·</span>
+                <span>${c.station || 'Кухня'}</span>
+                <span>·</span>
+                <span>⏱️ ${c.prepTimeMinutes || 15} мин</span>
+              </div>
+              <h3 class="ttk-card-title">${c.title}</h3>
+              <p class="ttk-card-desc">${c.description || ''}</p>
+              
+              <div class="ttk-metrics-grid">
+                <div class="ttk-metric-item">
+                  <span class="ttk-metric-label">Себестоимость:</span>
+                  <span class="ttk-metric-val green">${c.costPriceRub} ₽</span>
+                </div>
+                <div class="ttk-metric-item">
+                  <span class="ttk-metric-label">Цена в меню:</span>
+                  <span class="ttk-metric-val">${c.menuPriceRub} ₽</span>
+                </div>
+                <div class="ttk-metric-item">
+                  <span class="ttk-metric-label">Выход ГП:</span>
+                  <span class="ttk-metric-val" style="background:#fef08a; color:#854d0e; padding:2px 7px; border-radius:4px; font-weight:900;">
+                    ${c.yieldGp || c.yieldPortion || '250 г'}
+                  </span>
+                </div>
+                <div class="ttk-metric-item">
+                  <span class="ttk-metric-label">Наценка:</span>
+                  <span class="ttk-metric-val green">+${c.markupPercent || 350}%</span>
+                </div>
+              </div>
+
+              <div class="ttk-card-footer" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn-view-ttk" onclick="window.gcOpenTtkModal('${c.id}', 'chef')" style="flex: 1; min-width: 120px;">
+                  <span>🔪</span>
+                  <span>Цеховая ТТК</span>
+                </button>
+                <button type="button" class="btn-view-calc" onclick="window.gcOpenTtkModal('${c.id}', 'calc')" style="flex: 1; min-width: 120px;">
+                  <span>📊</span>
+                  <span>Калькуляция</span>
+                </button>
+                <button type="button" class="btn-print-quick" title="Быстрая печать ТТК" onclick="window.gcPrintTtkDirect('${c.id}')">
+                  🖨️
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        let loadMoreHtml = '';
+        if (hasMore) {
+          loadMoreHtml = `
+            <div style="grid-column: 1 / -1; padding: 24px 0; text-align: center;">
+              <button type="button" class="btn primary" id="btnLoadMoreCards" style="padding: 14px 32px; font-size: 15px; font-weight: 800; border-radius: 12px; background: var(--green); color: #fff; cursor: pointer; box-shadow: 0 4px 14px rgba(6,76,59,0.25);">
+                ⚡️ Показать еще 48 позиций (показано ${visibleItems.length} из ${list.length})
+              </button>
+              <button type="button" class="btn" id="btnShowAllCards" style="margin-left: 12px; padding: 14px 24px; font-size: 14px; font-weight: 700; border-radius: 12px; background: #fffdf8; border: 1.5px solid var(--gold); color: var(--ink); cursor: pointer;">
+                Показать все ${list.length} позиций
+              </button>
+            </div>
+          `;
+        }
+
+        grid.innerHTML = cardsHtml + loadMoreHtml;
+
+        const btnMore = document.getElementById('btnLoadMoreCards');
+        if (btnMore) {
+          btnMore.addEventListener('click', () => {
+            visibleLimit += 48;
+            renderCards(lastFilteredList);
+          });
+        }
+        const btnAll = document.getElementById('btnShowAllCards');
+        if (btnAll) {
+          btnAll.addEventListener('click', () => {
+            visibleLimit = lastFilteredList.length;
+            renderCards(lastFilteredList);
+          });
+        }
+      }
+
+      // Filter & Sort handling
+      function applyFilters() {
+        visibleLimit = 48;
+        const searchVal = document.getElementById('menuSearch').value.toLowerCase().trim();
+        const cuisineVal = document.getElementById('filterCuisine').value;
+        const dishTypeVal = document.getElementById('filterDishType').value;
+        const sortByVal = document.getElementById('filterSortBy').value;
+        const stationVal = document.getElementById('filterStation').value.toLowerCase();
+        const maxCostVal = Number(document.getElementById('filterMaxCost').value);
+        const activeCatBtn = document.querySelector('.cat-pill-btn.active');
+        const catVal = activeCatBtn ? activeCatBtn.getAttribute('data-cat') : 'all';
+
+        let filtered = currentCards.filter(c => {
+          if (catVal !== 'all' && c.category !== catVal) return false;
+          if (cuisineVal !== 'all' && c.cuisine !== cuisineVal) return false;
+          if (dishTypeVal !== 'all' && c.dishType !== dishTypeVal) return false;
+          if (stationVal !== 'all' && !(c.station || '').toLowerCase().includes(stationVal)) return false;
+          if (maxCostVal > 0 && c.costPriceRub > maxCostVal) return false;
+          if (searchVal) {
+            const inTitle = c.title.toLowerCase().includes(searchVal);
+            const inDesc = (c.description || '').toLowerCase().includes(searchVal);
+            const inCuisine = (c.cuisineLabel || '').toLowerCase().includes(searchVal);
+            const inType = (c.dishTypeLabel || '').toLowerCase().includes(searchVal);
+            const inIng = (c.ingredients || []).some(i => i.name.toLowerCase().includes(searchVal));
+            if (!inTitle && !inDesc && !inCuisine && !inType && !inIng) return false;
+          }
+          return true;
+        });
+
+        // Apply sorting
+        if (sortByVal) {
+          switch (sortByVal) {
+            case 'name_asc':
+              filtered.sort((a, b) => a.title.localeCompare(b.title, 'ru'));
+              break;
+            case 'name_desc':
+              filtered.sort((a, b) => b.title.localeCompare(a.title, 'ru'));
+              break;
+            case 'cost_asc':
+              filtered.sort((a, b) => a.costPriceRub - b.costPriceRub);
+              break;
+            case 'cost_desc':
+              filtered.sort((a, b) => b.costPriceRub - a.costPriceRub);
+              break;
+            case 'margin_desc':
+              filtered.sort((a, b) => (b.marginRub || (b.menuPriceRub - b.costPriceRub)) - (a.marginRub || (a.menuPriceRub - a.costPriceRub)));
+              break;
+            case 'markup_desc':
+              filtered.sort((a, b) => (b.markupPercent || 0) - (a.markupPercent || 0));
+              break;
+            case 'time_asc':
+              filtered.sort((a, b) => (a.prepTimeMinutes || 0) - (b.prepTimeMinutes || 0));
+              break;
+            case 'time_desc':
+              filtered.sort((a, b) => (b.prepTimeMinutes || 0) - (a.prepTimeMinutes || 0));
+              break;
+            case 'foodcost_asc':
+              filtered.sort((a, b) => (a.foodCostPercent || 0) - (b.foodCostPercent || 0));
+              break;
+            case 'calories_asc':
+              filtered.sort((a, b) => {
+                const calA = a.kbjuTotal?.calories || a.kbjuPer100g?.calories || 0;
+                const calB = b.kbjuTotal?.calories || b.kbjuPer100g?.calories || 0;
+                return calA - calB;
+              });
+              break;
+          }
+        }
+
+        renderCards(filtered);
+      }
+
+      window.gcFilterByCuisine = function(cuisine, e) {
+        if (e) e.stopPropagation();
+        const sel = document.getElementById('filterCuisine');
+        if (sel) {
+          sel.value = cuisine;
+          applyFilters();
+          sel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      };
+
+      window.gcFilterByType = function(type, e) {
+        if (e) e.stopPropagation();
+        const sel = document.getElementById('filterDishType');
+        if (sel) {
+          sel.value = type;
+          applyFilters();
+          sel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      };
+
+      document.getElementById('menuSearch').addEventListener('input', applyFilters);
+      document.getElementById('filterCuisine').addEventListener('change', applyFilters);
+      document.getElementById('filterDishType').addEventListener('change', applyFilters);
+      document.getElementById('filterSortBy').addEventListener('change', applyFilters);
+      document.getElementById('filterStation').addEventListener('change', applyFilters);
+      document.getElementById('filterMaxCost').addEventListener('change', applyFilters);
+
+      document.getElementById('btnResetFilters').addEventListener('click', () => {
+        document.getElementById('menuSearch').value = '';
+        document.getElementById('filterCuisine').value = 'all';
+        document.getElementById('filterDishType').value = 'all';
+        document.getElementById('filterSortBy').value = 'default';
+        document.getElementById('filterStation').value = 'all';
+        document.getElementById('filterMaxCost').value = '';
+        document.querySelectorAll('.cat-pill-btn').forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('.cat-pill-btn[data-cat="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        applyFilters();
+      });
+
+      document.getElementById('catsNav').addEventListener('click', (e) => {
+        const btn = e.target.closest('.cat-pill-btn');
+        if (!btn) return;
+        document.querySelectorAll('.cat-pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      });
+
+      // Supplier direct link helper
+      function getSupplierUrl(itemName, category = 'food') {
+        if (!itemName) return '#';
+        const clean = encodeURIComponent(itemName.trim().replace(/[•\d\.\,\(\)]/g, ' '));
+        if (category === 'equipment' || category === 'tableware') {
+          return `https://klenmarket.ru/search/?q=${clean}`;
+        }
+        return `https://market.yandex.ru/search?text=${clean}+horeca+опт`;
+      }
+
+      // Tab switcher function
+      window.gcSwitchModalTab = function(tabName) {
+        const chefBtn = document.getElementById('tabChefCardBtn');
+        const calcBtn = document.getElementById('tabFullCalcBtn');
+        const chefContent = document.getElementById('chefCardTabContent');
+        const calcContent = document.getElementById('fullCalcTabContent');
+
+        if (tabName === 'chef') {
+          if (chefBtn) chefBtn.classList.add('active');
+          if (calcBtn) calcBtn.classList.remove('active');
+          if (chefContent) chefContent.style.display = 'block';
+          if (calcContent) calcContent.style.display = 'none';
+        } else {
+          if (calcBtn) calcBtn.classList.add('active');
+          if (chefBtn) chefBtn.classList.remove('active');
+          if (calcContent) calcContent.style.display = 'block';
+          if (chefContent) chefContent.style.display = 'none';
+        }
+      };
+
+      // Chef Station Card Renderer (Matching the user's PDF kitchen standard)
+      function renderChefCard(card) {
+        if (!card) return;
+        const titleEl = document.getElementById('chefDishTitle');
+        if (titleEl) titleEl.textContent = card.title.toUpperCase();
+        const stationEl = document.getElementById('chefStationBadge');
+        if (stationEl) stationEl.textContent = (card.station || 'КУХНЯ').toUpperCase();
+        const ttkNumEl = document.getElementById('chefTtkNumber');
+        if (ttkNumEl) ttkNumEl.textContent = card.ttkNumber || 'ТТК';
+
+        // Ingredients Table
+        const tbody = document.getElementById('chefIngredientsBody');
+        if (tbody) {
+          const rows = (card.ingredients || []).map(ing => {
+            const qtyText = ing.quantity || (ing.netto ? `${ing.netto}гр` : (ing.brutto ? `${ing.brutto}гр` : 'по ТТК'));
+            const supUrl = getSupplierUrl(ing.name, 'food');
+            return `
+              <tr style="border-bottom: 1.5px solid #000000;">
+                <td style="padding: 10px 14px; font-size: 14px; font-weight: 700; color: #000000; border-right: 2px solid #000000; background: #ffffff;">
+                  <span>${ing.name}</span>
+                  <a href="${supUrl}" target="_blank" rel="noopener" class="supplier-link-btn" title="Найти оптового поставщика сырья (Яндекс Маркет B2B / HoReCa)">
+                    🔗 Поставщик ↗
+                  </a>
+                </td>
+                <td style="padding: 10px 14px; font-size: 14px; font-weight: 800; color: #000000; text-align: right; background: #ffffff; white-space: nowrap;">
+                  ${qtyText}
+                </td>
+              </tr>
+            `;
+          }).join('');
+          tbody.innerHTML = rows;
+        }
+
+        // Yield GP bar
+        const yieldVal = card.yieldGp || card.yieldPortion || '250 гр';
+        const yieldEl = document.getElementById('chefYieldVal');
+        if (yieldEl) yieldEl.textContent = yieldVal;
+
+        // Visual slice
+        const photoEl = document.getElementById('chefPhotoBox');
+        if (photoEl) {
+          photoEl.innerHTML = card.illustrationSvg || '<div style="font-size: 48px;">🍣</div>';
+        }
+
+        // Numbered Technological Process (7 steps)
+        const ol = document.getElementById('chefStepsOrderedList');
+        if (ol) {
+          if (card.steps && card.steps.length > 0) {
+            ol.innerHTML = card.steps.map(s => `
+              <li style="margin-bottom: 8px;">
+                <strong style="font-style: normal; color: #000000;">${s.title ? s.title + ': ' : ''}</strong>${s.text}
+              </li>
+            `).join('');
+          } else {
+            ol.innerHTML = `
+              <li style="margin-bottom: 8px;"><strong>1. Подготовка:</strong> Подготовить и взвесить ингредиенты согласно рецептурной карте.</li>
+              <li style="margin-bottom: 8px;"><strong>2. Приготовление:</strong> Выполнить тепловую или механическую обработку согласно технологии.</li>
+              <li style="margin-bottom: 8px;"><strong>3. Отдача:</strong> Оформить подачу и выдать на раздачу строго в указанном весе (${yieldVal}).</li>
+            `;
+          }
+        }
+      }
+
+      // Detailed Modal Logic
+      window.gcOpenTtkModal = function(cardId, initialTab = 'chef') {
+        const card = currentCards.find(c => c.id === cardId);
+        if (!card) return;
+        activeCard = card;
+        currentScale = 1;
+
+        // Reset scale buttons
+        document.querySelectorAll('#scalerBtnGroup .btn-portion').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-scale') === '1');
+        });
+
+        document.getElementById('modalTtkNum').textContent = card.ttkNumber || 'ТТК';
+        const cuisineEl = document.getElementById('modalCuisine');
+        if (cuisineEl) cuisineEl.textContent = card.cuisineLabel || 'Европейская';
+        const dishTypeEl = document.getElementById('modalDishType');
+        if (dishTypeEl) dishTypeEl.textContent = card.dishTypeLabel || 'Блюдо';
+        document.getElementById('modalStation').textContent = card.station || 'Кухня';
+        document.getElementById('modalDifficulty').textContent = card.difficultyLabel || 'Стандарт';
+        document.getElementById('modalTitle').textContent = card.title;
+        document.getElementById('modalPortionYield').textContent = `Выход блюда: ${card.yieldGp || card.yieldPortion || '250 г'}`;
+        document.getElementById('modalVisual').innerHTML = card.illustrationSvg || '<div style="color: var(--gold); font-size: 50px;">🍽️</div>';
+        document.getElementById('modalDesc').textContent = card.description || '';
+
+        // Tableware with supplier link
+        const tw = card.tableware || 'Стандартная ресторанная подача';
+        const twEl = document.getElementById('modalTableware');
+        if (twEl) {
+          twEl.innerHTML = `
+            <span>${tw}</span>
+            <a href="${getSupplierUrl(tw, 'tableware')}" target="_blank" rel="noopener" class="supplier-link-btn supplier-equip" title="Заказать ресторанную посуду у поставщика (Клён / Торговый Дизайн)">
+              🍽️ Поставщик посуды ↗
+            </a>
+          `;
+        }
+
+        document.getElementById('modalStorage').textContent = card.storageRules || 'Хранение сырья по нормам СанПиН.';
+
+        // Delivery standard with supplier link
+        const delivText = card.deliveryPackaging || 'Крафтовый ланчбокс с биоламинацией DoEco. Соусы в отдельных соусниках 30-50 мл. Доставка в термосумке при t=+60°C (для горячего) или +14°C (для суши). Срок доставки — до 45 минут.';
+        const delivEl = document.getElementById('modalDelivery');
+        if (delivEl) {
+          delivEl.innerHTML = `
+            <span>${delivText}</span>
+            <a href="https://klenmarket.ru/search/?q=упаковка+для+доставки" target="_blank" rel="noopener" class="supplier-link-btn supplier-equip" style="margin-left: 6px;" title="Купить сертифицированную упаковку для доставки в РФ">
+              🛒 Поставщик упаковки в РФ ↗
+            </a>
+          `;
+        }
+        const chefDelivTextEl = document.getElementById('chefDeliveryText');
+        if (chefDelivTextEl) chefDelivTextEl.textContent = delivText;
+
+        // KBJU
+        const kb = card.kbjuPer100g || { calories: 150, proteins: 10, fats: 8, carbs: 12 };
+        document.getElementById('kbjuCal').textContent = `${kb.calories} ккал`;
+        document.getElementById('kbjuProt').textContent = `${kb.proteins} г`;
+        document.getElementById('kbjuFat').textContent = `${kb.fats} г`;
+        document.getElementById('kbjuCarb').textContent = `${kb.carbs} г`;
+
+        // Equipment with direct supplier links
+        const eqList = document.getElementById('modalEquipmentList');
+        if (eqList) {
+          eqList.innerHTML = (card.equipment || ['Стандартное кухонное оборудование']).map(e => `
+            <li style="margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <span>• ${e}</span>
+              <a href="${getSupplierUrl(e, 'equipment')}" target="_blank" rel="noopener" class="supplier-link-btn supplier-equip" title="Купить у проверенного поставщика оборудования (Клён / Торговый Дизайн)">
+                🛒 Поставщик оборудования ↗
+              </a>
+            </li>
+          `).join('');
+        }
+
+        renderChefCard(card);
+        renderModalIngredients(1);
+        renderModalSteps(card.steps || []);
+
+        window.gcSwitchModalTab(initialTab);
+
+        document.getElementById('ttkModalBackdrop').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      };
+
+      function renderModalIngredients(scale) {
+        if (!activeCard) return;
+        const tbody = document.getElementById('modalTableBody');
+        let totalBrutto = 0;
+        let totalNetto = 0;
+        let totalCost = 0;
+
+        const rowsHtml = (activeCard.ingredients || []).map(ing => {
+          const scaledBrutto = Math.round((ing.brutto * scale) * 10) / 10;
+          const scaledNetto = Math.round((ing.netto * scale) * 10) / 10;
+          const scaledCost = Math.round((ing.costRub * scale) * 100) / 100;
+          totalBrutto += scaledBrutto;
+          totalNetto += scaledNetto;
+          totalCost += scaledCost;
+          const supUrl = getSupplierUrl(ing.name, 'food');
+
+          return `
+            <tr>
+              <td>
+                <strong>${ing.name}</strong>
+                <a href="${supUrl}" target="_blank" rel="noopener" class="supplier-link-btn" title="Купить у оптового поставщика сырья">
+                  🔗 Поставщик ↗
+                </a>
+              </td>
+              <td>${scaledBrutto} г/мл</td>
+              <td>${ing.wastePercent || 0}%</td>
+              <td>${scaledNetto} г/мл</td>
+              <td>${ing.pricePerKg || 0} ₽/кг</td>
+              <td><strong>${scaledCost.toFixed(2)} ₽</strong></td>
+            </tr>
+          `;
+        }).join('');
+
+        tbody.innerHTML = rowsHtml;
+        document.getElementById('tfootTotalBrutto').textContent = `${Math.round(totalBrutto)} г`;
+        document.getElementById('tfootTotalNetto').textContent = `${Math.round(totalNetto)} г`;
+        document.getElementById('tfootTotalCost').textContent = `${Math.round(totalCost)} ₽`;
+
+        // Update economic metrics
+        document.getElementById('modalCostRub').textContent = `${Math.round(totalCost)} ₽`;
+        const scaledMenuPrice = Math.round(activeCard.menuPriceRub * scale);
+        document.getElementById('modalMenuPrice').textContent = `${scaledMenuPrice} ₽`;
+        const fc = scaledMenuPrice > 0 ? ((totalCost / scaledMenuPrice) * 100).toFixed(1) : 25;
+        document.getElementById('modalFoodCost').textContent = `${fc}%`;
+        document.getElementById('modalMargin').textContent = `${scaledMenuPrice - Math.round(totalCost)} ₽`;
+      }
+
+      function renderModalSteps(steps) {
+        const stepsWrap = document.getElementById('modalStepsList');
+        if (!steps || steps.length === 0) {
+          stepsWrap.innerHTML = '<p style="color: var(--muted);">Инструкции шефа будут добавлены в ближайшем обновлении.</p>';
+          return;
+        }
+
+        stepsWrap.innerHTML = steps.map(s => `
+          <div class="step-card" id="stepCard_${s.stepNum}">
+            <div class="step-number-badge">${s.stepNum}</div>
+            <div class="step-content">
+              <div class="step-header">
+                <span class="step-title">${s.title}</span>
+                <div class="step-timer-wrap">
+                  <span class="step-timer-display" id="timerDisplay_${s.stepNum}">⏱️ ${s.timeText || '00:00'}</span>
+                  ${s.seconds ? `
+                    <button type="button" class="btn-step-timer" onclick="window.gcStartStepTimer(${s.stepNum}, ${s.seconds})">
+                      ▶ Старт
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #374151;">${s.text}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Timer functionality
+      window.gcStartStepTimer = function(stepNum, totalSec) {
+        const display = document.getElementById(`timerDisplay_${stepNum}`);
+        if (!display) return;
+
+        // If already running, pause/reset
+        if (activeTimers[stepNum]) {
+          clearInterval(activeTimers[stepNum].intervalId);
+          delete activeTimers[stepNum];
+          display.textContent = `⏱️ Пауза`;
+          return;
+        }
+
+        let rem = totalSec;
+        function updateDisplay(s) {
+          const m = Math.floor(s / 60);
+          const sec = s % 60;
+          display.textContent = `⏱️ ${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+        updateDisplay(rem);
+
+        const id = setInterval(() => {
+          rem--;
+          if (rem <= 0) {
+            clearInterval(id);
+            delete activeTimers[stepNum];
+            display.textContent = `🔔 ГОТОВО!`;
+            display.style.background = '#22c55e';
+            display.style.color = '#fff';
+            playTimerBeep();
+          } else {
+            updateDisplay(rem);
+          }
+        }, 1000);
+
+        activeTimers[stepNum] = { intervalId: id, remainingSec: rem };
+      };
+
+      // Portion scaling click
+      document.getElementById('scalerBtnGroup').addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-portion');
+        if (!btn) return;
+        document.querySelectorAll('#scalerBtnGroup .btn-portion').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentScale = Number(btn.getAttribute('data-scale')) || 1;
+        renderModalIngredients(currentScale);
+      });
+
+      // Close modal
+      function closeModal() {
+        document.getElementById('ttkModalBackdrop').classList.remove('open');
+        document.body.style.overflow = '';
+        // Clear running timers
+        Object.keys(activeTimers).forEach(k => {
+          clearInterval(activeTimers[k].intervalId);
+        });
+        activeTimers = {};
+      }
+      document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+      document.getElementById('ttkModalBackdrop').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('ttkModalBackdrop')) closeModal();
+      });
+
+      // Printable TTK Generator (ГОСТ-совместимый)
+      function buildPrintableHtml(card) {
+        return `
+          <div style="font-family: Arial, sans-serif; color: #000; line-height: 1.4; max-width: 800px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 16px;">
+              <div>
+                <h2 style="margin: 0; font-size: 20px;">GastroConnect HoReCa Standards</h2>
+                <div style="font-size: 12px; color: #444;">Платформа ресторанных технологических стандартов</div>
+              </div>
+              <div style="text-align: right; font-size: 12px;">
+                <div><strong>УТВЕРЖДАЮ:</strong></div>
+                <div>Шеф-повар / Управляющий</div>
+                <div style="margin-top: 20px;">_________________ / _________________ /</div>
+                <div>"____" ________________ 2026 г.</div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+              <h1 style="margin: 0 0 4px; font-size: 22px;">ТЕХНИКО-ТЕХНОЛОГИЧЕСКАЯ КАРТА № ${card.ttkNumber || 'ТТК-01'}</h1>
+              <div style="font-size: 16px; font-weight: bold;">Наименование: ${card.title}</div>
+              <div style="font-size: 13px;">Область применения: Рестораны, кафе, бары РФ (ГОСТ Р 53105-2008)</div>
+            </div>
+
+            <div style="margin-bottom: 14px; font-size: 13px;">
+              <strong>Выход готовой продукции:</strong> ${card.yieldPortion || '250 г'}<br/>
+              <strong>Станция / Цех:</strong> ${card.station || 'Горячий цех'}<br/>
+              <strong>Время отдачи блюда:</strong> ${card.prepTimeMinutes || 15} мин.
+            </div>
+
+            <h3 style="font-size: 14px; margin: 16px 0 6px; text-transform: uppercase;">1. Требования к сырью и таблица закладки</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;" border="1">
+              <thead>
+                <tr style="background: #f0f0f0;">
+                  <th style="padding: 6px;">Наименование сырья / полуфабриката</th>
+                  <th style="padding: 6px;">Брутто (г/мл)</th>
+                  <th style="padding: 6px;">% потерь</th>
+                  <th style="padding: 6px;">Нетто (г/мл)</th>
+                  <th style="padding: 6px;">Цена за кг</th>
+                  <th style="padding: 6px;">Себестоимость</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(card.ingredients || []).map(i => `
+                  <tr>
+                    <td style="padding: 5px;">${i.name}</td>
+                    <td style="padding: 5px; text-align: center;">${i.brutto}</td>
+                    <td style="padding: 5px; text-align: center;">${i.wastePercent || 0}%</td>
+                    <td style="padding: 5px; text-align: center;">${i.netto}</td>
+                    <td style="padding: 5px; text-align: right;">${i.pricePerKg} ₽</td>
+                    <td style="padding: 5px; text-align: right;">${(i.costRub || 0).toFixed(2)} ₽</td>
+                  </tr>
+                `).join('')}
+                <tr style="font-weight: bold; background: #fafafa;">
+                  <td style="padding: 6px;">ИТОГО НА 1 ПОРЦИЮ:</td>
+                  <td style="padding: 6px; text-align: center;">${(card.ingredients || []).reduce((s, x) => s + (x.brutto || 0), 0)}</td>
+                  <td>-</td>
+                  <td style="padding: 6px; text-align: center;">${(card.ingredients || []).reduce((s, x) => s + (x.netto || 0), 0)}</td>
+                  <td>-</td>
+                  <td style="padding: 6px; text-align: right;">${card.costPriceRub} ₽</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="font-size: 14px; margin: 16px 0 6px; text-transform: uppercase;">2. Технологический процесс приготовления</h3>
+            <div style="font-size: 12px; margin-bottom: 20px;">
+              ${(card.steps || []).map(s => `
+                <div style="margin-bottom: 8px;">
+                  <strong>${s.stepNum}. ${s.title} (${s.timeText || ''}):</strong> ${s.text}
+                </div>
+              `).join('')}
+            </div>
+
+            <h3 style="font-size: 14px; margin: 16px 0 6px; text-transform: uppercase;">3. Требования к оформлению, подаче и реализации</h3>
+            <div style="font-size: 12px; margin-bottom: 20px;">
+              <p><strong>Посуда и подача:</strong> ${card.tableware || 'Стандартная подача'}</p>
+              <p><strong>Условия и сроки хранения (СанПиН):</strong> ${card.storageRules || 'Хранение по СанПиН'}</p>
+            </div>
+
+            <h3 style="font-size: 14px; margin: 16px 0 6px; text-transform: uppercase;">4. Показатели пищевой ценности (КБЖУ на 100 г)</h3>
+            <div style="font-size: 12px; margin-bottom: 30px;">
+              Калорийность: ${card.kbjuPer100g ? card.kbjuPer100g.calories : 180} ккал | 
+              Белки: ${card.kbjuPer100g ? card.kbjuPer100g.proteins : 12} г | 
+              Жиры: ${card.kbjuPer100g ? card.kbjuPer100g.fats : 10} г | 
+              Углеводы: ${card.kbjuPer100g ? card.kbjuPer100g.carbs : 15} г
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 12px; border-top: 1px solid #000; padding-top: 16px;">
+              <div>Разработчик ТТК: Бренд-шеф GastroConnect</div>
+              <div>Бухгалтер-калькулятор: _________________ / Калькуляция верна /</div>
+            </div>
+          </div>
+        `;
+      }
+
+      window.gcPrintTtkDirect = function(cardId) {
+        const card = currentCards.find(c => c.id === cardId);
+        if (!card) return;
+        const area = document.getElementById('printArea');
+        area.innerHTML = buildPrintableHtml(card);
+        window.print();
+      };
+
+      document.getElementById('btnPrintModalTtk').addEventListener('click', () => {
+        if (!activeCard) return;
+        const area = document.getElementById('printArea');
+        area.innerHTML = buildPrintableHtml(activeCard);
+        window.print();
+      });
+
+      document.getElementById('btnCopyRecipe').addEventListener('click', () => {
+        if (!activeCard) return;
+        const text = `📋 ${activeCard.title} (${activeCard.ttkNumber})\n` +
+          `Выход: ${activeCard.yieldPortion}\n` +
+          `Себестоимость: ${activeCard.costPriceRub} ₽ | Меню: ${activeCard.menuPriceRub} ₽\n\n` +
+          `ИНГРЕДИЕНТЫ:\n` +
+          (activeCard.ingredients || []).map(i => `• ${i.name}: брутто ${i.brutto}г, нетто ${i.netto}г`).join('\n') +
+          `\n\nТЕХНОЛОГИЯ:\n` +
+          (activeCard.steps || []).map(s => `${s.stepNum}. ${s.title}: ${s.text}`).join('\n\n');
+        
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.getElementById('btnCopyRecipe');
+          btn.innerHTML = '<span>✅</span><span>Скопировано в буфер!</span>';
+          setTimeout(() => {
+            btn.innerHTML = '<span>📋</span><span>Копировать для повара/бармена</span>';
+          }, 2000);
+        });
+      });
+
+      // Chef PDF Printable Card Generator
+      function buildChefPrintableHtml(card) {
+        const yieldVal = card.yieldGp || card.yieldPortion || '250 гр';
+        const rows = (card.ingredients || []).map(i => {
+          const q = i.quantity || (i.netto ? `${i.netto}гр` : `${i.brutto}гр`);
+          return `
+            <tr style="border-bottom: 2px solid #000;">
+              <td style="padding: 10px 14px; font-size: 15px; font-weight: bold; border-right: 2px solid #000;">${i.name}</td>
+              <td style="padding: 10px 14px; font-size: 15px; font-weight: 900; text-align: right;">${q}</td>
+            </tr>
+          `;
+        }).join('');
+
+        const steps = (card.steps || []).map(s => `
+          <li style="margin-bottom: 8px;"><strong>${s.title}:</strong> ${s.text}</li>
+        `).join('');
+
+        return `
+          <div style="font-family: Arial, sans-serif; color: #000; max-width: 800px; margin: 0 auto; padding: 20px;">
+            <div style="border: 3px solid #000; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+              <div style="padding: 14px 20px; border-bottom: 3px solid #000; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+                <h1 style="margin: 0; font-size: 26px; font-weight: 900; text-transform: uppercase;">${card.title}</h1>
+                <span style="font-size: 14px; font-weight: bold; border: 2px solid #000; padding: 4px 10px; border-radius: 4px;">
+                  ${card.ttkNumber || 'ТТК'} · ${(card.station || 'КУХНЯ').toUpperCase()}
+                </span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr;">
+                <div style="border-right: 3px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                      <tr style="border-bottom: 2px solid #000; background: #f8fafc;">
+                        <th style="padding: 10px 14px; text-align: left; font-size: 14px; border-right: 2px solid #000;">наименование</th>
+                        <th style="padding: 10px 14px; text-align: right; font-size: 14px;">кол.</th>
+                      </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                  </table>
+                  <div style="background: #facc15; border-top: 3px solid #000; padding: 12px 16px; display: flex; justify-content: space-between; font-weight: 900; font-size: 18px;">
+                    <span>ВЫХОД ГП</span>
+                    <span>${yieldVal}</span>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+                  ${card.illustrationSvg || ''}
+                </div>
+              </div>
+            </div>
+            <div style="border: 2.5px solid #000; border-radius: 8px; padding: 20px; background: #fff;">
+              <h3 style="margin: 0 0 12px; font-size: 16px; font-weight: 900; text-transform: uppercase; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 6px;">
+                Технологический процесс приготовления:
+              </h3>
+              <ol style="margin: 0; padding-left: 24px; font-size: 15px; line-height: 1.8; font-style: italic;">
+                ${steps}
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+
+      const btnPrintChef = document.getElementById('btnPrintChefPdfCard');
+      if (btnPrintChef) {
+        btnPrintChef.addEventListener('click', () => {
+          if (!activeCard) return;
+          const area = document.getElementById('printArea');
+          area.innerHTML = buildChefPrintableHtml(activeCard);
+          window.print();
+        });
+      }
+
+      const btnCopyChef = document.getElementById('btnCopyChefCardText');
+      if (btnCopyChef) {
+        btnCopyChef.addEventListener('click', () => {
+          if (!activeCard) return;
+          const yieldVal = activeCard.yieldGp || activeCard.yieldPortion || '250 гр';
+          const text = `🍕 ${activeCard.title.toUpperCase()}\n` +
+            `ВЫХОД ГП: ${yieldVal}\n` +
+            `СТАНЦИЯ: ${activeCard.station || 'КУХНЯ'}\n\n` +
+            `ИНГРЕДИЕНТЫ:\n` +
+            (activeCard.ingredients || []).map(i => {
+              const q = i.quantity || (i.netto ? `${i.netto}гр` : `${i.brutto}гр`);
+              return `• ${i.name} — ${q}`;
+            }).join('\n') +
+            `\n\nТЕХНОЛОГИЧЕСКИЙ ПРОЦЕСС:\n` +
+            (activeCard.steps || []).map(s => `${s.stepNum}. ${s.title}: ${s.text}`).join('\n');
+
+          navigator.clipboard.writeText(text).then(() => {
+            btnCopyChef.innerHTML = '<span>✅</span><span>Скопировано!</span>';
+            setTimeout(() => {
+              btnCopyChef.innerHTML = '<span>📋</span><span>Скопировать ТТК для повара</span>';
+            }, 2000);
+          });
+        });
+      }
+
+      // New Custom TTK Modal Logic
+      const createModal = document.getElementById('createModalBackdrop');
+      const rowsWrap = document.getElementById('newIngredientsRows');
+
+      function addIngRow() {
+        const row = document.createElement('div');
+        row.style.display = 'grid';
+        row.style.gridTemplateColumns = '2fr 1fr 1fr 1fr 36px';
+        row.style.gap = '8px';
+        row.style.alignItems = 'center';
+        row.innerHTML = `
+          <input type="text" placeholder="Ингредиент" class="row-ing-name" required style="height: 38px; border: 1px solid rgba(201,154,63,0.35); border-radius: 6px; padding: 0 8px; font-size: 13px;" />
+          <input type="number" placeholder="Брутто, г" class="row-ing-brutto" required style="height: 38px; border: 1px solid rgba(201,154,63,0.35); border-radius: 6px; padding: 0 8px; font-size: 13px;" />
+          <input type="number" placeholder="% отхода" class="row-ing-waste" value="0" style="height: 38px; border: 1px solid rgba(201,154,63,0.35); border-radius: 6px; padding: 0 8px; font-size: 13px;" />
+          <input type="number" placeholder="Цена/кг ₽" class="row-ing-price" required style="height: 38px; border: 1px solid rgba(201,154,63,0.35); border-radius: 6px; padding: 0 8px; font-size: 13px;" />
+          <button type="button" class="btn" style="height: 38px; padding: 0; background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; cursor: pointer;" onclick="this.parentElement.remove()">✕</button>
+        `;
+        rowsWrap.appendChild(row);
+      }
+
+      document.getElementById('btnOpenCreateModal').addEventListener('click', () => {
+        rowsWrap.innerHTML = '';
+        addIngRow();
+        addIngRow();
+        addIngRow();
+        createModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+
+      document.getElementById('closeCreateModalBtn').addEventListener('click', () => {
+        createModal.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+      document.getElementById('btnCancelCreate').addEventListener('click', () => {
+        createModal.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+
+      document.getElementById('btnAddIngredientRow').addEventListener('click', addIngRow);
+
+      document.getElementById('createTtkForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('newTitle').value.trim();
+        const category = document.getElementById('newCategory').value;
+        const station = document.getElementById('newStation').value.trim() || 'Горячий цех';
+        const yieldPortion = document.getElementById('newYield').value.trim() || '250 г';
+        const menuPriceRub = Number(document.getElementById('newMenuPrice').value) || 600;
+        const desc = document.getElementById('newDesc').value.trim();
+        const stepsRaw = document.getElementById('newSteps').value.trim();
+
+        const catLabels = {
+          hot_dishes: 'Горячие блюда',
+          salads_starters: 'Закуски и салаты',
+          soups: 'Супы',
+          breakfast: 'Завтраки и бранчи',
+          pasta_pizza: 'Паста и пицца',
+          coffee_tea: 'Кофейная карта & чай',
+          bar_cocktails: 'Авторский бар',
+          desserts: 'Кондитерская'
+        };
+
+        const rows = rowsWrap.querySelectorAll('div');
+        const ingredients = [];
+        rows.forEach(r => {
+          const name = r.querySelector('.row-ing-name').value.trim();
+          const brutto = Number(r.querySelector('.row-ing-brutto').value) || 0;
+          const wastePercent = Number(r.querySelector('.row-ing-waste').value) || 0;
+          const pricePerKg = Number(r.querySelector('.row-ing-price').value) || 0;
+          if (name) {
+            ingredients.push({ name, brutto, wastePercent, pricePerKg });
+          }
+        });
+
+        const steps = stepsRaw.split('\n').filter(s => s.trim().length > 0).map((s, idx) => ({
+          stepNum: idx + 1,
+          title: `Шаг ${idx + 1}`,
+          text: s.replace(/^\d+[\.\)]\s*/, '')
+        }));
+
+        const newCard = {
+          title,
+          category,
+          categoryLabel: catLabels[category] || 'Блюдо',
+          station,
+          yieldPortion,
+          menuPriceRub,
+          description: desc,
+          prepTimeMinutes: 15,
+          difficulty: 'medium',
+          difficultyLabel: 'Стандарт',
+          ingredients,
+          steps,
+          tableware: 'Подача на усмотрение шеф-повара',
+          storageRules: 'Хранение заготовок по нормам СанПиН.'
+        };
+
+        try {
+          const res = await fetch('/api/tech-cards', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newCard)
+          });
+          const data = await res.json();
+          if (data && data.success && data.card) {
+            currentCards.unshift(data.card);
+            renderCards(currentCards);
+            updateStats();
+            createModal.classList.remove('open');
+            document.body.style.overflow = '';
+            document.getElementById('createTtkForm').reset();
+            window.gcOpenTtkModal(data.card.id);
+          }
+        } catch (err) {
+          alert('Ошибка при сохранении техкарты: ' + err.message);
+        }
+      });
+
+      // Init on load
+      loadCards();
+    })();
+  </script>
+</body>
+</html>

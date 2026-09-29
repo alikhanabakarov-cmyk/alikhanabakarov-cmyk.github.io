@@ -214,7 +214,8 @@ async function runAutopilotCycle(reason = 'scheduled', batchCount = 2) {
   };
 
   // 1. Проверка ночного режима (с 21:00 до 08:00)
-  if (!isAllowedPublishingTime(moscow.hours) && reason.startsWith('scheduled')) {
+  const isCompensation = reason.includes('compensat') || reason.includes('manual') || reason.includes('force');
+  if (!isCompensation && !isAllowedPublishingTime(moscow.hours) && reason.startsWith('scheduled')) {
     logEntry.status = 'skipped_night_mode';
     logEntry.message = `Ночной тихий режим с 21:00 до 08:00 МСК (текущее время: ${moscow.timeStr}). Публикации спят.`;
     console.log(`[Autopilot] ${logEntry.message}`);
@@ -252,10 +253,12 @@ async function runAutopilotCycle(reason = 'scheduled', batchCount = 2) {
       return 0;
     });
 
-    // Выбираем только те смены, которые ЕЩЕ НИ РАЗУ НЕ ПУБЛИКОВАЛИСЬ (СТРОГИЙ ДЕДУП)
+    // Выбираем только те смены, которые ЕЩЕ НИ РАЗУ НЕ ПУБЛИКОВАЛИСЬ (СТРОГИЙ ДЕДУП + РАЗНООБРАЗИЕ РОЛЕЙ)
     const selectedShifts = [];
     const usedContacts = new Set();
+    const roleCounts = new Map();
 
+    // Первый проход: обеспечение разнообразия ролей (не более 2 смен одинаковой профессии)
     for (const item of sortedCandidates) {
       const titleKey = `${item.title}_${item.rate}_${item.metro}`.toLowerCase();
       const phoneMatch = String(item.contacts || '').match(/(?:(?:\+7|8)[\s(.-]*\d{3}[\s).-]*\d{3}[\s.-]*\d{2}[\s.-]*\d{2}|\b8\d{10}\b|\b\+7\d{10}\b)/);
@@ -276,12 +279,39 @@ async function runAutopilotCycle(reason = 'scheduled', batchCount = 2) {
         continue;
       }
 
+      const normRole = (item.role || item.title || '').trim().toLowerCase().slice(0, 12);
+      const currentRoleCount = roleCounts.get(normRole) || 0;
+      if (batchCount > 2 && currentRoleCount >= 2) {
+        continue;
+      }
+
       selectedShifts.push({ ...item, titleKey, cleanPhone });
       publishedIds.add(item.id);
       publishedTitleKeys.add(titleKey);
       if (cleanPhone) usedContacts.add(cleanPhone);
+      roleCounts.set(normRole, currentRoleCount + 1);
 
       if (selectedShifts.length >= batchCount) break;
+    }
+
+    // Второй проход, если еще остались свободные места в пачке
+    if (selectedShifts.length < batchCount) {
+      for (const item of sortedCandidates) {
+        const titleKey = `${item.title}_${item.rate}_${item.metro}`.toLowerCase();
+        const phoneMatch = String(item.contacts || '').match(/(?:(?:\+7|8)[\s(.-]*\d{3}[\s).-]*\d{3}[\s.-]*\d{2}[\s.-]*\d{2}|\b8\d{10}\b|\b\+7\d{10}\b)/);
+        const cleanPhone = phoneMatch ? phoneMatch[0].replace(/\D/g, '') : null;
+
+        if (publishedIds.has(item.id) || publishedTitleKeys.has(titleKey)) continue;
+        if (cleanPhone && (publishedPhones.has(cleanPhone) || usedContacts.has(cleanPhone))) continue;
+        if (!item.contacts || item.contacts === '@gastroconnect') continue;
+
+        selectedShifts.push({ ...item, titleKey, cleanPhone });
+        publishedIds.add(item.id);
+        publishedTitleKeys.add(titleKey);
+        if (cleanPhone) usedContacts.add(cleanPhone);
+
+        if (selectedShifts.length >= batchCount) break;
+      }
     }
 
     // Если нет новых непубликовавшихся постов, НЕ ДУБЛИРУЕМ старые!
@@ -476,11 +506,48 @@ function startAutopilot() {
 }
 
 /**
+ * Функция компенсации пропущенных постов
+ * Рассчитывает или принимает количество недопоставленных смен и публикует их
+ */
+async function compensateMissedPosts(requestedCount = 12) {
+  const moscow = getMoscowTime();
+  const count = Math.max(1, Math.min(parseInt(requestedCount, 10) || 12, 26));
+  console.log(`[Autopilot] ⚡️ Запуск компенсации пропущенных постов (${count} смен) в ${moscow.timeStr} МСК...`);
+  
+  const result = await runAutopilotCycle(`compensation_${count}`, count);
+  if (result.success) {
+    autopilotState.lastDateKey = moscow.dateKey;
+    autopilotState.lastTriggeredSlot = `${moscow.dateKey}_20:00`;
+    saveAutopilotState({
+      lastRunTime: autopilotState.lastRunTime,
+      lastPublishedItem: autopilotState.lastPublishedItem,
+      totalPublished: autopilotState.totalPublished,
+      lastTriggeredSlot: autopilotState.lastTriggeredSlot,
+      lastDateKey: autopilotState.lastDateKey
+    });
+  }
+  return {
+    ...result,
+    compensatedCount: result.count || 0,
+    requestedCount: count,
+    timeMsk: moscow.timeStr
+  };
+}
+
+/**
  * Получение текущего статуса автопилота для API / панели управления
  */
 function getAutopilotStatus() {
   const moscow = getMoscowTime();
   const isNight = !isAllowedPublishingTime(moscow.hours);
+
+  // Расчет пропущенных за сегодня слотов
+  const passedHours = AUTOPILOT_CONFIG.activeHours.filter(slot => {
+    const [h] = slot.split(':').map(Number);
+    return moscow.hours > h;
+  });
+  const missedSlotsCount = (savedState.lastDateKey !== moscow.dateKey) ? passedHours.length : 0;
+  const missedPostsEstimate = missedSlotsCount * AUTOPILOT_CONFIG.postsPerSlot;
 
   return {
     success: true,
@@ -493,6 +560,7 @@ function getAutopilotStatus() {
     scheduleInterval: 'Каждый час с 08:00 до 20:00 (по 2 смены за слот)',
     postsPerDay: 'Около 26–30 постов в день',
     activeSlots: AUTOPILOT_CONFIG.activeHours,
+    missedPostsEstimate,
     channel: AUTOPILOT_CONFIG.channel,
     lastRunTime: autopilotState.lastRunTime,
     lastPublishedShift: autopilotState.lastPublishedItem,
@@ -504,6 +572,7 @@ function getAutopilotStatus() {
 module.exports = {
   startAutopilot,
   runAutopilotCycle,
+  compensateMissedPosts,
   getAutopilotStatus,
   getAggregatedShiftsPool,
   AUTOPILOT_CONFIG

@@ -20,7 +20,7 @@
               Панель для заявок, изображений, логотипа и главных надписей сайта.
             </p><div class="admin-actions"><button id="exportJson" type="button">Экспорт JSON</button><button id="exportCsv" class="btn" type="button">
                 Экспорт CSV
-              </button><button id="clearData" class="btn danger" type="button">
+              </button><a class="btn" style="background: linear-gradient(135deg, #c026d3 0%, #db2777 100%); color: #fff; text-decoration: none; border: none; padding: 9px 16px; border-radius: 10px; font-weight: 750;" href="/admin/#instagramSmmStudio">📸 Instagram Studio</a><button id="clearData" class="btn danger" type="button">
                 Очистить
               </button><input
                 id="adminSearch"
@@ -28,7 +28,257 @@
                 placeholder="Поиск: имя, телефон, Telegram, город..."
               /></div></div><div class="service-hero-media service-hero-media-home" data-site-bg="admin.hero" data-bg-default="/assets/hero-home.webp" aria-hidden="true">
             <img class="poster-hero-image" src="/assets/hero-home.webp" alt="Настройки GastroConnect" loading="eager" decoding="async" fetchpriority="high" />
-          </div></section><section class="admin-panel"><div class="section-head"><h2>Настройки сайта</h2><p>Меняйте основные тексты и изображения сайта через JSON. Изменения сохраняются локально и в Supabase, если база доступна.</p></div><form id="siteSettingsForm" class="settings-form"><label class="full">JSON настроек<textarea id="siteSettingsJson" class="settings-json" rows="18" placeholder="Настройки сайта"></textarea></label><div class="cabinet-actions form-actions"><button class="btn primary" type="submit">Сохранить настройки</button><button id="resetSiteSettings" type="button">Сбросить</button><button id="refreshSiteSettingsJson" type="button">Обновить JSON</button><button id="downloadSiteSettingsJson" type="button">Скачать JSON</button></div><p id="siteSettingsMessage" class="message"></p></form></section><section class="admin-panel"><div id="adminStats" class="stats"></div><div class="table-wrap"><table id="adminTable"><thead><tr><th>Дата</th><th>Тип</th><th>Имя/Компания</th><th>Телефон</th><th>Telegram</th><th>Данные</th></tr></thead><tbody></tbody></table></div></section></main><footer class="footer" id="contacts"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></div><div class="footer-links"><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a><a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a><a href="/privacy/">Политика конфиденциальности</a><a href="/terms/">Пользовательское соглашение</a><a href="/personal-data-consent/">Согласие на обработку персональных данных</a></div></footer></div><script>
+          </div></section><section class="admin-panel" id="mediaAssetsPanel" style="margin-top: 24px;">
+  <div class="section-head">
+    <span style="font-size: 12px; font-weight: 800; background: #ecfdf5; color: #064c3b; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">📸 Быстрая загрузка медиа</span>
+    <h2>Медиа-менеджер ключевых изображений сайта и PWA</h2>
+    <p>Перетащите сгенерированные картинки в нужные слоты или нажмите «Выбрать файл». Картинка сразу сохранится на сервере и отобразится на сайте.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+    <!-- Слот 1: Депо / Белорусская -->
+    <div class="gc-asset-slot" data-target="cluster-belorusskaya.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🏢</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">м. Белорусская / Депо</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Фудмолл, кирпич, гирлянды (16:9)</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/cluster-belorusskaya.webp" onerror="this.src='/assets/hero-home.webp'" style="width: 100%; height: 100%; object-fit: cover;" alt="Депо">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 2: GastroPass 3D щит -->
+    <div class="gc-asset-slot" data-target="gastropass-badge.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🛡</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">Паспорт шефа GastroPass</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">3D золотой щит, колпак, нож (1:1)</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/gastropass-badge.webp" onerror="this.src='/assets/logo-mark.png'" style="width: 100%; height: 100%; object-fit: contain; padding: 8px;" alt="GastroPass">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 3: PWA Мокап телефона -->
+    <div class="gc-asset-slot" data-target="pwa-install-mockup.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">📱</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">PWA-приложение в руках</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Мокап смартфона со сменами</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/pwa-install-mockup.webp" onerror="this.src='/assets/hero-workers.webp'" style="width: 100%; height: 100%; object-fit: cover;" alt="PWA">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 4: Щит гарантии выплат -->
+    <div class="gc-asset-slot" data-target="guarantee-shield.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🤝</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">Гарантия честной кухни</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">3D щит, рукопожатие, вилка (1:1)</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/guarantee-shield.webp" onerror="this.src='/assets/favicon.svg'" style="width: 100%; height: 100%; object-fit: contain; padding: 12px;" alt="Гарантия">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 5: Команда ресторана -->
+    <div class="gc-asset-slot" data-target="hero-workers.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">👥</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">Команда: Шеф, Бариста, Официант</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Главный баннер раздела сотрудников</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/hero-workers.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Команда">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 6: Москва-Сити -->
+    <div class="gc-asset-slot" data-target="cluster-siti.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🏙</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">Панорамный ресторан Москва-Сити</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Ночные огни, 60 этаж (16:9)</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/cluster-siti.webp" onerror="this.src='/assets/hero-restaurants.webp'" style="width: 100%; height: 100%; object-fit: cover;" alt="Москва-Сити">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+
+    <!-- Слот 7: SOS-Смена: Огонь на кухне -->
+    <div class="gc-asset-slot" data-target="hero-sos-banner.webp" style="background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🔥</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">SOS-Смена: Огонь на кухне</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Пламя в сковороде, повар, адреналин</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #f8fafc; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <img src="/assets/hero-sos-banner.webp" onerror="this.src='/assets/hero-home.webp'" style="width: 100%; height: 100%; object-fit: cover;" alt="SOS Смена">
+      </div>
+      <input type="file" accept="image/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700;">📂 Загрузить файл</button>
+    </div>
+  </div>
+</section>
+
+<!-- GastroConnect Video Commercials & Stories Panel -->
+<section class="admin-panel" id="videoAssetsPanel" style="margin-top: 28px; border: 2px solid #064c3b; background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);">
+  <div class="section-head">
+    <span style="font-size: 12px; font-weight: 800; background: #064c3b; color: #fde047; padding: 4px 12px; border-radius: 999px; text-transform: uppercase;">🎬 Видеоролики для соцсетей (Telegram, Reels, Shorts)</span>
+    <h2>Мульт-ролики GastroConnect (для соцсетей и автопилота)</h2>
+    <p>Медиа-банк роликов для Telegram-канала <b>@gastroconnect</b>, VK Клипов и Reels. Загрузите файлы в формате <b>.MP4 / .WEBM</b> для автоматической публикации постов в соцсетях.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+    <!-- Видео 1: Шеф-Лев SOS -->
+    <div class="gc-asset-slot gc-video-slot" data-target="01-lion-sos.mp4" data-subfolder="videos" style="background: #fff; border: 2px dashed #059669; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🦁</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">1. Шеф-Лев: SOS-смена</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Запара в пятницу, клик по gastroconnect.ru</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #000; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <video src="/assets/videos/01-lion-sos.mp4" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline preload="metadata" onloadeddata="this.play()"></video>
+      </div>
+      <input type="file" accept="video/mp4,video/webm,video/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700; background: #064c3b; color: #fff;">🎬 Загрузить 01-lion-sos.mp4</button>
+    </div>
+
+    <!-- Видео 2: Кот-бариста -->
+    <div class="gc-asset-slot gc-video-slot" data-target="02-cat-phone.mp4" data-subfolder="videos" style="background: #fff; border: 2px dashed #059669; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🐱</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">2. Кот со смартфоном</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Презентация сайта gastroconnect.ru (5 000 ₽)</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #000; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <video src="/assets/videos/02-cat-phone.mp4" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline preload="metadata" onloadeddata="this.play()"></video>
+      </div>
+      <input type="file" accept="video/mp4,video/webm,video/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700; background: #064c3b; color: #fff;">🎬 Загрузить 02-cat-phone.mp4</button>
+    </div>
+
+    <!-- Видео 3: Енот и Корги -->
+    <div class="gc-asset-slot gc-video-slot" data-target="03-raccoon-payout.mp4" data-subfolder="videos" style="background: #fff; border: 2px dashed #059669; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🦝🐶</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">3. Енот и Корги: Выплата</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Деньги сразу без штрафов и задержек</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #000; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <video src="/assets/videos/03-raccoon-payout.mp4" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline preload="metadata" onloadeddata="this.play()"></video>
+      </div>
+      <input type="file" accept="video/mp4,video/webm,video/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700; background: #064c3b; color: #fff;">🎬 Загрузить 03-raccoon-payout.mp4</button>
+    </div>
+
+    <!-- Видео 4: Пэкшот финал -->
+    <div class="gc-asset-slot gc-video-slot" data-target="04-animals-packshot.mp4" data-subfolder="videos" style="background: #fff; border: 2px dashed #059669; border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
+      <div style="font-size: 28px; margin-bottom: 6px;">🎉</div>
+      <div style="font-weight: 800; font-size: 15px; color: #1e293b;">4. Финальный пэкшот</div>
+      <div style="font-size: 12px; color: #64748b; margin-bottom: 12px;">Все звери и надпись GASTROCONNECT.RU</div>
+      <div class="gc-slot-preview" style="height: 140px; background: #000; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+        <video src="/assets/videos/04-animals-packshot.mp4" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline preload="metadata" onloadeddata="this.play()"></video>
+      </div>
+      <input type="file" accept="video/mp4,video/webm,video/*" class="gc-slot-input" style="display: none;">
+      <button type="button" class="btn" style="width: 100%; justify-content: center; font-size: 13px; font-weight: 700; background: #064c3b; color: #fff;">🎬 Загрузить 04-animals-packshot.mp4</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Asset Dropzone Uploader Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const slots = document.querySelectorAll('.gc-asset-slot');
+    slots.forEach(slot => {
+      const target = slot.getAttribute('data-target');
+      const subfolder = slot.getAttribute('data-subfolder') || '';
+      const input = slot.querySelector('.gc-slot-input');
+      const btn = slot.querySelector('button');
+      const previewImg = slot.querySelector('.gc-slot-preview img');
+      const previewVideo = slot.querySelector('.gc-slot-preview video');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        input.click();
+      });
+
+      slot.addEventListener('click', () => {
+        input.click();
+      });
+
+      slot.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        slot.style.borderColor = '#064c3b';
+        slot.style.background = '#f0fdf4';
+      });
+
+      slot.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        slot.style.borderColor = '#cbd5e1';
+        slot.style.background = '#fff';
+      });
+
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        slot.style.borderColor = '#cbd5e1';
+        slot.style.background = '#fff';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          uploadFile(e.dataTransfer.files[0], target, subfolder, slot, previewImg, previewVideo);
+        }
+      });
+
+      input.addEventListener('change', () => {
+        if (input.files && input.files[0]) {
+          uploadFile(input.files[0], target, subfolder, slot, previewImg, previewVideo);
+        }
+      });
+    });
+
+    async function uploadFile(file, targetFilename, subfolder, slotEl, imgEl, videoEl) {
+      const btn = slotEl.querySelector('button');
+      const origText = btn.textContent;
+      btn.textContent = '⏳ Загрузка на сервер...';
+      btn.disabled = true;
+
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64Data = reader.result;
+        try {
+          const res = await fetch('/api/assets/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: targetFilename, base64Data, subfolder })
+          });
+          const data = await res.json();
+          if (data.success) {
+            if (imgEl) imgEl.src = data.url + '?t=' + Date.now();
+            if (videoEl) {
+              videoEl.src = data.url + '?t=' + Date.now();
+              videoEl.load();
+              videoEl.play().catch(() => {});
+            }
+            btn.textContent = '✅ Сохранено на сервере!';
+            btn.style.background = '#064c3b';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+              btn.textContent = origText;
+              btn.disabled = false;
+              btn.style.background = '';
+              btn.style.color = '';
+            }, 3000);
+          } else {
+            alert('Ошибка загрузки: ' + data.error);
+            btn.textContent = origText;
+            btn.disabled = false;
+          }
+        } catch (err) {
+          alert('Ошибка сети: ' + err.message);
+          btn.textContent = origText;
+          btn.disabled = false;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+<section class="admin-panel"><div class="section-head"><h2>Настройки сайта</h2><p>Меняйте основные тексты и изображения сайта через JSON. Изменения сохраняются локально и в Supabase, если база доступна.</p></div><form id="siteSettingsForm" class="settings-form"><label class="full">JSON настроек<textarea id="siteSettingsJson" class="settings-json" rows="18" placeholder="Настройки сайта"></textarea></label><div class="cabinet-actions form-actions"><button class="btn primary" type="submit">Сохранить настройки</button><button id="resetSiteSettings" type="button">Сбросить</button><button id="refreshSiteSettingsJson" type="button">Обновить JSON</button><button id="downloadSiteSettingsJson" type="button">Скачать JSON</button></div><p id="siteSettingsMessage" class="message"></p></form></section><section class="admin-panel"><div id="adminStats" class="stats"></div><div class="table-wrap"><table id="adminTable"><thead><tr><th>Дата</th><th>Тип</th><th>Имя/Компания</th><th>Телефон</th><th>Telegram</th><th>Данные</th></tr></thead><tbody></tbody></table></div></section></main><footer class="footer" id="contacts"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></div><div class="footer-links"><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a><a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram</a><a href="/privacy/">Политика конфиденциальности</a><a href="/terms/">Пользовательское соглашение</a><a href="/personal-data-consent/">Согласие на обработку персональных данных</a></div></footer></div><script>
 /**
  * Minified by jsDelivr using Terser v5.48.0.
  * Original file: /npm/@supabase/supabase-js@2.107.0/dist/umd/supabase.js

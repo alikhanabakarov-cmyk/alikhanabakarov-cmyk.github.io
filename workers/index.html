@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="google-site-verification" content="GastroConnect-SearchConsole-Verify" />
     <meta name="yandex-verification" content="7809b97f5ab8ab49" />
-    <title>Подработка HoReCa в Москве — смены для официантов, поваров, бариста</title>
+    <title>Работа в HoReCa и подработка в Москве — смены для поваров, официантов, бариста | GastroConnect</title>
     <meta
       name="description"
-      content="Подработка в HoReCa в Москве и Московской области: смены для официантов, поваров, бариста, хостес и администраторов."
+      content="Работа в HoReCa в Москве: срочные смены и подработка для поваров, официантов, барменов и бариста с ежедневными выплатами от 4 500 до 7 500 ₽/день. Быстрый выход, оплата такси и питание!"
     />
-    <meta name="keywords" content="подработка horeca москва, работа в ресторане, смены для поваров, работа официантом москва, бариста вакансии москва, подработка с ежедневной оплатой, гибкий график общепит, работа в кафе москва, подработка для студентов horeca, gastroconnect работники" />
+    <meta name="keywords" content="работа в horeca, work in horeca, подработка horeca москва, работа в ресторане, смены общепит москва, работа поваром горячего цеха, работа официантом москва, бариста вакансии москва, подработка с ежедневной оплатой, гибкий график общепит, работа в кафе москва, подработка для студентов horeca, gastroconnect работники" />
     <meta name="theme-color" content="#064c3b" />
     <link rel="canonical" href="https://gastroconnect.ru/workers/" />
     <meta property="og:type" content="website" />
@@ -18,23 +21,29 @@
     <meta property="og:url" content="https://gastroconnect.ru/workers/" />
     <meta
       property="og:title"
-      content="Подработка HoReCa в Москве — смены для работников"
+      content="Работа в HoReCa и подработка в Москве — смены с ежедневной оплатой | GastroConnect"
     />
-    <meta property="og:description" content="Срочные смены и подработка в HoReCa по всей Москве и МО: вакансии для поваров, официантов, бариста и барменов с ежедневными выплатами и гибким графиком." />
+    <meta property="og:description" content="Работа в HoReCa: каталог проверенных смен и вакансий в ресторанах Москвы. Повара, официанты, бариста. Ставки до 7 500 ₽/смену, расчет сразу, компенсация такси и питание." />
     <meta
       property="og:image"
       content="https://gastroconnect.ru/assets/og-gastroconnect.webp"
     />
+    <meta property="og:image:secure_url" content="https://gastroconnect.ru/assets/og-gastroconnect.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="Работа в HoReCa и подработка в Москве — сервис смен GastroConnect" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Подработка HoReCa в Москве — смены для работников"
+      content="Работа в HoReCa и подработка в Москве — смены с ежедневной оплатой | GastroConnect"
     />
-    <meta name="twitter:description" content="Срочные смены и подработка в HoReCa по всей Москве и МО: вакансии для поваров, официантов, бариста и барменов с ежедневными выплатами и гибким графиком." />
+    <meta name="twitter:description" content="Работа в HoReCa: каталог проверенных смен и вакансий в ресторанах Москвы. Повара, официанты, бариста. Ставки до 7 500 ₽/смену, расчет сразу, компенсация такси и питание." />
     <meta
       name="twitter:image"
       content="https://gastroconnect.ru/assets/og-gastroconnect.webp"
     />
+    <meta name="twitter:image:alt" content="Работа в HoReCa и подработка в Москве — сервис смен GastroConnect" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -66,6 +75,7 @@
       }
       .vacancy-status-bar.is-visible {
         display: flex;
+        animation: statusBarFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
       .vacancy-status-bar.status-applied {
         background: #ecfdf5;
@@ -76,11 +86,13 @@
         background: #eff6ff;
         border: 1px solid #bfdbfe;
         color: #1e40af;
+        animation: statusBarFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards, statusPulseViewed 2.5s ease-in-out infinite;
       }
       .vacancy-status-bar.status-accepted {
         background: #fefce8;
         border: 1px solid #fde047;
         color: #854d0e;
+        animation: statusBarFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards, statusPulseAccepted 2.4s ease-in-out infinite;
       }
       .vacancy-status-indicator {
         display: inline-flex;
@@ -101,9 +113,32 @@
       }
       .vacancy-status-bar.status-viewed .vacancy-status-dot {
         background: #3b82f6;
+        animation: dotPulseViewed 2s infinite ease-in-out;
       }
       .vacancy-status-bar.status-accepted .vacancy-status-dot {
         background: #eab308;
+        animation: dotPulseAccepted 2s infinite ease-in-out;
+      }
+      .vacancy-status-bar .vacancy-status-check-icon {
+        display: none;
+      }
+      .vacancy-status-bar.status-accepted .vacancy-status-check-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #ca8a04;
+        color: #ffffff;
+        vertical-align: middle;
+        flex-shrink: 0;
+        margin-left: 2px;
+        box-shadow: 0 1px 3px rgba(202, 138, 4, 0.35);
+        animation: checkPopIn 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      .vacancy-status-bar.status-accepted .vacancy-status-check-icon svg {
+        display: block;
       }
       .vacancy-status-date {
         font-size: 11.5px;
@@ -147,9 +182,76 @@
         color: #ffffff;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
       }
+      @keyframes statusBarFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
       @keyframes statusPulse {
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.55; transform: scale(1.18); }
+      }
+      @keyframes statusPulseViewed {
+        0%, 100% {
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.35);
+          border-color: #bfdbfe;
+        }
+        50% {
+          box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.16), 0 2px 8px rgba(59, 130, 246, 0.1);
+          border-color: #93c5fd;
+        }
+      }
+      @keyframes statusPulseAccepted {
+        0%, 100% {
+          box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+          border-color: #fde047;
+        }
+        50% {
+          box-shadow: 0 0 0 6px rgba(234, 179, 8, 0.2), 0 2px 10px rgba(234, 179, 8, 0.12);
+          border-color: #facc15;
+        }
+      }
+      @keyframes dotPulseViewed {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6);
+        }
+        50% {
+          opacity: 0.65;
+          transform: scale(1.22);
+          box-shadow: 0 0 0 4px rgba(59, 130, 246, 0);
+        }
+      }
+      @keyframes dotPulseAccepted {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.65);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.25);
+          box-shadow: 0 0 0 5px rgba(234, 179, 8, 0);
+        }
+      }
+      @keyframes checkPopIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3) rotate(-15deg);
+        }
+        70% {
+          transform: scale(1.18) rotate(3deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
       }
       /* Shift card "Get alerts" button */
       .btn-shift-alert {
@@ -280,6 +382,775 @@
         justify-content: center;
         flex-shrink: 0;
       }
+
+      /* 1. SOS SHIFT BANNER */
+      .gc-sos-banner {
+        background: linear-gradient(135deg, #450a0a 0%, #1e1b4b 50%, #064c3b 100%);
+        border: 2px solid #ef4444;
+        border-radius: 20px;
+        padding: 24px 28px;
+        color: #ffffff;
+        margin-bottom: 28px;
+        box-shadow: 0 16px 36px rgba(239, 68, 68, 0.18);
+        position: relative;
+        overflow: hidden;
+      }
+      .gc-sos-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: radial-gradient(circle at 90% 20%, rgba(239, 68, 68, 0.25) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .gc-sos-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .gc-sos-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ef4444;
+        color: #ffffff;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+      }
+      .gc-sos-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffffff;
+        animation: sosPulse 1.2s infinite ease-in-out;
+      }
+      @keyframes sosPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(1.3); }
+      }
+      .gc-sos-timer {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 999px;
+        padding: 5px 14px;
+        font-size: 13.5px;
+        font-weight: 800;
+        color: #fecdd3;
+      }
+      .gc-sos-body {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: center;
+      }
+      @media (max-width: 768px) {
+        .gc-sos-body {
+          grid-template-columns: 1fr;
+        }
+      }
+      .gc-sos-title {
+        font-size: 22px;
+        font-weight: 900;
+        margin: 0 0 8px;
+        color: #ffffff;
+      }
+      .gc-sos-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .gc-sos-meta-item {
+        font-size: 13px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #f1f5f9;
+      }
+      .gc-sos-rate {
+        font-size: 24px;
+        font-weight: 950;
+        color: #fef08a;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .gc-sos-btn {
+        background: #ef4444;
+        color: #ffffff;
+        border: 2px solid #ef4444;
+        padding: 14px 24px;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 900;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+        text-decoration: none;
+        box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35);
+        white-space: nowrap;
+      }
+      .gc-sos-btn:hover {
+        background: #dc2626;
+        border-color: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(239, 68, 68, 0.45);
+      }
+
+      /* 2. METRO & TAGS FILTER BAR */
+      .gc-filter-section {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 16px 20px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+      .gc-filter-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .gc-filter-title {
+        font-size: 13.5px;
+        font-weight: 900;
+        color: #1e293b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .gc-metro-search-box {
+        position: relative;
+        flex: 1;
+        max-width: 320px;
+        min-width: 200px;
+      }
+      .gc-metro-search-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 32px 8px 12px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1e293b;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .gc-metro-search-input:focus {
+        border-color: #0284c7;
+        box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+      }
+      .gc-metro-clear-btn {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #94a3b8;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 2px 6px;
+      }
+      .gc-filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .gc-filter-pill {
+        background: #f1f5f9;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 800;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        user-select: none;
+      }
+      .gc-filter-pill:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+      .gc-filter-pill.is-active {
+        background: #064c3b;
+        border-color: #064c3b;
+        color: #ffffff;
+      }
+      .gc-filter-pill-badge {
+        font-size: 11px;
+        background: rgba(0, 0, 0, 0.12);
+        padding: 1px 6px;
+        border-radius: 999px;
+      }
+      .gc-filter-pill.is-active .gc-filter-pill-badge {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* Smart card badges */
+      .gc-card-perks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 10px 0;
+      }
+      .gc-perk-chip {
+        font-size: 11.5px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        line-height: 1.3;
+      }
+      .gc-perk-taxi {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+      }
+      .gc-perk-metro {
+        background: #f0f9ff;
+        color: #0369a1;
+        border: 1px solid #bae6fd;
+      }
+      .gc-perk-daily {
+        background: #fffbeb;
+        color: #92400e;
+        border: 1px solid #fde68a;
+      }
+      .gc-perk-trust {
+        background: #faf5ff;
+        color: #6b21a8;
+        border: 1px solid #e9d5ff;
+      }
+
+      /* 3. CHEF INCOME CALCULATOR */
+      .gc-calculator-section {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 34px 32px;
+        margin: 36px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+      .gc-calc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-top: 24px;
+      }
+      @media (max-width: 860px) {
+        .gc-calc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .gc-calc-field {
+        margin-bottom: 22px;
+      }
+      .gc-calc-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13.5px;
+        font-weight: 800;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+      .gc-calc-val-display {
+        font-size: 15px;
+        font-weight: 900;
+        color: #064c3b;
+        background: #ecfdf5;
+        padding: 3px 10px;
+        border-radius: 8px;
+        border: 1px solid #a7f3d0;
+      }
+      .gc-calc-slider {
+        width: 100%;
+        accent-color: #064c3b;
+        height: 8px;
+        cursor: pointer;
+      }
+      .gc-calc-pills-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 8px;
+      }
+      .gc-role-btn {
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 9px 10px;
+        font-size: 13px;
+        font-weight: 750;
+        color: #334155;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+      }
+      .gc-role-btn:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+      }
+      .gc-role-btn.is-active {
+        background: #064c3b;
+        border-color: #064c3b;
+        color: #ffffff;
+      }
+      /* Calculator Output Card */
+      .gc-calc-results {
+        background: linear-gradient(135deg, #064c3b 0%, #022c22 100%);
+        border-radius: 20px;
+        padding: 26px 24px;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .gc-calc-primary-res {
+        margin-bottom: 20px;
+      }
+      .gc-calc-res-label {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #a7f3d0;
+        display: block;
+        margin-bottom: 4px;
+      }
+      .gc-calc-main-num {
+        font-size: 38px;
+        font-weight: 950;
+        color: #ffffff;
+        line-height: 1.1;
+      }
+      .gc-calc-breakdown {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 16px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        margin-bottom: 20px;
+      }
+      .gc-calc-item-num {
+        font-size: 18px;
+        font-weight: 900;
+        color: #fef08a;
+      }
+      .gc-calc-item-desc {
+        font-size: 12px;
+        color: #d1fae5;
+        line-height: 1.3;
+      }
+
+      /* 4. TRUST & GUARANTEE SECTION */
+      .gc-trust-section {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 34px 32px;
+        margin: 36px 0;
+      }
+      .gc-trust-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 22px;
+      }
+      @media (max-width: 768px) {
+        .gc-trust-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .gc-trust-card {
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 16px;
+        padding: 22px;
+      }
+      .gc-trust-card-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .gc-trust-card-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .gc-trust-cook .gc-trust-card-icon {
+        background: #ecfdf5;
+        color: #065f46;
+      }
+      .gc-trust-rest .gc-trust-card-icon {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .gc-trust-list {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.6;
+      }
+      .gc-trust-list li {
+        margin-bottom: 8px;
+      }
+
+      /* 5. GASTROPASS BAR & MODAL */
+      .gc-gastropass-banner {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: 1.5px solid #334155;
+        border-radius: 20px;
+        padding: 24px 28px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 32px 0;
+      }
+      .gc-gastropass-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 800;
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.4);
+      }
+      .gc-gastropass-card-dialog {
+        background: #ffffff;
+        border-radius: 24px;
+        max-width: 530px;
+        width: 100%;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding: 28px 24px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        position: relative;
+        text-align: center;
+      }
+      .gc-reliability-box {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 20px 18px;
+        margin: 16px 0;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .gc-reliability-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .gc-reliability-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #065f46;
+        font-size: 11.5px;
+        font-weight: 900;
+        padding: 4px 10px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .gc-reliability-visual {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 16px;
+      }
+      @media (max-width: 480px) {
+        .gc-reliability-visual {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+      .gc-meter-circle-wrap {
+        position: relative;
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+      }
+      .gc-meter-svg {
+        transform: rotate(-90deg);
+      }
+      .gc-meter-center {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .gc-meter-val {
+        font-size: 22px;
+        font-weight: 950;
+        color: #064c3b;
+        line-height: 1;
+      }
+      .gc-meter-sub {
+        font-size: 9px;
+        font-weight: 800;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-top: 3px;
+      }
+      .gc-reliability-breakdown-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        width: 100%;
+      }
+      @media (max-width: 440px) {
+        .gc-reliability-breakdown-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .gc-metric-item {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 10px 8px;
+        text-align: center;
+      }
+      .gc-metric-num {
+        font-size: 17px;
+        font-weight: 900;
+        color: #064c3b;
+        display: block;
+      }
+      .gc-metric-label {
+        font-size: 11px;
+        font-weight: 800;
+        color: #475569;
+        display: block;
+        margin: 2px 0;
+        line-height: 1.2;
+      }
+      .gc-metric-detail {
+        font-size: 10px;
+        color: #64748b;
+        display: block;
+      }
+      .gc-shift-history-toggle-btn {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 9px 12px;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #1e293b;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        transition: background 0.2s;
+      }
+      .gc-shift-history-toggle-btn:hover {
+        background: #f1f5f9;
+      }
+      .gc-shift-history-list {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-height: 190px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .gc-shift-history-row {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 8px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12px;
+      }
+      .gc-shift-status-badge {
+        font-size: 11px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+      .badge-early {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+      }
+      .badge-ontime {
+        background: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+      }
+      .badge-late {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+      }
+      .badge-noshow {
+        background: #450a0a;
+        color: #fecaca;
+      }
+      .gc-sim-box {
+        margin-top: 14px;
+        background: #ffffff;
+        border: 1px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+      .gc-sim-head {
+        font-size: 12px;
+        font-weight: 800;
+        color: #334155;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .gc-sim-controls {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .gc-sim-select {
+        flex: 1;
+        min-width: 170px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        border: 1.5px solid #cbd5e1;
+        font-size: 12px;
+        font-weight: 700;
+        background: #f8fafc;
+        color: #0f172a;
+        outline: none;
+      }
+      .gc-sim-btn {
+        padding: 7px 12px;
+        border-radius: 8px;
+        border: none;
+        background: #064c3b;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .gc-sim-btn:hover {
+        opacity: 0.9;
+      }
+      .gc-sim-reset {
+        padding: 7px 10px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #64748b;
+        font-size: 11.5px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .gc-qr-box {
+        background: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        border-radius: 16px;
+        padding: 18px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 16px 0;
+      }
+
+      /* 6. QUICK APPLY MODAL */
+      .gc-step-btn-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .gc-step-pill {
+        background: #f1f5f9;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 10px 8px;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #334155;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.15s ease;
+      }
+      .gc-step-pill:hover {
+        background: #e2e8f0;
+        border-color: #94a3b8;
+      }
+      .gc-step-pill.is-selected {
+        background: #064c3b;
+        border-color: #064c3b;
+        color: #ffffff;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .vacancies-grid .vacancy-card {
           transition: none !important;
@@ -287,34 +1158,296 @@
         .vacancies-grid .vacancy-card:hover {
           transform: none !important;
         }
-        .vacancy-status-bar.status-applied .vacancy-status-dot {
-          animation: none;
+        .vacancy-status-bar,
+        .vacancy-status-bar.is-visible,
+        .vacancy-status-bar.status-applied .vacancy-status-dot,
+        .vacancy-status-bar.status-viewed,
+        .vacancy-status-bar.status-viewed .vacancy-status-dot,
+        .vacancy-status-bar.status-accepted,
+        .vacancy-status-bar.status-accepted .vacancy-status-dot,
+        .vacancy-status-bar.status-accepted .vacancy-status-check-icon {
+          animation: none !important;
         }
       }
     </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Смены и подработки для работников HoReCa",
-        "url": "https://gastroconnect.ru/workers/",
-        "provider": {
-          "@type": "Organization",
-          "name": "GastroConnect",
-          "url": "https://gastroconnect.ru/"
-        },
-        "areaServed": [
+        "@graph": [
           {
-            "@type": "AdministrativeArea",
-            "name": "Москва"
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Главная",
+                "item": "https://gastroconnect.ru/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Смены и подработка в HoReCa",
+                "item": "https://gastroconnect.ru/workers/"
+              }
+            ]
           },
           {
-            "@type": "AdministrativeArea",
-            "name": "Московская область"
+            "@type": "Service",
+            "name": "Смены и подработки для работников HoReCa",
+            "url": "https://gastroconnect.ru/workers/",
+            "provider": {
+              "@type": "Organization",
+              "name": "GastroConnect",
+              "url": "https://gastroconnect.ru/"
+            },
+            "areaServed": [
+              {
+                "@type": "AdministrativeArea",
+                "name": "Москва"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "Московская область"
+              }
+            ],
+            "serviceType": "Поиск смен и подработок",
+            "description": "Срочные смены, разовые подработки и постоянная занятость для поваров, официантов, су-шефов и бариста в заведениях Москвы и МО."
+          },
+          {
+            "@type": "JobPosting",
+            "title": "Срочная смена: Повар горячего цеха / Гриль в ресторан «Никитская Kitchen»",
+            "description": "<p>Срочный выход на смену в ресторан авторской кухни «Никитская Kitchen» (м. Тверская / Патриаршие). Расчет сразу по окончанию смены +30% за срочность.</p><p><b>Обязанности:</b></p><ul><li>Приготовление блюд горячего цеха и гриля по утвержденным техкартам;</li><li>Своевременная отдача блюд;</li><li>Поддержание чистоты цеха и соблюдение санитарных норм ХАССП.</li></ul><p><b>Требования:</b></p><ul><li>Опыт работы поваром горячего цеха от 1 года;</li><li>Наличие действующей личной медицинской книжки (ЛМК);</li><li>Пунктуальность и готовность к оперативному выходу на смену.</li></ul><p><b>Условия:</b></p><ul><li>Ставка: 7 500 ₽ за смену с мгновенным расчетом сразу по завершению;</li><li>Оплата такси до кухни за счет заведения;</li><li>Вкусное 3-разовое штатное питание от шефа;</li><li>Стильная форма от бренда;</li><li>Локация: 3 минуты пешком от м. Тверская.</li></ul>",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "GastroConnect",
+              "value": "shift-sos-hot-cook"
+            },
+            "datePosted": "2026-09-20T08:00:00+03:00",
+            "validThrough": "2026-12-31T23:59:59+03:00",
+            "employmentType": ["PART_TIME", "TEMPORARY"],
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Ресторан «Никитская Kitchen»",
+              "sameAs": "https://gastroconnect.ru/",
+              "logo": "https://gastroconnect.ru/assets/favicon.svg"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Большая Никитская, 24",
+                "addressLocality": "Москва",
+                "addressRegion": "Москва",
+                "postalCode": "125009",
+                "addressCountry": "RU"
+              }
+            },
+            "baseSalary": {
+              "@type": "MonetaryAmount",
+              "currency": "RUB",
+              "value": {
+                "@type": "QuantitativeValue",
+                "value": 7500,
+                "unitText": "DAY"
+              }
+            },
+            "jobBenefits": "Оплата такси до кухни, бесплатное 3-разовое питание от шефа, расчет сразу по окончанию смены, стильная форма",
+            "workHours": "Срочный выход (дневная/вечерняя смена)",
+            "industry": "HoReCa / Общественное питание",
+            "directApply": true,
+            "applicantLocationRequirements": {
+              "@type": "Country",
+              "name": "RU"
+            }
+          },
+          {
+            "@type": "JobPosting",
+            "title": "Су-шеф в ресторан авторской кухни",
+            "description": "<p>Ресторан авторской кухни «Никитская Kitchen» приглашает су-шефа на постоянную работу или проектные смены. Локация: м. Тверская / Патриаршие (3 мин пешком).</p><p><b>Обязанности:</b></p><ul><li>Организация и контроль бесперебойной работы кухни;</li><li>Контроль отдачи блюд, качества сырья и соблюдения технологических карт;</li><li>Соблюдение норм ХАССП, санитарных правил и товарного соседства;</li><li>Обучение линейного персонала (поваров горячего и холодного цехов).</li></ul><p><b>Требования:</b></p><ul><li>Опыт работы су-шефом или старшим поваром от 2 лет;</li><li>Знание европейской и авторской кухни;</li><li>Наличие действующей личной медицинской книжки (ЛМК).</li></ul><p><b>Условия:</b></p><ul><li>Ставка за смену: 6 500 ₽ (от 143 000 ₽ при графике 5/2);</li><li>График: 5/2 (11:00 – 23:00) или гибкие смены;</li><li>Бесплатный ночной корпоративный развоз на такси;</li><li>Бесплатное 3-разовое питание от бренд-шефа;</li><li>Стильная форма и официальное трудоустройство по ТК РФ;</li><li>Стабильные выплаты каждые 2 недели + чаевые и премии.</li></ul>",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "GastroConnect",
+              "value": "shift-sous-chef"
+            },
+            "datePosted": "2026-09-20T09:00:00+03:00",
+            "validThrough": "2026-12-31T23:59:59+03:00",
+            "employmentType": ["FULL_TIME", "PART_TIME"],
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Ресторан «Никитская Kitchen»",
+              "sameAs": "https://gastroconnect.ru/",
+              "logo": "https://gastroconnect.ru/assets/favicon.svg"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Большая Никитская, 24",
+                "addressLocality": "Москва",
+                "addressRegion": "Москва",
+                "postalCode": "125009",
+                "addressCountry": "RU"
+              }
+            },
+            "baseSalary": {
+              "@type": "MonetaryAmount",
+              "currency": "RUB",
+              "value": {
+                "@type": "QuantitativeValue",
+                "value": 6500,
+                "unitText": "DAY"
+              }
+            },
+            "jobBenefits": "Бесплатное 3-разовое питание, корпоративное такси до дома, брендовая форма, выплаты каждые 2 недели + премии, оформление по ТК РФ",
+            "workHours": "5/2 (11:00 – 23:00)",
+            "industry": "HoReCa / Общественное питание",
+            "directApply": true,
+            "applicantLocationRequirements": {
+              "@type": "Country",
+              "name": "RU"
+            }
+          },
+          {
+            "@type": "JobPosting",
+            "title": "Повар горячего цеха (Италия, гриль)",
+            "description": "<p>Гастробар «Belorusskaya Grill» ищет повара горячего цеха на постоянную работу или гибкие смены подработки. Метро Белорусская (5 минут пешком).</p><p><b>Обязанности:</b></p><ul><li>Приготовление блюд горячего цеха (итальянская паста, ризотто, мясо и рыба на гриле);</li><li>Соблюдение рецептур и стандартов отдачи;</li><li>Поддержание порядка и санитарных норм на рабочем месте.</li></ul><p><b>Требования:</b></p><ul><li>Опыт работы поваром горячего цеха от 1 года;</li><li>Знание базовых технологий термообработки мяса и гриля;</li><li>Наличие медицинской книжки или готовность её оформить.</li></ul><p><b>Условия:</b></p><ul><li>Ставка за смену: 5 100 ₽;</li><li>Ежедневные выплаты сразу после смены или 2 раза в месяц без задержек;</li><li>Бесплатное такси до дома после 23:00;</li><li>График: 2/2, 3/3 + возможность брать дополнительные оплачиваемые смены;</li><li>Вкусное штатное питание и компенсация медкнижки;</li><li>Открытая современная кухня и дружная команда.</li></ul>",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "GastroConnect",
+              "value": "shift-hot-cook"
+            },
+            "datePosted": "2026-09-20T10:00:00+03:00",
+            "validThrough": "2026-12-31T23:59:59+03:00",
+            "employmentType": ["PART_TIME", "TEMPORARY", "FULL_TIME"],
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Гастробар «Belorusskaya Grill»",
+              "sameAs": "https://gastroconnect.ru/",
+              "logo": "https://gastroconnect.ru/assets/favicon.svg"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Лесная, 5",
+                "addressLocality": "Москва",
+                "addressRegion": "Москва",
+                "postalCode": "125047",
+                "addressCountry": "RU"
+              }
+            },
+            "baseSalary": {
+              "@type": "MonetaryAmount",
+              "currency": "RUB",
+              "value": {
+                "@type": "QuantitativeValue",
+                "value": 5100,
+                "unitText": "DAY"
+              }
+            },
+            "jobBenefits": "Ежедневная выплата после смены, такси до дома после 23:00, бесплатное питание, компенсация медкнижки, шаговая доступность от кольцевой",
+            "workHours": "2/2, 3/3 (10:00 – 23:00)",
+            "industry": "HoReCa / Общественное питание",
+            "directApply": true,
+            "applicantLocationRequirements": {
+              "@type": "Country",
+              "name": "RU"
+            }
+          },
+          {
+            "@type": "JobPosting",
+            "title": "Повар холодного цеха в бистро",
+            "description": "<p>Уютное городское бистро «Maroseyka Bistro» в историческом центре Москвы (м. Китай-город, 3 минуты) приглашает повара холодного цеха.</p><p><b>Обязанности:</b></p><ul><li>Приготовление салатов, холодных закусок, авторских соусов и десертных заготовок;</li><li>Контроль товарного соседства, маркировки и сроков хранения заготовок;</li><li>Быстрая отдача заказов по технологическим картам.</li></ul><p><b>Требования:</b></p><ul><li>Опыт работы поваром холодного цеха от 6 месяцев;</li><li>Аккуратность, скорость нарезки, чистоплотность;</li><li>Действующая медицинская книжка.</li></ul><p><b>Условия:</b></p><ul><li>Ставка: от 4 900 до 5 200 ₽ за смену;</li><li>Дневные смены с комфортным графиком (09:00 – 21:00);</li><li>Сменный график: 2/2, 3/3;</li><li>Бесплатное питание от шефа;</li><li>Своевременные выплаты без штрафов и задержек;</li><li>Локация в центре: м. Китай-город.</li></ul>",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "GastroConnect",
+              "value": "shift-cold-cook"
+            },
+            "datePosted": "2026-09-20T11:00:00+03:00",
+            "validThrough": "2026-12-31T23:59:59+03:00",
+            "employmentType": ["PART_TIME", "TEMPORARY"],
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Бистро «Maroseyka Bistro»",
+              "sameAs": "https://gastroconnect.ru/",
+              "logo": "https://gastroconnect.ru/assets/favicon.svg"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Маросейка, 10",
+                "addressLocality": "Москва",
+                "addressRegion": "Москва",
+                "postalCode": "101000",
+                "addressCountry": "RU"
+              }
+            },
+            "baseSalary": {
+              "@type": "MonetaryAmount",
+              "currency": "RUB",
+              "value": {
+                "@type": "QuantitativeValue",
+                "minValue": 4900,
+                "maxValue": 5200,
+                "unitText": "DAY"
+              }
+            },
+            "jobBenefits": "Бесплатное питание, дневные смены без ночной работы, выплаты без задержек, локация в центре",
+            "workHours": "Дневной график 2/2, 3/3 (09:00 – 21:00)",
+            "industry": "HoReCa / Общественное питание",
+            "directApply": true,
+            "applicantLocationRequirements": {
+              "@type": "Country",
+              "name": "RU"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Как получить оплату сразу после смены в ресторане?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "В заведениях с отметкой «Ежедневные выплаты» или «SOS-смена» расчет производится в день выхода сразу после сдачи станции шефу: перевод на карту любого банка РФ или наличными на руки."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Можно ли выйти на смену без опыта поваром или официантом?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Да, для новичков доступны позиции помощника повара, раннера, хостес и мойщика посуды с 15-минутным инструктажем. На позиции поваров цехов требуется базовый опыт и знание ТТК."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Что делать, если заведение задерживает выплату или меняет условия?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Заведения проходят строгий аудит. При спорных вопросах служба поддержки и модераторы официального Telegram-сообщества @gastroconnect оперативно подключаются и защищают интересы работника."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Как ресторану срочно вызвать повара за 30–45 минут?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Используйте режим SOS-смены: заявка с повышенной ставкой (+30%) и оплатой такси мгновенно рассылается поварам в вашем районе и транслируется в канал @gastroconnect."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Нужна ли медицинская книжка для выхода на подработку в общепит?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Да, по нормам СанПиН в Москве необходима действующая ЛМК. Многие заведения-партнеры GastroConnect компенсируют ее продление или оформление."
+                }
+              }
+            ]
           }
-        ],
-        "serviceType": "Поиск смен и подработок",
-        "description": "Подработка и смены для работников HoReCa в Москве и Московской области."
+        ]
       }
     </script>
   </head>
@@ -336,6 +1469,14 @@
           <a href="/contacts/" data-site-setting="nav.contacts">Контакты</a>
         </nav>
         <div class="header-actions">
+          <a
+            class="header-tg-chat-badge"
+            href="https://t.me/gastroconnect"
+            target="_blank"
+            rel="noopener"
+            title="Живой чат сообщества @gastroconnect"
+            >💬 Чат @gastroconnect</a
+          >
           <a
             class="btn header-login"
             href="/auth/?mode=login&role=worker"
@@ -403,9 +1544,138 @@
             </p>
           </div>
 
+          <!-- 1. SOS-СМЕНА: ВЫХОД ЧЕРЕЗ 30 МИНУТ (Горящая замена) -->
+          <div class="gc-sos-banner" id="sosShiftBanner" itemscope itemtype="https://schema.org/JobPosting">
+            <meta itemprop="datePosted" content="2026-09-20T08:00:00+03:00" />
+            <meta itemprop="validThrough" content="2026-12-31T23:59:59+03:00" />
+            <meta itemprop="employmentType" content="PART_TIME" />
+            <meta itemprop="employmentType" content="TEMPORARY" />
+            <meta itemprop="description" content="Срочный выход на смену в ресторан авторской кухни «Никитская Kitchen» (м. Тверская / Патриаршие). Ставка 7 500 ₽ за смену с мгновенным расчетом сразу по завершению, оплата такси, питание от шефа." />
+            <div itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization" style="display:none;">
+              <meta itemprop="name" content="Ресторан «Никитская Kitchen»" />
+              <meta itemprop="sameAs" content="https://gastroconnect.ru/" />
+              <meta itemprop="logo" content="https://gastroconnect.ru/assets/favicon.svg" />
+            </div>
+            <div itemprop="jobLocation" itemscope itemtype="https://schema.org/Place" style="display:none;">
+              <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                <meta itemprop="streetAddress" content="ул. Большая Никитская, 24" />
+                <meta itemprop="addressLocality" content="Москва" />
+                <meta itemprop="addressRegion" content="Москва" />
+                <meta itemprop="postalCode" content="125009" />
+                <meta itemprop="addressCountry" content="RU" />
+              </div>
+            </div>
+            <div itemprop="baseSalary" itemscope itemtype="https://schema.org/MonetaryAmount" style="display:none;">
+              <meta itemprop="currency" content="RUB" />
+              <div itemprop="value" itemscope itemtype="https://schema.org/QuantitativeValue">
+                <meta itemprop="value" content="7500" />
+                <meta itemprop="unitText" content="DAY" />
+              </div>
+            </div>
+            <div class="gc-sos-head">
+              <span class="gc-sos-badge">
+                <span class="gc-sos-dot"></span>
+                🚨 SOS-смена • Срочный выход
+              </span>
+              <div class="gc-sos-timer" id="sosTimerBox">
+                <span>⏰ Заявка активна еще:</span>
+                <strong id="sosCountdown" style="font-family: monospace; font-size: 15px; color: #fff;">34:18</strong>
+              </div>
+            </div>
+            <div class="gc-sos-body">
+              <div>
+                <h3 class="gc-sos-title" id="sosTitle" itemprop="title">Повар горячего цеха / Гриль в ресторан «Никитская Kitchen»</h3>
+                <div class="gc-sos-meta">
+                  <span class="gc-sos-meta-item">📍 Патриаршие / м. Тверская (3 мин)</span>
+                  <span class="gc-sos-meta-item">⏰ Выход через 30–45 минут</span>
+                  <span class="gc-sos-meta-item">🚕 Оплачиваем такси до кухни</span>
+                  <span class="gc-sos-meta-item">🍱 3-разовое питание от шефа</span>
+                </div>
+                <div class="gc-sos-rate">
+                  <span id="sosRateVal">7 500 ₽</span>
+                  <span style="font-size: 14px; font-weight: 700; color: #fecdd3;">(+30% за срочность • расчет сразу по окончанию)</span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button type="button" class="gc-sos-btn" id="sosAcceptBtn" data-action="accept-sos">
+                  <span>⚡️</span>
+                  <span>Выезжаю (Занять смену за 30 сек)</span>
+                </button>
+                <button type="button" class="gc-sos-share-btn" id="sosShareBtn" data-action="share-sos-tg" data-role="Повар горячего цеха / Гриль" data-restaurant="Ресторан «Никитская Kitchen»" data-rate="7 500 ₽" data-metro="м. Тверская / Патриаршие" data-conditions="Оплата такси до кухни, 3-разовое питание, расчет сразу">
+                  <span>✈️</span> Поделиться SOS в TG (+30%)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. УМНЫЙ ФИЛЬТР СМЕН (Метро / Ночной развоз / Выплаты) -->
+          <div class="gc-filter-section" id="metroFilterSection">
+            <div class="gc-filter-row">
+              <span class="gc-filter-title">
+                <span>🚇</span> Умный подбор смен
+              </span>
+              <div class="gc-metro-search-box">
+                <input 
+                  type="text" 
+                  class="gc-metro-search-input" 
+                  id="metroSearchInput" 
+                  placeholder="🔍 Станция метро (Тверская, Белорусская...)" 
+                  aria-label="Поиск по станции метро"
+                />
+                <button type="button" class="gc-metro-clear-btn" id="metroClearBtn" style="display: none;" aria-label="Очистить">✕</button>
+              </div>
+            </div>
+            <div class="gc-filter-pills" id="filterPillsContainer">
+              <button type="button" class="gc-filter-pill is-active" data-filter="all">
+                🔘 Все смены <span class="gc-filter-pill-badge" id="filterCountAll">3</span>
+              </button>
+              <button type="button" class="gc-filter-pill" data-filter="metro">
+                🚶‍♂️ &lt; 5 мин от метро
+              </button>
+              <button type="button" class="gc-filter-pill" data-filter="taxi">
+                🚕 Ночной развоз / такси
+              </button>
+              <button type="button" class="gc-filter-pill" data-filter="daily">
+                💵 Ежедневная выплата
+              </button>
+              <button type="button" class="gc-filter-pill" data-filter="day">
+                ☀️ Дневные смены
+              </button>
+              <button type="button" class="gc-filter-pill" data-filter="high-rate">
+                🔥 Ставка от 5 500 ₽
+              </button>
+            </div>
+          </div>
+
           <div class="vacancies-grid" id="vacanciesGrid">
             <!-- Смена 1: Су-шеф -->
-            <article class="vacancy-card vacancy-card-featured" id="vacancyCard-sous-chef" data-vacancy-id="shift-sous-chef" data-vacancy-role="sous-chef">
+            <article class="vacancy-card vacancy-card-featured" id="vacancyCard-sous-chef" data-vacancy-id="shift-sous-chef" data-vacancy-role="sous-chef" data-metro="тверская патриаршие" data-tags="metro taxi day high-rate" data-rate="6500" itemscope itemtype="https://schema.org/JobPosting">
+              <meta itemprop="datePosted" content="2026-09-20T09:00:00+03:00" />
+              <meta itemprop="validThrough" content="2026-12-31T23:59:59+03:00" />
+              <meta itemprop="employmentType" content="FULL_TIME" />
+              <meta itemprop="employmentType" content="PART_TIME" />
+              <meta itemprop="description" content="Су-шеф в ресторан авторской кухни «Никитская Kitchen» (м. Тверская / Патриаршие). Организация работы кухни, контроль отдачи блюд и стандартов ХАССП. Ставка 6 500 ₽ за смену, 3-разовое питание, ночной развоз на такси, оформление по ТК РФ." />
+              <div itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization" style="display:none;">
+                <meta itemprop="name" content="Ресторан «Никитская Kitchen»" />
+                <meta itemprop="sameAs" content="https://gastroconnect.ru/" />
+                <meta itemprop="logo" content="https://gastroconnect.ru/assets/favicon.svg" />
+              </div>
+              <div itemprop="jobLocation" itemscope itemtype="https://schema.org/Place" style="display:none;">
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <meta itemprop="streetAddress" content="ул. Большая Никитская, 24" />
+                  <meta itemprop="addressLocality" content="Москва" />
+                  <meta itemprop="addressRegion" content="Москва" />
+                  <meta itemprop="postalCode" content="125009" />
+                  <meta itemprop="addressCountry" content="RU" />
+                </div>
+              </div>
+              <div itemprop="baseSalary" itemscope itemtype="https://schema.org/MonetaryAmount" style="display:none;">
+                <meta itemprop="currency" content="RUB" />
+                <div itemprop="value" itemscope itemtype="https://schema.org/QuantitativeValue">
+                  <meta itemprop="value" content="6500" />
+                  <meta itemprop="unitText" content="DAY" />
+                </div>
+              </div>
               <span class="vacancy-corner-badge" id="cornerBadge-sous-chef">
                 <span>✓</span> Отклик отправлен
               </span>
@@ -414,39 +1684,86 @@
                   <span class="vacancy-status-indicator">
                     <span class="vacancy-status-dot"></span>
                     <span class="vacancy-status-text">Отклик отправлен</span>
+                    <span class="vacancy-status-check-icon" aria-hidden="true" title="Принято"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline></svg></span>
                   </span>
                   <span class="vacancy-status-date">в обработке</span>
                 </div>
-                <span class="vacancy-role-tag">Шеф / Руководство</span>
-                <h3 class="vacancy-title">Су-шеф в ресторан авторской кухни</h3>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                  <span class="vacancy-role-tag">Шеф / Руководство</span>
+                  <span class="gc-perk-chip gc-perk-trust">⭐️ 4.95 Рейтинг заведения</span>
+                </div>
+                <h3 class="vacancy-title" itemprop="title">Су-шеф в ресторан авторской кухни</h3>
                 <div class="vacancy-rate-box">
                   <span class="vacancy-rate-label">Ставка за смену</span>
                   <span class="vacancy-rate-val">6 500 ₽</span>
                 </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Тверская / Патриаршие</span>
+                <div class="tg-job-meta" style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Тверская / Патриаршие (3 мин)</span>
                   <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(201, 154, 63, 0.12); padding: 4px 10px; border-radius: 6px;">⏰ 5/2 (11:00 – 23:00)</span>
                 </div>
+                <div class="gc-card-perks">
+                  <span class="gc-perk-chip gc-perk-taxi">🚕 Бесплатный ночной развоз</span>
+                  <span class="gc-perk-chip gc-perk-metro">🚶‍♂️ 3 мин пешком от метро</span>
+                  <span class="gc-perk-chip gc-perk-daily">💵 Выплаты 2 раза/мес + чаевые</span>
+                </div>
                 <ul class="vacancy-perks-list">
-                  <li>Бесплатное 3-разовое питание и стильная форма</li>
+                  <li>Бесплатное 3-разовое питание и стильная форма от бренда</li>
                   <li>Официальное оформление по ТК РФ</li>
-                  <li>Выплаты каждые 2 недели + премии от шефа</li>
+                  <li>Стабильные выплаты каждые 2 недели + премии от шефа</li>
                 </ul>
               </div>
-              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-                <button type="button" class="btn btn-shift-alert" id="btnAlert-sous-chef" data-action="get-alerts" data-role="Су-шеф в ресторан авторской кухни" data-role-category="sous-chef">
-                  <span class="btn-shift-alert-icon">🔔</span>
-                  <span class="btn-shift-alert-label">Get alerts</span>
-                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 8px;">
+                <button type="button" class="btn primary btn-quick-apply" data-action="quick-apply" data-role="Су-шеф в ресторан авторской кухни" data-vacancy-id="shift-sous-chef" style="width: 100%; justify-content: center; font-weight: 900; background: #064c3b; border-color: #064c3b;">
+                  ⚡️ Быстрый отклик в 1 клик
+                </button>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="btn btn-shift-alert" id="btnAlert-sous-chef" data-action="get-alerts" data-role="Су-шеф в ресторан авторской кухни" data-role-category="sous-chef" style="flex: 1;">
+                    <span class="btn-shift-alert-icon">🔔</span>
+                    <span class="btn-shift-alert-label">Get alerts</span>
+                    <span class="btn-shift-alert-tg-badge">Telegram</span>
+                  </button>
+                  <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-sous-chef" data-restaurant="Ресторан «Никитская Kitchen»" data-role="Су-шеф" data-payout="6 500 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
+                    ⭐️ Отзыв
+                  </button>
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #f8fafc; border-color: #cbd5e1; color: #334155; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                    🔒 Шеф
+                  </a>
+                </div>
+                <button type="button" class="btn btn-share-tg" data-action="share-tg" data-vacancy-id="shift-sous-chef" data-role="Су-шеф в ресторан авторской кухни" data-restaurant="Ресторан «Никитская Kitchen»" data-rate="6 500 ₽" data-metro="м. Тверская / Патриаршие" data-conditions="Питание от шефа, такси до дома, выплаты без задержек">
+                  <span>✈️</span> Поделиться сменой в TG
                 </button>
               </div>
             </article>
 
             <!-- Смена 2: Повар горячего цеха -->
-            <article class="vacancy-card" id="vacancyCard-hot-cook" data-vacancy-id="shift-hot-cook" data-vacancy-role="hot-cook">
+            <article class="vacancy-card" id="vacancyCard-hot-cook" data-vacancy-id="shift-hot-cook" data-vacancy-role="hot-cook" data-metro="белорусская" data-tags="metro taxi daily" data-rate="5100" itemscope itemtype="https://schema.org/JobPosting">
+              <meta itemprop="datePosted" content="2026-09-20T10:00:00+03:00" />
+              <meta itemprop="validThrough" content="2026-12-31T23:59:59+03:00" />
+              <meta itemprop="employmentType" content="PART_TIME" />
+              <meta itemprop="employmentType" content="TEMPORARY" />
+              <meta itemprop="employmentType" content="FULL_TIME" />
+              <meta itemprop="description" content="Повар горячего цеха (Италия, гриль) в гастробар «Belorusskaya Grill» (м. Белорусская, 5 мин). Приготовление пасты, ризотто, мяса на гриле. Ставка 5 100 ₽ за смену, ежедневные выплаты, такси после 23:00, бесплатное питание." />
+              <div itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization" style="display:none;">
+                <meta itemprop="name" content="Гастробар «Belorusskaya Grill»" />
+                <meta itemprop="sameAs" content="https://gastroconnect.ru/" />
+                <meta itemprop="logo" content="https://gastroconnect.ru/assets/favicon.svg" />
+              </div>
+              <div itemprop="jobLocation" itemscope itemtype="https://schema.org/Place" style="display:none;">
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <meta itemprop="streetAddress" content="ул. Лесная, 5" />
+                  <meta itemprop="addressLocality" content="Москва" />
+                  <meta itemprop="addressRegion" content="Москва" />
+                  <meta itemprop="postalCode" content="125047" />
+                  <meta itemprop="addressCountry" content="RU" />
+                </div>
+              </div>
+              <div itemprop="baseSalary" itemscope itemtype="https://schema.org/MonetaryAmount" style="display:none;">
+                <meta itemprop="currency" content="RUB" />
+                <div itemprop="value" itemscope itemtype="https://schema.org/QuantitativeValue">
+                  <meta itemprop="value" content="5100" />
+                  <meta itemprop="unitText" content="DAY" />
+                </div>
+              </div>
               <span class="vacancy-corner-badge" id="cornerBadge-hot-cook">
                 <span>✓</span> Отклик отправлен
               </span>
@@ -455,39 +1772,86 @@
                   <span class="vacancy-status-indicator">
                     <span class="vacancy-status-dot"></span>
                     <span class="vacancy-status-text">Отклик отправлен</span>
+                    <span class="vacancy-status-check-icon" aria-hidden="true" title="Принято"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline></svg></span>
                   </span>
                   <span class="vacancy-status-date">в обработке</span>
                 </div>
-                <span class="vacancy-role-tag">Кухня / Горячий цех</span>
-                <h3 class="vacancy-title">Повар горячего цеха (Италия, гриль)</h3>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                  <span class="vacancy-role-tag">Кухня / Горячий цех</span>
+                  <span class="gc-perk-chip gc-perk-trust">⭐️ 4.90 Рейтинг выплат</span>
+                </div>
+                <h3 class="vacancy-title" itemprop="title">Повар горячего цеха (Италия, гриль)</h3>
                 <div class="vacancy-rate-box">
                   <span class="vacancy-rate-label">Ставка за смену</span>
                   <span class="vacancy-rate-val">5 100 ₽</span>
                 </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Белорусская (5 мин)</span>
+                <div class="tg-job-meta" style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Белорусская (5 мин пешком)</span>
                   <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(201, 154, 63, 0.12); padding: 4px 10px; border-radius: 6px;">⏰ 2/2, 3/3 + доп. смены</span>
                 </div>
+                <div class="gc-card-perks">
+                  <span class="gc-perk-chip gc-perk-daily">💵 Ежедневные выплаты после смены</span>
+                  <span class="gc-perk-chip gc-perk-taxi">🚕 Такси до дома после 23:00</span>
+                  <span class="gc-perk-chip gc-perk-metro">🚶‍♂️ 5 мин от кольцевой</span>
+                </div>
                 <ul class="vacancy-perks-list">
-                  <li>Стабильные выплаты 2 раза в месяц без задержек</li>
+                  <li>Стабильные выплаты каждый день или 2 раза в месяц без задержек</li>
                   <li>Вкусное штатное питание и компенсация медкнижки</li>
-                  <li>Дружная команда и комфортные условия</li>
+                  <li>Дружная команда и комфортные условия на открытой кухне</li>
                 </ul>
               </div>
-              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-                <button type="button" class="btn btn-shift-alert" id="btnAlert-hot-cook" data-action="get-alerts" data-role="Повар горячего цеха (Италия, гриль)" data-role-category="hot-cook">
-                  <span class="btn-shift-alert-icon">🔔</span>
-                  <span class="btn-shift-alert-label">Get alerts</span>
-                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 8px;">
+                <button type="button" class="btn primary btn-quick-apply" data-action="quick-apply" data-role="Повар горячего цеха (Италия, гриль)" data-vacancy-id="shift-hot-cook" style="width: 100%; justify-content: center; font-weight: 900; background: #064c3b; border-color: #064c3b;">
+                  ⚡️ Быстрый отклик в 1 клик
+                </button>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="btn btn-shift-alert" id="btnAlert-hot-cook" data-action="get-alerts" data-role="Повар горячего цеха (Италия, гриль)" data-role-category="hot-cook" style="flex: 1;">
+                    <span class="btn-shift-alert-icon">🔔</span>
+                    <span class="btn-shift-alert-label">Get alerts</span>
+                    <span class="btn-shift-alert-tg-badge">Telegram</span>
+                  </button>
+                  <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-hot-cook" data-restaurant="Гастробар «Belorusskaya Grill»" data-role="Повар горячего цеха" data-payout="5 100 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
+                    ⭐️ Отзыв
+                  </button>
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #f8fafc; border-color: #cbd5e1; color: #334155; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                    🔒 Шеф
+                  </a>
+                </div>
+                <button type="button" class="btn btn-share-tg" data-action="share-tg" data-vacancy-id="shift-hot-cook" data-role="Повар горячего цеха (Италия, гриль)" data-restaurant="Гастробар «Belorusskaya Grill»" data-rate="5 100 ₽" data-metro="м. Белорусская (5 мин)" data-conditions="Ежедневные выплаты, такси после 23:00, бесплатное питание">
+                  <span>✈️</span> Поделиться сменой в TG
                 </button>
               </div>
             </article>
 
             <!-- Смена 3: Повар холодного цеха -->
-            <article class="vacancy-card" id="vacancyCard-cold-cook" data-vacancy-id="shift-cold-cook" data-vacancy-role="cold-cook">
+            <article class="vacancy-card" id="vacancyCard-cold-cook" data-vacancy-id="shift-cold-cook" data-vacancy-role="cold-cook" data-metro="китай-город" data-tags="metro day daily" data-rate="5200" itemscope itemtype="https://schema.org/JobPosting">
+              <meta itemprop="datePosted" content="2026-09-20T11:00:00+03:00" />
+              <meta itemprop="validThrough" content="2026-12-31T23:59:59+03:00" />
+              <meta itemprop="employmentType" content="PART_TIME" />
+              <meta itemprop="employmentType" content="TEMPORARY" />
+              <meta itemprop="description" content="Повар холодного цеха в бистро «Maroseyka Bistro» (м. Китай-город, 2 мин). Приготовление салатов, холодных закусок, соусов по техкартам. Ставка от 4 900 до 5 200 ₽ за смену, дневной график, выплаты каждую пятницу, питание от шефа." />
+              <div itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization" style="display:none;">
+                <meta itemprop="name" content="Бистро «Maroseyka Bistro»" />
+                <meta itemprop="sameAs" content="https://gastroconnect.ru/" />
+                <meta itemprop="logo" content="https://gastroconnect.ru/assets/favicon.svg" />
+              </div>
+              <div itemprop="jobLocation" itemscope itemtype="https://schema.org/Place" style="display:none;">
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <meta itemprop="streetAddress" content="ул. Маросейка, 10" />
+                  <meta itemprop="addressLocality" content="Москва" />
+                  <meta itemprop="addressRegion" content="Москва" />
+                  <meta itemprop="postalCode" content="101000" />
+                  <meta itemprop="addressCountry" content="RU" />
+                </div>
+              </div>
+              <div itemprop="baseSalary" itemscope itemtype="https://schema.org/MonetaryAmount" style="display:none;">
+                <meta itemprop="currency" content="RUB" />
+                <div itemprop="value" itemscope itemtype="https://schema.org/QuantitativeValue">
+                  <meta itemprop="minValue" content="4900" />
+                  <meta itemprop="maxValue" content="5200" />
+                  <meta itemprop="unitText" content="DAY" />
+                </div>
+              </div>
               <span class="vacancy-corner-badge" id="cornerBadge-cold-cook">
                 <span>✓</span> Отклик отправлен
               </span>
@@ -496,33 +1860,53 @@
                   <span class="vacancy-status-indicator">
                     <span class="vacancy-status-dot"></span>
                     <span class="vacancy-status-text">Отклик отправлен</span>
+                    <span class="vacancy-status-check-icon" aria-hidden="true" title="Принято"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline></svg></span>
                   </span>
                   <span class="vacancy-status-date">в обработке</span>
                 </div>
-                <span class="vacancy-role-tag">Кухня / Холодный цех</span>
-                <h3 class="vacancy-title">Повар холодного цеха в бистро</h3>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                  <span class="vacancy-role-tag">Кухня / Холодный цех</span>
+                  <span class="gc-perk-chip gc-perk-trust">⭐️ 4.92 Рейтинг выплат</span>
+                </div>
+                <h3 class="vacancy-title" itemprop="title">Повар холодного цеха в бистро</h3>
                 <div class="vacancy-rate-box">
                   <span class="vacancy-rate-label">Ставка за смену</span>
                   <span class="vacancy-rate-val">4 900 – 5 200 ₽</span>
                 </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Китай-город</span>
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(201, 154, 63, 0.12); padding: 4px 10px; border-radius: 6px;">⏰ 5/2, 6/1 (с 09:00)</span>
+                <div class="tg-job-meta" style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--green); background: rgba(6, 76, 59, 0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Китай-город (2 мин пешком)</span>
+                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(201, 154, 63, 0.12); padding: 4px 10px; border-radius: 6px;">⏰ 5/2, 6/1 (с 09:00 до 21:00)</span>
+                </div>
+                <div class="gc-card-perks">
+                  <span class="gc-perk-chip gc-perk-metro">🚶‍♂️ 2 мин от метро</span>
+                  <span class="gc-perk-chip gc-perk-daily">💵 Выплаты каждую пятницу</span>
+                  <span class="gc-perk-chip gc-perk-trust">☀️ Дневная смена (без ночи)</span>
                 </div>
                 <ul class="vacancy-perks-list">
                   <li>Официальное трудоустройство и питание от шефа</li>
-                  <li>Салаты, боулы, закуски по понятным техкартам</li>
-                  <li>Быстрый карьерный рост до су-шефа</li>
+                  <li>Салаты, боулы, закуски по понятным и красивым техкартам</li>
+                  <li>Быстрый карьерный рост до су-шефа с повышением оклада</li>
                 </ul>
               </div>
-              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 9px;">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-                <button type="button" class="btn btn-shift-alert" id="btnAlert-cold-cook" data-action="get-alerts" data-role="Повар холодного цеха в бистро" data-role-category="cold-cook">
-                  <span class="btn-shift-alert-icon">🔔</span>
-                  <span class="btn-shift-alert-label">Get alerts</span>
-                  <span class="btn-shift-alert-tg-badge">Telegram</span>
+              <div class="vacancy-actions" style="display: flex; flex-direction: column; gap: 8px;">
+                <button type="button" class="btn primary btn-quick-apply" data-action="quick-apply" data-role="Повар холодного цеха в бистро" data-vacancy-id="shift-cold-cook" style="width: 100%; justify-content: center; font-weight: 900; background: #064c3b; border-color: #064c3b;">
+                  ⚡️ Быстрый отклик в 1 клик
+                </button>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" class="btn btn-shift-alert" id="btnAlert-cold-cook" data-action="get-alerts" data-role="Повар холодного цеха в бистро" data-role-category="cold-cook" style="flex: 1;">
+                    <span class="btn-shift-alert-icon">🔔</span>
+                    <span class="btn-shift-alert-label">Get alerts</span>
+                    <span class="btn-shift-alert-tg-badge">Telegram</span>
+                  </button>
+                  <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-cold-cook" data-restaurant="Бистро «Малая Бронная»" data-role="Повар холодного цеха" data-payout="4 600 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
+                    ⭐️ Отзыв
+                  </button>
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #f8fafc; border-color: #cbd5e1; color: #334155; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                    🔒 Шеф
+                  </a>
+                </div>
+                <button type="button" class="btn btn-share-tg" data-action="share-tg" data-vacancy-id="shift-cold-cook" data-role="Повар холодного цеха в бистро" data-restaurant="Бистро «Малая Бронная»" data-rate="4 900 – 5 200 ₽" data-metro="м. Китай-город (2 мин)" data-conditions="Дневная смена, выплаты каждую пятницу, питание от шефа">
+                  <span>✈️</span> Поделиться сменой в TG
                 </button>
               </div>
             </article>
@@ -604,6 +1988,451 @@
             </div>
           </div>
 
+          <!-- SOS Acceptance Modal -->
+          <div id="sosModal" class="gc-alert-modal-backdrop" aria-hidden="true" style="display: none;">
+            <div class="gc-alert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
+              <button type="button" class="gc-alert-modal-close" id="sosModalClose" aria-label="Закрыть">✕</button>
+              <div class="gc-alert-modal-head">
+                <div class="gc-alert-modal-icon" style="background: #fee2e2; color: #ef4444;">🚨</div>
+                <div>
+                  <h3 id="sosModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #1e293b;">
+                    Занять SOS-смену: Выход сейчас
+                  </h3>
+                  <p style="margin: 4px 0 0; font-size: 13px; color: #64748b;">
+                    Ресторан «Никитская Kitchen» • <strong style="color: #ef4444;">7 500 ₽ за смену</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div id="sosModalFormView">
+                <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 12px; padding: 14px; margin: 16px 0;">
+                  <div style="font-size: 13px; color: #9f1239; line-height: 1.5;">
+                    ⚡️ Смена закрепится за вами. Шеф закроет набор. Такси до заведения оплачивается, расчет наличными или на карту сразу после смены.
+                  </div>
+                </div>
+                <form id="sosAcceptForm">
+                  <div style="margin-bottom: 12px;">
+                    <label for="sosCookName" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 5px; text-transform: uppercase;">Ваше имя</label>
+                    <input type="text" id="sosCookName" placeholder="Алексей" required style="width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <label for="sosCookContact" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 5px; text-transform: uppercase;">Телефон или Telegram</label>
+                    <input type="text" id="sosCookContact" placeholder="+7 (999) 000-00-00 или @username" required style="width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
+                  </div>
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 5px; text-transform: uppercase;">Через сколько будете на месте?</label>
+                    <div style="display: flex; gap: 8px;">
+                      <label style="flex: 1; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; font-size: 13px; font-weight: 750;">
+                        <input type="radio" name="sosEta" value="25" checked style="margin-right: 4px;" /> 20–30 мин
+                      </label>
+                      <label style="flex: 1; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; font-size: 13px; font-weight: 750;">
+                        <input type="radio" name="sosEta" value="40" style="margin-right: 4px;" /> 40–50 мин
+                      </label>
+                    </div>
+                  </div>
+                  <button type="submit" id="sosSubmitBtn" class="btn" style="width: 100%; justify-content: center; background: #ef4444; border-color: #ef4444; color: #fff; font-weight: 900; padding: 14px 20px; font-size: 16px; cursor: pointer;">
+                    🚀 Подтвердить выезд и открыть контакты шефа
+                  </button>
+                </form>
+              </div>
+
+              <div id="sosModalSuccessView" style="display: none; padding-top: 8px;">
+                <div style="background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="font-size: 22px;">🎉</span>
+                    <strong style="color: #065f46; font-size: 16px;">Смена закреплена за вами!</strong>
+                  </div>
+                  <p style="margin: 0 0 12px; font-size: 14px; color: #047857; line-height: 1.5;">
+                    Шеф Алексей уведомлен о вашем выезде. Ниже прямые инструкции и контакты для входа:
+                  </p>
+                  <div style="background: #ffffff; border-radius: 10px; padding: 14px; font-size: 13.5px; color: #1e293b; line-height: 1.6; border: 1px solid #d1fae5;">
+                    <div>📍 <b>Адрес:</b> Большая Никитская ул., 24 (м. Тверская, 3 мин)</div>
+                    <div>🔑 <b>Служебный вход:</b> Калитка со двора, код <b>3482#</b></div>
+                    <div>👨‍🍳 <b>Шеф-повар:</b> Алексей, тел. <b>+7 (995) 883-21-45</b></div>
+                    <div>💬 <b>Telegram шефа:</b> <b>@nikitskaya_chef</b></div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <a href="tel:+79958832145" class="btn primary" style="flex: 1; justify-content: center; background: #064c3b; border-color: #064c3b; font-weight: 900; text-decoration: none;">
+                    📞 Позвонить шефу
+                  </a>
+                  <a href="https://t.me/nikitskaya_chef" target="_blank" rel="noopener" class="btn" style="flex: 1; justify-content: center; background: #229ed9; border-color: #229ed9; color: #fff; font-weight: 900; text-decoration: none;">
+                    💬 Написать в Telegram
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Apply Modal -->
+          <div id="quickApplyModal" class="gc-alert-modal-backdrop" aria-hidden="true" style="display: none;">
+            <div class="gc-alert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="quickApplyTitle">
+              <button type="button" class="gc-alert-modal-close" id="quickApplyClose" aria-label="Закрыть">✕</button>
+              <div class="gc-alert-modal-head">
+                <div class="gc-alert-modal-icon" style="background: #ecfdf5; color: #064c3b;">⚡️</div>
+                <div>
+                  <h3 id="quickApplyTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #1e293b;">
+                    Отклик в 1 клик без резюме
+                  </h3>
+                  <p style="margin: 4px 0 0; font-size: 13px; color: #64748b;">
+                    Смена: <strong id="quickApplyRoleLabel" style="color: #064c3b;">Повар</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div id="quickApplyFormView">
+                <form id="quickApplyForm" style="margin-top: 16px;">
+                  <input type="hidden" id="quickApplyVacancyId" value="" />
+                  <input type="hidden" id="quickApplyRoleVal" value="" />
+
+                  <!-- Шаг 1: Цех -->
+                  <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">1. Ваш цех / специализация</label>
+                    <div class="gc-step-btn-group" id="quickApplyWorkshopGroup">
+                      <button type="button" class="gc-step-pill is-selected" data-val="Горячий цех">Горячий цех</button>
+                      <button type="button" class="gc-step-pill" data-val="Холодный цех">Холодный цех</button>
+                      <button type="button" class="gc-step-pill" data-val="Су-шеф">Су-шеф</button>
+                      <button type="button" class="gc-step-pill" data-val="Суши / Пицца">Суши / Пицца</button>
+                      <button type="button" class="gc-step-pill" data-val="Заготовщик">Заготовщик</button>
+                    </div>
+                  </div>
+
+                  <!-- Шаг 2: Опыт -->
+                  <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">2. Опыт в ресторанной кухне</label>
+                    <div class="gc-step-btn-group" id="quickApplyExpGroup">
+                      <button type="button" class="gc-step-pill" data-val="До 1 года">До 1 года</button>
+                      <button type="button" class="gc-step-pill is-selected" data-val="1–3 года">1–3 года</button>
+                      <button type="button" class="gc-step-pill" data-val="Более 3 лет">Более 3 лет</button>
+                      <button type="button" class="gc-step-pill" data-val="Шеф / Бригадир">Шеф / Бригадир</button>
+                    </div>
+                  </div>
+
+                  <!-- Шаг 3: Медкнижка -->
+                  <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">3. Медицинская книжка</label>
+                    <div class="gc-step-btn-group" id="quickApplyMedGroup">
+                      <button type="button" class="gc-step-pill is-selected" data-val="Есть действующая">✅ Есть действующая</button>
+                      <button type="button" class="gc-step-pill" data-val="В процессе оформления">⏳ В процессе</button>
+                    </div>
+                  </div>
+
+                  <!-- Шаг 4: Контакт -->
+                  <div style="margin-bottom: 16px;">
+                    <label for="quickApplyContact" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">4. Ваш телефон или Telegram для ответа</label>
+                    <input type="text" id="quickApplyContact" placeholder="+7 (999) 000-00-00 или @username" required style="width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
+                  </div>
+
+                  <button type="submit" id="quickApplySubmitBtn" class="btn primary" style="width: 100%; justify-content: center; background: #064c3b; border-color: #064c3b; font-weight: 900; padding: 14px; font-size: 15.5px; cursor: pointer;">
+                    🚀 Отправить отклик шефу
+                  </button>
+                </form>
+              </div>
+
+              <div id="quickApplySuccessView" style="display: none; padding-top: 8px;">
+                <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="font-size: 22px;">✅</span>
+                    <strong style="color: #065f46; font-size: 16px;">Отклик успешно передан шефу!</strong>
+                  </div>
+                  <p style="margin: 0 0 10px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="quickApplySuccessMsg">
+                    Ваша анкета передана управляющему заведением. Вы также можете связаться напрямую:
+                  </p>
+                  <div style="background: #ffffff; border-radius: 10px; padding: 12px; font-size: 13.5px; color: #1e293b; border: 1px solid #d1fae5;">
+                    <div>👨‍🍳 <b>Шеф заведения:</b> Шеф Алексей</div>
+                    <div>📞 <b>Телефон кухни:</b> +7 (995) 883-21-45</div>
+                    <div>💬 <b>Telegram:</b> @gastroconnect</div>
+                  </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" class="btn" style="width: 100%; justify-content: center; background: #24A1DE; border-color: #24A1DE; color: #ffffff; font-weight: 800; text-decoration: none; padding: 12px; border-radius: 10px; font-size: 14px;">
+                    💬 Перейти в чат сообщества @gastroconnect
+                  </a>
+                  <button type="button" class="btn" id="quickApplyDoneBtn" style="width: 100%; justify-content: center; background: #f8fafc; border-color: #cbd5e1; color: #334155; font-weight: 800; cursor: pointer; padding: 10px;">
+                    Закрыть окно
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GastroPass Modal -->
+          <div id="gastropassModal" class="gc-alert-modal-backdrop" aria-hidden="true" style="display: none;">
+            <div class="gc-gastropass-card-dialog" role="dialog" aria-modal="true" aria-labelledby="gastroPassTitle">
+              <button type="button" class="gc-alert-modal-close" id="gastropassClose" aria-label="Закрыть">✕</button>
+              <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div style="width: 68px; height: 68px; border-radius: 50%; background: #064c3b; color: #fef08a; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(6, 76, 59, 0.25);">
+                  👨‍🍳
+                </div>
+                <h3 id="gastroPassTitle" style="margin: 0 0 4px; font-size: 22px; font-weight: 900; color: #1e293b;">
+                  <span id="gpCardName">Повар GastroConnect</span>
+                </h3>
+                <p style="margin: 0 0 10px; font-size: 14px; color: #64748b;" id="gpCardRole">
+                  Повар горячего цеха / Су-шеф
+                </p>
+
+                <!-- Статус доступности -->
+                <div style="margin-bottom: 14px;">
+                  <select id="gpStatusSelect" style="padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; border: 1.5px solid #cbd5e1; background: #ecfdf5; color: #065f46; cursor: pointer; outline: none;">
+                    <option value="ready">🟢 Свободен для смен сегодня</option>
+                    <option value="looking">🟡 Ищу график 2/2 или 3/3</option>
+                    <option value="busy">🔴 Занят на смене</option>
+                  </select>
+                </div>
+
+                <!-- Навыки -->
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 380px; margin-bottom: 12px;">
+                  <span class="gc-perk-chip gc-perk-metro">Италия & Паста</span>
+                  <span class="gc-perk-chip gc-perk-taxi">Хоспер & Гриль</span>
+                  <span class="gc-perk-chip gc-perk-daily">Су-вид & Заготовки</span>
+                  <span class="gc-perk-chip gc-perk-trust">100% Выход без опозданий</span>
+                </div>
+
+                <!-- ВИЗУАЛИЗАЦИЯ РЕЙТИНГА «НАДЕЖНОСТЬ» -->
+                <div class="gc-reliability-box" id="gpReliabilityWidget">
+                  <div class="gc-reliability-head">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 16px;">🛡</span>
+                      <strong style="font-size: 14.5px; color: #1e293b;">Рейтинг «Надежность»</strong>
+                    </div>
+                    <span class="gc-reliability-badge" id="gpReliabilityLevelBadge">
+                      Топ-1% по дисциплине
+                    </span>
+                  </div>
+
+                  <!-- Визуальный спидометр / процентное кольцо -->
+                  <div class="gc-reliability-visual">
+                    <div class="gc-meter-circle-wrap">
+                      <svg class="gc-meter-svg" width="96" height="96" viewBox="0 0 96 96">
+                        <circle cx="48" cy="48" r="40" stroke="#e2e8f0" stroke-width="8" fill="none" />
+                        <circle id="gpMeterCircle" cx="48" cy="48" r="40" stroke="#064c3b" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="251.33" stroke-dashoffset="0" style="transition: stroke-dashoffset 0.8s ease;" />
+                      </svg>
+                      <div class="gc-meter-center">
+                        <span class="gc-meter-val" id="gpMeterScoreText">100%</span>
+                        <span class="gc-meter-sub">Индекс</span>
+                      </div>
+                    </div>
+                    
+                    <!-- 3 Ключевых метрики -->
+                    <div class="gc-reliability-breakdown-grid">
+                      <div class="gc-metric-item">
+                        <strong class="gc-metric-num" id="gpOnTimePct">100%</strong>
+                        <span class="gc-metric-label">Своевременно</span>
+                        <span class="gc-metric-detail" id="gpOnTimeCount">10 из 10 смен</span>
+                      </div>
+                      <div class="gc-metric-item">
+                        <strong class="gc-metric-num" id="gpNoLatePct">100%</strong>
+                        <span class="gc-metric-label">Без опозданий</span>
+                        <span class="gc-metric-detail" id="gpAvgEarly">в среднем за 11 мин</span>
+                      </div>
+                      <div class="gc-metric-item">
+                        <strong class="gc-metric-num" id="gpAttendancePct">100%</strong>
+                        <span class="gc-metric-label">Явка без срывов</span>
+                        <span class="gc-metric-detail" id="gpAttendanceDetail">0 невыходов</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Раскрывающийся лог смен -->
+                  <button type="button" class="gc-shift-history-toggle-btn" id="gpShiftToggleBtn" aria-expanded="false">
+                    <span>📋 История выходов на смены (<span id="gpShiftsCount">10</span>)</span>
+                    <span id="gpShiftToggleIcon">▼</span>
+                  </button>
+                  <div class="gc-shift-history-list" id="gpShiftHistoryList" style="display: none;"></div>
+
+                  <!-- Интерактивный симулятор выхода на смену -->
+                  <div class="gc-sim-box">
+                    <div class="gc-sim-head">
+                      <span>🧪 Смоделировать новый выход на смену:</span>
+                      <button type="button" class="gc-sim-reset" id="gpSimResetBtn">↺ Исходные смены</button>
+                    </div>
+                    <div class="gc-sim-controls">
+                      <select class="gc-sim-select" id="gpSimStatusSelect">
+                        <option value="early">🟢 Прибыть за 15 мин (Раньше)</option>
+                        <option value="on_time">🟢 Прибыть точно вовремя (Без задержки)</option>
+                        <option value="late_10">🟡 Небольшое опоздание (на 10 мин)</option>
+                        <option value="late_30">🔴 Опоздание на 30 мин</option>
+                        <option value="no_show">⛔️ Срыв смены / Неявка</option>
+                      </select>
+                      <button type="button" class="gc-sim-btn" id="gpSimAddBtn">➕ Добавить в расчет</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- QR-код шеф-визитки -->
+                <div class="gc-qr-box" id="gpQrBox">
+                  <svg id="gpQrSvg" width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="140" height="140" fill="#ffffff" rx="10"/>
+                    <rect x="15" y="15" width="35" height="35" rx="6" fill="#064c3b"/>
+                    <rect x="22" y="22" width="21" height="21" rx="3" fill="#ffffff"/>
+                    <rect x="27" y="27" width="11" height="11" rx="2" fill="#064c3b"/>
+
+                    <rect x="90" y="15" width="35" height="35" rx="6" fill="#064c3b"/>
+                    <rect x="97" y="22" width="21" height="21" rx="3" fill="#ffffff"/>
+                    <rect x="102" y="27" width="11" height="11" rx="2" fill="#064c3b"/>
+
+                    <rect x="15" y="90" width="35" height="35" rx="6" fill="#064c3b"/>
+                    <rect x="22" y="97" width="21" height="21" rx="3" fill="#ffffff"/>
+                    <rect x="27" y="102" width="11" height="11" rx="2" fill="#064c3b"/>
+
+                    <rect x="60" y="20" width="10" height="10" rx="2" fill="#064c3b"/>
+                    <rect x="75" y="25" width="8" height="18" rx="2" fill="#064c3b"/>
+                    <rect x="60" y="45" width="20" height="8" rx="2" fill="#064c3b"/>
+                    <rect x="20" y="60" width="15" height="10" rx="2" fill="#064c3b"/>
+                    <rect x="45" y="60" width="25" height="20" rx="3" fill="#c99a3f"/>
+                    <rect x="80" y="60" width="15" height="15" rx="2" fill="#064c3b"/>
+                    <rect x="105" y="60" width="18" height="10" rx="2" fill="#064c3b"/>
+                    <rect x="60" y="90" width="18" height="12" rx="2" fill="#064c3b"/>
+                    <rect x="85" y="85" width="12" height="18" rx="2" fill="#064c3b"/>
+                    <rect x="60" y="110" width="25" height="12" rx="2" fill="#064c3b"/>
+                    <rect x="100" y="105" width="22" height="20" rx="3" fill="#064c3b"/>
+                  </svg>
+                  <span style="font-size: 11.5px; font-weight: 700; color: #64748b; margin-top: 6px;">
+                    QR шеф-визитки для быстрого сканирования
+                  </span>
+                </div>
+
+                <div style="display: flex; gap: 8px; width: 100%; margin-top: 10px;">
+                  <button type="button" class="btn primary" id="gpCopyLinkBtn" style="flex: 1; justify-content: center; background: #064c3b; border-color: #064c3b; font-weight: 800; font-size: 13.5px; cursor: pointer;">
+                    📋 Скопировать ссылку
+                  </button>
+                  <a id="gpShareTgBtn" href="https://t.me/share/url?url=https%3A%2F%2Fgastroconnect.ru%2Fworkers%2F&text=%D0%9C%D0%BE%D1%8F+%D0%B2%D0%B8%D0%B7%D0%B8%D1%82%D0%BA%D0%B0+%D0%BF%D0%BE%D0%B2%D0%B0%D1%80%D0%B0+%D0%BD%D0%B0+GastroConnect" target="_blank" rel="noopener" class="btn" style="flex: 1; justify-content: center; background: #229ed9; border-color: #229ed9; color: #fff; font-weight: 800; font-size: 13.5px; text-decoration: none;">
+                    ✈️ В Telegram
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal: Подтверждение смены и публикация отзыва заведения в Telegram -->
+          <div id="shiftReviewModal" class="gc-alert-modal-backdrop" aria-hidden="true" style="display: none;">
+            <div class="gc-alert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="shiftReviewModalTitle" style="max-width: 540px;">
+              <button type="button" class="gc-alert-modal-close" id="shiftReviewModalClose" aria-label="Закрыть">✕</button>
+              
+              <div class="gc-alert-modal-head" style="margin-bottom: 16px;">
+                <span class="gc-alert-modal-badge" style="background: rgba(201, 154, 63, 0.2); color: #c99a3f; border: 1px solid rgba(201, 154, 63, 0.4);">
+                  ⭐️ Официальный отзыв заведения
+                </span>
+                <h3 id="shiftReviewModalTitle" style="margin: 8px 0 4px; font-size: 20px; font-weight: 900; color: #1e293b;">
+                  Подтверждение смены & Публикация отзыва
+                </h3>
+                <p style="margin: 0; font-size: 13.5px; color: #64748b; line-height: 1.4;">
+                  Шеф-повар или управляющий подтверждает успешное закрытие смены. Отзыв мгновенно транслируется в Telegram-канал <b>@gastroconnect</b>.
+                </p>
+              </div>
+
+              <div id="shiftReviewFormView">
+                <form id="shiftReviewForm" style="display: flex; flex-direction: column; gap: 14px;">
+                  <!-- Выбор смены -->
+                  <div>
+                    <label for="reviewShiftSelect" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                      1. Смена / Должность
+                    </label>
+                    <select id="reviewShiftSelect" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 14px; font-weight: 600; background: #fff; color: #1e293b;">
+                      <option value="shift-sous-chef" data-role="Су-шеф" data-restaurant="Ресторан «Никитская Kitchen»" data-metro="м. Тверская / Патриаршие" data-payout="6 500 ₽ (Выплачено полностью)">Су-шеф — Никитская Kitchen (м. Тверская, 6 500 ₽)</option>
+                      <option value="shift-hot-cook" data-role="Повар горячего цеха" data-restaurant="Гастробар «Belorusskaya Grill»" data-metro="м. Белорусская" data-payout="5 100 ₽ (Выплачено полностью)">Повар горячего цеха — Belorusskaya Grill (м. Белорусская, 5 100 ₽)</option>
+                      <option value="shift-cold-cook" data-role="Повар холодного цеха" data-restaurant="Бистро «Малая Бронная»" data-metro="м. Маяковская" data-payout="4 600 ₽ (Выплачено полностью)">Повар холодного цеха — Бистро «Малая Бронная» (м. Маяковская, 4 600 ₽)</option>
+                      <option value="shift-sos" data-role="Повар горячего цеха / Гриль" data-restaurant="Ресторан «Никитская Kitchen»" data-metro="м. Тверская" data-payout="7 500 ₽ (Выплачено сразу)">🚨 SOS-смена горячего цеха (м. Тверская, 7 500 ₽)</option>
+                    </select>
+                  </div>
+
+                  <!-- Повар и Заведение -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                      <label for="reviewRestaurantInput" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Заведение</label>
+                      <input type="text" id="reviewRestaurantInput" value="Ресторан «Никитская Kitchen»" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-weight: 600;" />
+                    </div>
+                    <div>
+                      <label for="reviewWorkerInput" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Имя мастера</label>
+                      <input type="text" id="reviewWorkerInput" value="Артем Смирнов" required placeholder="Имя специалиста" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-weight: 600;" />
+                    </div>
+                  </div>
+
+                  <!-- Оценка звездами -->
+                  <div>
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                      2. Оценка шефа за смену
+                    </label>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div id="reviewRatingStars" style="display: flex; gap: 4px; font-size: 24px; cursor: pointer;">
+                        <span data-star="1" style="color: #eab308; transition: transform 0.1s;">★</span>
+                        <span data-star="2" style="color: #eab308; transition: transform 0.1s;">★</span>
+                        <span data-star="3" style="color: #eab308; transition: transform 0.1s;">★</span>
+                        <span data-star="4" style="color: #eab308; transition: transform 0.1s;">★</span>
+                        <span data-star="5" style="color: #eab308; transition: transform 0.1s;">★</span>
+                      </div>
+                      <input type="hidden" id="reviewRatingVal" value="5" />
+                      <span id="reviewRatingLabel" style="font-size: 14px; font-weight: 800; color: #064c3b; margin-left: 6px;">5.0 — Идеальная смена</span>
+                    </div>
+                  </div>
+
+                  <!-- Пунктуальность и соблюдение ТТК -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                      <label for="reviewPunctualitySelect" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Пунктуальность</label>
+                      <select id="reviewPunctualitySelect" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13px; font-weight: 600; background: #fff;">
+                        <option value="Прибыл за 15 мин до смены">✓ За 15 мин до смены</option>
+                        <option value="Вовремя, без опозданий" selected>✓ Вовремя (100% явка)</option>
+                        <option value="Срочный выезд (SOS-замена)">⚡️ SOS-выезд за 35 мин</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="reviewPayoutInput" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Статус выплаты</label>
+                      <input type="text" id="reviewPayoutInput" value="6 500 ₽ (Выплачено полностью)" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13px; font-weight: 600;" />
+                    </div>
+                  </div>
+
+                  <!-- Текст отзыва -->
+                  <div>
+                    <label for="reviewTextInput" style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                      3. Комментарий шеф-повара
+                    </label>
+                    <textarea id="reviewTextInput" rows="3" required placeholder="Например: Отличная отдача чеков в запару, знание ТТК и безупречная чистота на горячем цеху. Будем рады видеть на постоянных сменах!" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-family: inherit; line-height: 1.4; resize: vertical;">Отличная отдача в запару пятничного вечера. ТТК соблюдены на 100%, чистота станции идеальная. Расчет произвели сразу после смены, ждем снова!</textarea>
+                  </div>
+
+                  <!-- Чекбокс подтверждения Telegram публикации -->
+                  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px;">
+                    <input type="checkbox" id="reviewPublishTgCheckbox" checked style="margin-top: 3px; cursor: pointer;" />
+                    <label for="reviewPublishTgCheckbox" style="font-size: 12.5px; color: #166534; line-height: 1.4; cursor: pointer;">
+                      <b>Опубликовать в Telegram-канал @gastroconnect</b><br />
+                      Отзыв укрепит рейтинг мастера и подтвердит прозрачность выплат в заведении.
+                    </label>
+                  </div>
+
+                  <button type="submit" id="shiftReviewSubmitBtn" class="btn primary" style="width: 100%; justify-content: center; background: #064c3b; border-color: #064c3b; font-weight: 900; padding: 14px; font-size: 15px; cursor: pointer; border-radius: 10px;">
+                    🚀 Подтвердить смену и отправить отзыв
+                  </button>
+                </form>
+              </div>
+
+              <!-- Success View -->
+              <div id="shiftReviewSuccessView" style="display: none; padding-top: 6px;">
+                <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="font-size: 22px;">🎉</span>
+                    <strong style="color: #065f46; font-size: 16px;">Смена подтверждена, отзыв опубликован!</strong>
+                  </div>
+                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="shiftReviewSuccessMsg">
+                    Отзыв от заведения успешно внесен в профиль работника и отправлен в официальный канал сообщества.
+                  </p>
+                  <div style="background: #ffffff; border-radius: 10px; padding: 12px; font-size: 13px; color: #1e293b; border: 1px solid #d1fae5; line-height: 1.5;">
+                    <div>📢 <b>Канал:</b> <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" style="color: #229ed9; font-weight: 700; text-decoration: none;">@gastroconnect</a></div>
+                    <div>⭐️ <b>Рейтинг повара:</b> <span id="revSuccessStars">⭐️⭐️⭐️⭐️⭐️ (5.0 / 5.0)</span></div>
+                    <div>💰 <b>Выплата:</b> <span id="revSuccessPayout">Подтверждена 100%</span></div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" class="btn" style="flex: 1; justify-content: center; background: #229ed9; border-color: #229ed9; color: #fff; font-weight: 800; text-decoration: none; padding: 12px;">
+                    ✈️ Открыть пост в Telegram
+                  </a>
+                  <button type="button" class="btn primary" id="shiftReviewDoneBtn" style="flex: 1; justify-content: center; background: #064c3b; border-color: #064c3b; font-weight: 800; cursor: pointer; padding: 12px;">
+                    Готово
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- VIP Баннер авторизации -->
           <div class="vacancies-banner" style="background: linear-gradient(135deg, #064c3b 0%, #032b22 100%); border: 1.5px solid rgba(201, 154, 63, 0.35); border-radius: 24px; padding: 36px 38px; color: #fff;">
             <div class="vacancies-banner-info" style="max-width: 660px;">
@@ -622,6 +2451,219 @@
               <a class="btn btn-contact-light" href="/auth/?mode=login&role=worker" style="padding: 14px 22px; font-weight: 800;">
                 Войти в кабинет
               </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. КАЛЬКУЛЯТОР ЧИСТОГО ДОХОДА ПОВАРА -->
+        <section class="gc-calc-container" id="chefCalculatorSection" aria-label="Калькулятор дохода повара">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;">
+            <div>
+              <span style="color: var(--gold); font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">
+                💰 Прозрачный расчет заработка
+              </span>
+              <h2 style="margin: 0; font-size: 24px; font-weight: 950; color: #1e293b;">
+                Калькулятор чистого дохода и бонусов на смене
+              </h2>
+            </div>
+            <span style="font-size: 13.5px; font-weight: 750; color: #064c3b; background: rgba(6, 76, 59, 0.08); padding: 6px 14px; border-radius: 999px;">
+              📊 Ставки ресторанов Москвы (2025–2026)
+            </span>
+          </div>
+
+          <div class="gc-calc-grid">
+            <div class="gc-calc-controls">
+              <!-- Роль / Цех -->
+              <div>
+                <label style="display: block; font-size: 12.5px; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 8px;">
+                  1. Ваша роль / специализация
+                </label>
+                <div class="gc-step-btn-group" id="calcRoleSelector">
+                  <button type="button" class="gc-step-pill" data-rate="4200" data-role="Официант / Раннер">Официант (4 200 ₽)</button>
+                  <button type="button" class="gc-step-pill" data-rate="4500" data-role="Бариста / Бармен">Бариста (4 500 ₽)</button>
+                  <button type="button" class="gc-step-pill" data-rate="4800" data-role="Холодный цех">Холодный цех (4 800 ₽)</button>
+                  <button type="button" class="gc-step-pill is-selected" data-rate="5200" data-role="Горячий цех">Горячий цех (5 200 ₽)</button>
+                  <button type="button" class="gc-step-pill" data-rate="5500" data-role="Суши / Пицца">Суши / Пицца (5 500 ₽)</button>
+                  <button type="button" class="gc-step-pill" data-rate="6500" data-role="Су-шеф">Су-шеф (6 500 ₽)</button>
+                  <button type="button" class="gc-step-pill" data-rate="8000" data-role="Шеф-повар">Шеф-повар (8 000 ₽)</button>
+                </div>
+              </div>
+
+              <!-- Количество смен в неделю -->
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <label for="calcShiftsSlider" style="font-size: 12.5px; font-weight: 800; color: #475569; text-transform: uppercase; margin: 0;">
+                    2. Количество смен в неделю
+                  </label>
+                  <span id="calcShiftsLabel" style="font-size: 16px; font-weight: 900; color: #064c3b;">
+                    4 смены / нед (график 2/2)
+                  </span>
+                </div>
+                <input type="range" id="calcShiftsSlider" min="1" max="6" step="1" value="4" class="gc-calc-slider" />
+                <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #94a3b8; margin-top: 4px;">
+                  <span>1 смена (подработка)</span>
+                  <span>3 смены (3/3)</span>
+                  <span>4 смены (2/2)</span>
+                  <span>5-6 смен (интенсив)</span>
+                </div>
+              </div>
+
+              <!-- Пользовательская ставка -->
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <label for="calcRateSlider" style="font-size: 12.5px; font-weight: 800; color: #475569; text-transform: uppercase; margin: 0;">
+                    3. Ставка за 1 смену (12 часов)
+                  </label>
+                  <span id="calcRateLabel" style="font-size: 18px; font-weight: 950; color: #064c3b;">
+                    5 200 ₽
+                  </span>
+                </div>
+                <input type="range" id="calcRateSlider" min="3500" max="9000" step="100" value="5200" class="gc-calc-slider" />
+              </div>
+            </div>
+
+            <!-- Итоги заработка -->
+            <div class="gc-calc-result-card">
+              <div style="font-size: 12.5px; font-weight: 900; color: #e6c587; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+                Чистый доход на руки
+              </div>
+              <div class="gc-calc-result-sum" id="calcMonthlyIncome">90 100 ₽</div>
+              <div class="gc-calc-result-sub" id="calcWeeklyIncome">~20 800 ₽ в неделю • расчет без задержек</div>
+
+              <div class="gc-calc-perks-box">
+                <div class="gc-calc-perk-row">
+                  <span>🍱 Питание от шефа (3 раза/день):</span>
+                  <strong id="calcFoodBonus">+18 000 ₽ / мес</strong>
+                </div>
+                <div class="gc-calc-perk-row">
+                  <span>🚕 Ночной развоз / такси домой:</span>
+                  <strong>+6 500 ₽ / мес</strong>
+                </div>
+                <div class="gc-calc-perk-row">
+                  <span>🔪 Компенсация формы и ножей:</span>
+                  <strong>Включено</strong>
+                </div>
+                <div class="gc-calc-perk-row" style="border-top: 1px dashed rgba(255,255,255,0.25); padding-top: 8px; margin-top: 4px; color: #fef08a;">
+                  <span>Общая выгода с бонусами:</span>
+                  <strong id="calcTotalValue">114 600 ₽ / мес</strong>
+                </div>
+              </div>
+
+              <a href="#vacancies" class="btn" style="width: 100%; justify-content: center; background: var(--gold); border-color: var(--gold); color: #062b21; font-weight: 900; padding: 13px; text-decoration: none; margin-top: 6px;">
+                🔍 Найти смены с этой ставкой
+              </a>
+              <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" class="btn" style="width: 100%; justify-content: center; background: #24A1DE; border-color: #24A1DE; color: #ffffff; font-weight: 900; padding: 13px; text-decoration: none; margin-top: 8px; border-radius: 10px;">
+                💬 Получать смены в Telegram @gastroconnect
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. ДВУСТОРОННИЙ ИНДЕКС ДОВЕРИЯ И ГАРАНТИЙ (Борьба с гостингом) -->
+        <section class="gc-trust-section" id="trustIndexSection" aria-label="Индекс Доверия и Гарантии">
+          <div style="text-align: center; max-width: 680px; margin: 0 auto 30px;">
+            <span style="color: var(--gold); font-size: 13px; font-weight: 950; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 6px;">
+              🛡 Стандарт честной кухни GastroConnect
+            </span>
+            <h2 style="font-size: 26px; font-weight: 950; color: #1e293b; margin: 0 0 10px;">
+              Двусторонний Индекс Доверия и Защита от гостинга
+            </h2>
+            <p style="font-size: 15px; color: #64748b; line-height: 1.5; margin: 0;">
+              Мы защищаем повара от невыплат и штрафов, а заведения — от срывов смен и невыходов. Никаких пустых обещаний: прозрачные правила для обеих сторон.
+            </p>
+          </div>
+
+          <div class="gc-trust-grid">
+            <!-- Гарантии повару -->
+            <div class="gc-trust-card">
+              <div class="gc-trust-head">
+                <div class="gc-trust-icon">👨‍🍳</div>
+                <div>
+                  <h3 class="gc-trust-title">Гарантии для повара</h3>
+                  <div class="gc-trust-badge">100% Защита труда</div>
+                </div>
+              </div>
+              <ul class="gc-trust-list">
+                <li>
+                  <strong style="color: #064c3b;">✓ Оплата 100% отработанного времени:</strong> без скрытых вычетов, «стажировок на мойке» и удержаний.
+                </li>
+                <li>
+                  <strong style="color: #064c3b;">✓ Компенсация при отмене смены:</strong> если заведение отменяет смену менее чем за 3 часа, повар получает 1 500 ₽ компенсации за простой.
+                </li>
+                <li>
+                  <strong style="color: #064c3b;">✓ Бесплатный стафф-обед и ужин:</strong> полноценное горячее питание с первого дня.
+                </li>
+                <li>
+                  <strong style="color: #064c3b;">✓ Прямой контакт шефа:</strong> без посредников и бессмысленных HR-тестов.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Гарантии заведению -->
+            <div class="gc-trust-card">
+              <div class="gc-trust-head">
+                <div class="gc-trust-icon" style="background: rgba(201, 154, 63, 0.15); color: #926a1f;">🏪</div>
+                <div>
+                  <h3 class="gc-trust-title">Гарантии для заведения</h3>
+                  <div class="gc-trust-badge" style="background: rgba(201, 154, 63, 0.15); color: #926a1f;">Рейтинг надежности</div>
+                </div>
+              </div>
+              <ul class="gc-trust-list">
+                <li>
+                  <strong style="color: #1e293b;">✓ Индекс явки 100%:</strong> повара подтверждают выезд геопозицией за 2 часа до начала смены.
+                </li>
+                <li>
+                  <strong style="color: #1e293b;">✓ Верификация медкнижек:</strong> исключаем мастеров без санитарного допуска на кухню.
+                </li>
+                <li>
+                  <strong style="color: #1e293b;">✓ Быстрая замена за 45 минут:</strong> если форс-мажор — система автоматически подбирает замену из ближайших проверенных поваров.
+                </li>
+                <li>
+                  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                      <strong style="color: #1e293b;">✓ Двусторонние отзывы:</strong> шеф ставит оценку за смену, формируя репутацию мастера.
+                    </div>
+                    <button type="button" class="btn primary" id="openReviewModalBtn" style="padding: 6px 12px; font-size: 12px; font-weight: 800; background: #064c3b; border-color: #064c3b; color: #fff; cursor: pointer; border-radius: 8px;">
+                      ⭐️ Подтвердить смену и оставить отзыв
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. GASTROPASS: ЦИФРОВАЯ ШЕФ-ВИЗИТКА И QR -->
+        <section class="gc-gastropass-banner" id="gastroPassSection" aria-label="Цифровая шеф-визитка GastroPass">
+          <div class="gc-gastropass-info">
+            <span class="gc-gastropass-tag">🪪 Персональный паспорт шефа / повара</span>
+            <h3 style="margin: 0 0 10px; font-size: 24px; font-weight: 950; color: #fff;">
+              GastroPass: Ваша цифровая визитка и статус готовности к сменам
+            </h3>
+            <p style="margin: 0; font-size: 15px; color: #d1fae5; line-height: 1.5;">
+              Забудьте про отправку резюме в Word. GastroPass — это интерактивная карточка с вашим цехом, ставкой, проверенными отзывами и статусом «Свободен для смен». Покажите QR-код шефу или отправьте ссылку в Telegram в 1 клик.
+            </p>
+            <div class="gc-gastropass-reliability-preview" id="gpBannerReliabilityBox" style="display: flex; align-items: center; gap: 12px; margin-top: 14px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(167, 243, 208, 0.3); border-radius: 12px; padding: 10px 14px; flex-wrap: wrap;">
+              <span style="font-size: 13.5px; font-weight: 900; color: #fef08a; display: flex; align-items: center; gap: 6px;">
+                🛡 Рейтинг «Надежность»: <span id="gpBannerScore">100%</span>
+              </span>
+              <span style="font-size: 13px; color: #d1fae5;">
+                • Своевременные выходы: <strong id="gpBannerOnTime">100%</strong>
+              </span>
+              <span style="font-size: 13px; color: #d1fae5;">
+                • Опозданий: <strong id="gpBannerLate">0</strong>
+              </span>
+              <span style="font-size: 12px; background: rgba(16, 185, 129, 0.3); color: #34d399; padding: 2px 8px; border-radius: 6px; font-weight: 800; margin-left: auto;">
+                ⭐️ Топ-1% по дисциплине
+              </span>
+            </div>
+          </div>
+          <div class="gc-gastropass-actions">
+            <button type="button" class="btn primary btn-gastropass-open" id="openGastroPassBtn" style="background: var(--gold); border-color: var(--gold); color: #062b21; font-weight: 900; padding: 14px 24px; font-size: 15px; cursor: pointer;">
+              📲 Открыть мой GastroPass & QR
+            </button>
+            <div style="font-size: 12.5px; color: #a7f3d0; text-align: center; font-weight: 700;">
+              ✓ Доступно без установки приложений
             </div>
           </div>
         </section>
@@ -658,6 +2700,102 @@
               <strong style="color: var(--text); display: block; font-size: 14px; margin-bottom: 4px;">💬 Живое общение</strong>
               <span style="font-size: 13px; color: var(--muted);">Чат поваров, су-шефов и управляющих со всей страны.</span>
             </div>
+          </div>
+        </section>
+
+        <!-- Live Shift Reviews Stream (Трансляция в Telegram @gastroconnect) -->
+        <section class="gc-live-reviews-section" id="liveReviewsSection" style="margin: 36px 0; background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 24px; padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 22px;">
+            <div>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 900; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+                Проверенные отзывы заведений • Telegram @gastroconnect
+              </span>
+              <h2 style="margin: 0; font-size: 24px; font-weight: 900; color: #1e293b;">
+                Подтвержденные смены и оценки шеф-поваров
+              </h2>
+            </div>
+            <button type="button" class="btn primary" id="headerConfirmShiftBtn" style="background: #064c3b; border-color: #064c3b; color: #fff; font-weight: 800; padding: 10px 18px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+              <span>⭐️</span>
+              <span>Подтвердить смену заведения</span>
+            </button>
+          </div>
+
+          <div id="liveReviewsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+            <!-- Review 1 -->
+            <article class="gc-review-card" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                  <div>
+                    <strong style="color: #064c3b; font-size: 15.5px; display: block;">Ресторан «Никитская Kitchen»</strong>
+                    <span style="font-size: 12.5px; color: #64748b;">м. Тверская / Патриаршие</span>
+                  </div>
+                  <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
+                    ⭐️ 5.0
+                  </span>
+                </div>
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: #334155;">
+                  👨‍🍳 <b>Мастер:</b> Артем Смирнов (Су-шеф)
+                </div>
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5; font-style: italic;">
+                  «Смена закрыта безупречно: идеальная чистота станции, быстрая отдача банкетного меню и точное знание ТТК. Выплата переведена сразу.»
+                </p>
+              </div>
+              <div style="border-top: 1px solid #e2e8f0; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+                <span>💰 6 500 ₽ • Выплачено 100%</span>
+                <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
+              </div>
+            </article>
+
+            <!-- Review 2 -->
+            <article class="gc-review-card" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                  <div>
+                    <strong style="color: #064c3b; font-size: 15.5px; display: block;">Гастробар «Belorusskaya Grill»</strong>
+                    <span style="font-size: 12.5px; color: #64748b;">м. Белорусская</span>
+                  </div>
+                  <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
+                    ⭐️ 5.0
+                  </span>
+                </div>
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: #334155;">
+                  👨‍🍳 <b>Мастер:</b> Михаил Воронов (Повар горячего цеха)
+                </div>
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5; font-style: italic;">
+                  «Вышел на замену вовремя, сразу встал на хоспер и гриль. Гости хвалили прожарку рибаев. Отличный профессионал, будем звать на все пятницы!»
+                </p>
+              </div>
+              <div style="border-top: 1px solid #e2e8f0; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+                <span>💰 5 100 ₽ • Выплачено 100%</span>
+                <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
+              </div>
+            </article>
+
+            <!-- Review 3 -->
+            <article class="gc-review-card" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                  <div>
+                    <strong style="color: #064c3b; font-size: 15.5px; display: block;">Бистро «Малая Бронная»</strong>
+                    <span style="font-size: 12.5px; color: #64748b;">м. Маяковская</span>
+                  </div>
+                  <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
+                    ⭐️ 5.0
+                  </span>
+                </div>
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: #334155;">
+                  👨‍🍳 <b>Мастер:</b> Светлана Кузнецова (Холодный цех)
+                </div>
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5; font-style: italic;">
+                  «Скорость нарезки и оформления боулов на высоте. Выручила в дневной ланч-пик. Санитарная книжка проверена, все четко.»
+                </p>
+              </div>
+              <div style="border-top: 1px solid #e2e8f0; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+                <span>💰 4 600 ₽ • Выплачено 100%</span>
+                <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -781,6 +2919,112 @@
               <button type="submit">Отправить анкету</button>
             <div class="success"></div>
           </form>
+        </section>
+
+        <!-- SEO ХАБ: СМЕНЫ ПО СТАНЦИЯМ МЕТРО МОСКВЫ -->
+        <section class="gc-metro-clusters-section" aria-label="Смены по станциям метро Москвы">
+          <div class="gc-metro-clusters-head">
+            <span class="gc-metro-clusters-title">
+              <span>🚇</span> Смены в шаговой доступности от ключевых станций метро:
+            </span>
+            <span style="font-size: 12.5px; color: #64748b; font-weight: 600;">
+              Быстрый выход • не более 5-7 минут пешком от метро
+            </span>
+          </div>
+          <div class="gc-metro-clusters-grid">
+            <a href="/podrabotka-patriarshie/" class="gc-metro-chip-link" title="Подработка и смены на Патриарших прудах">
+              <span>📍 Патриаршие / Тверская</span>
+              <span class="gc-metro-chip-count">14 смен</span>
+            </a>
+            <a href="/podrabotka-povarom-belorusskaya/" class="gc-metro-chip-link" title="Подработка поваром на Белорусской и Депо">
+              <span>📍 Белорусская / Депо / Лесная</span>
+              <span class="gc-metro-chip-count">19 смен</span>
+            </a>
+            <a href="/podrabotka-kitay-gorod/" class="gc-metro-chip-link" title="Подработка на Китай-городе и Покровке">
+              <span>📍 Китай-город / Покровка</span>
+              <span class="gc-metro-chip-count">16 смен</span>
+            </a>
+            <a href="/podrabotka-siti/" class="gc-metro-chip-link" title="Подработка в Москва-Сити">
+              <span>📍 Москва-Сити / Деловой центр</span>
+              <span class="gc-metro-chip-count">11 смен</span>
+            </a>
+            <a href="/workers/?metro=маяковская" class="gc-metro-chip-link">
+              <span>📍 Маяковская</span>
+              <span class="gc-metro-chip-count">8 смен</span>
+            </a>
+            <a href="/workers/?metro=арбатская" class="gc-metro-chip-link">
+              <span>📍 Арбатская</span>
+              <span class="gc-metro-chip-count">12 смен</span>
+            </a>
+            <a href="/workers/?metro=новокузнецкая" class="gc-metro-chip-link">
+              <span>📍 Новокузнецкая / Третьяковская</span>
+              <span class="gc-metro-chip-count">9 смен</span>
+            </a>
+            <a href="/workers/?metro=чистые-пруды" class="gc-metro-chip-link">
+              <span>📍 Чистые пруды / Сретенка</span>
+              <span class="gc-metro-chip-count">10 смен</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- ВОПРОСЫ И ОТВЕТЫ (FAQ ДЛЯ СОИСКАТЕЛЕЙ И РЕСТОРАТОРОВ) -->
+        <section class="gc-faq-section" id="faqSection" aria-label="Часто задаваемые вопросы о сменах в HoReCa">
+          <div class="gc-faq-header">
+            <span class="gc-faq-badge">База знаний сменщика</span>
+            <h2>Часто задаваемые вопросы о сменах и оплате</h2>
+            <p>Ответы на главные вопросы поваров, официантов и бариста о расчетах, графике и безопасности</p>
+          </div>
+          <div class="gc-faq-list" id="faqList">
+            <div class="gc-faq-item active">
+              <button type="button" class="gc-faq-question" aria-expanded="true">
+                <span>Как получить оплату сразу после смены в ресторане?</span>
+                <span class="gc-faq-icon" aria-hidden="true">▼</span>
+              </button>
+              <div class="gc-faq-answer">
+                В заведениях GastroConnect с отметкой «Ежедневные выплаты» или «SOS-смена» расчет производится в день выхода сразу после сдачи станции шефу: перевод на карту любого банка РФ (СБП / Тинькофф / Сбер) или наличными на руки без задержек.
+              </div>
+            </div>
+
+            <div class="gc-faq-item">
+              <button type="button" class="gc-faq-question" aria-expanded="false">
+                <span>Можно ли выйти на смену без опыта поваром или официантом?</span>
+                <span class="gc-faq-icon" aria-hidden="true">▼</span>
+              </button>
+              <div class="gc-faq-answer">
+                Да! Для кандидатов без опыта открыты вакансии помощника повара, раннера, хостес, сборщика и мойщика посуды с вводным 15-минутным инструктажем. На позиции поваров горячего/холодного цехов и шеф-де-парти требуется базовое знание технологических карт и санитарных норм.
+              </div>
+            </div>
+
+            <div class="gc-faq-item">
+              <button type="button" class="gc-faq-question" aria-expanded="false">
+                <span>Что делать, если заведение задерживает выплату или меняет условия?</span>
+                <span class="gc-faq-icon" aria-hidden="true">▼</span>
+              </button>
+              <div class="gc-faq-answer">
+                Все заведения проходят строгую модерацию и рейтинг выплат. При любой спорной ситуации служба поддержки GastroConnect и модераторы официального Telegram-сообщества <b>@gastroconnect</b> оперативно подключаются и защищают интересы работника.
+              </div>
+            </div>
+
+            <div class="gc-faq-item">
+              <button type="button" class="gc-faq-question" aria-expanded="false">
+                <span>Как ресторану срочно вызвать повара за 30–45 минут?</span>
+                <span class="gc-faq-icon" aria-hidden="true">▼</span>
+              </button>
+              <div class="gc-faq-answer">
+                Для экстренных замен используется режим SOS-смены: заявка моментально рассылается проверенным мастерам в радиусе 3–5 км от ресторана и транслируется в Telegram-канал <b>@gastroconnect</b> с повышенной ставкой (+30%) и компенсацией такси до заведения.
+              </div>
+            </div>
+
+            <div class="gc-faq-item">
+              <button type="button" class="gc-faq-question" aria-expanded="false">
+                <span>Нужна ли медицинская книжка для выхода на подработку в общепит?</span>
+                <span class="gc-faq-icon" aria-hidden="true">▼</span>
+              </button>
+              <div class="gc-faq-answer">
+                Да, по нормам СанПиН в Москве для работы на кухне и в зале заведений общепита требуется действующая медицинская книжка (ЛМК). Многие заведения-партнеры компенсируют ее продление или прохождение медосмотра.
+              </div>
+            </div>
+          </div>
         </section>
       </main>
 
@@ -1653,11 +3897,32 @@
           card.classList.add(details.cardClass);
 
           if (statusBar) {
-            statusBar.className = `vacancy-status-bar is-visible ${details.cssClass}`;
+            const newClass = `vacancy-status-bar is-visible ${details.cssClass}`;
+            if (statusBar.className !== newClass) {
+              statusBar.style.animation = "none";
+              void statusBar.offsetWidth;
+              statusBar.style.animation = "";
+              statusBar.className = newClass;
+            }
             const textElem = statusBar.querySelector(".vacancy-status-text");
             const dateElem = statusBar.querySelector(".vacancy-status-date");
             if (textElem) textElem.textContent = details.text;
             if (dateElem) dateElem.textContent = details.date;
+
+            // Ensure check icon is present inside .vacancy-status-bar only when status is 'Принято'
+            let checkIcon = statusBar.querySelector(".vacancy-status-check-icon");
+            const isAccepted = details.key === "accepted" || details.cssClass === "status-accepted";
+            if (isAccepted) {
+              if (!checkIcon) {
+                const indicator = statusBar.querySelector(".vacancy-status-indicator") || statusBar;
+                indicator.insertAdjacentHTML(
+                  "beforeend",
+                  `<span class="vacancy-status-check-icon" aria-hidden="true" title="Принято"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline></svg></span>`
+                );
+              }
+            } else if (checkIcon) {
+              checkIcon.remove();
+            }
           }
 
           if (cornerBadge) {
@@ -1930,6 +4195,1190 @@
     updateAlertButtons();
   }
 
+  // 1. SOS Shift Real-time Management
+  function initSosShift() {
+    const banner = document.getElementById("sosShiftBanner");
+    if (!banner) return;
+
+    const acceptBtn = document.getElementById("sosAcceptBtn");
+    const modal = document.getElementById("sosModal");
+    const modalClose = document.getElementById("sosModalClose");
+    const form = document.getElementById("sosAcceptForm");
+    const formView = document.getElementById("sosModalFormView");
+    const successView = document.getElementById("sosModalSuccessView");
+    const countdownEl = document.getElementById("sosCountdown");
+    const nameInput = document.getElementById("sosCookName");
+    const contactInput = document.getElementById("sosCookContact");
+
+    let timerRemainingSeconds = 34 * 60 + 18;
+
+    // Countdown loop
+    function updateCountdownDisplay() {
+      if (timerRemainingSeconds <= 0) {
+        countdownEl.textContent = "00:00 (Набор закрыт)";
+        return;
+      }
+      const mins = Math.floor(timerRemainingSeconds / 60);
+      const secs = timerRemainingSeconds % 60;
+      countdownEl.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    setInterval(() => {
+      if (timerRemainingSeconds > 0) {
+        timerRemainingSeconds--;
+        updateCountdownDisplay();
+      }
+    }, 1000);
+
+    // Fetch initial state
+    fetch("/api/sos/current")
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.shift) {
+          if (data.shift.isAccepted) {
+            banner.classList.add("is-accepted");
+            acceptBtn.disabled = true;
+            acceptBtn.innerHTML = `<span>✓</span> <span>Смена занята (Мастер в пути)</span>`;
+          }
+          if (data.shift.rate) {
+            const rateEl = document.getElementById("sosRateVal");
+            if (rateEl) rateEl.textContent = `${Number(data.shift.rate).toLocaleString("ru-RU")} ₽`;
+          }
+        }
+      })
+      .catch(() => {});
+
+    function openSosModal() {
+      // Pre-fill user contact if known
+      try {
+        const storedContact = localStorage.getItem("gc_user_contact") || "";
+        if (storedContact && contactInput && !contactInput.value) {
+          contactInput.value = storedContact;
+        }
+        const profileRaw = localStorage.getItem("gc_user_profile");
+        if (profileRaw) {
+          const prof = JSON.parse(profileRaw);
+          if (prof.name && nameInput && !nameInput.value) nameInput.value = prof.name;
+          if (prof.phone && contactInput && !contactInput.value) contactInput.value = prof.phone;
+        }
+      } catch {}
+
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSosModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    acceptBtn?.addEventListener("click", openSosModal);
+    modalClose?.addEventListener("click", closeSosModal);
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) closeSosModal();
+    });
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const cookName = nameInput.value.trim();
+      const cookContact = contactInput.value.trim();
+      const etaRadio = form.querySelector('input[name="sosEta"]:checked');
+      const etaMinutes = etaRadio ? parseInt(etaRadio.value, 10) : 30;
+
+      const submitBtn = document.getElementById("sosSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Закрепляем смену за вами...";
+
+      try {
+        const res = await fetch("/api/sos/accept", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cookName, cookContact, etaMinutes })
+        });
+        const data = await res.json();
+      } catch (err) {}
+
+      // Save known contacts locally
+      try {
+        localStorage.setItem("gc_user_contact", cookContact);
+      } catch {}
+
+      // Show success instructions view
+      formView.style.display = "none";
+      successView.style.display = "block";
+
+      // Update banner button state
+      acceptBtn.disabled = true;
+      acceptBtn.innerHTML = `<span>✓</span> <span>Выезд подтвержден (Вы забронировали)</span>`;
+      banner.style.borderColor = "#10b981";
+    });
+  }
+
+  // 2. Smart Metro and Category Filter
+  function initMetroAndTagFilters() {
+    const searchInput = document.getElementById("metroSearchInput");
+    const clearBtn = document.getElementById("metroClearBtn");
+    const pills = document.querySelectorAll("#filterPillsContainer .gc-filter-pill");
+    const cards = document.querySelectorAll("#vacanciesGrid .vacancy-card");
+    const allCountBadge = document.getElementById("filterCountAll");
+
+    if (!cards.length) return;
+    if (allCountBadge) allCountBadge.textContent = cards.length;
+
+    let activeFilter = "all";
+    let metroSearchQuery = "";
+
+    function applyFilter() {
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const cardTags = (card.dataset.tags || "").split(" ");
+        const cardMetro = (card.dataset.metro || "").toLowerCase();
+        const cardRate = parseInt(card.dataset.rate || "0", 10);
+
+        let matchesCategory = false;
+        if (activeFilter === "all") matchesCategory = true;
+        else if (activeFilter === "metro") matchesCategory = cardTags.includes("metro");
+        else if (activeFilter === "taxi") matchesCategory = cardTags.includes("taxi");
+        else if (activeFilter === "daily") matchesCategory = cardTags.includes("daily");
+        else if (activeFilter === "day") matchesCategory = cardTags.includes("day");
+        else if (activeFilter === "high-rate") matchesCategory = cardRate >= 5500;
+
+        let matchesMetro = true;
+        if (metroSearchQuery.trim()) {
+          matchesMetro = cardMetro.includes(metroSearchQuery.trim().toLowerCase());
+        }
+
+        if (matchesCategory && matchesMetro) {
+          card.style.display = "";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        pills.forEach((p) => p.classList.remove("is-active"));
+        pill.classList.add("is-active");
+        activeFilter = pill.dataset.filter || "all";
+        applyFilter();
+      });
+    });
+
+    searchInput?.addEventListener("input", () => {
+      metroSearchQuery = searchInput.value;
+      if (clearBtn) {
+        clearBtn.style.display = metroSearchQuery ? "block" : "none";
+      }
+      applyFilter();
+    });
+
+    clearBtn?.addEventListener("click", () => {
+      searchInput.value = "";
+      metroSearchQuery = "";
+      clearBtn.style.display = "none";
+      searchInput.focus();
+      applyFilter();
+    });
+  }
+
+  // 3. Chef Net Income Calculator
+  function initChefIncomeCalculator() {
+    const rolePills = document.querySelectorAll("#calcRoleSelector .gc-step-pill");
+    const shiftsSlider = document.getElementById("calcShiftsSlider");
+    const rateSlider = document.getElementById("calcRateSlider");
+    const shiftsLabel = document.getElementById("calcShiftsLabel");
+    const rateLabel = document.getElementById("calcRateLabel");
+    const monthlyIncomeEl = document.getElementById("calcMonthlyIncome");
+    const weeklyIncomeEl = document.getElementById("calcWeeklyIncome");
+    const foodBonusEl = document.getElementById("calcFoodBonus");
+    const totalValueEl = document.getElementById("calcTotalValue");
+
+    if (!shiftsSlider || !rateSlider) return;
+
+    function recalculate() {
+      const shifts = parseInt(shiftsSlider.value, 10);
+      const rate = parseInt(rateSlider.value, 10);
+
+      // Schedule label
+      let schedText = "";
+      if (shifts === 1) schedText = "1 смена / нед (подработка)";
+      else if (shifts === 2) schedText = "2 смены / нед (выходные)";
+      else if (shifts === 3) schedText = "3 смены / нед (график 3/3)";
+      else if (shifts === 4) schedText = "4 смены / нед (график 2/2)";
+      else if (shifts === 5) schedText = "5 смен / нед (график 5/2)";
+      else schedText = "6 смен / нед (интенсивный график)";
+      shiftsLabel.textContent = schedText;
+
+      rateLabel.textContent = `${rate.toLocaleString("ru-RU")} ₽`;
+
+      // Calculations
+      const monthlyIncome = Math.round(shifts * rate * 4.33);
+      const weeklyIncome = shifts * rate;
+      const foodValue = Math.round(shifts * 4.33 * 800); // 3 meals/shift ~ 800 rub
+      const taxiValue = shifts >= 3 ? 6500 : 2500;
+      const totalBenefit = monthlyIncome + foodValue + taxiValue;
+
+      monthlyIncomeEl.textContent = `${monthlyIncome.toLocaleString("ru-RU")} ₽`;
+      weeklyIncomeEl.textContent = `~${weeklyIncome.toLocaleString("ru-RU")} ₽ в неделю • расчет без задержек`;
+      foodBonusEl.textContent = `+${foodValue.toLocaleString("ru-RU")} ₽ / мес`;
+      totalValueEl.textContent = `${totalBenefit.toLocaleString("ru-RU")} ₽ / мес`;
+    }
+
+    rolePills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        rolePills.forEach((p) => p.classList.remove("is-selected"));
+        pill.classList.add("is-selected");
+        const defaultRate = parseInt(pill.dataset.rate, 10);
+        if (defaultRate) {
+          rateSlider.value = defaultRate;
+        }
+        recalculate();
+      });
+    });
+
+    shiftsSlider.addEventListener("input", recalculate);
+    rateSlider.addEventListener("input", recalculate);
+
+    recalculate();
+  }
+
+  // 4. Zero-Friction 3-Tap Quick Apply
+  function initQuickApplyModal() {
+    const modal = document.getElementById("quickApplyModal");
+    if (!modal) return;
+
+    const modalClose = document.getElementById("quickApplyClose");
+    const roleLabel = document.getElementById("quickApplyRoleLabel");
+    const vacancyIdInput = document.getElementById("quickApplyVacancyId");
+    const roleValInput = document.getElementById("quickApplyRoleVal");
+    const form = document.getElementById("quickApplyForm");
+    const formView = document.getElementById("quickApplyFormView");
+    const successView = document.getElementById("quickApplySuccessView");
+    const contactInput = document.getElementById("quickApplyContact");
+    const doneBtn = document.getElementById("quickApplyDoneBtn");
+
+    // Generic helper for single-select pill groups
+    function setupPillGroup(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.addEventListener("click", (e) => {
+        const btn = e.target.closest(".gc-step-pill");
+        if (!btn) return;
+        container.querySelectorAll(".gc-step-pill").forEach((b) => b.classList.remove("is-selected"));
+        btn.classList.add("is-selected");
+      });
+    }
+
+    setupPillGroup("quickApplyWorkshopGroup");
+    setupPillGroup("quickApplyExpGroup");
+    setupPillGroup("quickApplyMedGroup");
+
+    function getSelectedPillVal(containerId) {
+      const selected = document.querySelector(`#${containerId} .gc-step-pill.is-selected`);
+      return selected ? selected.dataset.val : "";
+    }
+
+    function openQuickApply(vacancyId, roleTitle) {
+      vacancyIdInput.value = vacancyId;
+      roleValInput.value = roleTitle;
+      roleLabel.textContent = roleTitle;
+
+      formView.style.display = "block";
+      successView.style.display = "none";
+
+      // Try pre-filling user's contact
+      try {
+        const storedContact = localStorage.getItem("gc_user_contact") || "";
+        if (storedContact && !contactInput.value) {
+          contactInput.value = storedContact;
+        }
+      } catch {}
+
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => contactInput.focus(), 150);
+    }
+
+    function closeQuickApply() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Attach to all quick apply buttons
+    document.querySelectorAll(".btn-quick-apply[data-action='quick-apply']").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const vacancyId = btn.dataset.vacancyId || "shift-generic";
+        const role = btn.dataset.role || "Повар";
+        openQuickApply(vacancyId, role);
+      });
+    });
+
+    modalClose?.addEventListener("click", closeQuickApply);
+    doneBtn?.addEventListener("click", closeQuickApply);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeQuickApply();
+    });
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const vacancyId = vacancyIdInput.value;
+      const roleTitle = roleValInput.value;
+      const workshop = getSelectedPillVal("quickApplyWorkshopGroup");
+      const experience = getSelectedPillVal("quickApplyExpGroup");
+      const medicalBook = getSelectedPillVal("quickApplyMedGroup");
+      const contact = contactInput.value.trim();
+
+      const submitBtn = document.getElementById("quickApplySubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Отправка шефу...";
+
+      try {
+        await fetch("/api/quick-apply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            vacancyId,
+            roleTitle,
+            workshop,
+            experience,
+            medicalBook,
+            contact
+          })
+        });
+      } catch (err) {}
+
+      // Save contact for future visits
+      try {
+        localStorage.setItem("gc_user_contact", contact);
+      } catch {}
+
+      // Update card UI state on page
+      const card = document.querySelector(`.vacancy-card[data-vacancy-id="${vacancyId}"]`);
+      if (card) {
+        card.classList.add("has-applied");
+        const quickBtn = card.querySelector(".btn-quick-apply");
+        if (quickBtn) {
+          quickBtn.textContent = "✓ Отклик отправлен шефу";
+          quickBtn.style.background = "#10b981";
+          quickBtn.style.borderColor = "#10b981";
+        }
+      }
+
+      formView.style.display = "none";
+      successView.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "🚀 Отправить отклик шефу";
+    });
+  }
+
+  // 5. GastroPass Digital Chef Card & QR
+  function initGastroPass() {
+    const modal = document.getElementById("gastropassModal");
+    const openBtn = document.getElementById("openGastroPassBtn");
+    const closeBtn = document.getElementById("gastropassClose");
+    const statusSelect = document.getElementById("gpStatusSelect");
+    const copyBtn = document.getElementById("gpCopyLinkBtn");
+    const nameEl = document.getElementById("gpCardName");
+    const roleEl = document.getElementById("gpCardRole");
+
+    if (!modal) return;
+
+    // Load saved or default profile
+    function loadProfile() {
+      try {
+        const raw = localStorage.getItem("gc_gastropass_profile");
+        if (raw) {
+          const prof = JSON.parse(raw);
+          if (prof.name) nameEl.textContent = prof.name;
+          if (prof.role) roleEl.textContent = prof.role;
+          if (prof.status) statusSelect.value = prof.status;
+        } else {
+          // Check worker form or user profile
+          const profileRaw = localStorage.getItem("gc_user_profile");
+          if (profileRaw) {
+            const p = JSON.parse(profileRaw);
+            if (p.name) nameEl.textContent = p.name;
+            if (p.role) roleEl.textContent = p.role;
+          }
+        }
+      } catch {}
+    }
+
+    loadProfile();
+
+    function openModal() {
+      loadProfile();
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openBtn?.addEventListener("click", openModal);
+    closeBtn?.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    statusSelect?.addEventListener("change", () => {
+      const newStatus = statusSelect.value;
+      try {
+        const existing = JSON.parse(localStorage.getItem("gc_gastropass_profile") || "{}");
+        existing.status = newStatus;
+        localStorage.setItem("gc_gastropass_profile", JSON.stringify(existing));
+      } catch {}
+
+      // Update select styling based on status
+      if (newStatus === "ready") {
+        statusSelect.style.background = "#ecfdf5";
+        statusSelect.style.color = "#065f46";
+      } else if (newStatus === "looking") {
+        statusSelect.style.background = "#fef9c3";
+        statusSelect.style.color = "#854d0e";
+      } else {
+        statusSelect.style.background = "#fee2e2";
+        statusSelect.style.color = "#991b1b";
+      }
+    });
+
+    copyBtn?.addEventListener("click", async () => {
+      const shareUrl = `${window.location.origin}/workers/#gastropass`;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+        }
+      } catch {}
+
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = "✓ Ссылка скопирована!";
+      copyBtn.style.background = "#10b981";
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+        copyBtn.style.background = "#064c3b";
+      }, 2000);
+    });
+
+    // Worker Shift History & Reliability Rating Logic
+    const meterCircle = document.getElementById("gpMeterCircle");
+    const meterScoreText = document.getElementById("gpMeterScoreText");
+    const reliabilityLevelBadge = document.getElementById("gpReliabilityLevelBadge");
+    const onTimePctEl = document.getElementById("gpOnTimePct");
+    const onTimeCountEl = document.getElementById("gpOnTimeCount");
+    const noLatePctEl = document.getElementById("gpNoLatePct");
+    const avgEarlyEl = document.getElementById("gpAvgEarly");
+    const attendancePctEl = document.getElementById("gpAttendancePct");
+    const attendanceDetailEl = document.getElementById("gpAttendanceDetail");
+    const shiftToggleBtn = document.getElementById("gpShiftToggleBtn");
+    const shiftToggleIcon = document.getElementById("gpShiftToggleIcon");
+    const shiftHistoryList = document.getElementById("gpShiftHistoryList");
+    const shiftsCountEl = document.getElementById("gpShiftsCount");
+    const simStatusSelect = document.getElementById("gpSimStatusSelect");
+    const simAddBtn = document.getElementById("gpSimAddBtn");
+    const simResetBtn = document.getElementById("gpSimResetBtn");
+    const bannerScoreEl = document.getElementById("gpBannerScore");
+    const bannerOnTimeEl = document.getElementById("gpBannerOnTime");
+    const bannerLateEl = document.getElementById("gpBannerLate");
+
+    function decl(n, titles) {
+      const cases = [2, 0, 1, 1, 1, 2];
+      return titles[(n % 100 > 4 && n % 100 < 20) ? 2 : cases[Math.min(n % 10, 5)]];
+    }
+
+    let workerShifts = [];
+
+    function calculateReliability(shifts) {
+      const total = shifts.length;
+      if (total === 0) {
+        return {
+          total: 0,
+          onTimePct: 100,
+          noLatePct: 100,
+          attendancePct: 100,
+          score: 100,
+          onTime: 0,
+          noLate: 0,
+          lateCount: 0,
+          noShowCount: 0,
+          avgEarly: 14,
+          level: "Высшая надежность (Топ-мастер)",
+          badgeBg: "#ecfdf5",
+          badgeColor: "#065f46",
+          circleColor: "#064c3b"
+        };
+      }
+
+      const attended = shifts.filter(s => s.attended !== false).length;
+      const onTime = shifts.filter(s => s.attended !== false && (s.status === "early" || s.status === "on_time")).length;
+      const noLate = shifts.filter(s => s.attended !== false && s.status !== "late").length;
+      const lateCount = shifts.filter(s => s.status === "late").length;
+      const noShowCount = shifts.filter(s => s.attended === false).length;
+
+      const onTimePct = Math.round((onTime / total) * 100);
+      const noLatePct = Math.round((noLate / total) * 100);
+      const attendancePct = Math.round((attended / total) * 100);
+
+      const score = Math.min(100, Math.max(0, Math.round(
+        0.5 * onTimePct + 0.3 * noLatePct + 0.2 * attendancePct
+      )));
+
+      const diffs = shifts.filter(s => s.attended !== false && typeof s.minutesDiff === "number").map(s => s.minutesDiff);
+      const avgDiff = diffs.length > 0 ? (diffs.reduce((a, b) => a + b, 0) / diffs.length) : -11;
+      const avgEarly = Math.abs(Math.round(avgDiff));
+
+      let level = "Высшая надежность (Топ-мастер)";
+      let badgeBg = "#ecfdf5";
+      let badgeColor = "#065f46";
+      let circleColor = "#064c3b";
+
+      if (score >= 95) {
+        level = "Высшая надежность (Топ-мастер)";
+        badgeBg = "#ecfdf5";
+        badgeColor = "#065f46";
+        circleColor = "#064c3b";
+      } else if (score >= 85) {
+        level = "Высокая надежность (Проверен)";
+        badgeBg = "#f0fdf4";
+        badgeColor = "#047857";
+        circleColor = "#10b981";
+      } else if (score >= 70) {
+        level = "Базовая надежность";
+        badgeBg = "#fefce8";
+        badgeColor = "#b45309";
+        circleColor = "#f59e0b";
+      } else {
+        level = "Низкий индекс явки";
+        badgeBg = "#fef2f2";
+        badgeColor = "#b91c1c";
+        circleColor = "#ef4444";
+      }
+
+      return {
+        total,
+        onTime,
+        onTimePct,
+        noLate,
+        noLatePct,
+        attendancePct,
+        score,
+        lateCount,
+        noShowCount,
+        avgEarly,
+        level,
+        badgeBg,
+        badgeColor,
+        circleColor
+      };
+    }
+
+    function renderReliabilityUI() {
+      const stats = calculateReliability(workerShifts);
+
+      // 1. Progress circle
+      const circumference = 251.33;
+      const offset = circumference * (1 - stats.score / 100);
+      if (meterCircle) {
+        meterCircle.style.strokeDashoffset = offset;
+        meterCircle.style.stroke = stats.circleColor;
+      }
+      if (meterScoreText) {
+        meterScoreText.textContent = `${stats.score}%`;
+        meterScoreText.style.color = stats.circleColor;
+      }
+
+      // 2. Level Badge
+      if (reliabilityLevelBadge) {
+        reliabilityLevelBadge.textContent = stats.level;
+        reliabilityLevelBadge.style.background = stats.badgeBg;
+        reliabilityLevelBadge.style.color = stats.badgeColor;
+      }
+
+      // 3. Breakdown metrics
+      if (onTimePctEl) onTimePctEl.textContent = `${stats.onTimePct}%`;
+      if (onTimeCountEl) onTimeCountEl.textContent = `${stats.onTime} из ${stats.total} смен`;
+      if (noLatePctEl) noLatePctEl.textContent = `${stats.noLatePct}%`;
+      if (avgEarlyEl) {
+        avgEarlyEl.textContent = stats.lateCount > 0 ? `${stats.lateCount} ${decl(stats.lateCount, ["опоздание", "опоздания", "опозданий"])}` : `в среднем за ${stats.avgEarly} мин`;
+      }
+      if (attendancePctEl) attendancePctEl.textContent = `${stats.attendancePct}%`;
+      if (attendanceDetailEl) {
+        attendanceDetailEl.textContent = stats.noShowCount > 0 ? `${stats.noShowCount} невыходов` : "0 невыходов";
+      }
+      if (shiftsCountEl) shiftsCountEl.textContent = String(stats.total);
+
+      // 4. Banner preview on main page
+      if (bannerScoreEl) bannerScoreEl.textContent = `${stats.score}%`;
+      if (bannerOnTimeEl) bannerOnTimeEl.textContent = `${stats.onTimePct}% выходов вовремя`;
+      if (bannerLateEl) bannerLateEl.textContent = `${stats.lateCount}`;
+
+      // 5. Render Shift List
+      if (shiftHistoryList) {
+        shiftHistoryList.innerHTML = workerShifts.map((s) => {
+          let badgeClass = "badge-early";
+          let badgeText = "✓ За 15 мин";
+
+          if (s.status === "early") {
+            badgeClass = "badge-early";
+            badgeText = `✓ За ${Math.abs(s.minutesDiff || 15)} мин`;
+          } else if (s.status === "on_time") {
+            badgeClass = "badge-ontime";
+            badgeText = "✓ Точно вовремя";
+          } else if (s.status === "late") {
+            badgeClass = "badge-late";
+            badgeText = `⚠️ Опоздание (${s.minutesDiff || 10} мин)`;
+          } else if (s.attended === false || s.status === "no_show") {
+            badgeClass = "badge-noshow";
+            badgeText = "⛔️ Неявка на смену";
+          }
+
+          const simTag = s.isUserSimulated ? `<span style="font-size: 10px; background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: 4px;">Симуляция</span>` : "";
+
+          return `
+            <div class="gc-shift-history-row">
+              <div style="min-width: 0; flex: 1;">
+                <div style="font-weight: 800; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  ${escapeHtml(s.restaurant)} ${simTag}
+                </div>
+                <div style="font-size: 11px; color: #64748b;">
+                  ${escapeHtml(s.role)} • ${escapeHtml(s.date)}
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
+                <span class="gc-shift-status-badge ${badgeClass}">${badgeText}</span>
+                <span style="font-size: 11px; font-weight: 700; color: #065f46;">${escapeHtml(s.payout || "Выплачено")}</span>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+    }
+
+    async function loadWorkerShifts() {
+      try {
+        const res = await fetch("/api/worker/shifts");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.shifts) && data.shifts.length > 0) {
+            workerShifts = data.shifts;
+            localStorage.setItem("gc_worker_shifts", JSON.stringify(workerShifts));
+            renderReliabilityUI();
+            return;
+          }
+        }
+      } catch {}
+
+      try {
+        const local = localStorage.getItem("gc_worker_shifts");
+        if (local) {
+          workerShifts = JSON.parse(local);
+          renderReliabilityUI();
+          return;
+        }
+      } catch {}
+
+      workerShifts = [
+        { id: "sh-1", restaurant: "Ресторан «Никитская Kitchen»", role: "Су-шеф", date: "21 сентября 2026", status: "early", minutesDiff: -15, attended: true, payout: "6 500 ₽" },
+        { id: "sh-2", restaurant: "Гастробар «Belorusskaya Grill»", role: "Повар горячего цеха", date: "19 сентября 2026", status: "early", minutesDiff: -10, attended: true, payout: "5 100 ₽" },
+        { id: "sh-3", restaurant: "Бистро «Малая Бронная»", role: "Повар холодного цеха", date: "16 сентября 2026", status: "on_time", minutesDiff: 0, attended: true, payout: "4 600 ₽" },
+        { id: "sh-4", restaurant: "Ресторан «Северяне»", role: "Повар горячего цеха", date: "12 сентября 2026", status: "early", minutesDiff: -20, attended: true, payout: "5 500 ₽" },
+        { id: "sh-5", restaurant: "Гастробар «Loro»", role: "Су-шеф смены", date: "8 сентября 2026", status: "early", minutesDiff: -5, attended: true, payout: "7 200 ₽" },
+        { id: "sh-6", restaurant: "Ресторан «Margarita Bistro»", role: "Повар ХЦ / Заготовщик", date: "4 сентября 2026", status: "early", minutesDiff: -15, attended: true, payout: "5 200 ₽" },
+        { id: "sh-7", restaurant: "Кофейня-пекарня «Sapiens»", role: "Повар-универсал", date: "29 августа 2026", status: "on_time", minutesDiff: 0, attended: true, payout: "4 200 ₽" },
+        { id: "sh-8", restaurant: "Ресторан «Горыныч»", role: "Повар ГЦ / Гриль", date: "24 августа 2026", status: "early", minutesDiff: -12, attended: true, payout: "5 500 ₽" },
+        { id: "sh-9", restaurant: "Бар «Клава»", role: "Повар смены / Закуски", date: "18 августа 2026", status: "on_time", minutesDiff: 0, attended: true, payout: "6 000 ₽" },
+        { id: "sh-10", restaurant: "Бистро «Малая Бронная»", role: "Повар ХЦ", date: "14 августа 2026", status: "early", minutesDiff: -5, attended: true, payout: "4 600 ₽" }
+      ];
+      renderReliabilityUI();
+    }
+
+    shiftToggleBtn?.addEventListener("click", () => {
+      const isHidden = shiftHistoryList.style.display === "none";
+      shiftHistoryList.style.display = isHidden ? "flex" : "none";
+      shiftToggleIcon.textContent = isHidden ? "▲" : "▼";
+      shiftToggleBtn.setAttribute("aria-expanded", String(isHidden));
+    });
+
+    simAddBtn?.addEventListener("click", async () => {
+      const simVal = simStatusSelect?.value || "early";
+      let status = "early";
+      let minutesDiff = -15;
+      let attended = true;
+
+      if (simVal === "early") {
+        status = "early";
+        minutesDiff = -15;
+      } else if (simVal === "on_time") {
+        status = "on_time";
+        minutesDiff = 0;
+      } else if (simVal === "late_10") {
+        status = "late";
+        minutesDiff = 10;
+      } else if (simVal === "late_30") {
+        status = "late";
+        minutesDiff = 30;
+      } else if (simVal === "no_show") {
+        status = "no_show";
+        minutesDiff = 0;
+        attended = false;
+      }
+
+      const newShift = {
+        id: `sim-${Date.now()}`,
+        restaurant: "Тестовая смена (Моделирование)",
+        role: "Повар смены",
+        date: "Сегодня",
+        status,
+        minutesDiff,
+        attended,
+        payout: attended ? "5 000 ₽" : "0 ₽",
+        isUserSimulated: true
+      };
+
+      workerShifts.unshift(newShift);
+      localStorage.setItem("gc_worker_shifts", JSON.stringify(workerShifts));
+      renderReliabilityUI();
+
+      try {
+        await fetch("/api/worker/shifts/log", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newShift)
+        });
+      } catch {}
+    });
+
+    simResetBtn?.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/worker/shifts/reset", { method: "POST" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.shifts) {
+            workerShifts = data.shifts;
+            localStorage.setItem("gc_worker_shifts", JSON.stringify(workerShifts));
+            renderReliabilityUI();
+            return;
+          }
+        }
+      } catch {}
+
+      localStorage.removeItem("gc_worker_shifts");
+      loadWorkerShifts();
+    });
+
+    loadWorkerShifts();
+  }
+
+  // 6. Подтверждение выполнения смены и публикация отзыва заведения в Telegram @gastroconnect
+  function initShiftReviewsModal() {
+    const modal = document.getElementById("shiftReviewModal");
+    if (!modal) return;
+
+    const modalClose = document.getElementById("shiftReviewModalClose");
+    const openBtns = [
+      document.getElementById("openReviewModalBtn"),
+      document.getElementById("headerConfirmShiftBtn")
+    ].filter(Boolean);
+
+    const shiftSelect = document.getElementById("reviewShiftSelect");
+    const restaurantInput = document.getElementById("reviewRestaurantInput");
+    const workerInput = document.getElementById("reviewWorkerInput");
+    const starsContainer = document.getElementById("reviewRatingStars");
+    const ratingValInput = document.getElementById("reviewRatingVal");
+    const ratingLabel = document.getElementById("reviewRatingLabel");
+    const punctualitySelect = document.getElementById("reviewPunctualitySelect");
+    const payoutInput = document.getElementById("reviewPayoutInput");
+    const textInput = document.getElementById("reviewTextInput");
+    const publishTgCheckbox = document.getElementById("reviewPublishTgCheckbox");
+    const submitBtn = document.getElementById("shiftReviewSubmitBtn");
+
+    const formView = document.getElementById("shiftReviewFormView");
+    const successView = document.getElementById("shiftReviewSuccessView");
+    const doneBtn = document.getElementById("shiftReviewDoneBtn");
+    const liveReviewsGrid = document.getElementById("liveReviewsGrid");
+
+    const ratingTexts = {
+      1: "1.0 — Неудовлетворительно",
+      2: "2.0 — Были замечания по ТТК",
+      3: "3.0 — Смена отработана средне",
+      4: "4.0 — Хорошая смена, уверенный выход",
+      5: "5.0 — Идеальная смена, высший класс"
+    };
+
+    function setRating(rating) {
+      const num = Math.max(1, Math.min(5, rating));
+      ratingValInput.value = num;
+      if (ratingLabel) ratingLabel.textContent = ratingTexts[num] || `${num}.0`;
+
+      if (starsContainer) {
+        const stars = starsContainer.querySelectorAll("[data-star]");
+        stars.forEach((star) => {
+          const starVal = parseInt(star.getAttribute("data-star"), 10);
+          star.style.color = starVal <= num ? "#eab308" : "#cbd5e1";
+        });
+      }
+    }
+
+    starsContainer?.addEventListener("click", (e) => {
+      const star = e.target.closest("[data-star]");
+      if (!star) return;
+      const val = parseInt(star.getAttribute("data-star"), 10);
+      if (val) setRating(val);
+    });
+
+    shiftSelect?.addEventListener("change", () => {
+      const opt = shiftSelect.options[shiftSelect.selectedIndex];
+      if (!opt) return;
+      if (opt.dataset.restaurant && restaurantInput) restaurantInput.value = opt.dataset.restaurant;
+      if (opt.dataset.payout && payoutInput) payoutInput.value = opt.dataset.payout;
+    });
+
+    function openModal(preselectedShiftId, preselectedRestaurant, preselectedPayout) {
+      if (preselectedShiftId && shiftSelect) {
+        shiftSelect.value = preselectedShiftId;
+        const opt = shiftSelect.options[shiftSelect.selectedIndex];
+        if (opt) {
+          if (restaurantInput) restaurantInput.value = preselectedRestaurant || opt.dataset.restaurant || "";
+          if (payoutInput) payoutInput.value = preselectedPayout || opt.dataset.payout || "";
+        }
+      }
+
+      // Pre-fill worker name from user profile or submission if present
+      try {
+        const storedProfile = JSON.parse(localStorage.getItem("gc_user_profile") || "{}");
+        const storedGastropass = JSON.parse(localStorage.getItem("gc_gastropass_profile") || "{}");
+        if (workerInput && !workerInput.value) {
+          workerInput.value = storedProfile.name || storedGastropass.name || "Артем Смирнов";
+        }
+      } catch {}
+
+      if (formView) formView.style.display = "block";
+      if (successView) successView.style.display = "none";
+      modal.style.display = "flex";
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openBtns.forEach((btn) => btn.addEventListener("click", () => openModal()));
+    document.addEventListener("click", (e) => {
+      const cardConfirmBtn = e.target.closest("[data-action='confirm-shift-review']");
+      if (cardConfirmBtn) {
+        e.preventDefault();
+        const shiftId = cardConfirmBtn.dataset.shiftId;
+        const restaurant = cardConfirmBtn.dataset.restaurant;
+        const payout = cardConfirmBtn.dataset.payout;
+        openModal(shiftId, restaurant, payout);
+      }
+    });
+
+    modalClose?.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    doneBtn?.addEventListener("click", closeModal);
+
+    // Fetch and render initial reviews from server
+    async function loadReviews() {
+      try {
+        const res = await fetch("/api/reviews");
+        const data = await res.json();
+        if (data.success && Array.isArray(data.reviews) && data.reviews.length > 0 && liveReviewsGrid) {
+          renderReviewsGrid(data.reviews);
+        }
+      } catch {}
+    }
+
+    function renderReviewsGrid(reviews) {
+      if (!liveReviewsGrid) return;
+      const html = reviews.slice(0, 6).map((r) => {
+        const ratingNum = r.rating || 5;
+        const starsStr = "★".repeat(ratingNum) + "☆".repeat(5 - ratingNum);
+        return `
+          <article class="gc-review-card" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                <div>
+                  <strong style="color: #064c3b; font-size: 15.5px; display: block;">${escapeText(r.restaurantName)}</strong>
+                  <span style="font-size: 12.5px; color: #64748b;">${escapeText(r.metro || "Москва")}</span>
+                </div>
+                <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
+                  ⭐️ ${ratingNum}.0
+                </span>
+              </div>
+              <div style="margin-bottom: 8px; font-size: 13.5px; color: #334155;">
+                👨‍🍳 <b>Мастер:</b> ${escapeText(r.workerName)} (${escapeText(r.role)})
+              </div>
+              <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5; font-style: italic;">
+                «${escapeText(r.text || "Смена подтверждена заведением, все стандарты кухни соблюдены.")}»
+              </p>
+            </div>
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+              <span>💰 ${escapeText(r.payout)}</span>
+              <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
+            </div>
+          </article>
+        `;
+      }).join("");
+      liveReviewsGrid.innerHTML = html;
+    }
+
+    // Submit review form handler
+    const form = document.getElementById("shiftReviewForm");
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const selectedOption = shiftSelect ? shiftSelect.options[shiftSelect.selectedIndex] : null;
+      const shiftId = shiftSelect?.value || "shift-general";
+      const restaurantName = restaurantInput?.value?.trim() || "Ресторан «Никитская Kitchen»";
+      const workerName = workerInput?.value?.trim() || "Артем Смирнов";
+      const role = selectedOption?.dataset?.role || "Повар";
+      const metro = selectedOption?.dataset?.metro || "Москва";
+      const rating = Number(ratingValInput?.value) || 5;
+      const punctuality = punctualitySelect?.value || "Вовремя, без опозданий";
+      const payout = payoutInput?.value?.trim() || "Выплачено 100%";
+      const text = textInput?.value?.trim() || "Смена закрыта успешно, стандарты соблюдены.";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "⏳ Отправка в Telegram @gastroconnect...";
+      }
+
+      try {
+        const response = await fetch("/api/reviews/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            shiftId,
+            restaurantName,
+            workerName,
+            role,
+            rating,
+            text,
+            payout,
+            metro,
+            punctuality
+          })
+        });
+
+        const data = await response.json();
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "🚀 Подтвердить смену и отправить отзыв";
+        }
+
+        if (data.success) {
+          // Update success view
+          const starsSuccess = document.getElementById("revSuccessStars");
+          const payoutSuccess = document.getElementById("revSuccessPayout");
+          if (starsSuccess) {
+            starsSuccess.textContent = `${"⭐️".repeat(rating)} (${rating}.0 / 5.0)`;
+          }
+          if (payoutSuccess) {
+            payoutSuccess.textContent = payout;
+          }
+
+          if (formView) formView.style.display = "none";
+          if (successView) successView.style.display = "block";
+
+          // Prepend card to live reviews grid
+          if (liveReviewsGrid && data.review) {
+            const cardMarkup = `
+              <article class="gc-review-card" style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
+                <div>
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+                    <div>
+                      <strong style="color: #064c3b; font-size: 15.5px; display: block;">${escapeText(data.review.restaurantName)}</strong>
+                      <span style="font-size: 12.5px; color: #64748b;">${escapeText(data.review.metro)}</span>
+                    </div>
+                    <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
+                      ⭐️ ${data.review.rating}.0
+                    </span>
+                  </div>
+                  <div style="margin-bottom: 8px; font-size: 13.5px; color: #334155;">
+                    👨‍🍳 <b>Мастер:</b> ${escapeText(data.review.workerName)} (${escapeText(data.review.role)})
+                  </div>
+                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5; font-style: italic;">
+                    «${escapeText(data.review.text)}»
+                  </p>
+                </div>
+                <div style="border-top: 1px solid #86efac; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+                  <span>💰 ${escapeText(data.review.payout)}</span>
+                  <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
+                </div>
+              </article>
+            `;
+            liveReviewsGrid.insertAdjacentHTML("afterbegin", cardMarkup);
+          }
+
+          // Mark vacancy card as approved/completed
+          const targetCard = document.querySelector(`[data-vacancy-id="${shiftId}"]`);
+          if (targetCard) {
+            const cornerBadge = targetCard.querySelector(".vacancy-corner-badge");
+            const statusBar = targetCard.querySelector(".vacancy-status-bar");
+            if (cornerBadge) {
+              cornerBadge.innerHTML = "<span>⭐️</span> Смена подтверждена и оплачена";
+              cornerBadge.style.display = "inline-flex";
+              cornerBadge.style.background = "#064c3b";
+            }
+            if (statusBar) {
+              statusBar.style.animation = "none";
+              void statusBar.offsetWidth;
+              statusBar.style.animation = "";
+              statusBar.className = "vacancy-status-bar is-visible status-accepted";
+              const textElem = statusBar.querySelector(".vacancy-status-text");
+              const dateElem = statusBar.querySelector(".vacancy-status-date");
+              if (textElem) textElem.textContent = "Смена закрыта шефом • Отзыв в TG";
+              if (dateElem) dateElem.textContent = "оценка 5.0";
+
+              let checkIcon = statusBar.querySelector(".vacancy-status-check-icon");
+              if (!checkIcon) {
+                const indicator = statusBar.querySelector(".vacancy-status-indicator") || statusBar;
+                indicator.insertAdjacentHTML(
+                  "beforeend",
+                  `<span class="vacancy-status-check-icon" aria-hidden="true" title="Принято"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline></svg></span>`
+                );
+              }
+            }
+          }
+        } else {
+          alert(`Ошибка: ${data.error || "Не удалось отправить отзыв"}`);
+        }
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "🚀 Подтвердить смену и отправить отзыв";
+        }
+        alert(`Ошибка соединения: ${err.message}`);
+      }
+    });
+
+    loadReviews();
+  }
+
+  // 4. Toast notification helper
+  function showGcToast(msg, icon = "📋") {
+    const toast = document.getElementById("gcToastNotify");
+    const msgEl = document.getElementById("gcToastMsg");
+    const iconEl = document.getElementById("gcToastIcon");
+    if (!toast || !msgEl) return;
+    msgEl.textContent = msg;
+    if (iconEl) iconEl.textContent = icon;
+    toast.classList.add("visible");
+    setTimeout(() => {
+      toast.classList.remove("visible");
+    }, 3800);
+  }
+
+  // 5. Telegram Viral Sharing
+  function initTelegramViralSharing() {
+    document.addEventListener("click", async (e) => {
+      const shareBtn = e.target.closest('[data-action="share-tg"], [data-action="share-sos-tg"]');
+      if (!shareBtn) return;
+      e.preventDefault();
+
+      const isSos = shareBtn.dataset.action === "share-sos-tg";
+      const role = shareBtn.dataset.role || "Повар на смену";
+      const restaurant = shareBtn.dataset.restaurant || "Ресторан GastroConnect";
+      const rate = shareBtn.dataset.rate || "5 100 ₽";
+      const metro = shareBtn.dataset.metro || "м. Белорусская / центр";
+      const conditions = shareBtn.dataset.conditions || "Питание, ночной развоз на такси, расчет сразу";
+
+      const headerEmoji = isSos ? "⚡️ [SOS-СМЕНА]" : "🍕";
+      const postText = 
+`${headerEmoji} ${role.toUpperCase()} | ${restaurant.toUpperCase()}
+
+💰 ЗП / Ставка: ${rate}/смена
+📍 Локация: ${metro}
+⏰ График: Смена 10:00–22:00 (12 ч)
+🎁 Условия / Бонусы: ${conditions}
+
+📞 Контакты для отклика:
+Telegram: @gastroconnect
+⚡️ Зарегистрироваться и откликнуться: https://gastroconnect.ru/workers/
+💬 Чат сообщества: https://t.me/gastroconnect`;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(postText);
+          showGcToast("📋 Текст смены скопирован! Открываем Telegram...", "✈️");
+        }
+      } catch (err) {}
+
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent("https://gastroconnect.ru/workers/")}&text=${encodeURIComponent(postText)}`;
+      setTimeout(() => {
+        window.open(shareUrl, "_blank", "noopener,noreferrer");
+      }, 350);
+    });
+  }
+
+  // 6. FAQ Accordion
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll(".gc-faq-item");
+    faqItems.forEach((item) => {
+      const btn = item.querySelector(".gc-faq-question");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        const isOpen = item.classList.contains("active");
+        faqItems.forEach((i) => {
+          i.classList.remove("active");
+          const qBtn = i.querySelector(".gc-faq-question");
+          if (qBtn) qBtn.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) {
+          item.classList.add("active");
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+  }
+
+  // 7. Floating Telegram Smart Banner
+  function initFloatingTelegramBanner() {
+    const banner = document.getElementById("floatingTgBanner");
+    const closeBtn = document.getElementById("floatingTgClose");
+    if (!banner || !closeBtn) return;
+
+    try {
+      const dismissed = localStorage.getItem("gc_tg_banner_dismissed");
+      if (dismissed && Date.now() - parseInt(dismissed, 10) < 3 * 24 * 60 * 60 * 1000) {
+        banner.classList.add("hidden");
+      }
+    } catch {}
+
+    closeBtn.addEventListener("click", () => {
+      banner.classList.add("hidden");
+      try {
+        localStorage.setItem("gc_tg_banner_dismissed", String(Date.now()));
+      } catch {}
+    });
+  }
+
+  // 8. PWA Support
+  function initPwaSupport() {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  }
+
   applySettings(readJson(SETTINGS_KEY, {}));
   scheduleBackgrounds();
   initPublicForms();
@@ -1937,6 +5386,16 @@
   initReviewsCarousel();
   updateVacanciesApplicationStatus();
   initShiftAlerts();
+  initSosShift();
+  initMetroAndTagFilters();
+  initChefIncomeCalculator();
+  initQuickApplyModal();
+  initGastroPass();
+  initShiftReviewsModal();
+  initTelegramViralSharing();
+  initFaqAccordion();
+  initFloatingTelegramBanner();
+  initPwaSupport();
   window.addEventListener("load", () => {
     setTimeout(refreshSettings, 400);
     setTimeout(updateVacanciesApplicationStatus, 800);
@@ -1944,6 +5403,26 @@
   }, { once: true });
 })();
 </script>
+
+<!-- ПЛАВАЮЩИЙ SMART-БЕЙДЖ ПОДПИСКИ НА ТЕЛЕГРАМ-КАНАЛ @GASTROCONNECT -->
+<div class="gc-floating-tg-banner" id="floatingTgBanner" role="complementary" aria-label="Срочные смены в Telegram">
+  <div class="gc-floating-tg-head">
+    <span class="gc-floating-tg-badge">⚡️ Срочные смены в Москве</span>
+    <button type="button" class="gc-floating-tg-close" id="floatingTgClose" aria-label="Закрыть баннер">✕</button>
+  </div>
+  <p class="gc-floating-tg-text">
+    Горящие <strong>SOS-смены со ставкой +30%</strong> публикуются в канале <strong>@gastroconnect</strong> на 15 минут раньше, чем на сайте!
+  </p>
+  <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" class="gc-floating-tg-btn" id="floatingTgActionBtn">
+    <span>⚡️</span> Подписаться на смены @gastroconnect
+  </a>
+</div>
+
+<!-- ВСПЛЫВАЮЩИЙ ТОАСТ УВЕДОМЛЕНИЙ -->
+<div class="gc-toast-notify" id="gcToastNotify" role="status" aria-live="polite">
+  <span id="gcToastIcon">📋</span>
+  <span id="gcToastMsg">Текст смены скопирован!</span>
+</div>
 </body>
 </html>
 

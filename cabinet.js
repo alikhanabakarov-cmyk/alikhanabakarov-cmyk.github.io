@@ -3356,6 +3356,9 @@
       await loadShiftPosts();
       await loadWorkerLiveShifts();
       updateWorkerKpiWidgets();
+      if (typeof window.initWorkerRechartsDashboard === "function") {
+        window.initWorkerRechartsDashboard();
+      }
       return;
     }
 

@@ -111,7 +111,12 @@
           <a href="/suppliers/" data-site-setting="nav.suppliers"
             >Поставщикам</a
           >
+          <a href="/menu/" style="color: var(--green); font-weight: 750;">📋 Меню и техкарты</a>
           <a href="/contacts/" data-site-setting="nav.contacts">Контакты</a>
+          <a href="/telegram-app" style="color: #229ed9; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+            <span>📱 Telegram App</span>
+            <span style="background: #229ed9; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">NEW</span>
+          </a>
         </nav>
         <div class="header-actions">
           <a
@@ -174,6 +179,122 @@
             <img class="poster-hero-image" src="/assets/hero-restaurants.webp" alt="Быстрый подбор персонала для заведений" loading="eager" decoding="async" fetchpriority="high" />
           </div>
         </section>
+
+        <!-- SOS Urgent Staffing Section -->
+        <section id="sos-staffing" style="margin: 40px auto; max-width: 1200px; padding: 0 20px;">
+          <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(20, 16, 12, 0.95) 100%); border: 2px solid rgba(239, 68, 68, 0.45); border-radius: 24px; padding: 36px 32px; box-shadow: 0 16px 40px rgba(239, 68, 68, 0.15);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
+              <div>
+                <span style="display: inline-flex; align-items: center; gap: 8px; background: #ef4444; color: #fff; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+                  🚨 SOS-ВЫЗОВ: СРОЧНАЯ ПОДМЕНА ЗА 30–45 МИНУТ
+                </span>
+                <h2 style="font-size: 28px; font-weight: 900; margin: 0 0 8px; color: #fff;">
+                  Сотрудник не вышел на смену? Закройте позицию сейчас
+                </h2>
+                <p style="font-size: 15px; color: #d1d5db; margin: 0; max-width: 720px; line-height: 1.5;">
+                  Заполните форму ниже: вызов моментально публикуется в канал <b>@gastroconnect</b> и отправляется доступным поварам, бариста и официантам в радиусе вашей станции метро.
+                </p>
+              </div>
+              <a href="/telegram-app" class="btn" style="background: #229ed9; border-color: #229ed9; color: #fff; font-weight: 800; padding: 12px 20px; display: inline-flex; align-items: center; gap: 8px;">
+                📱 Открыть в Telegram Mini App →
+              </a>
+            </div>
+
+            <form id="sosRestaurantForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; background: rgba(0,0,0,0.3); padding: 24px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);">
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Ресторан / Проект</label>
+                <input id="sosVenueInput" required placeholder="Например: Ресторан «Никитская Kitchen»" style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Кто требуется срочно</label>
+                <select id="sosRoleInput" required style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;">
+                  <option value="Повар горячего цеха">Повар горячего цеха (Гриль/Мясо/Рыба)</option>
+                  <option value="Повар холодного цеха">Повар холодного цеха / Заготовщик</option>
+                  <option value="Пиццайоло">Пиццайоло на дровяную печь</option>
+                  <option value="Повар-сушист">Повар-сушист</option>
+                  <option value="Бариста">Бариста на поток</option>
+                  <option value="Официант">Официант в зал / Раннер</option>
+                  <option value="Бармен">Бармен контактной стойки</option>
+                  <option value="Су-шеф">Су-шеф на смену</option>
+                </select>
+              </div>
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Ставка за выход (расчет сразу)</label>
+                <input id="sosRateInput" required value="6 500 – 7 500 ₽" style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Метро и адрес</label>
+                <input id="sosMetroInput" required placeholder="м. Тверская (3 мин)" style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Когда нужен специалист?</label>
+                <input id="sosUrgencyInput" required value="Срочно через 30-45 минут" style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px;">Контакты шефа / управляющего</label>
+                <input id="sosContactInput" required placeholder="+7 999 123-45-67 | @chef_patrik" style="width: 100%; background: #111827; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 10px; font-size: 14px;" />
+              </div>
+              <div style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 6px;">
+                <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: #d1d5db; cursor: pointer;">
+                  <input type="checkbox" id="sosPublishTgCheck" checked style="width: 18px; height: 18px; accent-color: #ef4444;" />
+                  <span>Мгновенно опубликовать в канал <b>@gastroconnect</b> с кнопкой прямого отклика</span>
+                </label>
+                <button type="submit" id="sosSubmitBtn" style="background: #ef4444; color: #fff; border: none; font-weight: 900; font-size: 15px; padding: 14px 28px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                  🚨 Опубликовать SOS-вызов
+                </button>
+              </div>
+            </form>
+            <div id="sosSuccessMsg" style="display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 12px; padding: 16px; margin-top: 16px; color: #d1fae5; text-align: center;">
+              <b>🎉 SOS-смена успешно активирована!</b> Сообщение отправлено в Telegram-канал <b>@gastroconnect</b>. Специалисты уже видят вызов.
+            </div>
+          </div>
+        </section>
+        <script>
+          (function() {
+            const form = document.getElementById('sosRestaurantForm');
+            if (!form) return;
+            form.addEventListener('submit', async function(e) {
+              e.preventDefault();
+              const btn = document.getElementById('sosSubmitBtn');
+              btn.disabled = true;
+              btn.textContent = 'Публикуем...';
+
+              const payload = {
+                venue: document.getElementById('sosVenueInput').value,
+                role: document.getElementById('sosRoleInput').value,
+                rate: document.getElementById('sosRateInput').value,
+                metro: document.getElementById('sosMetroInput').value,
+                urgency: document.getElementById('sosUrgencyInput').value,
+                perks: 'Оплата такси, сытное питание, расчет сразу после смены',
+                contacts: document.getElementById('sosContactInput').value,
+                autoPublishToTelegram: document.getElementById('sosPublishTgCheck').checked
+              };
+
+              try {
+                const res = await fetch('/api/sos/create', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                  document.getElementById('sosSuccessMsg').style.display = 'block';
+                  form.reset();
+                  setTimeout(() => {
+                    document.getElementById('sosSuccessMsg').scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                } else {
+                  alert('Ошибка: ' + (data.error || 'Не удалось опубликовать'));
+                }
+              } catch (err) {
+                alert('Ошибка отправки: ' + err.message);
+              } finally {
+                btn.disabled = false;
+                btn.textContent = '🚨 Опубликовать SOS-вызов';
+              }
+            });
+          })();
+        </script>
 
         <section class="direction-section">
           <div class="section-head">

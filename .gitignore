@@ -9,7 +9,15 @@ node_modules/
 .env.local
 .openai/
 dist/
+
 autopilot-state.json
 autopilot-published.json
 telegram-alerts.json
+quick-applications.json
+sos-shifts.json
+worker-shifts.json
+telegram-applications.json
+batch*-tech-cards.json
+extra-tech-cards.json
+scripts/
 

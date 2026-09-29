@@ -28,7 +28,7 @@
                 placeholder="Поиск: имя, телефон, Telegram, город..."
               /><select id="adminTypeFilter" aria-label="Фильтр по типу заявки"><option value="">Все типы</option><option value="callback">Звонки</option><option value="worker">Работники</option><option value="restaurant">Заведения</option><option value="supplier">Поставщики</option><option value="feedback">Обратная связь</option><option value="telegram_bot">Telegram</option></select><select id="adminStatusFilter" aria-label="Фильтр по статусу"><option value="">Все статусы</option><option value="new">Новые</option><option value="in_progress">В работе</option><option value="done">Закрытые</option><option value="archived">Архив</option></select></div></div><div class="service-hero-media service-hero-media-home" data-site-bg="admin.hero" data-bg-default="/assets/hero-home.webp" aria-hidden="true">
             <img class="poster-hero-image" src="/assets/hero-home.webp" alt="Панель администратора GastroConnect" loading="eager" decoding="async" fetchpriority="high" />
-          </div></section><section class="admin-panel"><div class="section-head"><h2>Настройки сайта</h2><p>Логотип, hero-картинки и главные тексты вынесены в отдельную панель управления.</p></div><div class="admin-actions"><a class="btn primary" href="/manage/">Открыть настройки сайта</a></div></section>
+          </div></section><section class="admin-panel"><div class="section-head"><h2>Настройки сайта</h2><p>Логотип, hero-картинки и главные тексты вынесены в отдельную панель управления.</p></div><div class="admin-actions"><a class="btn primary" href="/manage/">Открыть настройки сайта</a><a class="btn" style="background: #064c3b; color: #fff; text-decoration: none;" href="/manage/#mediaAssetsPanel">📸 Загрузить медиа и обложки</a></div></section>
 
 <section class="admin-panel">
   <!-- GastroConnect Telegram Studio & Publisher (@gastroconnect) -->
@@ -147,6 +147,255 @@
               <a href="https://t.me/gastroconnect" target="_blank" class="tg-inline-btn" style="background: rgba(255,255,255,0.08);">💬 Обсудить в комментариях</a>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="admin-panel" id="telegramAutopilotSection">
+  <div class="section-head">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <span style="display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase; background: #064c3b; color: #fde047; padding: 4px 10px; border-radius: 999px; margin-bottom: 6px;">⚡️ Автопилот Telegram @gastroconnect</span>
+        <h2 style="margin: 0; font-size: 22px;">Мониторинг публикаций и компенсация пропусков</h2>
+        <p style="margin: 4px 0 0; color: var(--muted); font-size: 14px;">Автоматическая публикация вакансий HoReCa каждый час с 08:00 до 21:00 МСК (тихий режим ночью с 21:00 до 08:00).</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button id="apRefreshBtn" class="btn" type="button" style="font-size: 13px; padding: 8px 14px;">🔄 Обновить статус</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+      <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Статус автопилота</div>
+      <div style="font-size: 18px; font-weight: 800; color: #064c3b; margin-top: 4px;" id="apStatusBadge">🟢 Активен</div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 4px;" id="apTimezone">Europe/Moscow (UTC+3)</div>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+      <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Время МСК сейчас</div>
+      <div style="font-size: 18px; font-weight: 800; color: #1e293b; margin-top: 4px;" id="apMskTime">--:--</div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 4px;" id="apNightInfo">Дневной режим (постинг)</div>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+      <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Всего опубликовано</div>
+      <div style="font-size: 18px; font-weight: 800; color: #0284c7; margin-top: 4px;" id="apTotalPublished">--</div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Смен в @gastroconnect</div>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+      <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase;">Оценка пропущенных смен</div>
+      <div style="font-size: 18px; font-weight: 800; color: #10b981; margin-top: 4px;" id="apMissedCount">0</div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Компенсировано за сегодня</div>
+    </div>
+  </div>
+
+  <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 20px;">
+    <div>
+      <div style="font-weight: 700; color: #064c3b; font-size: 15px;">⚡️ Пакетная компенсация пропущенных постов</div>
+      <div style="font-size: 13px; color: #047857; margin-top: 2px;">
+        Мгновенная отправка проверенных вакансий HoReCa с реальными номерами в канал @gastroconnect.
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+      <select id="apCompensateCount" style="padding: 9px 12px; border-radius: 8px; border: 1px solid #059669; font-weight: 600; background: #fff; color: #064c3b;">
+        <option value="6">6 вакансий</option>
+        <option value="12" selected>12 вакансий (рекомендовано)</option>
+        <option value="18">18 вакансий</option>
+        <option value="24">24 вакансии (день)</option>
+      </select>
+      <button id="apCompensateBtn" class="btn primary" type="button" style="background: #059669; border-color: #059669;">
+        ⚡️ Запустить компенсацию
+      </button>
+      <button id="apRunSingleBtn" class="btn" type="button" style="background: #fff; color: #064c3b; border: 1px solid #cbd5e1;">
+        ▶️ Опубликовать 2 смены
+      </button>
+    </div>
+  </div>
+
+  <div id="apActionMsg" style="display: none; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; font-weight: 600;"></div>
+
+  <div>
+    <h3 style="font-size: 15px; margin: 0 0 10px; color: #334155;">📋 Журнал активности автопилота</h3>
+    <div id="apLogsContainer" style="max-height: 240px; overflow-y: auto; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 12.5px; color: #1e293b;">
+      Загрузка истории...
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; padding: 16px 20px; background: #f0f9ff; border: 1.5px solid #0284c7; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 28px;">📱</span>
+      <div>
+        <strong style="color: #0369a1; font-size: 15px; display: block;">Telegram Mini App & SOS-режим подключены</strong>
+        <span style="color: #0c4a6e; font-size: 13px;">Отклики в 1 клик через Telegram, моментальные SOS-вызовы для ресторанов и быстрый поиск по станциям метро.</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="/telegram-app" target="_blank" class="btn primary" style="background: #0284c7; border-color: #0284c7; font-size: 13px; padding: 8px 16px;">
+        📱 Открыть Mini App
+      </a>
+      <a href="/restaurants/#sos-staffing" target="_blank" class="btn" style="background: #fff; color: #ef4444; border: 1px solid #ef4444; font-size: 13px; padding: 8px 16px;">
+        🚨 SOS-форма ресторанов
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="admin-panel">
+  <!-- GastroConnect Instagram & Reels SMM Studio Pro -->
+  <div class="ig-smm-studio" id="instagramSmmStudio">
+    <div class="ig-studio-header">
+      <span class="ig-smm-badge">📸 Instagram & Reels Studio Pro</span>
+      <h3 style="margin: 6px 0 4px; font-size: 24px; color: var(--green);">Генератор вирусных Reels, Stories и постов</h3>
+      <p style="color: var(--muted); margin: 0; font-size: 14.5px;">
+        Сценарии рилс с таймкодами, мокап ленты Instagram для @gastroconnect.ru, оптимизированные хэштеги и моментальный анонс в Telegram.
+      </p>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <span style="font-size: 13px; font-weight: 800; color: var(--muted); display: block; margin-bottom: 8px;">Готовые сценарии Reels для GastroConnect:</span>
+      <div class="ig-template-selector">
+        <button class="ig-tpl-btn active" type="button" data-tpl-id="reels_sos_lion">🦁 SOS-смена (Шеф-Лев)</button>
+        <button class="ig-tpl-btn" type="button" data-tpl-id="reels_rates_2026">💰 Реальные ставки 2026</button>
+        <button class="ig-tpl-btn" type="button" data-tpl-id="reels_gastropass">🛡 Паспорт GastroPass</button>
+        <button class="ig-tpl-btn" type="button" data-tpl-id="reels_zero_fee">🤝 0% комиссия сервиса</button>
+      </div>
+    </div>
+
+    <div class="ig-studio-body">
+      <!-- Left Column: Editor & Controls -->
+      <div class="ig-editor-col">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="ig-field-box">
+            <label for="igPostFormat">Формат контента</label>
+            <select id="igPostFormat">
+              <option value="reels">🎬 Reels / Shorts (9:16)</option>
+              <option value="feed">📷 Пост в ленту (1:1)</option>
+              <option value="stories">⚡️ Stories (9:16)</option>
+            </select>
+          </div>
+          <div class="ig-field-box">
+            <label for="igPostAudio">Трендовое аудио / звук</label>
+            <input type="text" id="igPostAudio" value="GastroConnect Audio • Трендовый динамичный бит (HoReCa)" />
+          </div>
+        </div>
+
+        <div class="ig-field-box">
+          <label for="igPostHook">Хук первых 3 секунд (удержание внимания):</label>
+          <input type="text" id="igPostHook" value="🚨 Пятница 18:30, горячий цех горит, а повар не вышел? Знакомо каждому ресторатору Москвы 😤" />
+        </div>
+
+        <div class="ig-field-box">
+          <label for="igPostTimeline">Покадровый сценарий для видеографа и монтажера:</label>
+          <textarea id="igPostTimeline" rows="4" style="font-family: monospace; font-size: 12.5px;">[00:00 - 00:03] Крупный план: Шеф в панике держится за голову, стопка чеков растет, сотейники дымят.
+[00:03 - 00:15] Су-шеф открывает ноутбук на gastroconnect.ru и в 1 клик жмет «Вызвать SOS-повара».
+[00:15 - 00:30] Через 35 минут на кухню входит повар с ножами и подтвержденным рейтингом GastroPass 5.0.
+[00:30 - 00:45] Смена закрыта идеально, гости довольны, расчет сразу на карту по СБП!</textarea>
+        </div>
+
+        <div class="ig-field-box">
+          <label for="igPostCaption">Текст публикации под видео (Caption):</label>
+          <textarea id="igPostCaption" rows="6">🚨 В пятницу вечером запара, а повар не вышел?
+
+Хватит судорожно строчить в чаты и молиться, чтобы кто-то доехал! На платформе gastroconnect.ru проверенные повара, су-шефы, бариста и официанты Москвы выезжают на смену за 30–45 минут.
+
+✨ Почему заведения выбирают GastroConnect:
+• ⚡️ Выезд от 30 минут по всей Москве и МО
+• 🛡 Проверенный паспорт квалификации GastroPass (5.0 рейтинг)
+• 🤝 0% комиссия сервиса — прямой расчет с мастером
+
+💰 Для сменщиков: ставки от 5 100 до 7 500 ₽ за 12 часов с выплатой сразу в конце смены!
+
+🔗 Ссылка на регистрацию и вызов поваров — в шапке профиля @gastroconnect.ru</textarea>
+        </div>
+
+        <div class="ig-field-box">
+          <label>Хэштеги для охвата в рекомендациях (Reels):</label>
+          <div class="ig-tags-wrapper" id="igHashtagsContainer">
+            <span class="ig-tag-chip" data-tag="#ПоварМосква">#ПоварМосква <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+            <span class="ig-tag-chip" data-tag="#HoReCa">#HoReCa <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+            <span class="ig-tag-chip" data-tag="#РестораныМосквы">#РестораныМосквы <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+            <span class="ig-tag-chip" data-tag="#РаботаНаКухне">#РаботаНаКухне <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+            <span class="ig-tag-chip" data-tag="#ШефПовар">#ШефПовар <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+            <span class="ig-tag-chip" data-tag="#GastroConnect">#GastroConnect <span class="remove-tag" onclick="this.parentElement.remove(); window.updateIgCaptionHashtags();">✕</span></span>
+          </div>
+        </div>
+
+        <div class="ig-action-bar">
+          <button type="button" class="btn-ig-copy" id="copyIgPostBtn">
+            📋 Скопировать текст и хэштеги для Instagram
+          </button>
+          <button type="button" class="btn-ig-script" id="downloadReelsScriptBtn">
+            🎬 Скачать сценарий (TXT)
+          </button>
+          <button type="button" class="btn-ig-tg-announce" id="announceReelsInTgBtn">
+            🚀 Анонсировать в Telegram @gastroconnect
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Phone Mockup -->
+      <div class="ig-phone-preview-col">
+        <div class="ig-phone-frame">
+          <div class="ig-dynamic-island"></div>
+          <div class="ig-phone-screen" id="igPhoneMockupScreen">
+            <!-- Screen Header -->
+            <div class="ig-screen-header">
+              <div class="ig-brand-row">
+                <div class="ig-mock-avatar">GC</div>
+                <div>
+                  <div class="ig-mock-username">gastroconnect.ru <span class="ig-verified-badge">✓</span></div>
+                  <div style="font-size: 10px; color: rgba(255,255,255,0.7);">Москва • HoReCa</div>
+                </div>
+              </div>
+              <button type="button" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer;">
+                Подписаться
+              </button>
+            </div>
+
+            <!-- Screen Media Area -->
+            <div class="ig-mock-media-wrap">
+              <img id="igMockMediaImg" src="/assets/hero-home.webp" alt="Reels Preview" />
+            </div>
+
+            <!-- Floating Hook Overlay Card -->
+            <div class="ig-overlay-hook-card" id="igMockOverlayHook">
+              🚨 Пятница 18:30, горячий цех горит, а повар не вышел?
+            </div>
+
+            <!-- Reels Sidebar Buttons -->
+            <div class="ig-reels-actions-col">
+              <div class="ig-action-item">
+                <span class="ig-action-icon" id="igMockLikeBtn">🤍</span>
+                <span class="ig-action-count" id="igMockLikesCount">1 428</span>
+              </div>
+              <div class="ig-action-item">
+                <span class="ig-action-icon">💬</span>
+                <span class="ig-action-count">94</span>
+              </div>
+              <div class="ig-action-item">
+                <span class="ig-action-icon">✈️</span>
+                <span class="ig-action-count">312</span>
+              </div>
+              <div class="ig-action-item">
+                <span class="ig-action-icon">🔖</span>
+              </div>
+            </div>
+
+            <!-- Bottom Info -->
+            <div class="ig-reels-bottom-info">
+              <div class="ig-caption-scroll" id="igMockCaptionText">
+                🚨 <b>В пятницу вечером запара, а повар не вышел?</b><br/>Хватит судорожно строчить в чаты...
+              </div>
+              <div class="ig-audio-row">
+                <span>🎵</span>
+                <span id="igMockAudioText" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 190px;">GastroConnect Audio • Трендовый бит</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: #64748b; margin-top: 10px; text-align: center;">
+          📱 Живой предпросмотр Reels в ленте рекомендаций Instagram
         </div>
       </div>
     </div>
@@ -1250,4 +1499,5 @@ if (window.supabase?.createClient) {
 </script>
 <script src="/script.min.js?v=1025"></script>
 <script src="/telegram-studio.js?v=1032"></script>
+<script src="/instagram-studio.js?v=101"></script>
 </body></html>

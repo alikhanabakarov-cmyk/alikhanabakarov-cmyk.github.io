@@ -136,6 +136,14 @@
           <a href="#workers" class="nav-role-link" data-switch-role="worker">👨‍🍳 Соискателям</a>
           <a href="#restaurants" class="nav-role-link" data-switch-role="restaurant">🏛️ Заведениям</a>
           <a href="#suppliers" class="nav-role-link" data-switch-role="supplier">🚚 Поставщикам</a>
+          <a href="/menu/" style="color: var(--green); font-weight: 750; display: inline-flex; align-items: center; gap: 4px;">
+            <span>📋 Меню и техкарты</span>
+            <span style="background: var(--gold); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">ТТК</span>
+          </a>
+          <a href="/telegram-app" style="color: #229ed9; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+            <span>📱 Telegram App</span>
+            <span style="background: #229ed9; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">NEW</span>
+          </a>
         </nav>
         <div class="header-actions">
           <a class="btn header-login" href="/auth/?mode=login" data-site-setting="nav.login">Войти</a>
@@ -166,6 +174,12 @@
               <button class="btn" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('supplier')">
                 🚚 Я поставщик
               </button>
+              <a href="/menu/" class="btn" style="background: rgba(201, 154, 63, 0.16); border: 1.5px solid var(--gold); color: var(--gold); font-weight: 850; display: inline-flex; align-items: center; gap: 6px;">
+                <span>📋 Меню и техкарты</span>
+              </a>
+              <a href="/telegram-app" class="btn" style="background: rgba(34, 158, 217, 0.16); border: 1.5px solid #229ed9; color: #229ed9; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                <span>📱 Telegram Mini App</span>
+              </a>
             </div>
             <div class="hero-benefits">
               <span>⚡️ Выход от 2-х часов</span>
@@ -251,6 +265,18 @@
                   <span class="persona-role-desc">Заказы ресторанов, реестр поставщиков</span>
                 </div>
               </button>
+
+              <a
+                href="/menu/"
+                class="persona-tab-btn"
+                style="text-decoration: none; border-color: rgba(201, 154, 63, 0.5); background: #fffdf8;"
+              >
+                <span class="persona-icon">📋</span>
+                <div class="persona-info">
+                  <span class="persona-role-title" style="color: var(--green);">Меню и техкарты (ТТК)</span>
+                  <span class="persona-role-desc">Рецептуры, Food Cost, приготовление</span>
+                </div>
+              </a>
             </div>
           </div>
         </section>
@@ -1002,6 +1028,164 @@
                 <span class="carousel-road-finish-icon">🏦</span>
                 <span class="carousel-road-finish-label">БАНК</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- РАЗДЕЛ: МЕНЮ И ТЕХНОЛОГИЧЕСКИЕ КАРТЫ (ТТК) -->
+        <section class="section" id="menu-tech-cards" style="padding: 60px 24px; background: #ffffff; border-top: 1px solid rgba(201, 154, 63, 0.2); border-bottom: 1px solid rgba(201, 154, 63, 0.2);">
+          <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 36px;">
+              <div>
+                <span class="eyebrow" style="color: var(--gold); font-weight: 800;">Шеф-поварам, барменам и рестораторам</span>
+                <h2 style="font-size: clamp(26px, 3.5vw, 36px); font-weight: 900; color: var(--green); margin: 6px 0 10px;">
+                  Интерактивная база меню и технологических карт (ТТК)
+                </h2>
+                <p style="font-size: 16px; color: var(--muted); max-width: 720px; margin: 0; line-height: 1.55;">
+                  Готовые ресторанные стандарты блюд и напитков: точная закладка сырья (брутто/нетто), расчет себестоимости и Food Cost %, пошаговая технология приготовления с таймингами и печать официального бланка ТТК.
+                </p>
+              </div>
+              <a href="/menu/" class="btn primary" style="padding: 12px 24px; font-size: 15px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+                <span>📖 Все 17+ ТТК в каталоге (по кухням и видам)</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- 4 Featured Cards Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; margin-bottom: 32px;">
+              
+              <!-- Card 1: Salmon -->
+              <div style="background: #fffdf8; border: 1.5px solid rgba(201, 154, 63, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(42, 33, 18, 0.05);">
+                <div style="height: 160px; background: #181d22; position: relative;">
+                  <svg viewBox="0 0 400 280" style="width: 100%; height: 100%; object-fit: cover;">
+                    <ellipse cx="200" cy="145" rx="140" ry="90" fill="#242c36" stroke="#3b4452" stroke-width="2"/>
+                    <rect x="130" y="142" width="130" height="9" rx="4" fill="#4d7c0f"/>
+                    <rect x="125" y="156" width="135" height="9" rx="4" fill="#3f6212"/>
+                    <path d="M 140 120 Q 200 95 260 115 Q 275 145 255 170 Q 190 185 135 155 Z" fill="#ff7f50" stroke="#7f1d1d" stroke-width="2"/>
+                    <path d="M 160 118 Q 185 135 210 155" stroke="#fff" stroke-width="2" opacity="0.55"/>
+                    <path d="M 185 110 Q 210 130 235 150" stroke="#fff" stroke-width="2" opacity="0.55"/>
+                    <path d="M 220 115 Q 230 95 240 100 Q 235 115 220 115 Z" fill="#84cc16"/>
+                  </svg>
+                  <span style="position: absolute; top: 10px; right: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">FC: 28.5%</span>
+                  <span style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 5px;">ТТК-КУХ-01</span>
+                </div>
+                <div style="padding: 16px; display: flex; flex-direction: column; flex: 1;">
+                  <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Горячий цех · 18 мин</div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 0 0 10px; line-height: 1.35;">
+                    Филе лосося в мисо-глазури со спаржей
+                  </h3>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; background: #fff8ee; padding: 8px 10px; border-radius: 8px; margin-bottom: 14px;">
+                    <span>Себест: <strong style="color: var(--green);">420 ₽</strong></span>
+                    <span>Меню: <strong>1 480 ₽</strong></span>
+                  </div>
+                  <a href="/menu/" class="btn" style="margin-top: auto; padding: 8px; font-size: 13px; font-weight: 700; text-align: center; background: #f6ecdf; border: 1px solid rgba(201,154,63,0.3);">
+                    Смотреть техкарту
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 2: Ribeye Steak -->
+              <div style="background: #fffdf8; border: 1.5px solid rgba(201, 154, 63, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(42, 33, 18, 0.05);">
+                <div style="height: 160px; background: #141517; position: relative;">
+                  <svg viewBox="0 0 400 280" style="width: 100%; height: 100%; object-fit: cover;">
+                    <rect x="25" y="30" width="350" height="220" rx="16" fill="#1e2022"/>
+                    <ellipse cx="85" cy="83" rx="28" ry="18" fill="#5c3818"/>
+                    <ellipse cx="95" cy="180" rx="32" ry="26" fill="#e8d5b5"/>
+                    <path d="M 160 130 C 170 80, 290 75, 330 110 C 350 145, 335 200, 280 215 C 210 225, 150 190, 160 130 Z" fill="#542417" stroke="#1a0603" stroke-width="2"/>
+                    <line x1="180" y1="110" x2="280" y2="190" stroke="#120402" stroke-width="5" opacity="0.8"/>
+                    <line x1="210" y1="95" x2="310" y2="175" stroke="#120402" stroke-width="5" opacity="0.8"/>
+                    <path d="M 190 140 Q 230 130 270 145" stroke="#2d5218" stroke-width="3" fill="none"/>
+                  </svg>
+                  <span style="position: absolute; top: 10px; right: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">FC: 31.0%</span>
+                  <span style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 5px;">ТТК-КУХ-02</span>
+                </div>
+                <div style="padding: 16px; display: flex; flex-direction: column; flex: 1;">
+                  <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Хоспер / Гриль · 20 мин</div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 0 0 10px; line-height: 1.35;">
+                    Стейк Рибай Prime с перечным соусом
+                  </h3>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; background: #fff8ee; padding: 8px 10px; border-radius: 8px; margin-bottom: 14px;">
+                    <span>Себест: <strong style="color: var(--green);">780 ₽</strong></span>
+                    <span>Меню: <strong>2 490 ₽</strong></span>
+                  </div>
+                  <a href="/menu/" class="btn" style="margin-top: auto; padding: 8px; font-size: 13px; font-weight: 700; text-align: center; background: #f6ecdf; border: 1px solid rgba(201,154,63,0.3);">
+                    Смотреть техкарту
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 3: Lavender Raf -->
+              <div style="background: #fffdf8; border: 1.5px solid rgba(201, 154, 63, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(42, 33, 18, 0.05);">
+                <div style="height: 160px; background: #2e1065; position: relative;">
+                  <svg viewBox="0 0 400 280" style="width: 100%; height: 100%; object-fit: cover;">
+                    <ellipse cx="200" cy="225" rx="110" ry="25" fill="#c4b5fd"/>
+                    <path d="M 130 110 L 145 205 Q 200 225 255 205 L 270 110 Z" fill="#a855f7" stroke="#7c3aed" stroke-width="2"/>
+                    <ellipse cx="200" cy="110" rx="70" ry="22" fill="#faf5ff"/>
+                    <circle cx="185" cy="108" r="3" fill="#7e22ce"/>
+                    <circle cx="200" cy="109" r="3" fill="#6b21a8"/>
+                    <circle cx="215" cy="108" r="3" fill="#9333ea"/>
+                    <path d="M 180 75 Q 175 60 185 50" stroke="#c4b5fd" stroke-width="2.5" fill="none"/>
+                  </svg>
+                  <span style="position: absolute; top: 10px; right: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">FC: 23.5%</span>
+                  <span style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 5px;">ТТК-БАР-06</span>
+                </div>
+                <div style="padding: 16px; display: flex; flex-direction: column; flex: 1;">
+                  <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Кофейный бар · 4 мин</div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 0 0 10px; line-height: 1.35;">
+                    Лавандово-черничный авторский Раф
+                  </h3>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; background: #fff8ee; padding: 8px 10px; border-radius: 8px; margin-bottom: 14px;">
+                    <span>Себест: <strong style="color: var(--green);">82 ₽</strong></span>
+                    <span>Меню: <strong>350 ₽</strong></span>
+                  </div>
+                  <a href="/menu/" class="btn" style="margin-top: auto; padding: 8px; font-size: 13px; font-weight: 700; text-align: center; background: #f6ecdf; border: 1px solid rgba(201,154,63,0.3);">
+                    Смотреть техкарту
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 4: Basque Cheesecake -->
+              <div style="background: #fffdf8; border: 1.5px solid rgba(201, 154, 63, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(42, 33, 18, 0.05);">
+                <div style="height: 160px; background: #451a03; position: relative;">
+                  <svg viewBox="0 0 400 280" style="width: 100%; height: 100%; object-fit: cover;">
+                    <ellipse cx="200" cy="150" rx="160" ry="95" fill="#fdfbf7"/>
+                    <path d="M 90 170 C 130 190, 200 190, 280 160" stroke="#991b1b" stroke-width="12" fill="none" opacity="0.4"/>
+                    <g transform="translate(130, 75)">
+                      <path d="M 20 60 L 120 20 L 105 25 L 20 60 Z" fill="#3f1f10"/>
+                      <path d="M 20 60 L 125 110 L 115 130 L 15 80 Z" fill="#fde68a" stroke="#d97706" stroke-width="1"/>
+                    </g>
+                    <circle cx="140" cy="180" r="9" fill="#be123c"/>
+                    <circle cx="260" cy="155" r="9" fill="#be123c"/>
+                  </svg>
+                  <span style="position: absolute; top: 10px; right: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">FC: 22.0%</span>
+                  <span style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 5px;">ТТК-КОНД-09</span>
+                </div>
+                <div style="padding: 16px; display: flex; flex-direction: column; flex: 1;">
+                  <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Кондитерская · 35 мин</div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 0 0 10px; line-height: 1.35;">
+                    Баскский чизкейк Сан-Себастьян
+                  </h3>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; background: #fff8ee; padding: 8px 10px; border-radius: 8px; margin-bottom: 14px;">
+                    <span>Себест: <strong style="color: var(--green);">98 ₽</strong></span>
+                    <span>Меню: <strong>450 ₽</strong></span>
+                  </div>
+                  <a href="/menu/" class="btn" style="margin-top: auto; padding: 8px; font-size: 13px; font-weight: 700; text-align: center; background: #f6ecdf; border: 1px solid rgba(201,154,63,0.3);">
+                    Смотреть техкарту
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Features Bar -->
+            <div style="background: linear-gradient(135deg, rgba(6,76,59,0.05), rgba(201,154,63,0.08)); border: 1px solid rgba(201,154,63,0.25); border-radius: 12px; padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 16px; font-size: 14px; font-weight: 750; color: var(--green);">
+              <span>⚖️ Масштабирование порций (1x–50x)</span>
+              <span>·</span>
+              <span>⏱️ Кулинарные таймеры процессов</span>
+              <span>·</span>
+              <span>🖨️ Экспорт бланка по ГОСТ Р 53105</span>
+              <span>·</span>
+              <span>➕ Онлайн-конструктор ТТК</span>
             </div>
           </div>
         </section>

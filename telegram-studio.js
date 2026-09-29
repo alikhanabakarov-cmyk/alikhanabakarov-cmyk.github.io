@@ -24,6 +24,165 @@
     bindFormInputs();
     bindPublishButtons();
     updateLivePreview();
+    initAutopilotControls();
+  }
+
+  async function initAutopilotControls() {
+    const apSection = document.getElementById('telegramAutopilotSection');
+    if (!apSection) return;
+
+    const refreshBtn = document.getElementById('apRefreshBtn');
+    const compensateBtn = document.getElementById('apCompensateBtn');
+    const runSingleBtn = document.getElementById('apRunSingleBtn');
+    const countSelect = document.getElementById('apCompensateCount');
+    const msgBox = document.getElementById('apActionMsg');
+
+    async function loadStatus() {
+      try {
+        const res = await fetch('/api/autopilot/status');
+        const data = await res.json();
+        if (!data || !data.success) return;
+
+        const mskEl = document.getElementById('apMskTime');
+        const totalEl = document.getElementById('apTotalPublished');
+        const missedEl = document.getElementById('apMissedCount');
+        const badgeEl = document.getElementById('apStatusBadge');
+        const nightEl = document.getElementById('apNightInfo');
+        const tzEl = document.getElementById('apTimezone');
+        const logsEl = document.getElementById('apLogsContainer');
+
+        if (mskEl) mskEl.textContent = data.currentMoscowTime || '--:--';
+        if (totalEl) totalEl.textContent = data.totalPublished || '0';
+        if (missedEl) {
+          const missed = data.missedPostsEstimate || 0;
+          missedEl.textContent = missed > 0 ? `${missed} пропущено` : '0 (актуально)';
+          missedEl.style.color = missed > 0 ? '#dc2626' : '#10b981';
+        }
+        if (badgeEl) {
+          badgeEl.textContent = data.enabled ? (data.isNightModeActive ? '🌙 Тихий режим (ночь)' : '🟢 Активен (постинг)') : '🔴 Отключен';
+        }
+        if (nightEl) {
+          nightEl.textContent = data.isNightModeActive ? 'Ночь: с 21:00 до 08:00 МСК' : 'Дневной постинг (каждый час)';
+        }
+        if (tzEl) tzEl.textContent = data.timezone || 'Europe/Moscow (UTC+3)';
+
+        if (logsEl && Array.isArray(data.recentLogs)) {
+          if (data.recentLogs.length === 0) {
+            logsEl.innerHTML = '<div style="color: #64748b;">Логи пока пусты. Автопилот готов к работе.</div>';
+          } else {
+            logsEl.innerHTML = data.recentLogs.map(log => {
+              const postsHtml = Array.isArray(log.posts) 
+                ? log.posts.map(p => `• ${p.success ? '✅' : '❌'} <b>${p.title || 'Смена'}</b> (${p.rate || ''}) ${p.postUrl ? `<a href="${p.postUrl}" target="_blank" style="color: #0284c7; text-decoration: underline;">Пост в TG</a>` : ''}`).join('<br>')
+                : (log.message || '');
+              return `<div style="margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px;">
+                <span style="color: #64748b;">[${log.timeMsk || ''} МСК | ${log.trigger || ''}]</span>
+                <span style="font-weight: 600; color: ${log.status === 'published' ? '#059669' : '#334155'};"> ${log.status || ''}</span><br>
+                ${postsHtml}
+              </div>`;
+            }).join('');
+          }
+        }
+      } catch (err) {
+        console.warn('Autopilot status load error:', err);
+      }
+    }
+
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        refreshBtn.disabled = true;
+        refreshBtn.textContent = '⏳ Загрузка...';
+        loadStatus().finally(() => {
+          refreshBtn.disabled = false;
+          refreshBtn.textContent = '🔄 Обновить статус';
+        });
+      });
+    }
+
+    if (compensateBtn) {
+      compensateBtn.addEventListener('click', async () => {
+        const count = countSelect ? parseInt(countSelect.value, 10) : 12;
+        compensateBtn.disabled = true;
+        compensateBtn.textContent = `⏳ Публикация ${count} смен...`;
+        if (msgBox) {
+          msgBox.style.display = 'block';
+          msgBox.style.background = '#eff6ff';
+          msgBox.style.color = '#1d4ed8';
+          msgBox.textContent = `⚡️ Запущен процесс компенсации ${count} смен в @gastroconnect. Подождите несколько секунд...`;
+        }
+        try {
+          const res = await fetch('/api/autopilot/compensate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ count })
+          });
+          const result = await res.json();
+          if (result.success) {
+            if (msgBox) {
+              msgBox.style.background = '#ecfdf5';
+              msgBox.style.color = '#064c3b';
+              msgBox.innerHTML = `✅ Успешно компенсировано и опубликовано <b>${result.compensatedCount || result.count}</b> смен в Telegram-канал <a href="https://t.me/gastroconnect" target="_blank" style="color: #064c3b; text-decoration: underline; font-weight: bold;">@gastroconnect</a>!`;
+            }
+          } else {
+            if (msgBox) {
+              msgBox.style.background = '#fef2f2';
+              msgBox.style.color = '#b91c1c';
+              msgBox.textContent = `Ошибка: ${result.error || result.message || 'Не удалось опубликовать'}`;
+            }
+          }
+        } catch (e) {
+          if (msgBox) {
+            msgBox.style.background = '#fef2f2';
+            msgBox.style.color = '#b91c1c';
+            msgBox.textContent = `Ошибка сети: ${e.message}`;
+          }
+        } finally {
+          compensateBtn.disabled = false;
+          compensateBtn.textContent = '⚡️ Запустить компенсацию';
+          loadStatus();
+        }
+      });
+    }
+
+    if (runSingleBtn) {
+      runSingleBtn.addEventListener('click', async () => {
+        runSingleBtn.disabled = true;
+        runSingleBtn.textContent = '⏳ Отправка...';
+        try {
+          const res = await fetch('/api/autopilot/run-now', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ count: 2 })
+          });
+          const result = await res.json();
+          if (msgBox) {
+            msgBox.style.display = 'block';
+            if (result.success) {
+              msgBox.style.background = '#ecfdf5';
+              msgBox.style.color = '#064c3b';
+              msgBox.innerHTML = `✅ Опубликовано ${result.count || 2} смен в <a href="https://t.me/gastroconnect" target="_blank" style="text-decoration: underline;">@gastroconnect</a>!`;
+            } else {
+              msgBox.style.background = '#fef2f2';
+              msgBox.style.color = '#b91c1c';
+              msgBox.textContent = result.message || result.error || 'Ошибка отправки';
+            }
+          }
+        } catch (e) {
+          if (msgBox) {
+            msgBox.style.display = 'block';
+            msgBox.style.background = '#fef2f2';
+            msgBox.style.color = '#b91c1c';
+            msgBox.textContent = e.message;
+          }
+        } finally {
+          runSingleBtn.disabled = false;
+          runSingleBtn.textContent = '▶️ Опубликовать 2 смены';
+          loadStatus();
+        }
+      });
+    }
+
+    loadStatus();
+    setInterval(loadStatus, 30000);
   }
 
   function bindTemplateButtons() {

@@ -3,7 +3,7 @@
       content="Личный кабинет GastroConnect для профилей, смен, приглашений и заявок по ролям."
     />
     <meta property="og:description" content="Личный кабинет пользователя GastroConnect: управление профилем, отклики на смены, приглашения кандидатов и мониторинг заявок." />
-    <meta name="keywords" content="личный кабинет gastroconnect, кабинет соискателя horeca, кабинет заведения москва, управление сменами gastroconnect" /><meta name="theme-color" content="#064c3b" /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1037" /></head><body><div class="page-shell"><header class="site-header"><a class="brand" href="/" aria-label="GastroConnect"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></a><nav class="main-nav" aria-label="Главное меню"><a href="/workers/">Сотрудникам</a><a href="/restaurants/">Заведениям</a><a href="/suppliers/">Поставщикам</a><a href="/contacts/">Контакты</a></nav><button id="logoutBtn" type="button">Выйти</button></header><main class="cabinet-page service-page"><section class="service-hero service-hero-cabinet"><div class="service-hero-copy"><p class="eyebrow" data-site-setting="cabinet.eyebrow">
+    <meta name="keywords" content="личный кабинет gastroconnect, кабинет соискателя horeca, кабинет заведения москва, управление сменами gastroconnect" /><meta name="theme-color" content="#064c3b" /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1037" /></head><body><div class="page-shell"><header class="site-header"><a class="brand" href="/" aria-label="GastroConnect"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></a><nav class="main-nav" aria-label="Главное меню"><a href="/workers/">Сотрудникам</a><a href="/restaurants/">Заведениям</a><a href="/suppliers/">Поставщикам</a><a href="/menu/" style="color: var(--green); font-weight: 750;">Меню и техкарты</a><a href="/contacts/">Контакты</a></nav><button id="logoutBtn" type="button">Выйти</button></header><main class="cabinet-page service-page"><section class="service-hero service-hero-cabinet"><div class="service-hero-copy"><p class="eyebrow" data-site-setting="cabinet.eyebrow">
               Рабочее пространство
             </p><h1 data-site-setting="cabinet.title">Кабинет GastroConnect</h1><p data-site-setting="cabinet.lead">
               Профили, смены, приглашения и заявки собраны в одном месте для
@@ -11,11 +11,31 @@
             </p><p id="userInfo" class="message">Проверяем вход...</p></div><div class="service-hero-media service-hero-media-home" data-site-bg="cabinet.hero" data-bg-default="/assets/hero-home.webp" aria-hidden="true">
             <img class="poster-hero-image" src="/assets/hero-home.webp" alt="Личный кабинет GastroConnect" loading="eager" decoding="async" fetchpriority="high" />
           </div></section><section id="workerCabinet" class="role-panel"><h2>Кабинет работника</h2><p>
-            Заполните профиль, чтобы заведения понимали, кого они приглашают на
-            смену.
+            Рабочее пространство соискателя: интерактивная аналитика доходов на Recharts, активные смены, расчет ставок и профиль.
           </p>
+          <!-- Worker Cabinet Navigation Tabs -->
+          <div class="worker-view-nav" role="tablist" aria-label="Разделы кабинета работника">
+            <button type="button" class="worker-view-tab active" data-worker-view="dashboard" id="tabWorkerDashboard">
+              <span class="tab-icon">📊</span> Дашборд доходов (Recharts)
+            </button>
+            <button type="button" class="worker-view-tab" data-worker-view="shifts" id="tabWorkerShifts">
+              <span class="tab-icon">⚡️</span> Смены и заявки
+            </button>
+            <button type="button" class="worker-view-tab" data-worker-view="calc" id="tabWorkerCalc">
+              <span class="tab-icon">💰</span> Калькулятор заработка
+            </button>
+            <button type="button" class="worker-view-tab" data-worker-view="profile" id="tabWorkerProfile">
+              <span class="tab-icon">👤</span> Профиль соискателя
+            </button>
+          </div>
+
+          <!-- ПАНЕЛЬ 1: Дашборд доходов соискателя на Recharts -->
+          <div id="workerDashboardView" class="worker-view-pane active" data-worker-pane="dashboard">
+            <div id="workerRechartsDashboardMount"></div>
+          </div>
+
           <!-- Визуальные виджеты: Активные смены и Статус заявок (Supabase) -->
-          <div class="gc-kpi-dashboard" id="workerKpiDashboard">
+          <div class="gc-kpi-dashboard" id="workerKpiDashboard" data-worker-pane="shifts">
             <div class="gc-kpi-header">
               <div>
                 <div class="gc-kpi-badge"><span class="gc-pulse-dot"></span> Оперативные данные Supabase</div>
@@ -117,6 +137,8 @@
             </div>
           </div>
 
+          <!-- ПАНЕЛЬ 4: Профиль соискателя -->
+          <div id="workerProfileView" data-worker-pane="profile">
           <div class="cabinet-grid"><label
               >Имя
               <input
@@ -185,9 +207,11 @@
                 placeholder="коротко о себе, навыки и пожелания"
               ></textarea></label></div><div class="cabinet-actions form-actions"><button id="saveWorkerProfileBtn" type="button">
               Сохранить профиль работника
-            </button></div><p id="workerProfileMessage" class="message"></p><hr class="section-divider" />
+            </button></div><p id="workerProfileMessage" class="message"></p>
+          </div><!-- /workerProfileView -->
+          <hr class="section-divider" />
             <!-- Финансовый хаб и калькулятор заработка соискателя -->
-            <div class="worker-earnings-hub" id="workerEarningsHub">
+            <div class="worker-earnings-hub" id="workerEarningsHub" data-worker-pane="calc">
               <div class="worker-earnings-header">
                 <div>
                   <span class="earnings-badge-chip">💰 Доход и выплаты соискателя</span>
@@ -446,7 +470,8 @@
               <h4 style="margin: 24px 0 12px; font-size: 18px; color: var(--green);">Последние начисления и статус выплат</h4>
               <div id="workerPayoutsList"></div>
             </div><hr class="section-divider" />
-            <!-- Репутация и отзывы от заведений -->
+            <!-- Репутация, отзывы и поток смен -->
+            <div id="workerShiftsCatalogWrap" data-worker-pane="shifts">
             <div class="worker-reviews-hub" id="workerReviewsHub">
               <div class="worker-reviews-header">
                 <div>
@@ -595,7 +620,9 @@
   <button id="loadShiftPostsBtn" type="button">Показать смены заведений</button>
 </div>
 <div id="shiftPostsList" class="list-grid"></div>
-<p id="shiftPostsMessage" class="message"></p></section><section id="restaurantCabinet" class="role-panel"><h2>Кабинет заведения</h2><p>
+<p id="shiftPostsMessage" class="message"></p>
+</div><!-- /workerShiftsCatalogWrap -->
+</section><section id="restaurantCabinet" class="role-panel"><h2>Кабинет заведения</h2><p>
             Здесь заведение ведет профиль, публикует смены, смотрит анкеты
             работников и отправляет заявки поставщикам.
           </p>
@@ -2217,6 +2244,11 @@ if (window.supabase?.createClient) {
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });
 })();
 </script>
+<script src="/assets/vendor/react.production.min.js"></script>
+<script src="/assets/vendor/react-dom.production.min.js"></script>
+<script src="/assets/vendor/prop-types.min.js"></script>
+<script src="/assets/vendor/recharts.min.js"></script>
+<script src="/worker-dashboard.js?v=202"></script>
 <script src="/cabinet.js?v=1025"></script>
 <script src="/telegram-studio.js?v=1032"></script>
 </body></html>
