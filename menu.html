@@ -1261,7 +1261,7 @@
   </div>
 
   <!-- Tech Cards Client Script -->
-  <script src="/tech-cards-data.js"></script>
+  <script src="/tech-cards-loader.js"></script>
   <script>
     (function() {
       let currentCards = [];
@@ -1295,13 +1295,11 @@
           const data = await res.json();
           if (data && data.success && Array.isArray(data.cards)) {
             currentCards = data.cards;
-          } else if (typeof getAllTechCards === 'function') {
-            currentCards = getAllTechCards();
+          } else {
+            currentCards = await gcFetchTechCards();
           }
         } catch (e) {
-          if (typeof getAllTechCards === 'function') {
-            currentCards = getAllTechCards();
-          }
+          currentCards = await gcFetchTechCards();
         }
         renderCards(currentCards);
         updateStats();
