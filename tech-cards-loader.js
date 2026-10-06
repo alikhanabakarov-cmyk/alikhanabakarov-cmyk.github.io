@@ -4,7 +4,7 @@
 var GC_TECH_CARDS = null;
 function gcFetchTechCards() {
   if (GC_TECH_CARDS) return Promise.resolve(GC_TECH_CARDS);
-  return fetch('/tech-cards.json?v=20260929')
+  return fetch('/tech-cards.json?v=20261006')
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();

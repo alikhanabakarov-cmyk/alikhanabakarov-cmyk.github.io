@@ -8,6 +8,7 @@
  */
 
 const TECH_CARDS = [
+
   {
     "id": "pdf-sushi-1",
     "ttkNumber": "ТТК-МАКИ-01",
@@ -221609,12 +221610,7905 @@ const TECH_CARDS = [
       }
     ],
     "storageRules": "Готовые блюда на раздаче хранятся при t=+65°C не более 2 часов. Заготовки полуфабрикатов — при t=+2...+4°C до 48 часов по СанПиН 2.3/2.4.3590-20."
+  },
+  {
+    "id": "dumpling-01",
+    "ttkNumber": "ТТК-ДИМ-01",
+    "title": "Сяо лун бао со свининой",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "meat",
+    "dishTypeLabel": "Мясо и стейки",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "180 г (6 шт)",
+    "prepTimeMinutes": 45,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 9.2,
+    "costPriceRub": 66.6,
+    "menuPriceRub": 720,
+    "marginRub": 653.4,
+    "markupPercent": 981,
+    "kbjuPer100g": {
+      "calories": 235,
+      "proteins": 12,
+      "fats": 13,
+      "carbs": 18
+    },
+    "kbjuTotal": {
+      "calories": 423,
+      "proteins": 21.6,
+      "fats": 23.4,
+      "carbs": 32.4
+    },
+    "equipment": [
+      "Пароконвектомат / бамбуковая паровая корзина",
+      "Индукционная плита",
+      "Гастроёмкости GN 1/1"
+    ],
+    "tableware": "Бамбуковая корзина или белая фарфоровая тарелка d=21 см, t=75°C, соевый соус с уксусом в соуснике.",
+    "description": "Суповые пельмени-жамбао по шанхайскому канону: тончайшее дрожжевое тесто, сочная свиная начинка и горячий бульон в каждой порции.",
+    "ingredients": [
+      {
+        "name": "Мука пшеничная в/с",
+        "brutto": 130,
+        "wastePercent": 0,
+        "netto": 122,
+        "pricePerKg": 70,
+        "costRub": 8.5
+      },
+      {
+        "name": "Вода питьевая",
+        "brutto": 65,
+        "wastePercent": 0,
+        "netto": 65,
+        "pricePerKg": 0,
+        "costRub": 0.0
+      },
+      {
+        "name": "Свинина (лопатка, фарш с/м)",
+        "brutto": 110,
+        "wastePercent": 5,
+        "netto": 104,
+        "pricePerKg": 420,
+        "costRub": 43.7
+      },
+      {
+        "name": "Желатин / куриный бульон желе",
+        "brutto": 40,
+        "wastePercent": 0,
+        "netto": 40,
+        "pricePerKg": 80,
+        "costRub": 3.2
+      },
+      {
+        "name": "Имбирь свежий",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 6,
+        "pricePerKg": 600,
+        "costRub": 3.6
+      },
+      {
+        "name": "Лук зелёный",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 12,
+        "pricePerKg": 300,
+        "costRub": 3.6
+      },
+      {
+        "name": "Соевый соус",
+        "brutto": 10,
+        "wastePercent": 0,
+        "netto": 10,
+        "pricePerKg": 220,
+        "costRub": 2.2
+      },
+      {
+        "name": "Сахар, соль, кунжутное масло",
+        "brutto": 6,
+        "wastePercent": 0,
+        "netto": 6,
+        "pricePerKg": 300,
+        "costRub": 1.8
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Замес теста",
+        "timeText": "30 минут",
+        "seconds": 1800,
+        "text": "Замесить крутое тесто из муки и воды, дать отлежаться 30 минут."
+      },
+      {
+        "stepNum": 2,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Свиной фарш смешать с мелкорубленым имбирём, зеленью и кусочками бульонного желе."
+      },
+      {
+        "stepNum": 3,
+        "title": "Лепка",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Раскатать тесто (диаметр 8 см), выложить начинку и защипнуть «мешочком» не менее 18 складок."
+      },
+      {
+        "stepNum": 4,
+        "title": "Паровая обработка",
+        "timeText": "10 минут",
+        "seconds": 600,
+        "text": "Готовить в бамбуковой корзине на сильном пару 8–10 минут при t=100°C."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать сразу после варки на пару с соево-уксусным дипом."
+      }
+    ],
+    "storageRules": "Паровая обработка: полуфабрикат хранить при t=-18°C до 60 суток; готовые пельмени при t=+75°C не более 30 минут.",
+    "deliveryPackaging": "Лайнер DoEco с перфорацией, соус в герметичном соуснике. Доставка в термосумке при t=+60°C, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"200\" cy=\"150\" rx=\"150\" ry=\"95\" fill=\"#1f2937\"/><circle cx=\"170\" cy=\"140\" r=\"30\" fill=\"#f1c27d\"/><path d=\"M170 110 q30 22 0 38 q-30 -16 0 -38z\" fill=\"#e7b879\"/><circle cx=\"230\" cy=\"158\" r=\"26\" fill=\"#f1c27d\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">SYAO LONG BAO</text></svg>"
+  },
+  {
+    "id": "dumpling-02",
+    "ttkNumber": "ТТК-ДИМ-02",
+    "title": "Хар гоу — димсамы с креветкой",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "seafood",
+    "dishTypeLabel": "Рыба и морепродукты",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "120 г (4 шт)",
+    "prepTimeMinutes": 40,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 20.4,
+    "costPriceRub": 114.1,
+    "menuPriceRub": 560,
+    "marginRub": 445.9,
+    "markupPercent": 391,
+    "kbjuPer100g": {
+      "calories": 180,
+      "proteins": 12,
+      "fats": 6,
+      "carbs": 22
+    },
+    "kbjuTotal": {
+      "calories": 216,
+      "proteins": 14.4,
+      "fats": 7.2,
+      "carbs": 26.4
+    },
+    "equipment": [
+      "Бамбуковая паровая корзина",
+      "Индукционная плита",
+      "Венчик и миски"
+    ],
+    "tableware": "Бамбуковая корзина с пергаментной подкладкой, соус хойсин в соуснике.",
+    "description": "Прозрачные рисовые димсамы с цельными кусочками креветки и бамбуком; классический кантонский завтрак-димсам.",
+    "ingredients": [
+      {
+        "name": "Мука рисовая",
+        "brutto": 85,
+        "wastePercent": 0,
+        "netto": 80,
+        "pricePerKg": 180,
+        "costRub": 14.4
+      },
+      {
+        "name": "Крахмал кукурузный",
+        "brutto": 25,
+        "wastePercent": 0,
+        "netto": 25,
+        "pricePerKg": 130,
+        "costRub": 3.2
+      },
+      {
+        "name": "Креветка очищенная (варёная)",
+        "brutto": 60,
+        "wastePercent": 8,
+        "netto": 55,
+        "pricePerKg": 1400,
+        "costRub": 77.0
+      },
+      {
+        "name": "Бамбук маринованный",
+        "brutto": 25,
+        "wastePercent": 0,
+        "netto": 25,
+        "pricePerKg": 500,
+        "costRub": 12.5
+      },
+      {
+        "name": "Чеснок",
+        "brutto": 5,
+        "wastePercent": 0,
+        "netto": 4,
+        "pricePerKg": 250,
+        "costRub": 1.0
+      },
+      {
+        "name": "Масло кунжутное",
+        "brutto": 6,
+        "wastePercent": 0,
+        "netto": 6,
+        "pricePerKg": 800,
+        "costRub": 4.8
+      },
+      {
+        "name": "Сахар, соль, перец",
+        "brutto": 5,
+        "wastePercent": 0,
+        "netto": 5,
+        "pricePerKg": 250,
+        "costRub": 1.2
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Тесто",
+        "timeText": "10 минут",
+        "seconds": 600,
+        "text": "Смешать рисовую муку с крахмалом и горячей водой, замесить эластичное тесто."
+      },
+      {
+        "stepNum": 2,
+        "title": "Начинка",
+        "timeText": "10 минут",
+        "seconds": 600,
+        "text": "Креветку крупно порубить, смешать с бамбуком, чесноком и приправами."
+      },
+      {
+        "stepNum": 3,
+        "title": "Лепка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Раскатать круги теста Ø 7 см, выложить начинку и защипнуть «лодочкой» с фестончатым краем."
+      },
+      {
+        "stepNum": 4,
+        "title": "Варка на пару",
+        "timeText": "7 минут",
+        "seconds": 420,
+        "text": "Готовить на сильном пару 6–7 минут до прозрачности теста."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать горячими со сладковатым соусом."
+      }
+    ],
+    "storageRules": "Полуфабрикаты хранить при t=-18°C до 30 суток; после варки на пару подавать немедленно.",
+    "deliveryPackaging": "Перфорированный лайнер DoEco, дип в герметичном соуснике 30 мл, термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><circle cx=\"180\" cy=\"150\" r=\"70\" fill=\"#1f2937\"/><ellipse cx=\"250\" cy=\"160\" rx=\"55\" ry=\"40\" fill=\"#2b3544\"/><circle cx=\"190\" cy=\"150\" r=\"42\" fill=\"#f9d9b8\"/><path d=\"M190 116 q28 34 0 50 q-26 -16 0 -50z\" fill=\"#fbd7b0\"/><circle cx=\"210\" cy=\"150\" r=\"8\" fill=\"#e28f6b\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">HAR GOW</text></svg>"
+  },
+  {
+    "id": "dumpling-03",
+    "ttkNumber": "ТТК-ДИМ-03",
+    "title": "Гёдза с курицей и шиитаке",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "poultry",
+    "dishTypeLabel": "Птица",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "210 г (6 шт)",
+    "prepTimeMinutes": 45,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 14.0,
+    "costPriceRub": 86.7,
+    "menuPriceRub": 620,
+    "marginRub": 533.3,
+    "markupPercent": 615,
+    "kbjuPer100g": {
+      "calories": 215,
+      "proteins": 12,
+      "fats": 9,
+      "carbs": 22
+    },
+    "kbjuTotal": {
+      "calories": 452,
+      "proteins": 25.2,
+      "fats": 18.9,
+      "carbs": 46.2
+    },
+    "equipment": [
+      "Сковорода с антипригарным покрытием",
+      "Пароварка",
+      "Крышка d=28 см"
+    ],
+    "tableware": "Тёмная керамическая тарелка, соус «понезу» на основе соевого и рисового уксуса.",
+    "description": "Японские пельмени с сочной куриной начинкой и грибами шиитаке: хрустящее дно после обжарки и паровая доводка.",
+    "ingredients": [
+      {
+        "name": "Тесто для гёдза (круговое)",
+        "brutto": 140,
+        "wastePercent": 0,
+        "netto": 140,
+        "pricePerKg": 90,
+        "costRub": 12.6
+      },
+      {
+        "name": "Фарш куриный",
+        "brutto": 85,
+        "wastePercent": 6,
+        "netto": 80,
+        "pricePerKg": 330,
+        "costRub": 26.4
+      },
+      {
+        "name": "Шиитаке сушёные (размоченные)",
+        "brutto": 30,
+        "wastePercent": 0,
+        "netto": 30,
+        "pricePerKg": 1200,
+        "costRub": 36.0
+      },
+      {
+        "name": "Капуста белокочанная",
+        "brutto": 60,
+        "wastePercent": 16,
+        "netto": 50,
+        "pricePerKg": 45,
+        "costRub": 2.2
+      },
+      {
+        "name": "Лук зелёный",
+        "brutto": 12,
+        "wastePercent": 0,
+        "netto": 10,
+        "pricePerKg": 300,
+        "costRub": 3.0
+      },
+      {
+        "name": "Имбирь и чеснок",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 7,
+        "pricePerKg": 350,
+        "costRub": 2.5
+      },
+      {
+        "name": "Соевый соус, кунжутное масло",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 500,
+        "costRub": 4.0
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать куриный фарш, мелко нашинкованные шиитаке и капусту, зелень и приправы; отбить."
+      },
+      {
+        "stepNum": 2,
+        "title": "Лепка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Выложить начинку на кружки теста, защипнуть «ёлочкой» 5–7 складок."
+      },
+      {
+        "stepNum": 3,
+        "title": "Обжарка",
+        "timeText": "4 минуты",
+        "seconds": 240,
+        "text": "Обжарить гёдза дном вниз в масле до румяной корочки 3–4 минуты."
+      },
+      {
+        "stepNum": 4,
+        "title": "Паровая доводка",
+        "timeText": "6 минут",
+        "seconds": 360,
+        "text": "Влить воду (≈100 мл), накрыть крышкой и пропарить 5–6 минут до выпаривания."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Перевернуть корочкой вверх, подать с понезу-соусом."
+      }
+    ],
+    "storageRules": "Полуфабрикат хранить при t=-18°C до 45 суток; готовые гёдза при t=+75°C до 30 минут.",
+    "deliveryPackaging": "Лайнер + термосумка t=+60°C, соус в соуснике 30 мл, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"140\" cy=\"160\" rx=\"60\" ry=\"55\" fill=\"#2b3544\"/><ellipse cx=\"240\" cy=\"160\" rx=\"60\" ry=\"55\" fill=\"#303a4a\"/><ellipse cx=\"190\" cy=\"170\" rx=\"60\" ry=\"50\" fill=\"#f5c98d\"/><path d=\"M190 128 q24 42 0 62 q-24 -20 0 -62z\" fill=\"#efb87a\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">GYOZA CHICKEN</text></svg>"
+  },
+  {
+    "id": "dumpling-04",
+    "ttkNumber": "ТТК-ДИМ-04",
+    "title": "Дамплинги с лососем и имбирём",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "seafood",
+    "dishTypeLabel": "Рыба и морепродукты",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "180 г (6 шт)",
+    "prepTimeMinutes": 45,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 15.6,
+    "costPriceRub": 123.1,
+    "menuPriceRub": 790,
+    "marginRub": 666.9,
+    "markupPercent": 542,
+    "kbjuPer100g": {
+      "calories": 220,
+      "proteins": 15,
+      "fats": 10,
+      "carbs": 18
+    },
+    "kbjuTotal": {
+      "calories": 396,
+      "proteins": 27.0,
+      "fats": 18.0,
+      "carbs": 32.4
+    },
+    "equipment": [
+      "Паровая корзина",
+      "Индукционная плита",
+      "Силиконовый коврик"
+    ],
+    "tableware": "Светлая фарфоровая тарелка d=23 см, долька лайма, соус с имбирём.",
+    "description": "Нежные паровые дамплинги с филе лосося, имбирём и луком-пореем; подарут с лаймовым дипом.",
+    "ingredients": [
+      {
+        "name": "Филе лосося",
+        "brutto": 80,
+        "wastePercent": 10,
+        "netto": 72,
+        "pricePerKg": 1300,
+        "costRub": 93.6
+      },
+      {
+        "name": "Лук-порей",
+        "brutto": 30,
+        "wastePercent": 0,
+        "netto": 24,
+        "pricePerKg": 250,
+        "costRub": 6.0
+      },
+      {
+        "name": "Имбирь свежий",
+        "brutto": 10,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 600,
+        "costRub": 4.8
+      },
+      {
+        "name": "Тесто пресное (круговое)",
+        "brutto": 130,
+        "wastePercent": 0,
+        "netto": 130,
+        "pricePerKg": 90,
+        "costRub": 11.7
+      },
+      {
+        "name": "Соевый соус",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 220,
+        "costRub": 1.8
+      },
+      {
+        "name": "Масло кунжутное",
+        "brutto": 5,
+        "wastePercent": 0,
+        "netto": 5,
+        "pricePerKg": 800,
+        "costRub": 4.0
+      },
+      {
+        "name": "Сахар, соль, чили",
+        "brutto": 5,
+        "wastePercent": 0,
+        "netto": 5,
+        "pricePerKg": 250,
+        "costRub": 1.2
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Начинка",
+        "timeText": "12 минут",
+        "seconds": 720,
+        "text": "Лосось мелко порубить, смешать с имбирём, пореем и приправами."
+      },
+      {
+        "stepNum": 2,
+        "title": "Лепка",
+        "timeText": "12 минут",
+        "seconds": 720,
+        "text": "Выложить начинку и защипнуть дамплинги полумесяцем."
+      },
+      {
+        "stepNum": 3,
+        "title": "Варка на пару",
+        "timeText": "8 минут",
+        "seconds": 480,
+        "text": "Готовить на пару 7–8 минут."
+      },
+      {
+        "stepNum": 4,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать с лаймом и имбирно-соевым дипом."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 30 суток; после варки на пару подавать немедленно.",
+    "deliveryPackaging": "Перфорированный лайнер DoEco, дип в соуснике, термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"200\" cy=\"160\" rx=\"120\" ry=\"70\" fill=\"#212a38\"/><ellipse cx=\"200\" cy=\"160\" rx=\"95\" ry=\"52\" fill=\"#f6b99a\"/><path d=\"M200 116 q34 44 0 72 q-34 -28 0 -72z\" fill=\"#f09a72\"/><circle cx=\"160\" cy=\"150\" r=\"14\" fill=\"#f7d9a0\"/><circle cx=\"240\" cy=\"160\" r=\"12\" fill=\"#f7d9a0\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">SALMON DUMPLINGS</text></svg>"
+  },
+  {
+    "id": "dumpling-05",
+    "ttkNumber": "ТТК-ДИМ-05",
+    "title": "Шуй мей с креветкой и свининой",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "seafood",
+    "dishTypeLabel": "Рыба и морепродукты",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "130 г (4 шт)",
+    "prepTimeMinutes": 45,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 14.5,
+    "costPriceRub": 93.0,
+    "menuPriceRub": 640,
+    "marginRub": 547.0,
+    "markupPercent": 588,
+    "kbjuPer100g": {
+      "calories": 210,
+      "proteins": 11,
+      "fats": 10,
+      "carbs": 20
+    },
+    "kbjuTotal": {
+      "calories": 273,
+      "proteins": 14.3,
+      "fats": 13.0,
+      "carbs": 26.0
+    },
+    "equipment": [
+      "Бамбуковая корзина",
+      "Пароварка",
+      "Миски"
+    ],
+    "tableware": "Корзина с пергаментом, чили-масло и соус соевый.",
+    "description": "Открытые димсамы-«цветы» с креветочной и свиной начинкой в жёлтом яичном тесте.",
+    "ingredients": [
+      {
+        "name": "Яичное тесто для димсамов",
+        "brutto": 90,
+        "wastePercent": 0,
+        "netto": 90,
+        "pricePerKg": 110,
+        "costRub": 9.9
+      },
+      {
+        "name": "Креветка очищенная",
+        "brutto": 45,
+        "wastePercent": 10,
+        "netto": 40,
+        "pricePerKg": 1400,
+        "costRub": 56.0
+      },
+      {
+        "name": "Свинина (фарш)",
+        "brutto": 55,
+        "wastePercent": 5,
+        "netto": 52,
+        "pricePerKg": 420,
+        "costRub": 21.8
+      },
+      {
+        "name": "Лук репчатый",
+        "brutto": 20,
+        "wastePercent": 0,
+        "netto": 18,
+        "pricePerKg": 45,
+        "costRub": 0.8
+      },
+      {
+        "name": "Имбирь",
+        "brutto": 6,
+        "wastePercent": 0,
+        "netto": 5,
+        "pricePerKg": 600,
+        "costRub": 3.0
+      },
+      {
+        "name": "Соевый соус, сахар",
+        "brutto": 6,
+        "wastePercent": 0,
+        "netto": 6,
+        "pricePerKg": 250,
+        "costRub": 1.5
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать креветку, свиной фарш, лук и имбирь, вымесить до однородности."
+      },
+      {
+        "stepNum": 2,
+        "title": "Лепка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Из тонкого теста сформировать «цветок» с открытым верхом, наполнить начинкой."
+      },
+      {
+        "stepNum": 3,
+        "title": "Варка на пару",
+        "timeText": "8 минут",
+        "seconds": 480,
+        "text": "Готовить на пару 8 минут."
+      },
+      {
+        "stepNum": 4,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать с чили-маслом и соевым соусом."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 30 суток; после паровой обработки подавать сразу.",
+    "deliveryPackaging": "Лайнер + соусник, термосумка t=+60°C, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><circle cx=\"200\" cy=\"150\" r=\"80\" fill=\"#232b39\"/><circle cx=\"200\" cy=\"150\" r=\"55\" fill=\"#f6d98f\"/><path d=\"M172 150 q28 -18 56 0 q-28 18 -56 0z\" fill=\"#e07d5f\"/><circle cx=\"182\" cy=\"142\" r=\"8\" fill=\"#f2b8a0\"/><circle cx=\"218\" cy=\"148\" r=\"7\" fill=\"#f2b8a0\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">SHUI MAI</text></svg>"
+  },
+  {
+    "id": "dumpling-06",
+    "ttkNumber": "ТТК-ДИМ-06",
+    "title": "Бао классическая паровая булочка",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "dough_baking",
+    "dishTypeLabel": "Выпечка",
+    "station": "Мучной цех / Паназиатская станция",
+    "yieldPortion": "120 г (1 шт)",
+    "prepTimeMinutes": 90,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 4.3,
+    "costPriceRub": 8.2,
+    "menuPriceRub": 190,
+    "marginRub": 181.8,
+    "markupPercent": 2217,
+    "kbjuPer100g": {
+      "calories": 220,
+      "proteins": 6,
+      "fats": 2,
+      "carbs": 45
+    },
+    "kbjuTotal": {
+      "calories": 264,
+      "proteins": 7.2,
+      "fats": 2.4,
+      "carbs": 54.0
+    },
+    "equipment": [
+      "Пароконвектомат",
+      "Расстоечный шкаф",
+      "Паровая корзина"
+    ],
+    "tableware": "Одиночная сервировка в корзине, крафт-подложка.",
+    "description": "Классическая китайская паровая булочка «мантоу» из дрожжевого теста: пышная, белёсая, идеальная основа для бао с начинкой.",
+    "ingredients": [
+      {
+        "name": "Мука пшеничная в/с",
+        "brutto": 90,
+        "wastePercent": 0,
+        "netto": 85,
+        "pricePerKg": 70,
+        "costRub": 6.0
+      },
+      {
+        "name": "Дрожжи прессованные",
+        "brutto": 5,
+        "wastePercent": 0,
+        "netto": 5,
+        "pricePerKg": 150,
+        "costRub": 0.8
+      },
+      {
+        "name": "Сахар",
+        "brutto": 10,
+        "wastePercent": 0,
+        "netto": 10,
+        "pricePerKg": 70,
+        "costRub": 0.7
+      },
+      {
+        "name": "Вода/молоко",
+        "brutto": 55,
+        "wastePercent": 0,
+        "netto": 55,
+        "pricePerKg": 0,
+        "costRub": 0.0
+      },
+      {
+        "name": "Масло растительное",
+        "brutto": 4,
+        "wastePercent": 0,
+        "netto": 4,
+        "pricePerKg": 150,
+        "costRub": 0.6
+      },
+      {
+        "name": "Соль",
+        "brutto": 2,
+        "wastePercent": 0,
+        "netto": 2,
+        "pricePerKg": 30,
+        "costRub": 0.1
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Опара",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать дрожжи с сахаром и тёплой водой, дать подойти."
+      },
+      {
+        "stepNum": 2,
+        "title": "Замес",
+        "timeText": "60 минут",
+        "seconds": 3600,
+        "text": "Замесить мягкое тесто с маслом и солью, отставить на расстойку 60 минут."
+      },
+      {
+        "stepNum": 3,
+        "title": "Формовка",
+        "timeText": "10 минут",
+        "seconds": 600,
+        "text": "Разделить на куски 120 г, сформовать гладкие шары."
+      },
+      {
+        "stepNum": 4,
+        "title": "Вторая расстойка",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Оставить на 20 минут, выложить на пергамент."
+      },
+      {
+        "stepNum": 5,
+        "title": "Варка на пару",
+        "timeText": "17 минут",
+        "seconds": 1020,
+        "text": "Готовить на пару 12 минут, не открывая крышку ещё 5 минут."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 45 суток; готовая булочка в тепле при t=+65°C до 2 часов.",
+    "deliveryPackaging": "Крафтовый лайнер, термосумка t=+60°C, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><circle cx=\"200\" cy=\"150\" r=\"95\" fill=\"#1f2937\"/><path d=\"M110 175 Q200 150 290 175 Q200 205 110 175z\" fill=\"#2b3544\"/><path d=\"M130 165 Q200 135 270 165 Q200 195 130 165z\" fill=\"#f4efe6\"/><path d=\"M155 160 Q200 145 245 160 Q200 180 155 160z\" fill=\"#efe6d2\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">BAO CLASSIC</text></svg>"
+  },
+  {
+    "id": "dumpling-07",
+    "ttkNumber": "ТТК-ДИМ-07",
+    "title": "Бао с уткой конфи",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "meat",
+    "dishTypeLabel": "Мясо и стейки",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "150 г (1 шт)",
+    "prepTimeMinutes": 40,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 11.6,
+    "costPriceRub": 57.0,
+    "menuPriceRub": 490,
+    "marginRub": 433.0,
+    "markupPercent": 760,
+    "kbjuPer100g": {
+      "calories": 260,
+      "proteins": 12,
+      "fats": 14,
+      "carbs": 22
+    },
+    "kbjuTotal": {
+      "calories": 390,
+      "proteins": 18.0,
+      "fats": 21.0,
+      "carbs": 33.0
+    },
+    "equipment": [
+      "Пароконвектомат",
+      "Плита для конфи",
+      "Паровая корзина"
+    ],
+    "tableware": "Тёмная тарелка, крафт-подложка, подача в корзине.",
+    "description": "Паровая булочка бао со сладковатым конфи из утки, солёным огурцом и соусом хойсин.",
+    "ingredients": [
+      {
+        "name": "Булочка бао (полуфабрикат)",
+        "brutto": 90,
+        "wastePercent": 0,
+        "netto": 90,
+        "pricePerKg": 45,
+        "costRub": 4.0
+      },
+      {
+        "name": "Утка (филе, конфи)",
+        "brutto": 60,
+        "wastePercent": 0,
+        "netto": 60,
+        "pricePerKg": 700,
+        "costRub": 42.0
+      },
+      {
+        "name": "Огурец солёный/маринованный",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 13,
+        "pricePerKg": 250,
+        "costRub": 3.2
+      },
+      {
+        "name": "Соус хойсин",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 15,
+        "pricePerKg": 350,
+        "costRub": 5.2
+      },
+      {
+        "name": "Лук зелёный",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 6,
+        "pricePerKg": 300,
+        "costRub": 1.8
+      },
+      {
+        "name": "Кунжут",
+        "brutto": 2,
+        "wastePercent": 0,
+        "netto": 2,
+        "pricePerKg": 400,
+        "costRub": 0.8
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Конфи",
+        "timeText": "90 минут",
+        "seconds": 5400,
+        "text": "Утку медленно томить в утином жиру 90 минут, разобрать на волокна."
+      },
+      {
+        "stepNum": 2,
+        "title": "Прогрев бао",
+        "timeText": "5 минут",
+        "seconds": 300,
+        "text": "Прогреть булочку на пару 5 минут."
+      },
+      {
+        "stepNum": 3,
+        "title": "Сборка",
+        "timeText": "3 минуты",
+        "seconds": 180,
+        "text": "Промазать хойсином, выложить утку, огурец и зелень, посыпать кунжутом."
+      },
+      {
+        "stepNum": 4,
+        "title": "Подача",
+        "timeText": "1 минута",
+        "seconds": 60,
+        "text": "Подать горячей в корзине."
+      }
+    ],
+    "storageRules": "Конфи из утки до 24 часов при t=+4°C; собранный бао подавать в течение 15 минут.",
+    "deliveryPackaging": "Бао оборачивается в лайнер DoEco; соус в соуснике; термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><circle cx=\"200\" cy=\"150\" r=\"92\" fill=\"#1f2937\"/><path d=\"M120 170 Q200 140 280 170 Q200 198 120 170z\" fill=\"#f4efe6\"/><path d=\"M150 168 Q200 152 250 168 Q200 184 150 168z\" fill=\"#d98a5a\"/><circle cx=\"165\" cy=\"175\" r=\"5\" fill=\"#8fb996\"/><circle cx=\"240\" cy=\"176\" r=\"5\" fill=\"#8fb996\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">BAO DUCK</text></svg>"
+  },
+  {
+    "id": "dumpling-08",
+    "ttkNumber": "ТТК-ДИМ-08",
+    "title": "Бао с тофу и овощами",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "vegetarian",
+    "dishTypeLabel": "Овощи и вегетарианское",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "160 г (1 шт)",
+    "prepTimeMinutes": 35,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 13.8,
+    "costPriceRub": 57.8,
+    "menuPriceRub": 420,
+    "marginRub": 362.2,
+    "markupPercent": 627,
+    "kbjuPer100g": {
+      "calories": 190,
+      "proteins": 9,
+      "fats": 7,
+      "carbs": 26
+    },
+    "kbjuTotal": {
+      "calories": 304,
+      "proteins": 14.4,
+      "fats": 11.2,
+      "carbs": 41.6
+    },
+    "equipment": [
+      "Пароконвектомат",
+      "Сковорода Wok",
+      "Паровая корзина"
+    ],
+    "tableware": "Керамическая тарелка, соус в соуснике, зелень сверху.",
+    "description": "Вегетарианская паровая булочка бао с обжаренным тофу, морковью, шиитаке и соусом терияки.",
+    "ingredients": [
+      {
+        "name": "Булочка бао (полуфабрикат)",
+        "brutto": 90,
+        "wastePercent": 0,
+        "netto": 90,
+        "pricePerKg": 45,
+        "costRub": 4.0
+      },
+      {
+        "name": "Тофу (обжаренный)",
+        "brutto": 55,
+        "wastePercent": 0,
+        "netto": 55,
+        "pricePerKg": 400,
+        "costRub": 22.0
+      },
+      {
+        "name": "Шиитаке (размоченные)",
+        "brutto": 20,
+        "wastePercent": 0,
+        "netto": 20,
+        "pricePerKg": 1200,
+        "costRub": 24.0
+      },
+      {
+        "name": "Морковь (соломка)",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 13,
+        "pricePerKg": 40,
+        "costRub": 0.5
+      },
+      {
+        "name": "Соус терияки",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 15,
+        "pricePerKg": 350,
+        "costRub": 5.2
+      },
+      {
+        "name": "Лук зелёный, кунжут",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 7,
+        "pricePerKg": 300,
+        "costRub": 2.1
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Начинка",
+        "timeText": "12 минут",
+        "seconds": 720,
+        "text": "Обжарить тофу и овощи в воке, глазировать терияки."
+      },
+      {
+        "stepNum": 2,
+        "title": "Прогрев бао",
+        "timeText": "5 минут",
+        "seconds": 300,
+        "text": "Прогреть булочку на пару 5 минут."
+      },
+      {
+        "stepNum": 3,
+        "title": "Сборка",
+        "timeText": "3 минуты",
+        "seconds": 180,
+        "text": "Выложить начинку в булочку, посыпать зеленью и кунжутом."
+      },
+      {
+        "stepNum": 4,
+        "title": "Подача",
+        "timeText": "1 минута",
+        "seconds": 60,
+        "text": "Подать горячей."
+      }
+    ],
+    "storageRules": "Начинка при t=+4°C до 24 часов; собранный бао подать в течение 15 минут.",
+    "deliveryPackaging": "Лайнер DoEco, соус отдельно, термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><circle cx=\"200\" cy=\"150\" r=\"92\" fill=\"#1f2937\"/><path d=\"M122 170 Q200 140 278 170 Q200 198 122 170z\" fill=\"#f4efe6\"/><path d=\"M155 168 Q200 152 245 168 Q200 184 155 168z\" fill=\"#d9b26a\"/><circle cx=\"175\" cy=\"174\" r=\"5\" fill=\"#e8d6a8\"/><circle cx=\"230\" cy=\"175\" r=\"5\" fill=\"#3f7d4e\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">BAO TOFU</text></svg>"
+  },
+  {
+    "id": "dumpling-09",
+    "ttkNumber": "ТТК-ДИМ-09",
+    "title": "Манты с бараниной и луком",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "caucasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "meat",
+    "dishTypeLabel": "Мясо и стейки",
+    "station": "Мучной цех / Горячий цех",
+    "yieldPortion": "240 г (3 шт)",
+    "prepTimeMinutes": 60,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 18.6,
+    "costPriceRub": 100.4,
+    "menuPriceRub": 540,
+    "marginRub": 439.6,
+    "markupPercent": 438,
+    "kbjuPer100g": {
+      "calories": 230,
+      "proteins": 12,
+      "fats": 12,
+      "carbs": 19
+    },
+    "kbjuTotal": {
+      "calories": 552,
+      "proteins": 28.8,
+      "fats": 28.8,
+      "carbs": 45.6
+    },
+    "equipment": [
+      "Каскадный мантышница",
+      "Пароварка",
+      "Гастроёмкости"
+    ],
+    "tableware": "Большая тарелка d=27 см, сметанно-чесночный соус или укроп.",
+    "description": "Крупные паровые манты по среднеазиатской технологии: сочный фарш из баранины и репчатого лука в тонком тесте.",
+    "ingredients": [
+      {
+        "name": "Мука пшеничная в/с",
+        "brutto": 150,
+        "wastePercent": 0,
+        "netto": 140,
+        "pricePerKg": 70,
+        "costRub": 9.8
+      },
+      {
+        "name": "Баранина (фарш)",
+        "brutto": 130,
+        "wastePercent": 6,
+        "netto": 122,
+        "pricePerKg": 650,
+        "costRub": 79.3
+      },
+      {
+        "name": "Лук репчатый",
+        "brutto": 70,
+        "wastePercent": 14,
+        "netto": 60,
+        "pricePerKg": 45,
+        "costRub": 2.7
+      },
+      {
+        "name": "Зира / специи",
+        "brutto": 3,
+        "wastePercent": 0,
+        "netto": 3,
+        "pricePerKg": 1200,
+        "costRub": 3.6
+      },
+      {
+        "name": "Соль, перец",
+        "brutto": 4,
+        "wastePercent": 0,
+        "netto": 4,
+        "pricePerKg": 250,
+        "costRub": 1.0
+      },
+      {
+        "name": "Масло топлёное",
+        "brutto": 10,
+        "wastePercent": 0,
+        "netto": 10,
+        "pricePerKg": 400,
+        "costRub": 4.0
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Тесто",
+        "timeText": "30 минут",
+        "seconds": 1800,
+        "text": "Замесить пресное тесто, раскатать в пласты 2 мм."
+      },
+      {
+        "stepNum": 2,
+        "title": "Фарш",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Баранину и лук нарезать вручную мелкими кубиками, посолить, поперчить с зирой."
+      },
+      {
+        "stepNum": 3,
+        "title": "Лепка",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Выложить начинку, собрать манты «конвертом» в 4 защипа."
+      },
+      {
+        "stepNum": 4,
+        "title": "Варка на пару",
+        "timeText": "45 минут",
+        "seconds": 2700,
+        "text": "Готовить на пару 40–45 минут в мантышнице."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать со сметанным соусом и зеленью."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 45 суток; после паровой обработки подавать немедленно.",
+    "deliveryPackaging": "Лайнер, соус в соуснике, термосумка t=+60°C, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"125\" cy=\"160\" rx=\"48\" ry=\"60\" fill=\"#2b3544\"/><ellipse cx=\"253\" cy=\"160\" rx=\"48\" ry=\"60\" fill=\"#303a4a\"/><path d=\"M125 118 l30 26 l-14 34 l-32 0 l-14 -34z\" fill=\"#eedcb4\"/><path d=\"M253 118 l30 26 l-14 34 l-32 0 l-14 -34z\" fill=\"#e6d0a4\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">MANTY LAMB</text></svg>"
+  },
+  {
+    "id": "dumpling-10",
+    "ttkNumber": "ТТК-ДИМ-10",
+    "title": "Вонтоны с курицей и креветками",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "seafood",
+    "dishTypeLabel": "Рыба и морепродукты",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "170 г (6 шт)",
+    "prepTimeMinutes": 40,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 15.0,
+    "costPriceRub": 88.7,
+    "menuPriceRub": 590,
+    "marginRub": 501.3,
+    "markupPercent": 565,
+    "kbjuPer100g": {
+      "calories": 200,
+      "proteins": 12,
+      "fats": 8,
+      "carbs": 20
+    },
+    "kbjuTotal": {
+      "calories": 340,
+      "proteins": 20.4,
+      "fats": 13.6,
+      "carbs": 34.0
+    },
+    "equipment": [
+      "Пароварка",
+      "Корзина паровая",
+      "Миски"
+    ],
+    "tableware": "Тарелка d=22 см, соевый дип с имбирём в соуснике.",
+    "description": "Тонкие вонтоны на пару с куриным фаршем и креветкой, в азиатском стиле с зелёным луком.",
+    "ingredients": [
+      {
+        "name": "Тесто вонтонов (листы)",
+        "brutto": 120,
+        "wastePercent": 0,
+        "netto": 120,
+        "pricePerKg": 130,
+        "costRub": 15.6
+      },
+      {
+        "name": "Фарш куриный",
+        "brutto": 60,
+        "wastePercent": 5,
+        "netto": 57,
+        "pricePerKg": 330,
+        "costRub": 18.8
+      },
+      {
+        "name": "Креветка очищенная",
+        "brutto": 35,
+        "wastePercent": 8,
+        "netto": 32,
+        "pricePerKg": 1400,
+        "costRub": 44.8
+      },
+      {
+        "name": "Лук зелёный",
+        "brutto": 12,
+        "wastePercent": 0,
+        "netto": 10,
+        "pricePerKg": 300,
+        "costRub": 3.0
+      },
+      {
+        "name": "Имбирь, чеснок",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 7,
+        "pricePerKg": 350,
+        "costRub": 2.5
+      },
+      {
+        "name": "Соевый соус, кунжутное масло",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 500,
+        "costRub": 4.0
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать куриный фарш, рубленую креветку, зелень и приправы."
+      },
+      {
+        "stepNum": 2,
+        "title": "Лепка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Нарезать тесто на квадраты, выложить начинку, сформовать вонтоны."
+      },
+      {
+        "stepNum": 3,
+        "title": "Варка на пару",
+        "timeText": "8 минут",
+        "seconds": 480,
+        "text": "Готовить на пару 7–8 минут."
+      },
+      {
+        "stepNum": 4,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать с имбирно-соевым дипом."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 30 суток; после паровой обработки подавать сразу.",
+    "deliveryPackaging": "Лайнер DoEco, дип в соуснике, термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"155\" cy=\"155\" rx=\"58\" ry=\"52\" fill=\"#28313f\"/><ellipse cx=\"245\" cy=\"158\" rx=\"58\" ry=\"52\" fill=\"#2f3949\"/><ellipse cx=\"155\" cy=\"155\" rx=\"42\" ry=\"36\" fill=\"#f2d9a6\"/><ellipse cx=\"245\" cy=\"158\" rx=\"42\" ry=\"36\" fill=\"#ecf0c8\"/><path d=\"M155 124 q20 31 0 48 q-20 -17 0 -48z\" fill=\"#e9c98e\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">WONTON</text></svg>"
+  },
+  {
+    "id": "GC-0040",
+    "ttkNumber": "ТТК-ДИМ-0040",
+    "title": "Китайские пельмени с курицей и креветками",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "panasian",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "seafood",
+    "dishTypeLabel": "Рыба и морепродукты",
+    "station": "Паназиатская станция / Мучной цех",
+    "yieldPortion": "220 г (8 шт)",
+    "prepTimeMinutes": 50,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 16.1,
+    "costPriceRub": 98.0,
+    "menuPriceRub": 610,
+    "marginRub": 512.0,
+    "markupPercent": 522,
+    "kbjuPer100g": {
+      "calories": 205,
+      "proteins": 13,
+      "fats": 8,
+      "carbs": 20
+    },
+    "kbjuTotal": {
+      "calories": 451,
+      "proteins": 28.6,
+      "fats": 17.6,
+      "carbs": 44.0
+    },
+    "equipment": [
+      "Пароварка",
+      "Кастрюля/плита",
+      "Скалка"
+    ],
+    "tableware": "Тарелка d=24 см, уксусно-соевый дип в соуснике.",
+    "description": "Китайские пельмени «цзяоцзы» с сочной начинкой из куриного фарша и креветки, варёные или на пару с уксусным дипом.",
+    "ingredients": [
+      {
+        "name": "Мука пшеничная в/с",
+        "brutto": 110,
+        "wastePercent": 0,
+        "netto": 104,
+        "pricePerKg": 70,
+        "costRub": 7.3
+      },
+      {
+        "name": "Фарш куриный",
+        "brutto": 75,
+        "wastePercent": 5,
+        "netto": 71,
+        "pricePerKg": 330,
+        "costRub": 23.4
+      },
+      {
+        "name": "Креветка очищенная",
+        "brutto": 45,
+        "wastePercent": 10,
+        "netto": 40,
+        "pricePerKg": 1400,
+        "costRub": 56.0
+      },
+      {
+        "name": "Капуста пекинская",
+        "brutto": 40,
+        "wastePercent": 25,
+        "netto": 30,
+        "pricePerKg": 150,
+        "costRub": 4.5
+      },
+      {
+        "name": "Имбирь, чеснок",
+        "brutto": 10,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 350,
+        "costRub": 2.8
+      },
+      {
+        "name": "Соевый соус, кунжутное масло",
+        "brutto": 8,
+        "wastePercent": 0,
+        "netto": 8,
+        "pricePerKg": 500,
+        "costRub": 4.0
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Тесто",
+        "timeText": "25 минут",
+        "seconds": 1500,
+        "text": "Замесить тесто, раскатать круги Ø 8 см."
+      },
+      {
+        "stepNum": 2,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать куриный фарш, креветку, капусту, имбирь и приправы."
+      },
+      {
+        "stepNum": 3,
+        "title": "Лепка",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Защипнуть цзяоцзы полумесяцем."
+      },
+      {
+        "stepNum": 4,
+        "title": "Отваривание",
+        "timeText": "8 минут",
+        "seconds": 480,
+        "text": "Варить в кипящей воде 8 минут, откинуть."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать с уксусно-соевым дипом."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 30 суток; после тепловой обработки подавать немедленно.",
+    "deliveryPackaging": "Лайнер DoEco, соус в соуснике, термосумка t=+60°C, срок до 45 минут.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"200\" cy=\"160\" rx=\"120\" ry=\"65\" fill=\"#25303f\"/><ellipse cx=\"200\" cy=\"160\" rx=\"95\" ry=\"50\" fill=\"#f3ddab\"/><path d=\"M200 122 q34 38 0 64 q-34 -26 0 -64z\" fill=\"#e9cc8f\"/><circle cx=\"168\" cy=\"152\" r=\"9\" fill=\"#e49a84\"/><circle cx=\"228\" cy=\"160\" r=\"9\" fill=\"#e49a84\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">JIAOZI</text></svg>"
+  },
+  {
+    "id": "GC-0051",
+    "ttkNumber": "ТТК-ДИМ-0051",
+    "title": "Белорусские пельмени из говядины и свинины с капустой",
+    "category": "dumplings",
+    "categoryLabel": "Димсамы и пельмени",
+    "cuisine": "european",
+    "cuisineLabel": "Паназиатская / Японская",
+    "dishType": "meat",
+    "dishTypeLabel": "Мясо и стейки",
+    "station": "Мучной цех / Горячий цех",
+    "yieldPortion": "260 г (10 шт)",
+    "prepTimeMinutes": 55,
+    "difficulty": "medium",
+    "difficultyLabel": "Стандарт",
+    "foodCostPercent": 15.6,
+    "costPriceRub": 74.8,
+    "menuPriceRub": 480,
+    "marginRub": 405.2,
+    "markupPercent": 542,
+    "kbjuPer100g": {
+      "calories": 225,
+      "proteins": 12,
+      "fats": 12,
+      "carbs": 18
+    },
+    "kbjuTotal": {
+      "calories": 585,
+      "proteins": 31.2,
+      "fats": 31.2,
+      "carbs": 46.8
+    },
+    "equipment": [
+      "Кастрюля/плита",
+      "Скалка",
+      "Гастроёмкости"
+    ],
+    "tableware": "Глубокая тарелка d=25 см, сметана и зелень.",
+    "description": "Белорусские пельмени в тонком тесте: смесь говядины и свинины с тушёной капустой, подаются с маслом и сметаной.",
+    "ingredients": [
+      {
+        "name": "Мука пшеничная в/с",
+        "brutto": 120,
+        "wastePercent": 0,
+        "netto": 114,
+        "pricePerKg": 70,
+        "costRub": 8.0
+      },
+      {
+        "name": "Говядина (фарш)",
+        "brutto": 55,
+        "wastePercent": 5,
+        "netto": 52,
+        "pricePerKg": 550,
+        "costRub": 28.6
+      },
+      {
+        "name": "Свинина (фарш)",
+        "brutto": 55,
+        "wastePercent": 5,
+        "netto": 52,
+        "pricePerKg": 420,
+        "costRub": 21.8
+      },
+      {
+        "name": "Капуста тушёная",
+        "brutto": 50,
+        "wastePercent": 0,
+        "netto": 50,
+        "pricePerKg": 120,
+        "costRub": 6.0
+      },
+      {
+        "name": "Лук репчатый",
+        "brutto": 30,
+        "wastePercent": 0,
+        "netto": 26,
+        "pricePerKg": 45,
+        "costRub": 1.2
+      },
+      {
+        "name": "Масло сливочное",
+        "brutto": 15,
+        "wastePercent": 0,
+        "netto": 15,
+        "pricePerKg": 550,
+        "costRub": 8.2
+      },
+      {
+        "name": "Специи",
+        "brutto": 4,
+        "wastePercent": 0,
+        "netto": 4,
+        "pricePerKg": 250,
+        "costRub": 1.0
+      }
+    ],
+    "steps": [
+      {
+        "stepNum": 1,
+        "title": "Тесто",
+        "timeText": "30 минут",
+        "seconds": 1800,
+        "text": "Замесить крутое тесто, дать отлежаться 20 минут."
+      },
+      {
+        "stepNum": 2,
+        "title": "Начинка",
+        "timeText": "15 минут",
+        "seconds": 900,
+        "text": "Смешать два фарша с тушёной капустой и луком, приправить."
+      },
+      {
+        "stepNum": 3,
+        "title": "Лепка",
+        "timeText": "20 минут",
+        "seconds": 1200,
+        "text": "Раскатать, сформовать пельмени."
+      },
+      {
+        "stepNum": 4,
+        "title": "Отваривание",
+        "timeText": "9 минут",
+        "seconds": 540,
+        "text": "Варить 8–9 минут, заправить сливочным маслом."
+      },
+      {
+        "stepNum": 5,
+        "title": "Сервировка",
+        "timeText": "2 минуты",
+        "seconds": 120,
+        "text": "Подать со сметаной и зеленью."
+      }
+    ],
+    "storageRules": "Полуфабрикат при t=-18°C до 45 суток; после отваривания подавать немедленно.",
+    "deliveryPackaging": "Лайнер, соус в соуснике, термосумка t=+60°C.",
+    "recipeStatus": "researched",
+    "illustrationSvg": "<svg viewBox=\"0 0 400 280\" class=\"ttk-card-illu\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"400\" height=\"280\" fill=\"#151719\"/><ellipse cx=\"125\" cy=\"165\" rx=\"40\" ry=\"55\" fill=\"#2b3544\"/><ellipse cx=\"200\" cy=\"165\" rx=\"40\" ry=\"55\" fill=\"#303a4a\"/><ellipse cx=\"275\" cy=\"165\" rx=\"40\" ry=\"55\" fill=\"#2b3544\"/><path d=\"M125 128 l22 18 l-8 32 l-28 0 l-8 -32z\" fill=\"#f0e2bd\"/><path d=\"M200 126 l24 20 l-9 32 l-30 0 l-9 -32z\" fill=\"#e9d6a8\"/><path d=\"M275 128 l22 18 l-8 32 l-28 0 l-8 -32z\" fill=\"#f0e2bd\"/><text x=\"200\" y=\"255\" text-anchor=\"middle\" fill=\"#ca8a04\" font-size=\"13\" font-weight=\"bold\">BELARUSIAN PELMENI</text></svg>"
+  },
+  {
+    "id": "GC-0001",
+    "ttkNumber": "ТТК-КАТ-0001",
+    "title": "Паста в сливочном соусе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Паста в сливочном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0002",
+    "ttkNumber": "ТТК-КАТ-0002",
+    "title": "Котлетки из куриного филе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "analog_found_requires_adaptation",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Котлетки из куриного филе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-03"
+    ]
+  },
+  {
+    "id": "GC-0003",
+    "ttkNumber": "ТТК-КАТ-0003",
+    "title": "Куриная грудка на гриле с тыквенным рисом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка на гриле с тыквенным рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0004",
+    "ttkNumber": "ТТК-КАТ-0004",
+    "title": "Красная рыбка",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Красная рыбка технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0005",
+    "ttkNumber": "ТТК-КАТ-0005",
+    "title": "Индейка запеченная в итальянских травах с кус-кусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Индейка запеченная в итальянских травах с кус-кусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0006",
+    "ttkNumber": "ТТК-КАТ-0006",
+    "title": "Спагетти карбонара",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "analog_found_requires_adaptation",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Спагетти карбонара технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-02"
+    ]
+  },
+  {
+    "id": "GC-0007",
+    "ttkNumber": "ТТК-КАТ-0007",
+    "title": "Паста с соусом арабьята",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Паста с соусом арабьята технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0008",
+    "ttkNumber": "ТТК-КАТ-0008",
+    "title": "Бефстроганов",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "analog_found_requires_adaptation",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бефстроганов технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-04"
+    ]
+  },
+  {
+    "id": "GC-0009",
+    "ttkNumber": "ТТК-КАТ-0009",
+    "title": "Гречневая лапша",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Гречневая лапша технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0010",
+    "ttkNumber": "ТТК-КАТ-0010",
+    "title": "Плов с бараниной",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Плов с бараниной технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0011",
+    "ttkNumber": "ТТК-КАТ-0011",
+    "title": "Фузилли с креветками",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фузилли с креветками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0012",
+    "ttkNumber": "ТТК-КАТ-0012",
+    "title": "Тефтели с ягодным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Тефтели с ягодным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0013",
+    "ttkNumber": "ТТК-КАТ-0013",
+    "title": "Пенне болоньезе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пенне болоньезе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0014",
+    "ttkNumber": "ТТК-КАТ-0014",
+    "title": "Рыбные котлетки с тыквенно-картофельным пюре",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Рыбные котлетки с тыквенно-картофельным пюре технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0015",
+    "ttkNumber": "ТТК-КАТ-0015",
+    "title": "Лапша удон с курицей и овощами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Лапша удон с курицей и овощами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0016",
+    "ttkNumber": "ТТК-КАТ-0016",
+    "title": "Куриная грудка с птитимом и зеленой фасолью",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка с птитимом и зеленой фасолью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0017",
+    "ttkNumber": "ТТК-КАТ-0017",
+    "title": "Фрикадельки с домашней пастой в томатном соусе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фрикадельки с домашней пастой в томатном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0018",
+    "ttkNumber": "ТТК-КАТ-0018",
+    "title": "Шницель из куриной грудки с моцареллой и картофельным пюре",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Шницель из куриной грудки с моцареллой и картофельным пюре технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0019",
+    "ttkNumber": "ТТК-КАТ-0019",
+    "title": "Лазанья с курицей и пастой из гречневой муки",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Лазанья с курицей и пастой из гречневой муки технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0020",
+    "ttkNumber": "ТТК-КАТ-0020",
+    "title": "Рисовая лапша «вок» с курицей и овощами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Рисовая лапша «вок» с курицей и овощами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0021",
+    "ttkNumber": "ТТК-КАТ-0021",
+    "title": "Феттучини с томатами и страчателлой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Феттучини с томатами и страчателлой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0022",
+    "ttkNumber": "ТТК-КАТ-0022",
+    "title": "Кесадилья с курицей",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Кесадилья с курицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0023",
+    "ttkNumber": "ТТК-КАТ-0023",
+    "title": "Картофельная запеканка с мясным фаршем и сырным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельная запеканка с мясным фаршем и сырным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0024",
+    "ttkNumber": "ТТК-КАТ-0024",
+    "title": "Сладкая курочка в апельсиновом соусе с рисом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сладкая курочка в апельсиновом соусе с рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0025",
+    "ttkNumber": "ТТК-КАТ-0025",
+    "title": "Апельсиновая курочка с рисом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "В извлечении источника масса порции выглядит ошибочной (1 г); массу и КБЖУ порции не заполнять."
+    ],
+    "researchQuery": "Апельсиновая курочка с рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0026",
+    "ttkNumber": "ТТК-КАТ-0026",
+    "title": "Куриная грудка на гриле с картофельным пюре и соусом из базилика",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка на гриле с картофельным пюре и соусом из базилика технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0027",
+    "ttkNumber": "ТТК-КАТ-0027",
+    "title": "Печень по-строгановски с картофельным пюре",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Печень по-строгановски с картофельным пюре технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0028",
+    "ttkNumber": "ТТК-КАТ-0028",
+    "title": "Индейка с гречневой кашей и шампиньонами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Индейка с гречневой кашей и шампиньонами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0029",
+    "ttkNumber": "ТТК-КАТ-0029",
+    "title": "Курица карри с жасминовым рисом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Курица карри с жасминовым рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0030",
+    "ttkNumber": "ТТК-КАТ-0030",
+    "title": "Куриные тефтельки с птитимом в сливочно-грибном соусе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриные тефтельки с птитимом в сливочно-грибном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0031",
+    "ttkNumber": "ТТК-КАТ-0031",
+    "title": "Котлета из говядины и свинины с картофельным пюре и брусничным мармеладом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Котлета из говядины и свинины с картофельным пюре и брусничным мармеладом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0032",
+    "ttkNumber": "ТТК-КАТ-0032",
+    "title": "Кампаньелли по-флотски",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Кампаньелли по-флотски технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0033",
+    "ttkNumber": "ТТК-КАТ-0033",
+    "title": "Филе индейки в беконе с жареным картофелем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Филе индейки в беконе с жареным картофелем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0034",
+    "ttkNumber": "ТТК-КАТ-0034",
+    "title": "Паста в соусе Альфредо с курицей и грибами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Паста в соусе Альфредо с курицей и грибами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0035",
+    "ttkNumber": "ТТК-КАТ-0035",
+    "title": "Картофельные биточки с куриным фаршем и грибным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельные биточки с куриным фаршем и грибным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0036",
+    "ttkNumber": "ТТК-КАТ-0036",
+    "title": "Паэлья с креветками и мидиями",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Паэлья с креветками и мидиями технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0037",
+    "ttkNumber": "ТТК-КАТ-0037",
+    "title": "Гарвардская тарелка: креветки, брокколи, спаржа, перец и киноа",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Гарвардская тарелка: креветки, брокколи, спаржа, перец и киноа технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0038",
+    "ttkNumber": "ТТК-КАТ-0038",
+    "title": "Птитим с подкопченной форелью и страчателлой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Птитим с подкопченной форелью и страчателлой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0039",
+    "ttkNumber": "ТТК-КАТ-0039",
+    "title": "Куриная грудка с грибами и картофелем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка с грибами и картофелем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0041",
+    "ttkNumber": "ТТК-КАТ-0041",
+    "title": "Лагман с говядиной и овощами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Лагман с говядиной и овощами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0042",
+    "ttkNumber": "ТТК-КАТ-0042",
+    "title": "Шашлык из индейки с печеным картофелем и итальянским томатным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Шашлык из индейки с печеным картофелем и итальянским томатным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0043",
+    "ttkNumber": "ТТК-КАТ-0043",
+    "title": "Бифштекс из говядины с картофельным пюре и зеленым горошком",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бифштекс из говядины с картофельным пюре и зеленым горошком технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0044",
+    "ttkNumber": "ТТК-КАТ-0044",
+    "title": "Гюдон из говядины с рисом и яйцом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Гюдон из говядины с рисом и яйцом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0045",
+    "ttkNumber": "ТТК-КАТ-0045",
+    "title": "Чкмерули из курицы в сливочном соусе с печеным молодым картофелем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Чкмерули из курицы в сливочном соусе с печеным молодым картофелем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0046",
+    "ttkNumber": "ТТК-КАТ-0046",
+    "title": "Филе минтая под овощной шапкой с молодым картофелем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Филе минтая под овощной шапкой с молодым картофелем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0047",
+    "ttkNumber": "ТТК-КАТ-0047",
+    "title": "Курочка в средиземноморском стиле с птитимом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Курочка в средиземноморском стиле с птитимом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0048",
+    "ttkNumber": "ТТК-КАТ-0048",
+    "title": "Митболы из курицы со сливочной фасолью и брокколи",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Митболы из курицы со сливочной фасолью и брокколи технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0049",
+    "ttkNumber": "ТТК-КАТ-0049",
+    "title": "Паста в сливочном песто с куриной грудкой на гриле",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Паста в сливочном песто с куриной грудкой на гриле технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0050",
+    "ttkNumber": "ТТК-КАТ-0050",
+    "title": "Говядина тушеная с нутом в ароматных специях",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Говядина тушеная с нутом в ароматных специях технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0052",
+    "ttkNumber": "ТТК-КАТ-0052",
+    "title": "Куриный бифштекс со сливочной гречкой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриный бифштекс со сливочной гречкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0053",
+    "ttkNumber": "ТТК-КАТ-0053",
+    "title": "Американская запеканка с курицей и брокколи",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Американская запеканка с курицей и брокколи технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0054",
+    "ttkNumber": "ТТК-КАТ-0054",
+    "title": "Курица терияки с кенийской фасолью",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Курица терияки с кенийской фасолью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0055",
+    "ttkNumber": "ТТК-КАТ-0055",
+    "title": "Леберкезе с картофельным пюре и горчичным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Леберкезе с картофельным пюре и горчичным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0056",
+    "ttkNumber": "ТТК-КАТ-0056",
+    "title": "Немецкая колбаска карривурст с печеным картофелем и фирменной капустой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Немецкая колбаска карривурст с печеным картофелем и фирменной капустой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0057",
+    "ttkNumber": "ТТК-КАТ-0057",
+    "title": "Стейк из лосося с картофельным пюре, спаржей и шпинатом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Стейк из лосося с картофельным пюре, спаржей и шпинатом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0058",
+    "ttkNumber": "ТТК-КАТ-0058",
+    "title": "Черная паста Nero с креветками в соусе биск",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Черная паста Nero с креветками в соусе биск технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0059",
+    "ttkNumber": "ТТК-КАТ-0059",
+    "title": "Говядина томленая с овощами и картофельным пюре",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Говядина томленая с овощами и картофельным пюре технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0060",
+    "ttkNumber": "ТТК-КАТ-0060",
+    "title": "Пенне в сырно-сливочном соусе с ароматной куриной грудкой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пенне в сырно-сливочном соусе с ароматной куриной грудкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0061",
+    "ttkNumber": "ТТК-КАТ-0061",
+    "title": "Итальянская лазанья",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Итальянская лазанья технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0062",
+    "ttkNumber": "ТТК-КАТ-0062",
+    "title": "Имбирная говядина с рисом и овощами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Имбирная говядина с рисом и овощами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0063",
+    "ttkNumber": "ТТК-КАТ-0063",
+    "title": "Сливочное куриное рагу с обжаренными вешенками и крем-кашей из брокколи",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сливочное куриное рагу с обжаренными вешенками и крем-кашей из брокколи технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0064",
+    "ttkNumber": "ТТК-КАТ-0064",
+    "title": "Горячий ленивый ролл с филе форели и крабовыми палочками",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Горячий ленивый ролл с филе форели и крабовыми палочками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0065",
+    "ttkNumber": "ТТК-КАТ-0065",
+    "title": "Рыбная запеканка со сливочно-шпинатным соусом и сыром",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Рыбная запеканка со сливочно-шпинатным соусом и сыром технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0066",
+    "ttkNumber": "ТТК-КАТ-0066",
+    "title": "Биточек из куриного филе с креветками и ароматным кус-кусом с соусом сливочный спайси",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Биточек из куриного филе с креветками и ароматным кус-кусом с соусом сливочный спайси технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0067",
+    "ttkNumber": "ТТК-КАТ-0067",
+    "title": "Утиный окорочок без кости в соусе хойсин с брокколи и морковью",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Утиный окорочок без кости в соусе хойсин с брокколи и морковью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0068",
+    "ttkNumber": "ТТК-КАТ-0068",
+    "title": "Котлета из трех видов рыб с пюре из сельдерея",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Котлета из трех видов рыб с пюре из сельдерея технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0069",
+    "ttkNumber": "ТТК-КАТ-0069",
+    "title": "Маффины из кабачков с сочной индейкой и томатным джемом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Маффины из кабачков с сочной индейкой и томатным джемом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0070",
+    "ttkNumber": "ТТК-КАТ-0070",
+    "title": "Спагетти аль помодоро с куриной грудкой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Спагетти аль помодоро с куриной грудкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0071",
+    "ttkNumber": "ТТК-КАТ-0071",
+    "title": "Картофельные ньокки с томленой бараниной и баклажанами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельные ньокки с томленой бараниной и баклажанами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0072",
+    "ttkNumber": "ТТК-КАТ-0072",
+    "title": "Котлетки из морепродуктов с цветной капустой в соусе из анчоусов и пармезана",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Котлетки из морепродуктов с цветной капустой в соусе из анчоусов и пармезана технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0073",
+    "ttkNumber": "ТТК-КАТ-0073",
+    "title": "Террин из курицы с кукурузной полентой",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Террин из курицы с кукурузной полентой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0074",
+    "ttkNumber": "ТТК-КАТ-0074",
+    "title": "Рулет из индейки с пюре из батата",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Рулет из индейки с пюре из батата технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0075",
+    "ttkNumber": "ТТК-КАТ-0075",
+    "title": "Салат Цезарь",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "analog_found_requires_adaptation",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат Цезарь технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-05"
+    ]
+  },
+  {
+    "id": "GC-0076",
+    "ttkNumber": "ТТК-КАТ-0076",
+    "title": "Салат Нисуаз",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат Нисуаз технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0077",
+    "ttkNumber": "ТТК-КАТ-0077",
+    "title": "Греческий салат",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Греческий салат технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0078",
+    "ttkNumber": "ТТК-КАТ-0078",
+    "title": "Салат оливье",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат оливье технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0079",
+    "ttkNumber": "ТТК-КАТ-0079",
+    "title": "Винегрет с копченой форелью",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Винегрет с копченой форелью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0080",
+    "ttkNumber": "ТТК-КАТ-0080",
+    "title": "Сельдь под шубой",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сельдь под шубой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0081",
+    "ttkNumber": "ТТК-КАТ-0081",
+    "title": "Салат с ростбифом, шпинатом и рукколой в медово-горчичном соусе",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат с ростбифом, шпинатом и рукколой в медово-горчичном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0082",
+    "ttkNumber": "ТТК-КАТ-0082",
+    "title": "Салат Мимоза с копченой форелью",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат Мимоза с копченой форелью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0083",
+    "ttkNumber": "ТТК-КАТ-0083",
+    "title": "Салат с рукколой, куриной грудкой и свеклой в соусе песто",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат с рукколой, куриной грудкой и свеклой в соусе песто технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0084",
+    "ttkNumber": "ТТК-КАТ-0084",
+    "title": "Зеленый боул с угрем и рисом",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Зеленый боул с угрем и рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0085",
+    "ttkNumber": "ТТК-КАТ-0085",
+    "title": "Зеленый боул с копченой форелью, бобами эдамаме, соусом гуакамоле и рисом",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Зеленый боул с копченой форелью, бобами эдамаме, соусом гуакамоле и рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0086",
+    "ttkNumber": "ТТК-КАТ-0086",
+    "title": "Зеленый боул с креветками и киноа",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Зеленый боул с креветками и киноа технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0087",
+    "ttkNumber": "ТТК-КАТ-0087",
+    "title": "Зеленый боул с запеченной куриной грудкой и кус-кусом",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Зеленый боул с запеченной куриной грудкой и кус-кусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0088",
+    "ttkNumber": "ТТК-КАТ-0088",
+    "title": "Оригинальный салат с томленой говядиной и маринованными огурчиками",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Оригинальный салат с томленой говядиной и маринованными огурчиками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0089",
+    "ttkNumber": "ТТК-КАТ-0089",
+    "title": "Поке с курицей",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Поке с курицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0090",
+    "ttkNumber": "ТТК-КАТ-0090",
+    "title": "Поке с тунцом",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Поке с тунцом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0091",
+    "ttkNumber": "ТТК-КАТ-0091",
+    "title": "Классический свекольный салат с сыром и филе масляной рыбы",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Классический свекольный салат с сыром и филе масляной рыбы технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0092",
+    "ttkNumber": "ТТК-КАТ-0092",
+    "title": "Витаминный салат с лимонной заправкой",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Витаминный салат с лимонной заправкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0093",
+    "ttkNumber": "ТТК-КАТ-0093",
+    "title": "Боул со стейком из лосося, салатом табуле и брокколи",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Боул со стейком из лосося, салатом табуле и брокколи технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0094",
+    "ttkNumber": "ТТК-КАТ-0094",
+    "title": "Тайский салат с кальмаром",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Тайский салат с кальмаром технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0095",
+    "ttkNumber": "ТТК-КАТ-0095",
+    "title": "Природная вода негазированная 500 мл",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "500 мл",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "purchased_product_requires_label",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Покупной продукт: данные по этикетке, не выдумывать производственную ТТК."
+    ],
+    "researchQuery": "Природная вода негазированная 500 мл технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0096",
+    "ttkNumber": "ТТК-КАТ-0096",
+    "title": "Природная вода газированная 500 мл",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "500 мл",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "purchased_product_requires_label",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Покупной продукт: данные по этикетке, не выдумывать производственную ТТК."
+    ],
+    "researchQuery": "Природная вода газированная 500 мл технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0097",
+    "ttkNumber": "ТТК-КАТ-0097",
+    "title": "Каша рисовая с соусом из черной смородины и кедровыми орешками",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Каша рисовая с соусом из черной смородины и кедровыми орешками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0098",
+    "ttkNumber": "ТТК-КАТ-0098",
+    "title": "Овсяная каша с пюре манго, клюквой и грецкими орешками",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Овсяная каша с пюре манго, клюквой и грецкими орешками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0099",
+    "ttkNumber": "ТТК-КАТ-0099",
+    "title": "Омлет с ветчиной из индейки, сыром чеддер и хашбрауном",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Омлет с ветчиной из индейки, сыром чеддер и хашбрауном технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0100",
+    "ttkNumber": "ТТК-КАТ-0100",
+    "title": "Творожная запеканка с персиковым конфитюром",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Творожная запеканка с персиковым конфитюром технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0101",
+    "ttkNumber": "ТТК-КАТ-0101",
+    "title": "Блинчики с мясом",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Блинчики с мясом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0102",
+    "ttkNumber": "ТТК-КАТ-0102",
+    "title": "Блинчики с яблоками и корицей",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Блинчики с яблоками и корицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0103",
+    "ttkNumber": "ТТК-КАТ-0103",
+    "title": "Сырники с клюквой",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сырники с клюквой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0104",
+    "ttkNumber": "ТТК-КАТ-0104",
+    "title": "Сырники с бельгийским шоколадом",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сырники с бельгийским шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0105",
+    "ttkNumber": "ТТК-КАТ-0105",
+    "title": "Сырники с маковой начинкой",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сырники с маковой начинкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0106",
+    "ttkNumber": "ТТК-КАТ-0106",
+    "title": "Кукурузные блинчики с печенью индейки",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Кукурузные блинчики с печенью индейки технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0107",
+    "ttkNumber": "ТТК-КАТ-0107",
+    "title": "Творожная запеканка с изюмом, курагой и соусом из вареной сгущенки",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Творожная запеканка с изюмом, курагой и соусом из вареной сгущенки технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0108",
+    "ttkNumber": "ТТК-КАТ-0108",
+    "title": "Панкейки с клубничным вареньем",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Панкейки с клубничным вареньем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0109",
+    "ttkNumber": "ТТК-КАТ-0109",
+    "title": "Скрэмбл с поджаренным беконом и спаржей",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Скрэмбл с поджаренным беконом и спаржей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0110",
+    "ttkNumber": "ТТК-КАТ-0110",
+    "title": "Суп-пюре из шампиньонов со сливками",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Суп-пюре из шампиньонов со сливками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0111",
+    "ttkNumber": "ТТК-КАТ-0111",
+    "title": "Суп куриный с домашней лапшой",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Суп куриный с домашней лапшой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0112",
+    "ttkNumber": "ТТК-КАТ-0112",
+    "title": "Уха с лососем",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Уха с лососем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0113",
+    "ttkNumber": "ТТК-КАТ-0113",
+    "title": "Суп Том Ям",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Суп Том Ям технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0114",
+    "ttkNumber": "ТТК-КАТ-0114",
+    "title": "Борщ с говядиной",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Борщ с говядиной технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0115",
+    "ttkNumber": "ТТК-КАТ-0115",
+    "title": "Сырный суп с креветками",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сырный суп с креветками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0116",
+    "ttkNumber": "ТТК-КАТ-0116",
+    "title": "Солянка мясная с тамбовским окороком",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Солянка мясная с тамбовским окороком технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0117",
+    "ttkNumber": "ТТК-КАТ-0117",
+    "title": "Напиток ягодный из малины, клубники и клюквы",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Напиток ягодный из малины, клубники и клюквы технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0118",
+    "ttkNumber": "ТТК-КАТ-0118",
+    "title": "Напиток ягодный из облепихи",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Напиток ягодный из облепихи технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0119",
+    "ttkNumber": "ТТК-КАТ-0119",
+    "title": "Напиток имбирный с лимоном",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Напиток имбирный с лимоном технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0120",
+    "ttkNumber": "ТТК-КАТ-0120",
+    "title": "Куриная грудка с хашбрауном и грибным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка с хашбрауном и грибным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0121",
+    "ttkNumber": "ТТК-КАТ-0121",
+    "title": "Куриная грудка на гриле с пенне маринара",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная грудка на гриле с пенне маринара технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0122",
+    "ttkNumber": "ТТК-КАТ-0122",
+    "title": "Куриные бедрышки в сливочном соусе с ароматным укропом и запеченным картофелем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриные бедрышки в сливочном соусе с ароматным укропом и запеченным картофелем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0123",
+    "ttkNumber": "ТТК-КАТ-0123",
+    "title": "Котлетки из филе индейки с птитимом три сыра",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Котлетки из филе индейки с птитимом три сыра технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0124",
+    "ttkNumber": "ТТК-КАТ-0124",
+    "title": "Говядина по-бургундски с пшеницей",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Говядина по-бургундски с пшеницей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0125",
+    "ttkNumber": "ТТК-КАТ-0125",
+    "title": "Строганов из свинины с гречневой кашей",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Строганов из свинины с гречневой кашей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0126",
+    "ttkNumber": "ТТК-КАТ-0126",
+    "title": "Пенне карбонара",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пенне карбонара технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0127",
+    "ttkNumber": "ТТК-КАТ-0127",
+    "title": "Плов с курицей",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Плов с курицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0128",
+    "ttkNumber": "ТТК-КАТ-0128",
+    "title": "Биточек из картофеля с куриным фаршем и грибным соусом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Биточек из картофеля с куриным фаршем и грибным соусом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0129",
+    "ttkNumber": "ТТК-КАТ-0129",
+    "title": "Краб кейк с ароматным рисом",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Краб кейк с ароматным рисом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0130",
+    "ttkNumber": "ТТК-КАТ-0130",
+    "title": "Люля из свинины и курицы с фаршированным перцем",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Люля из свинины и курицы с фаршированным перцем технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0131",
+    "ttkNumber": "ТТК-КАТ-0131",
+    "title": "Пад тай с курицей",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пад тай с курицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0132",
+    "ttkNumber": "ТТК-КАТ-0132",
+    "title": "Свиная грудинка в азиатском стиле с лапшой удон",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Свиная грудинка в азиатском стиле с лапшой удон технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0133",
+    "ttkNumber": "ТТК-КАТ-0133",
+    "title": "Сырники с нутеллой",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сырники с нутеллой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0134",
+    "ttkNumber": "ТТК-КАТ-0134",
+    "title": "Омлет с ветчиной и сыром",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Омлет с ветчиной и сыром технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0135",
+    "ttkNumber": "ТТК-КАТ-0135",
+    "title": "Фузилли болоньезе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фузилли болоньезе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0136",
+    "ttkNumber": "ТТК-КАТ-0136",
+    "title": "Вырезка из свинины со сливочной полентой и вялеными томатами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Вырезка из свинины со сливочной полентой и вялеными томатами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0137",
+    "ttkNumber": "ТТК-КАТ-0137",
+    "title": "Филе куриного бедра со сливочным ризотто",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Филе куриного бедра со сливочным ризотто технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0138",
+    "ttkNumber": "ТТК-КАТ-0138",
+    "title": "Паста по-флотски",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Паста по-флотски технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0139",
+    "ttkNumber": "ТТК-КАТ-0139",
+    "title": "Вареники с картофелем и грибами",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Вареники с картофелем и грибами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0140",
+    "ttkNumber": "ТТК-КАТ-0140",
+    "title": "Куриная лапша",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Куриная лапша технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0141",
+    "ttkNumber": "ТТК-КАТ-0141",
+    "title": "Уха с красной рыбой",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Уха с красной рыбой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0142",
+    "ttkNumber": "ТТК-КАТ-0142",
+    "title": "Борщ с говядиной",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Борщ с говядиной технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "frozen"
+    ]
+  },
+  {
+    "id": "GC-0143",
+    "ttkNumber": "ТТК-КАТ-0143",
+    "title": "Смузи клубника/базилик 250 г",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "250 г",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "250 г из названия пользователя; не считать автоматически объемом 250 мл."
+    ],
+    "researchQuery": "Смузи клубника/базилик 250 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0144",
+    "ttkNumber": "ТТК-КАТ-0144",
+    "title": "Смузи клубника/вишня/черная смородина 250 г",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "250 г",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "250 г из названия пользователя; не считать автоматически объемом 250 мл."
+    ],
+    "researchQuery": "Смузи клубника/вишня/черная смородина 250 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0145",
+    "ttkNumber": "ТТК-КАТ-0145",
+    "title": "Смузи черника/лаванда 250 г",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "250 г",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "250 г из названия пользователя; не считать автоматически объемом 250 мл."
+    ],
+    "researchQuery": "Смузи черника/лаванда 250 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0146",
+    "ttkNumber": "ТТК-КАТ-0146",
+    "title": "Смузи манго/кокос 250 г",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "250 г",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "250 г из названия пользователя; не считать автоматически объемом 250 мл."
+    ],
+    "researchQuery": "Смузи манго/кокос 250 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0147",
+    "ttkNumber": "ТТК-КАТ-0147",
+    "title": "Смузи ревень/банан/яблоко 250 г",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": "250 г",
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "250 г из названия пользователя; не считать автоматически объемом 250 мл."
+    ],
+    "researchQuery": "Смузи ревень/банан/яблоко 250 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0148",
+    "ttkNumber": "ТТК-КАТ-0148",
+    "title": "Тирамису",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Тирамису технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0149",
+    "ttkNumber": "ТТК-КАТ-0149",
+    "title": "Чиа-пудинг с манго и маракуйей",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Чиа-пудинг с манго и маракуйей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0150",
+    "ttkNumber": "ТТК-КАТ-0150",
+    "title": "Тарталетка малина-тархун",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Тарталетка малина-тархун технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0151",
+    "ttkNumber": "ТТК-КАТ-0151",
+    "title": "Сэндвич с курицей и авокадо",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сэндвич с курицей и авокадо технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0152",
+    "ttkNumber": "ТТК-КАТ-0152",
+    "title": "Круассан с красной рыбой и сливочным сыром",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с красной рыбой и сливочным сыром технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0153",
+    "ttkNumber": "ТТК-КАТ-0153",
+    "title": "Клаб-сэндвич с курицей и беконом",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Клаб-сэндвич с курицей и беконом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0154",
+    "ttkNumber": "ТТК-КАТ-0154",
+    "title": "Японский сэндвич с яйцом",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Японский сэндвич с яйцом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0155",
+    "ttkNumber": "ТТК-КАТ-0155",
+    "title": "Сэндвич с тунцом на цельнозерновом тартине",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сэндвич с тунцом на цельнозерновом тартине технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0156",
+    "ttkNumber": "ТТК-КАТ-0156",
+    "title": "Круассан с тамбовским окороком и сыром чеддер",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с тамбовским окороком и сыром чеддер технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0157",
+    "ttkNumber": "ТТК-КАТ-0157",
+    "title": "Чиабатта с индейкой су-вид, сальсой из болгарского перца и моцареллой",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Чиабатта с индейкой су-вид, сальсой из болгарского перца и моцареллой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0158",
+    "ttkNumber": "ТТК-КАТ-0158",
+    "title": "Цельнозерновой багет с куриной грудкой, печеным болгарским перцем и карамелизированным луком",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Цельнозерновой багет с куриной грудкой, печеным болгарским перцем и карамелизированным луком технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0159",
+    "ttkNumber": "ТТК-КАТ-0159",
+    "title": "Классическая чиабатта Цезарь с куриной грудкой и пармезаном",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Классическая чиабатта Цезарь с куриной грудкой и пармезаном технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0160",
+    "ttkNumber": "ТТК-КАТ-0160",
+    "title": "Ролл с курицей",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Ролл с курицей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0161",
+    "ttkNumber": "ТТК-КАТ-0161",
+    "title": "Ролл с креветками",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Ролл с креветками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0162",
+    "ttkNumber": "ТТК-КАТ-0162",
+    "title": "Ролл с ветчиной, чеддером и омлетом",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Ролл с ветчиной, чеддером и омлетом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0163",
+    "ttkNumber": "ТТК-КАТ-0163",
+    "title": "Фокачча с мортаделлой, соусом песто и моцареллой",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фокачча с мортаделлой, соусом песто и моцареллой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0164",
+    "ttkNumber": "ТТК-КАТ-0164",
+    "title": "Круассан с миндальным кремом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Круассан с миндальным кремом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0165",
+    "ttkNumber": "ТТК-КАТ-0165",
+    "title": "Круассан с миндальным кремом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Круассан с миндальным кремом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0166",
+    "ttkNumber": "ТТК-КАТ-0166",
+    "title": "Печенье кантуччи с миндалем, клюквой и изюмом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Печенье кантуччи с миндалем, клюквой и изюмом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0167",
+    "ttkNumber": "ТТК-КАТ-0167",
+    "title": "Ассорти пирожных Картошка",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Ассорти пирожных Картошка технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0168",
+    "ttkNumber": "ТТК-КАТ-0168",
+    "title": "Ассорти пирожных Картошка",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Ассорти пирожных Картошка технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0169",
+    "ttkNumber": "ТТК-КАТ-0169",
+    "title": "Рулет с маком и шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Рулет с маком и шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0170",
+    "ttkNumber": "ТТК-КАТ-0170",
+    "title": "Рулет с маком и шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Рулет с маком и шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0171",
+    "ttkNumber": "ТТК-КАТ-0171",
+    "title": "Орешки с вареной сгущенкой и грецким орехом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Орешки с вареной сгущенкой и грецким орехом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0172",
+    "ttkNumber": "ТТК-КАТ-0172",
+    "title": "Торт Морковный (порция)",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Торт Морковный (порция) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0173",
+    "ttkNumber": "ТТК-КАТ-0173",
+    "title": "Творожное кольцо",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Творожное кольцо технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0174",
+    "ttkNumber": "ТТК-КАТ-0174",
+    "title": "Творожное кольцо",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Творожное кольцо технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0175",
+    "ttkNumber": "ТТК-КАТ-0175",
+    "title": "Шоколадный брауни с вишней",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Шоколадный брауни с вишней технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0176",
+    "ttkNumber": "ТТК-КАТ-0176",
+    "title": "Шоколадный брауни с вишней",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Шоколадный брауни с вишней технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0177",
+    "ttkNumber": "ТТК-КАТ-0177",
+    "title": "Пирожное Медовик (порция)",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пирожное Медовик (порция) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0178",
+    "ttkNumber": "ТТК-КАТ-0178",
+    "title": "Банановый кекс с шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Банановый кекс с шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0179",
+    "ttkNumber": "ТТК-КАТ-0179",
+    "title": "Мильфей",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Мильфей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0180",
+    "ttkNumber": "ТТК-КАТ-0180",
+    "title": "Мильфей",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Мильфей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0181",
+    "ttkNumber": "ТТК-КАТ-0181",
+    "title": "Мильфей со свежей голубикой",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Мильфей со свежей голубикой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0182",
+    "ttkNumber": "ТТК-КАТ-0182",
+    "title": "Мильфей со свежей голубикой",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Мильфей со свежей голубикой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0183",
+    "ttkNumber": "ТТК-КАТ-0183",
+    "title": "Баскский чизкейк с черничным соусом (порция)",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Баскский чизкейк с черничным соусом (порция) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0184",
+    "ttkNumber": "ТТК-КАТ-0184",
+    "title": "Баскский чизкейк с черничным соусом (порция)",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Баскский чизкейк с черничным соусом (порция) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0185",
+    "ttkNumber": "ТТК-КАТ-0185",
+    "title": "Эклер клубничный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер клубничный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0186",
+    "ttkNumber": "ТТК-КАТ-0186",
+    "title": "Эклер клубничный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер клубничный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0187",
+    "ttkNumber": "ТТК-КАТ-0187",
+    "title": "Лимонный тарт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Лимонный тарт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0188",
+    "ttkNumber": "ТТК-КАТ-0188",
+    "title": "Черный круассан с черной смородиной",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Черный круассан с черной смородиной технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0189",
+    "ttkNumber": "ТТК-КАТ-0189",
+    "title": "Слойка тархун-малина",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Слойка тархун-малина технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0190",
+    "ttkNumber": "ТТК-КАТ-0190",
+    "title": "Торт «Блинный с черникой»",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Торт «Блинный с черникой» технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0191",
+    "ttkNumber": "ТТК-КАТ-0191",
+    "title": "Торт «Наполеон»",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Торт «Наполеон» технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0192",
+    "ttkNumber": "ТТК-КАТ-0192",
+    "title": "Эклер лавандовый",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер лавандовый технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0193",
+    "ttkNumber": "ТТК-КАТ-0193",
+    "title": "Эклер лавандовый",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер лавандовый технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0194",
+    "ttkNumber": "ТТК-КАТ-0194",
+    "title": "Эклер грушевый",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер грушевый технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0195",
+    "ttkNumber": "ТТК-КАТ-0195",
+    "title": "Эклер грушевый",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Эклер грушевый технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "unpackaged"
+    ]
+  },
+  {
+    "id": "GC-0196",
+    "ttkNumber": "ТТК-КАТ-0196",
+    "title": "Круассан классический",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан классический технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0197",
+    "ttkNumber": "ТТК-КАТ-0197",
+    "title": "Круассан шоколадный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан шоколадный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0198",
+    "ttkNumber": "ТТК-КАТ-0198",
+    "title": "Яблочный тарт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Яблочный тарт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0199",
+    "ttkNumber": "ТТК-КАТ-0199",
+    "title": "Улитка с изюмом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Улитка с изюмом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0200",
+    "ttkNumber": "ТТК-КАТ-0200",
+    "title": "Круассан с миндальным кремом 24 ч",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с миндальным кремом 24 ч технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0201",
+    "ttkNumber": "ТТК-КАТ-0201",
+    "title": "Слоеный квадратик с клубникой и бананом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Слоеный квадратик с клубникой и бананом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0202",
+    "ttkNumber": "ТТК-КАТ-0202",
+    "title": "Итальянская «Маритоццо»",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Итальянская «Маритоццо» технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0203",
+    "ttkNumber": "ТТК-КАТ-0203",
+    "title": "Круассан с шоколадом и фундучным пралине",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с шоколадом и фундучным пралине технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0204",
+    "ttkNumber": "ТТК-КАТ-0204",
+    "title": "Тарталетка с клубникой",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Тарталетка с клубникой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0205",
+    "ttkNumber": "ТТК-КАТ-0205",
+    "title": "Круассан с грушей",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с грушей технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0206",
+    "ttkNumber": "ТТК-КАТ-0206",
+    "title": "Бриошь с заварным кремом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бриошь с заварным кремом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0207",
+    "ttkNumber": "ТТК-КАТ-0207",
+    "title": "Ягодная лодочка",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Ягодная лодочка технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0208",
+    "ttkNumber": "ТТК-КАТ-0208",
+    "title": "Черепица",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Черепица технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0209",
+    "ttkNumber": "ТТК-КАТ-0209",
+    "title": "Эстерхази",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эстерхази технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0210",
+    "ttkNumber": "ТТК-КАТ-0210",
+    "title": "Сладкая груша",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Сладкая груша технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0211",
+    "ttkNumber": "ТТК-КАТ-0211",
+    "title": "Кофейное зернышко",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Кофейное зернышко технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0212",
+    "ttkNumber": "ТТК-КАТ-0212",
+    "title": "Зеленая фисташка",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Зеленая фисташка технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0213",
+    "ttkNumber": "ТТК-КАТ-0213",
+    "title": "Три шоколада",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Три шоколада технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0214",
+    "ttkNumber": "ТТК-КАТ-0214",
+    "title": "Торт Морковный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Торт Морковный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0215",
+    "ttkNumber": "ТТК-КАТ-0215",
+    "title": "Мильфей с клубникой",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Мильфей с клубникой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0216",
+    "ttkNumber": "ТТК-КАТ-0216",
+    "title": "Банановый кекс с шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Банановый кекс с шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0217",
+    "ttkNumber": "ТТК-КАТ-0217",
+    "title": "Медовик",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Медовик технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0218",
+    "ttkNumber": "ТТК-КАТ-0218",
+    "title": "Тирамису",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Совпадение очищенного названия: не объединять автоматически, проверить варианты исполнения."
+    ],
+    "researchQuery": "Тирамису технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0219",
+    "ttkNumber": "ТТК-КАТ-0219",
+    "title": "Эклер с соленой карамелью",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эклер с соленой карамелью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0220",
+    "ttkNumber": "ТТК-КАТ-0220",
+    "title": "Эклер ванильный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эклер ванильный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0221",
+    "ttkNumber": "ТТК-КАТ-0221",
+    "title": "Эклер маракуйя",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эклер маракуйя технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0222",
+    "ttkNumber": "ТТК-КАТ-0222",
+    "title": "Эклер шоколадный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эклер шоколадный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0223",
+    "ttkNumber": "ТТК-КАТ-0223",
+    "title": "Эклер ягодный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Эклер ягодный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0224",
+    "ttkNumber": "ТТК-КАТ-0224",
+    "title": "Макарони Карамель 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Карамель 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0225",
+    "ttkNumber": "ТТК-КАТ-0225",
+    "title": "Макарони Лаванда 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Лаванда 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0226",
+    "ttkNumber": "ТТК-КАТ-0226",
+    "title": "Макарони Лайм 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Лайм 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0227",
+    "ttkNumber": "ТТК-КАТ-0227",
+    "title": "Булочка с творогом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Булочка с творогом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0228",
+    "ttkNumber": "ТТК-КАТ-0228",
+    "title": "Макарони Манго/маракуйя 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Манго/маракуйя 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0229",
+    "ttkNumber": "ТТК-КАТ-0229",
+    "title": "Макарони Ваниль 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Ваниль 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0230",
+    "ttkNumber": "ТТК-КАТ-0230",
+    "title": "Макарони Шоколад 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Шоколад 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0231",
+    "ttkNumber": "ТТК-КАТ-0231",
+    "title": "Макарони Малина 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Малина 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0232",
+    "ttkNumber": "ТТК-КАТ-0232",
+    "title": "Макарони Фисташка 1 шт",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Макарони Фисташка 1 шт технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0233",
+    "ttkNumber": "ТТК-КАТ-0233",
+    "title": "Манго",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Название недостаточно для восстановления точного состава и технологии; требуется спецификация блюда."
+    ],
+    "researchQuery": "Манго технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0234",
+    "ttkNumber": "ТТК-КАТ-0234",
+    "title": "Шоколадный мишка маршмеллоу",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Шоколадный мишка маршмеллоу технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0235",
+    "ttkNumber": "ТТК-КАТ-0235",
+    "title": "Трубочка с шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Трубочка с шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0236",
+    "ttkNumber": "ТТК-КАТ-0236",
+    "title": "Круассан с брауни и заварным кремом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан с брауни и заварным кремом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0237",
+    "ttkNumber": "ТТК-КАТ-0237",
+    "title": "Сухарики",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сухарики технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0238",
+    "ttkNumber": "ТТК-КАТ-0238",
+    "title": "Фруктовый батончик «1 яблоко + 12 ягод клубники» (1 шт.)",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фруктовый батончик «1 яблоко + 12 ягод клубники» (1 шт.) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0239",
+    "ttkNumber": "ТТК-КАТ-0239",
+    "title": "Фруктовый батончик «1 яблоко + 1 манго» (1 шт)",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фруктовый батончик «1 яблоко + 1 манго» (1 шт) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0240",
+    "ttkNumber": "ТТК-КАТ-0240",
+    "title": "Фруктовый батончик «1 яблоко + 20 ягод черники» (1 шт)",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фруктовый батончик «1 яблоко + 20 ягод черники» (1 шт) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0241",
+    "ttkNumber": "ТТК-КАТ-0241",
+    "title": "Картофельные чипсы с солью 70 г",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельные чипсы с солью 70 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0242",
+    "ttkNumber": "ТТК-КАТ-0242",
+    "title": "Картофельные чипсы со вкусом сметаны и зелени 70 г",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельные чипсы со вкусом сметаны и зелени 70 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0243",
+    "ttkNumber": "ТТК-КАТ-0243",
+    "title": "Картофельные чипсы со вкусом сыра 70 г",
+    "category": "snacks",
+    "categoryLabel": "Снеки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Картофельные чипсы со вкусом сыра 70 г технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0244",
+    "ttkNumber": "ТТК-КАТ-0244",
+    "title": "Фисташковое печенье с белым шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Фисташковое печенье с белым шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0245",
+    "ttkNumber": "ТТК-КАТ-0245",
+    "title": "Шоколадное печенье с фундуком",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Шоколадное печенье с фундуком технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0246",
+    "ttkNumber": "ТТК-КАТ-0246",
+    "title": "Овсяное печенье с молочным шоколадом",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Овсяное печенье с молочным шоколадом технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0247",
+    "ttkNumber": "ТТК-КАТ-0247",
+    "title": "Бленд кофе в зернах, 1000 г. эспрессо (50/50) (1700)",
+    "category": "drinks",
+    "categoryLabel": "Напитки",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бленд кофе в зернах, 1000 г. эспрессо (50/50) (1700) технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0248",
+    "ttkNumber": "ТТК-КАТ-0248",
+    "title": "Бриошь с креветками, скрэмблом и гуакамоле",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бриошь с креветками, скрэмблом и гуакамоле технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0249",
+    "ttkNumber": "ТТК-КАТ-0249",
+    "title": "Пеканбон с карамелью",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пеканбон с карамелью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0250",
+    "ttkNumber": "ТТК-КАТ-0250",
+    "title": "«Фантазия» с рикоттой и мятой",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "«Фантазия» с рикоттой и мятой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0251",
+    "ttkNumber": "ТТК-КАТ-0251",
+    "title": "Булочка с шоколадом и апельсином",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Булочка с шоколадом и апельсином технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0252",
+    "ttkNumber": "ТТК-КАТ-0252",
+    "title": "Бантик ягодный",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Бантик ягодный технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "cafe"
+    ]
+  },
+  {
+    "id": "GC-0253",
+    "ttkNumber": "ТТК-КАТ-0253",
+    "title": "Французский круассан зерновой с форелью",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Французский круассан зерновой с форелью технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0254",
+    "ttkNumber": "ТТК-КАТ-0254",
+    "title": "Сэндвич с тунцом на домашнем цельнозерновом хлебе",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Сэндвич с тунцом на домашнем цельнозерновом хлебе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0255",
+    "ttkNumber": "ТТК-КАТ-0255",
+    "title": "Круассан со скрэмблом и сыровяленой колбасой Лонганиза",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Круассан со скрэмблом и сыровяленой колбасой Лонганиза технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0256",
+    "ttkNumber": "ТТК-КАТ-0256",
+    "title": "Хрустящий панини с курицей, моцареллой и соусом из базилика",
+    "category": "sandwiches",
+    "categoryLabel": "Сэндвичи и закуски",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Хрустящий панини с курицей, моцареллой и соусом из базилика технологическая карта брутто нетто выход пищевая ценность",
+    "tags": []
+  },
+  {
+    "id": "GC-0260",
+    "ttkNumber": "ТТК-КАТ-0260",
+    "title": "Пудинг чиа-манго",
+    "category": "desserts",
+    "categoryLabel": "Десерты и выпечка",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Пудинг чиа-манго технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0261",
+    "ttkNumber": "ТТК-КАТ-0261",
+    "title": "Говядина тушеная с гречкой и овощами в томатном соусе",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Говядина тушеная с гречкой и овощами в томатном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0262",
+    "ttkNumber": "ТТК-КАТ-0262",
+    "title": "Боул с ломтиками форели холодного копчения, рукколой, брокколи и киноа с апельсиновой заправкой",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Боул с ломтиками форели холодного копчения, рукколой, брокколи и киноа с апельсиновой заправкой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0263",
+    "ttkNumber": "ТТК-КАТ-0263",
+    "title": "Вафли из кабачков с ветчиной из грудки индейки и соусом из сладких перцев",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Вафли из кабачков с ветчиной из грудки индейки и соусом из сладких перцев технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0264",
+    "ttkNumber": "ТТК-КАТ-0264",
+    "title": "Суп из тыквы с семечками",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Суп из тыквы с семечками технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0265",
+    "ttkNumber": "ТТК-КАТ-0265",
+    "title": "Салат с креветками, страчателлой и манго в медово-кунжутном соусе",
+    "category": "salads_starters",
+    "categoryLabel": "Салаты и боулы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Салат с креветками, страчателлой и манго в медово-кунжутном соусе технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0266",
+    "ttkNumber": "ТТК-КАТ-0266",
+    "title": "Блинчики из овсяной муки с куриным филе и грибами",
+    "category": "breakfast",
+    "categoryLabel": "Завтраки и бранчи",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "reference_product_data_only",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Блинчики из овсяной муки с куриным филе и грибами технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ],
+    "sourceRefs": [
+      "SRC-01"
+    ]
+  },
+  {
+    "id": "GC-0267",
+    "ttkNumber": "ТТК-КАТ-0267",
+    "title": "Холодный томатный суп со страчателлой",
+    "category": "soups",
+    "categoryLabel": "Супы",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Холодный томатный суп со страчателлой технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
+  },
+  {
+    "id": "GC-0268",
+    "ttkNumber": "ТТК-КАТ-0268",
+    "title": "Филе трески с пюре из корня сельдерея",
+    "category": "hot_dishes",
+    "categoryLabel": "Горячие блюда",
+    "yieldPortion": null,
+    "description": "Данные уточняются: точный состав, выход и технология позиции в стадии проработки.",
+    "ingredients": [],
+    "steps": [],
+    "recipeStatus": "draft",
+    "publish": false,
+    "status": "draft",
+    "recipeStatusSource": "not_researched",
+    "storageRules": "Сроки хранения уточняются технологической службой.",
+    "allergens": [],
+    "allergensStatus": "not_verified",
+    "notes": [
+      "Позиция в стадии проработки: состав, выход и технология уточняются технологической службой."
+    ],
+    "researchQuery": "Филе трески с пюре из корня сельдерея технологическая карта брутто нетто выход пищевая ценность",
+    "tags": [
+      "pp"
+    ]
   }
+
 ];
 
-if (typeof window !== "undefined") {
-  window.TECH_CARDS = TECH_CARDS;
-}
 
 function getAllTechCards() {
   return TECH_CARDS;

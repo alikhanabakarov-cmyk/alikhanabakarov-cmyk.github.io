@@ -891,7 +891,11 @@
               <button type="button" class="cat-pill-btn" data-cat="pasta_pizza">🍕 Паста и римская пицца</button>
               <button type="button" class="cat-pill-btn" data-cat="coffee_tea">☕ Кофейная карта & чай</button>
               <button type="button" class="cat-pill-btn" data-cat="bar_cocktails">🍹 Авторский бар & моктейли</button>
+              <button type="button" class="cat-pill-btn" data-cat="dumplings">🥟 Димсамы и пельмени</button>
               <button type="button" class="cat-pill-btn" data-cat="desserts">🍰 Кондитерская & десерты</button>
+              <button type="button" class="cat-pill-btn" data-cat="drinks">🥤 Напитки</button>
+              <button type="button" class="cat-pill-btn" data-cat="sandwiches">🥪 Сэндвичи и закуски</button>
+              <button type="button" class="cat-pill-btn" data-cat="snacks">🍿 Снеки</button>
             </div>
           </div>
         </div>
@@ -1199,8 +1203,12 @@
                 <option value="breakfast">🍳 Завтраки</option>
                 <option value="pasta_pizza">🍕 Паста и пицца</option>
                 <option value="coffee_tea">☕ Кофе и чай</option>
-                <option value="bar_cocktails">🍹 Бар и коктейли</option>
-                <option value="desserts">🍰 Десерты</option>
+<option value="bar_cocktails">🍹 Бар и коктейли</option>
+<option value="dumplings">🥟 Димсамы и пельмени</option>
+<option value="desserts">🍰 Десерты</option>
+<option value="drinks">🥤 Напитки</option>
+<option value="sandwiches">🥪 Сэндвичи</option>
+<option value="snacks">🍿 Снеки</option>
               </select>
             </div>
           </div>
@@ -1311,7 +1319,9 @@
         const count = currentCards.length;
         document.getElementById('statCardsCount').textContent = count + ' ТТК';
         if (count > 0) {
-          const avgFc = currentCards.reduce((acc, c) => acc + (c.foodCostPercent || 25), 0) / count;
+          const ready = currentCards.filter(c => !c.recipeStatus || c.recipeStatus !== 'draft');
+          const base = ready.length ? ready : currentCards;
+          const avgFc = base.reduce((acc, c) => acc + (c.foodCostPercent || 25), 0) / base.length;
           document.getElementById('statAvgFoodCost').textContent = avgFc.toFixed(1) + '%';
         }
       }
@@ -1339,27 +1349,38 @@
         const visibleItems = list.slice(0, visibleLimit);
         const hasMore = list.length > visibleLimit;
 
-        const cardsHtml = visibleItems.map(c => `
+        const cardsHtml = visibleItems.map(c => {
+          const isDraft = c.recipeStatus === 'draft';
+          return `
           <div class="ttk-card" data-id="${c.id}">
             <div class="ttk-card-visual">
               ${c.illustrationSvg || '<div style="color: var(--gold); font-size: 40px;">🍽️</div>'}
               <span class="ttk-badge-number">${c.ttkNumber || 'ТТК'}</span>
-              <span class="ttk-badge-foodcost">FC: ${c.foodCostPercent || 25}%</span>
-              <span class="ttk-badge-cuisine" title="Фильтр по кухне" onclick="window.gcFilterByCuisine('${c.cuisine || 'all'}', event)">${c.cuisineLabel || 'Европейская'}</span>
-              <span class="ttk-badge-type" title="Фильтр по виду" onclick="window.gcFilterByType('${c.dishType || 'all'}', event)">${c.dishTypeLabel || 'Блюдо'}</span>
+              ${isDraft
+                ? '<span class="ttk-badge-foodcost" style="background:#fff8e1; color:#7a5b00;">📋 Уточняется</span>'
+                : `<span class="ttk-badge-foodcost">FC: ${c.foodCostPercent || 25}%</span>`}
+              ${isDraft
+                ? '<span class="ttk-badge-cuisine">—</span><span class="ttk-badge-type">—</span>'
+                : `<span class="ttk-badge-cuisine" title="Фильтр по кухне" onclick="window.gcFilterByCuisine('${c.cuisine || 'all'}', event)">${c.cuisineLabel || 'Европейская'}</span>
+              <span class="ttk-badge-type" title="Фильтр по виду" onclick="window.gcFilterByType('${c.dishType || 'all'}', event)">${c.dishTypeLabel || 'Блюдо'}</span>`}
             </div>
             <div class="ttk-card-body">
               <div class="ttk-card-meta">
                 <span>${c.categoryLabel || 'Блюдо'}</span>
+                ${isDraft ? '' : `<span>·</span>
+                <span>${c.station || 'Кухня'}</span>`}
                 <span>·</span>
-                <span>${c.station || 'Кухня'}</span>
-                <span>·</span>
-                <span>⏱️ ${c.prepTimeMinutes || 15} мин</span>
+                <span>${c.yieldGp || c.yieldPortion ? 'Выход: ' + (c.yieldGp || c.yieldPortion) : 'Выход: уточняется'}</span>
               </div>
               <h3 class="ttk-card-title">${c.title}</h3>
               <p class="ttk-card-desc">${c.description || ''}</p>
-              
-              <div class="ttk-metrics-grid">
+              ${isDraft
+                ? `<div class="ttk-metrics-grid" style="grid-template-columns: 1fr;">
+                    <div style="grid-column: 1 / -1; background: #fff8e1; border: 1px dashed #e0a800; border-radius: 10px; padding: 12px 14px; color: #7a5b00; font-size: 13px; font-weight: 600;">
+                      📋 Состав, выход и технология в стадии проработки. Себестоимость и КБЖУ появятся после публикации технологом.
+                    </div>
+                  </div>`
+                : `<div class="ttk-metrics-grid">
                 <div class="ttk-metric-item">
                   <span class="ttk-metric-label">Себестоимость:</span>
                   <span class="ttk-metric-val green">${c.costPriceRub} ₽</span>
@@ -1378,16 +1399,16 @@
                   <span class="ttk-metric-label">Наценка:</span>
                   <span class="ttk-metric-val green">+${c.markupPercent || 350}%</span>
                 </div>
-              </div>
+              </div>`}
 
               <div class="ttk-card-footer" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
                 <button type="button" class="btn-view-ttk" onclick="window.gcOpenTtkModal('${c.id}', 'chef')" style="flex: 1; min-width: 120px;">
                   <span>🔪</span>
-                  <span>Цеховая ТТК</span>
+                  <span>${isDraft ? 'Карточка' : 'Цеховая ТТК'}</span>
                 </button>
                 <button type="button" class="btn-view-calc" onclick="window.gcOpenTtkModal('${c.id}', 'calc')" style="flex: 1; min-width: 120px;">
                   <span>📊</span>
-                  <span>Калькуляция</span>
+                  <span>${isDraft ? 'Статус' : 'Калькуляция'}</span>
                 </button>
                 <button type="button" class="btn-print-quick" title="Быстрая печать ТТК" onclick="window.gcPrintTtkDirect('${c.id}')">
                   🖨️
@@ -1395,7 +1416,8 @@
               </div>
             </div>
           </div>
-        `).join('');
+        `;
+        }).join('');
 
         let loadMoreHtml = '';
         if (hasMore) {
@@ -1648,6 +1670,18 @@
         if (!card) return;
         activeCard = card;
         currentScale = 1;
+        const isDraft = card.recipeStatus === 'draft';
+
+        if (!document.getElementById('ttkDraftNotice')) {
+          const n = document.createElement('div');
+          n.id = 'ttkDraftNotice';
+          n.style.cssText = 'display:none; margin-bottom: 16px; padding: 14px 16px; border-radius: 10px; background: #fff8e1; border: 1.5px solid #e0a800; color: #7a5b00; font-weight: 700; font-size: 14px;';
+          n.textContent = '📋 Данные уточняются: точный состав, выход и технология позиции в стадии проработки технологической службой. Блюдо станет доступно для заказа после публикации ТТК.';
+          const body = document.querySelector('.ttk-modal-body');
+          if (body) body.prepend(n);
+        }
+        const notice = document.getElementById('ttkDraftNotice');
+        if (notice) notice.style.display = isDraft ? 'block' : 'none';
 
         // Reset scale buttons
         document.querySelectorAll('#scalerBtnGroup .btn-portion').forEach(b => {
@@ -1656,13 +1690,13 @@
 
         document.getElementById('modalTtkNum').textContent = card.ttkNumber || 'ТТК';
         const cuisineEl = document.getElementById('modalCuisine');
-        if (cuisineEl) cuisineEl.textContent = card.cuisineLabel || 'Европейская';
+        if (cuisineEl) cuisineEl.textContent = isDraft ? '—' : (card.cuisineLabel || 'Европейская');
         const dishTypeEl = document.getElementById('modalDishType');
-        if (dishTypeEl) dishTypeEl.textContent = card.dishTypeLabel || 'Блюдо';
-        document.getElementById('modalStation').textContent = card.station || 'Кухня';
-        document.getElementById('modalDifficulty').textContent = card.difficultyLabel || 'Стандарт';
+        if (dishTypeEl) dishTypeEl.textContent = isDraft ? '—' : (card.dishTypeLabel || 'Блюдо');
+        document.getElementById('modalStation').textContent = isDraft ? 'В проработке' : (card.station || 'Кухня');
+        document.getElementById('modalDifficulty').textContent = isDraft ? '—' : (card.difficultyLabel || 'Стандарт');
         document.getElementById('modalTitle').textContent = card.title;
-        document.getElementById('modalPortionYield').textContent = `Выход блюда: ${card.yieldGp || card.yieldPortion || '250 г'}`;
+        document.getElementById('modalPortionYield').textContent = `Выход блюда: ${card.yieldGp || card.yieldPortion || (isDraft ? 'уточняется' : '250 г')}`;
         document.getElementById('modalVisual').innerHTML = card.illustrationSvg || '<div style="color: var(--gold); font-size: 50px;">🍽️</div>';
         document.getElementById('modalDesc').textContent = card.description || '';
 
@@ -1730,6 +1764,24 @@
         let totalBrutto = 0;
         let totalNetto = 0;
         let totalCost = 0;
+
+        if (activeCard.recipeStatus === 'draft') {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--muted); font-weight: 600; padding: 18px 10px;">
+                📋 Раскладка сырья уточняется технологом — данные появятся после публикации карточки.
+              </td>
+            </tr>
+          `;
+          document.getElementById('tfootTotalBrutto').textContent = '—';
+          document.getElementById('tfootTotalNetto').textContent = '—';
+          document.getElementById('tfootTotalCost').textContent = '—';
+          document.getElementById('modalCostRub').textContent = '—';
+          document.getElementById('modalMenuPrice').textContent = '—';
+          document.getElementById('modalFoodCost').textContent = '—';
+          document.getElementById('modalMargin').textContent = '—';
+          return;
+        }
 
         const rowsHtml = (activeCard.ingredients || []).map(ing => {
           const scaledBrutto = Math.round((ing.brutto * scale) * 10) / 10;
