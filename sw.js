@@ -1,8 +1,8 @@
-const CACHE_NAME = 'gc-cache-v6';
+const CACHE_NAME = 'gc-cache-v7';
 const STATIC_ASSETS = [
   '/',
   '/workers/',
-  '/style.css?v=1045',
+  '/style.css?v=1046',
   '/manifest.webmanifest',
   '/assets/favicon.svg',
   '/assets/favicon-192.png',

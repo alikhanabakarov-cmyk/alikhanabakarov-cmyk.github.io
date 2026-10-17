@@ -7,7 +7,7 @@
     /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:type" content="image/webp" /><meta property="og:image:alt" content="GastroConnect — HoReCa платформа для Москвы и области" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="GastroConnect — смены, персонал и поставщики HoReCa в Москве" /><meta name="twitter:description" content="Срочные смены для поваров, официантов и бариста, надежный персонал для ресторанов и прямые B2B-поставки в Москве и Московской области." /><meta
       name="twitter:image"
       content="https://gastroconnect.ru/assets/og-gastroconnect.webp"
-    /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1045" /><script type="application/ld+json">
+    /><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" /><link rel="alternate icon" href="/favicon.ico" sizes="any" /><link rel="manifest" href="/site.webmanifest" /><link rel="stylesheet" href="/style.css?v=1046" /><script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -135,17 +135,11 @@
     </script>
   <script defer src="/cookie-consent.js"></script>
 </head><body><div class="page-shell"><header class="site-header"><a class="brand" href="/" aria-label="GastroConnect"><span class="brand-mark" aria-hidden="true">GC</span><span class="brand-text">GastroConnect</span></a>        <nav class="main-nav" aria-label="Главное меню">
-          <a href="#workers" class="nav-role-link" data-switch-role="worker">👨‍🍳 Соискателям</a>
-          <a href="#restaurants" class="nav-role-link" data-switch-role="restaurant">🏛️ Заведениям</a>
-          <a href="#suppliers" class="nav-role-link" data-switch-role="supplier">🚚 Поставщикам</a>
-          <a href="/menu/" style="color: var(--ink); font-weight: 750; display: inline-flex; align-items: center; gap: 4px;">
-            <span>📋 Меню и техкарты</span>
-            <span style="background: var(--gold); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">ТТК</span>
-          </a>
-          <a href="/telegram-app" style="color: #229ed9; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-            <span>📱 Telegram App</span>
-            <span style="background: #229ed9; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">NEW</span>
-          </a>
+          <a href="#workers" class="nav-role-link" data-switch-role="worker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>Соискателям</a>
+          <a href="#restaurants" class="nav-role-link" data-switch-role="restaurant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-5h6v5"/></svg>Заведениям</a>
+          <a href="#suppliers" class="nav-role-link" data-switch-role="supplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l4 4v4h-8z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>Поставщикам</a>
+          <a href="/menu/" class="nav-extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Меню и ТТК <span class="nav-tag">ТТК</span></a>
+          <a href="/telegram-app" class="nav-extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>Telegram <span class="nav-tag nav-tag-tg">NEW</span></a>
         </nav>
         <div class="header-actions">
           <a class="btn header-login" href="/auth/?mode=login" data-site-setting="nav.login">Войти</a>
@@ -158,43 +152,37 @@
         <section class="poster-hero">
           <div class="poster-copy">
             <div class="eyebrow" data-site-setting="home.eyebrow">
-              Российская платформа гибкой занятости для HoReCa
+              Платформа для ресторанной индустрии
             </div>
             <h1 data-site-setting="home.title">
-              Смены, персонал и поставки без хаоса в чатах
+              Смены, команда и поставки.<br />Всё для работы ресторана.
             </h1>
             <p data-site-setting="home.lead">
-              GastroConnect собирает в одном месте проверенных поваров, заведения Москвы и прямых B2B-поставщиков HoReCa.
+              GastroConnect объединяет сотрудников, заведения и поставщиков HoReCa в Москве.
             </p>
             <div class="hero-actions">
-              <button class="btn primary" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('restaurant')">
-                🏛️ Я заведение
+              <button class="btn primary" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('worker')">
+                Найти смену
               </button>
-              <button class="btn" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('worker')">
-                👨‍🍳 Я соискатель
+              <button class="btn" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('restaurant')">
+                Найти сотрудника
               </button>
-              <button class="btn" type="button" onclick="window.gcSwitchRole && window.gcSwitchRole('supplier')">
-                🚚 Я поставщик
-              </button>
-              <a href="/menu/" class="btn" style="background: rgba(198,163,98,0.16); border: 1.5px solid var(--gold); color: var(--gold); font-weight: 850; display: inline-flex; align-items: center; gap: 6px;">
-                <span>📋 Меню и техкарты</span>
-              </a>
-              <a href="/telegram-app" class="btn" style="background: rgba(34, 158, 217, 0.16); border: 1.5px solid #229ed9; color: #229ed9; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
-                <span>📱 Telegram Mini App</span>
-              </a>
+            </div>
+            <div class="hero-secondary-links">
+              <a href="#suppliers" class="hero-link" data-switch-role="supplier">Поставщикам — предлагать продукты и оборудование →</a>
             </div>
             <div class="hero-benefits">
-              <span>⚡️ Выход от 2-х часов</span>
-              <span>💰 Выплаты день в день</span>
-              <span>📦 40+ проверенных поставщиков</span>
+              <span>Выход от 2 часов</span>
+              <span>Выплаты день в день</span>
+              <span>40+ проверенных поставщиков</span>
             </div>
           </div>
           <div
             class="poster-visual poster-visual-home poster-visual-with-dashboard"
             data-site-bg="home.hero" data-bg-default="/assets/hero-home.webp"
-            aria-label="GastroConnect для HoReCa"
+            aria-label="Смена повара в ресторане Москвы"
           >
-            <img class="poster-hero-image" src="/assets/hero-home.webp" alt="GastroConnect для HoReCa" loading="eager" decoding="async" fetchpriority="high" />
+            <img class="poster-hero-image" src="/assets/hero-home.webp" alt="Повар за работой на профессиональной кухне ресторана" loading="eager" decoding="async" fetchpriority="high" />
             <div class="hero-dashboard">
               <div class="dash-card dash-card-main">
                 <span>Сегодня в ленте</span>
@@ -215,10 +203,10 @@
           </div>
         </section>
 
-        <!-- PERSONA SWITCHER NAVIGATION -->
+        <!-- AUDIENCE SWITCHER · три основные аудитории -->
         <section class="persona-switcher-band" id="role-selector" aria-label="Выбор роли">
           <div class="persona-switcher-wrap">
-            <p class="persona-switcher-title">Выберите ваш профиль для перехода:</p>
+            <p class="persona-switcher-title">Одна платформа — три рабочих сценария</p>
             <div class="persona-tabs-nav" role="tablist">
               <button
                 type="button"
@@ -229,11 +217,10 @@
                 aria-controls="persona-worker-view"
                 onclick="window.gcSwitchRole('worker')"
               >
-                <span class="persona-icon">👨‍🍳</span>
-                <div class="persona-info">
-                  <span class="persona-role-title">Соискателям / Поварам</span>
-                  <span class="persona-role-desc">Смены, ставки, калькулятор дохода</span>
-                </div>
+                <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>
+                <span class="persona-role-title">Сотрудникам</span>
+                <span class="persona-role-desc">Найдите смену или постоянную работу.</span>
+                <span class="persona-cta">Смотреть смены →</span>
               </button>
 
               <button
@@ -245,11 +232,10 @@
                 aria-controls="persona-restaurant-view"
                 onclick="window.gcSwitchRole('restaurant')"
               >
-                <span class="persona-icon">🏛️</span>
-                <div class="persona-info">
-                  <span class="persona-role-title">Заведениям / Ресторанам</span>
-                  <span class="persona-role-desc">База персонала, заказ смен, HoReCa B2B</span>
-                </div>
+                <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-5h6v5"/></svg></span>
+                <span class="persona-role-title">Заведениям</span>
+                <span class="persona-role-desc">Находите сотрудников и закрывайте смены.</span>
+                <span class="persona-cta">Найти сотрудника →</span>
               </button>
 
               <button
@@ -261,23 +247,20 @@
                 aria-controls="persona-supplier-view"
                 onclick="window.gcSwitchRole('supplier')"
               >
-                <span class="persona-icon">🚚</span>
-                <div class="persona-info">
-                  <span class="persona-role-title">Поставщикам / B2B</span>
-                  <span class="persona-role-desc">Заказы ресторанов, реестр поставщиков</span>
-                </div>
+                <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h13v13H1z"/><path d="M14 8h4l4 4v4h-8z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></span>
+                <span class="persona-role-title">Поставщикам</span>
+                <span class="persona-role-desc">Предлагайте продукты, оборудование и услуги заведениям.</span>
+                <span class="persona-cta">Стать поставщиком →</span>
               </button>
 
               <a
                 href="/menu/"
-                class="persona-tab-btn"
-                style="text-decoration: none; border-color: rgba(198,163,98,0.5); background: #1D5139;"
+                class="persona-tab-btn persona-menu-card"
               >
-                <span class="persona-icon">📋</span>
-                <div class="persona-info">
-                  <span class="persona-role-title" style="color: var(--ink);">Меню и техкарты (ТТК)</span>
-                  <span class="persona-role-desc">Рецептуры, Food Cost, приготовление</span>
-                </div>
+                <span class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span>
+                <span class="persona-role-title">Меню и техкарты (ТТК)</span>
+                <span class="persona-role-desc">Рецептуры, Food Cost, брутто/нетто и приготовление.</span>
+                <span class="persona-cta">Открыть каталог →</span>
               </a>
             </div>
           </div>
@@ -891,43 +874,43 @@
                 <span class="carousel-truck-exhaust"></span>
                 <svg viewBox="0 0 88 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <!-- Сочный изумрудно-зеленый градиент кузова фургона GastroConnect -->
+                    <!-- Глубокий изумрудный градиент кузова фургона GastroConnect -->
                     <linearGradient id="vanGreenGrad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#4ade80"/>
-                      <stop offset="30%" stop-color="#22c55e"/>
-                      <stop offset="75%" stop-color="#16a34a"/>
-                      <stop offset="100%" stop-color="#14532d"/>
+                      <stop offset="0%" stop-color="#2D7856"/>
+                      <stop offset="30%" stop-color="#236547"/>
+                      <stop offset="75%" stop-color="#1D553E"/>
+                      <stop offset="100%" stop-color="#123A2A"/>
                     </linearGradient>
                     <!-- Крыша фургона с легким контрастным светом -->
                     <linearGradient id="vanRoofGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#86efac"/>
-                      <stop offset="60%" stop-color="#22c55e"/>
-                      <stop offset="100%" stop-color="#15803d"/>
+                      <stop offset="0%" stop-color="#3E8C68"/>
+                      <stop offset="60%" stop-color="#2D7856"/>
+                      <stop offset="100%" stop-color="#1D553E"/>
                     </linearGradient>
-                    <!-- Тонированные стекла кабины с небесным отражением -->
+                    <!-- Стекла кабины в теплых песочно-кремовых тонах -->
                     <linearGradient id="vanGlassGrad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#f0f9ff"/>
-                      <stop offset="35%" stop-color="#bae6fd"/>
-                      <stop offset="75%" stop-color="#38bdf8"/>
-                      <stop offset="100%" stop-color="#0284c7"/>
+                      <stop offset="0%" stop-color="#F3EBDD"/>
+                      <stop offset="35%" stop-color="#DFCFB4"/>
+                      <stop offset="75%" stop-color="#C5B79A"/>
+                      <stop offset="100%" stop-color="#A79A7F"/>
                     </linearGradient>
                     <!-- Литые диски колес -->
                     <linearGradient id="vanWheelRim" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0%" stop-color="#EDE4D0"/>
-                      <stop offset="45%" stop-color="#A9B79F"/>
-                      <stop offset="100%" stop-color="#80947A"/>
+                      <stop offset="45%" stop-color="#C9BFA8"/>
+                      <stop offset="100%" stop-color="#A79A7F"/>
                     </linearGradient>
                     <!-- Хром для бамперов и зеркал -->
                     <linearGradient id="vanChrome" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stop-color="#80947A"/>
+                      <stop offset="0%" stop-color="#A79A7F"/>
                       <stop offset="40%" stop-color="#ffffff"/>
-                      <stop offset="75%" stop-color="#A9B79F"/>
-                      <stop offset="100%" stop-color="#80947A"/>
+                      <stop offset="75%" stop-color="#C9BFA8"/>
+                      <stop offset="100%" stop-color="#A79A7F"/>
                     </linearGradient>
-                    <!-- Золотисто-оранжевая плашка логотипа Gastro -->
+                    <!-- Матово-золотая плашка логотипа Gastro -->
                     <linearGradient id="vanBadgeGrad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#fbbf24"/>
-                      <stop offset="100%" stop-color="#f59e0b"/>
+                      <stop offset="0%" stop-color="#D6B77D"/>
+                      <stop offset="100%" stop-color="#C5A367"/>
                     </linearGradient>
                   </defs>
 
@@ -1180,14 +1163,11 @@
             </div>
 
             <!-- Features Bar -->
-            <div style="background: linear-gradient(135deg, rgba(29,81,57,0.05), rgba(198,163,98,0.08)); border: 1px solid rgba(198,163,98,0.25); border-radius: 12px; padding: 18px 24px; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 16px; font-size: 14px; font-weight: 750; color: var(--ink);">
-              <span>⚖️ Масштабирование порций (1x–50x)</span>
-              <span>·</span>
-              <span>⏱️ Кулинарные таймеры процессов</span>
-              <span>·</span>
-              <span>🖨️ Экспорт бланка по ГОСТ Р 53105</span>
-              <span>·</span>
-              <span>➕ Онлайн-конструктор ТТК</span>
+            <div class="features-bar">
+              <span class="features-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M7 7l-3 6h6z"/><path d="M17 7l-3 6h6z"/></svg>Масштабирование порций (1x–50x)</span>
+              <span class="features-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 13V9"/><path d="M9 2h6"/></svg>Кулинарные таймеры процессов</span>
+              <span class="features-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4v-6h16v6h-2"/><rect x="8" y="14" width="8" height="7"/></svg>Экспорт бланка по ГОСТ Р 53105</span>
+              <span class="features-bar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>Онлайн-конструктор ТТК</span>
             </div>
           </div>
         </section>
