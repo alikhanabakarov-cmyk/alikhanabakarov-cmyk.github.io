@@ -47,7 +47,7 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/style.css?v=1041" />
+    <link rel="stylesheet" href="/style.css?v=1042" />
     <style id="workers-vacancies-hover-anim">
       .vacancies-grid .vacancy-card {
         transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.3s ease;
@@ -83,7 +83,7 @@
         color: #065f46;
       }
       .vacancy-status-bar.status-viewed {
-        background: #eff6ff;
+        background: var(--green-2);
         border: 1px solid #bfdbfe;
         color: #1e40af;
         animation: statusBarFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards, statusPulseViewed 2.5s ease-in-out infinite;
@@ -148,11 +148,11 @@
       /* Applied card visual accent */
       .vacancy-card.is-applied {
         border-color: #10b981;
-        background: linear-gradient(180deg, #EDE4D0 0%, #EDE4D0 100%);
+        background: linear-gradient(180deg, var(--green-2) 0%, var(--green-2) 100%);
       }
       .vacancy-card.is-applied-viewed {
         border-color: #3b82f6;
-        background: linear-gradient(180deg, #f8faff 0%, #f1f6fe 100%);
+        background: linear-gradient(180deg, var(--green-2) 0%, var(--green-2) 100%);
       }
       .vacancy-corner-badge {
         display: none;
@@ -331,7 +331,7 @@
         padding: 20px;
       }
       .gc-alert-modal-dialog {
-        background: #ffffff;
+        background: var(--card);
         border-radius: 20px;
         max-width: 520px;
         width: 100%;
@@ -351,7 +351,7 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background: #E6D9C0;
+        background: var(--green-2);
         border: none;
         font-size: 15px;
         color: #80947A;
@@ -431,7 +431,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: #ffffff;
+        background: var(--card);
         animation: sosPulse 1.2s infinite ease-in-out;
       }
       @keyframes sosPulse {
@@ -516,7 +516,7 @@
 
       /* 2. METRO & TAGS FILTER BAR */
       .gc-filter-section {
-        background: #ffffff;
+        background: var(--card);
         border: 1px solid #A9B79F;
         border-radius: 16px;
         padding: 16px 20px;
@@ -582,7 +582,7 @@
         align-items: center;
       }
       .gc-filter-pill {
-        background: #E6D9C0;
+        background: var(--green-2);
         border: 1.5px solid #A9B79F;
         border-radius: 999px;
         padding: 6px 14px;
@@ -643,7 +643,7 @@
         border: 1px solid #bae6fd;
       }
       .gc-perk-daily {
-        background: #fffbeb;
+        background: var(--green-2);
         color: #92400e;
         border: 1px solid #fde68a;
       }
@@ -655,7 +655,7 @@
 
       /* 3. CHEF INCOME CALCULATOR */
       .gc-calculator-section {
-        background: #ffffff;
+        background: var(--card);
         border: 1.5px solid #A9B79F;
         border-radius: 24px;
         padding: 34px 32px;
@@ -706,7 +706,7 @@
         gap: 8px;
       }
       .gc-role-btn {
-        background: #EDE4D0;
+        background: var(--green-2);
         border: 1.5px solid #A9B79F;
         border-radius: 10px;
         padding: 9px 10px;
@@ -718,7 +718,7 @@
         transition: all 0.2s;
       }
       .gc-role-btn:hover {
-        background: #E6D9C0;
+        background: var(--green-2);
         border-color: #80947A;
       }
       .gc-role-btn.is-active {
@@ -776,7 +776,7 @@
 
       /* 4. TRUST & GUARANTEE SECTION */
       .gc-trust-section {
-        background: #EDE4D0;
+        background: var(--green-2);
         border: 1px solid #A9B79F;
         border-radius: 24px;
         padding: 34px 32px;
@@ -794,7 +794,7 @@
         }
       }
       .gc-trust-card {
-        background: #ffffff;
+        background: var(--card);
         border: 1.5px solid #A9B79F;
         border-radius: 16px;
         padding: 22px;
@@ -819,7 +819,7 @@
         color: #065f46;
       }
       .gc-trust-rest .gc-trust-card-icon {
-        background: #eff6ff;
+        background: var(--green-2);
         color: #1d4ed8;
       }
       .gc-trust-list {
@@ -860,7 +860,7 @@
         border: 1px solid rgba(16, 185, 129, 0.4);
       }
       .gc-gastropass-card-dialog {
-        background: #ffffff;
+        background: var(--card);
         border-radius: 24px;
         max-width: 530px;
         width: 100%;
@@ -872,7 +872,7 @@
         text-align: center;
       }
       .gc-reliability-box {
-        background: #EDE4D0;
+        background: var(--green-2);
         border: 1.5px solid #A9B79F;
         border-radius: 18px;
         padding: 20px 18px;
@@ -962,7 +962,7 @@
         }
       }
       .gc-metric-item {
-        background: #ffffff;
+        background: var(--card);
         border: 1px solid #A9B79F;
         border-radius: 12px;
         padding: 10px 8px;
@@ -989,7 +989,7 @@
       }
       .gc-shift-history-toggle-btn {
         width: 100%;
-        background: #ffffff;
+        background: var(--card);
         border: 1px solid #A9B79F;
         border-radius: 10px;
         padding: 9px 12px;
@@ -1004,7 +1004,7 @@
         transition: background 0.2s;
       }
       .gc-shift-history-toggle-btn:hover {
-        background: #E6D9C0;
+        background: var(--green-2);
       }
       .gc-shift-history-list {
         margin-top: 10px;
@@ -1016,7 +1016,7 @@
         padding-right: 4px;
       }
       .gc-shift-history-row {
-        background: #ffffff;
+        background: var(--card);
         border: 1px solid #A9B79F;
         border-radius: 10px;
         padding: 8px 10px;
@@ -1039,7 +1039,7 @@
         border: 1px solid #a7f3d0;
       }
       .badge-ontime {
-        background: #f0fdf4;
+        background: var(--green-2);
         color: #15803d;
         border: 1px solid #bbf7d0;
       }
@@ -1054,7 +1054,7 @@
       }
       .gc-sim-box {
         margin-top: 14px;
-        background: #ffffff;
+        background: var(--card);
         border: 1px dashed #A9B79F;
         border-radius: 12px;
         padding: 12px 14px;
@@ -1082,7 +1082,7 @@
         border: 1.5px solid #A9B79F;
         font-size: 12px;
         font-weight: 700;
-        background: #EDE4D0;
+        background: var(--green-2);
         color: #202722;
         outline: none;
       }
@@ -1105,14 +1105,14 @@
         padding: 7px 10px;
         border-radius: 8px;
         border: 1px solid #A9B79F;
-        background: #ffffff;
+        background: var(--card);
         color: #80947A;
         font-size: 11.5px;
         font-weight: 700;
         cursor: pointer;
       }
       .gc-qr-box {
-        background: #EDE4D0;
+        background: var(--green-2);
         border: 2px dashed #A9B79F;
         border-radius: 16px;
         padding: 18px;
@@ -1130,7 +1130,7 @@
         margin-bottom: 14px;
       }
       .gc-step-pill {
-        background: #E6D9C0;
+        background: var(--green-2);
         border: 1.5px solid #A9B79F;
         border-radius: 10px;
         padding: 10px 8px;
@@ -1727,7 +1727,7 @@
                   <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-sous-chef" data-restaurant="Ресторан «Никитская Kitchen»" data-role="Су-шеф" data-payout="6 500 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
                     ⭐️ Отзыв
                   </button>
-                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #EDE4D0; border-color: #A9B79F; color: #3a423d; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: var(--green-2); border-color: var(--ink); color: var(--ink); text-decoration: none;" title="Полные контакты шефа в кабинете">
                     🔒 Шеф
                   </a>
                 </div>
@@ -1815,7 +1815,7 @@
                   <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-hot-cook" data-restaurant="Гастробар «Belorusskaya Grill»" data-role="Повар горячего цеха" data-payout="5 100 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
                     ⭐️ Отзыв
                   </button>
-                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #EDE4D0; border-color: #A9B79F; color: #3a423d; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: var(--green-2); border-color: var(--ink); color: var(--ink); text-decoration: none;" title="Полные контакты шефа в кабинете">
                     🔒 Шеф
                   </a>
                 </div>
@@ -1903,7 +1903,7 @@
                   <button type="button" class="btn btn-confirm-shift-card" data-action="confirm-shift-review" data-shift-id="shift-cold-cook" data-restaurant="Бистро «Малая Бронная»" data-role="Повар холодного цеха" data-payout="4 600 ₽" title="Подтвердить смену и опубликовать отзыв в Telegram" style="padding: 10px 12px; font-size: 12.5px; font-weight: 800; background: #ecfdf5; border-color: #a7f3d0; color: #065f46; cursor: pointer;">
                     ⭐️ Отзыв
                   </button>
-                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: #EDE4D0; border-color: #A9B79F; color: #3a423d; text-decoration: none;" title="Полные контакты шефа в кабинете">
+                  <a class="btn" href="/auth/?mode=signup&role=worker" style="padding: 10px 14px; font-size: 12.5px; font-weight: 800; background: var(--green-2); border-color: var(--ink); color: var(--ink); text-decoration: none;" title="Полные контакты шефа в кабинете">
                     🔒 Шеф
                   </a>
                 </div>
@@ -1958,7 +1958,7 @@
                     <button type="submit" id="shiftAlertSubmitBtn" class="btn primary" style="flex: 1; min-width: 180px; justify-content: center; background: #229ed9; border-color: #229ed9; font-weight: 900; padding: 13px 18px;">
                       ⚡️ Включить алерты
                     </button>
-                    <a id="shiftAlertBotLink" href="https://t.me/GastroConnect_Bot" target="_blank" rel="noopener" class="btn" style="background: #EDE4D0; border: 1.5px solid #A9B79F; color: #3a423d; font-weight: 800; padding: 13px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                    <a id="shiftAlertBotLink" href="https://t.me/GastroConnect_Bot" target="_blank" rel="noopener" class="btn" style="background: var(--green-2); border: 1.5px solid #A9B79F; color: var(--ink); font-weight: 800; padding: 13px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
                       🤖 Бот @GastroConnect_Bot
                     </a>
                   </div>
@@ -1979,7 +1979,7 @@
                   <a id="shiftAlertOpenBotBtn" href="https://t.me/GastroConnect_Bot" target="_blank" rel="noopener" class="btn primary" style="flex: 1; justify-content: center; background: #229ed9; border-color: #229ed9; font-weight: 900; padding: 12px 18px;">
                     📲 Открыть @GastroConnect_Bot
                   </a>
-                  <button type="button" id="shiftAlertTestBtn" class="btn" style="background: #E6D9C0; border-color: #A9B79F; color: #202722; font-weight: 800; padding: 12px 16px;">
+                  <button type="button" id="shiftAlertTestBtn" class="btn" style="background: var(--green-2); border-color: var(--ink); color: var(--ink); font-weight: 800; padding: 12px 16px;">
                     🔔 Тестовый алерт
                   </button>
                   <button type="button" id="shiftAlertUnsubBtn" class="btn" style="background: transparent; border-color: transparent; color: #ef4444; font-size: 13px; font-weight: 700; padding: 12px 14px; cursor: pointer;">
@@ -2047,7 +2047,7 @@
                   <p style="margin: 0 0 12px; font-size: 14px; color: #047857; line-height: 1.5;">
                     Шеф Алексей уведомлен о вашем выезде. Ниже прямые инструкции и контакты для входа:
                   </p>
-                  <div style="background: #ffffff; border-radius: 10px; padding: 14px; font-size: 13.5px; color: #202722; line-height: 1.6; border: 1px solid #d1fae5;">
+                  <div style="background: var(--card); border-radius: 10px; padding: 14px; font-size: 13.5px; color: var(--ink); line-height: 1.6; border: 1px solid #d1fae5;">
                     <div>📍 <b>Адрес:</b> Большая Никитская ул., 24 (м. Тверская, 3 мин)</div>
                     <div>🔑 <b>Служебный вход:</b> Калитка со двора, код <b>3482#</b></div>
                     <div>👨‍🍳 <b>Шеф-повар:</b> Алексей, тел. <b>+7 (995) 883-21-45</b></div>
@@ -2140,7 +2140,7 @@
                   <p style="margin: 0 0 10px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="quickApplySuccessMsg">
                     Ваша анкета передана управляющему заведением. Вы также можете связаться напрямую:
                   </p>
-                  <div style="background: #ffffff; border-radius: 10px; padding: 12px; font-size: 13.5px; color: #202722; border: 1px solid #d1fae5;">
+                  <div style="background: var(--card); border-radius: 10px; padding: 12px; font-size: 13.5px; color: var(--ink); border: 1px solid #d1fae5;">
                     <div>👨‍🍳 <b>Шеф заведения:</b> Шеф Алексей</div>
                     <div>📞 <b>Телефон кухни:</b> +7 (995) 883-21-45</div>
                     <div>💬 <b>Telegram:</b> @gastroconnect</div>
@@ -2150,7 +2150,7 @@
                   <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" class="btn" style="width: 100%; justify-content: center; background: #24A1DE; border-color: #24A1DE; color: #ffffff; font-weight: 800; text-decoration: none; padding: 12px; border-radius: 10px; font-size: 14px;">
                     💬 Перейти в чат сообщества @gastroconnect
                   </a>
-                  <button type="button" class="btn" id="quickApplyDoneBtn" style="width: 100%; justify-content: center; background: #EDE4D0; border-color: #A9B79F; color: #3a423d; font-weight: 800; cursor: pointer; padding: 10px;">
+                  <button type="button" class="btn" id="quickApplyDoneBtn" style="width: 100%; justify-content: center; background: var(--green-2); border-color: var(--ink); color: var(--ink); font-weight: 800; cursor: pointer; padding: 10px;">
                     Закрыть окно
                   </button>
                 </div>
@@ -2330,7 +2330,7 @@
                     <label for="reviewShiftSelect" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
                       1. Смена / Должность
                     </label>
-                    <select id="reviewShiftSelect" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14px; font-weight: 600; background: #fff; color: #202722;">
+                    <select id="reviewShiftSelect" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14px; font-weight: 600; background: var(--card); color: var(--ink);">
                       <option value="shift-sous-chef" data-role="Су-шеф" data-restaurant="Ресторан «Никитская Kitchen»" data-metro="м. Тверская / Патриаршие" data-payout="6 500 ₽ (Выплачено полностью)">Су-шеф — Никитская Kitchen (м. Тверская, 6 500 ₽)</option>
                       <option value="shift-hot-cook" data-role="Повар горячего цеха" data-restaurant="Гастробар «Belorusskaya Grill»" data-metro="м. Белорусская" data-payout="5 100 ₽ (Выплачено полностью)">Повар горячего цеха — Belorusskaya Grill (м. Белорусская, 5 100 ₽)</option>
                       <option value="shift-cold-cook" data-role="Повар холодного цеха" data-restaurant="Бистро «Малая Бронная»" data-metro="м. Маяковская" data-payout="4 600 ₽ (Выплачено полностью)">Повар холодного цеха — Бистро «Малая Бронная» (м. Маяковская, 4 600 ₽)</option>
@@ -2372,7 +2372,7 @@
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
                       <label for="reviewPunctualitySelect" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Пунктуальность</label>
-                      <select id="reviewPunctualitySelect" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13px; font-weight: 600; background: #fff;">
+                      <select id="reviewPunctualitySelect" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13px; font-weight: 600; background: var(--card);">
                         <option value="Прибыл за 15 мин до смены">✓ За 15 мин до смены</option>
                         <option value="Вовремя, без опозданий" selected>✓ Вовремя (100% явка)</option>
                         <option value="Срочный выезд (SOS-замена)">⚡️ SOS-выезд за 35 мин</option>
@@ -2393,7 +2393,7 @@
                   </div>
 
                   <!-- Чекбокс подтверждения Telegram публикации -->
-                  <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px;">
+                  <div style="background: var(--green-2); border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px;">
                     <input type="checkbox" id="reviewPublishTgCheckbox" checked style="margin-top: 3px; cursor: pointer;" />
                     <label for="reviewPublishTgCheckbox" style="font-size: 12.5px; color: #166534; line-height: 1.4; cursor: pointer;">
                       <b>Опубликовать в Telegram-канал @gastroconnect</b><br />
@@ -2417,7 +2417,7 @@
                   <p style="margin: 0 0 12px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="shiftReviewSuccessMsg">
                     Отзыв от заведения успешно внесен в профиль работника и отправлен в официальный канал сообщества.
                   </p>
-                  <div style="background: #ffffff; border-radius: 10px; padding: 12px; font-size: 13px; color: #202722; border: 1px solid #d1fae5; line-height: 1.5;">
+                  <div style="background: var(--card); border-radius: 10px; padding: 12px; font-size: 13px; color: var(--ink); border: 1px solid #d1fae5; line-height: 1.5;">
                     <div>📢 <b>Канал:</b> <a href="https://t.me/gastroconnect" target="_blank" rel="noopener" style="color: #229ed9; font-weight: 700; text-decoration: none;">@gastroconnect</a></div>
                     <div>⭐️ <b>Рейтинг повара:</b> <span id="revSuccessStars">⭐️⭐️⭐️⭐️⭐️ (5.0 / 5.0)</span></div>
                     <div>💰 <b>Выплата:</b> <span id="revSuccessPayout">Подтверждена 100%</span></div>
@@ -2706,7 +2706,7 @@
         </section>
 
         <!-- Live Shift Reviews Stream (Трансляция в Telegram @gastroconnect) -->
-        <section class="gc-live-reviews-section" id="liveReviewsSection" style="margin: 36px 0; background: #ffffff; border: 1.5px solid #A9B79F; border-radius: 24px; padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        <section class="gc-live-reviews-section" id="liveReviewsSection" style="margin: 36px 0; background: var(--card); border: 1.5px solid #A9B79F; border-radius: 24px; padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 22px;">
             <div>
               <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 900; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;">
@@ -2725,7 +2725,7 @@
 
           <div id="liveReviewsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
             <!-- Review 1 -->
-            <article class="gc-review-card" style="background: #EDE4D0; border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <article class="gc-review-card" style="background: var(--green-2); border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
@@ -2750,7 +2750,7 @@
             </article>
 
             <!-- Review 2 -->
-            <article class="gc-review-card" style="background: #EDE4D0; border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <article class="gc-review-card" style="background: var(--green-2); border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
@@ -2775,7 +2775,7 @@
             </article>
 
             <!-- Review 3 -->
-            <article class="gc-review-card" style="background: #EDE4D0; border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <article class="gc-review-card" style="background: var(--green-2); border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
@@ -5113,7 +5113,7 @@
         const ratingNum = r.rating || 5;
         const starsStr = "★".repeat(ratingNum) + "☆".repeat(5 - ratingNum);
         return `
-          <article class="gc-review-card" style="background: #EDE4D0; border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+          <article class="gc-review-card" style="background: var(--green-2); border: 1.5px solid #A9B79F; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                 <div>
@@ -5202,7 +5202,7 @@
           // Prepend card to live reviews grid
           if (liveReviewsGrid && data.review) {
             const cardMarkup = `
-              <article class="gc-review-card" style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
+              <article class="gc-review-card" style="background: var(--green-2); border: 2px solid #86efac; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
                 <div>
                   <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                     <div>
