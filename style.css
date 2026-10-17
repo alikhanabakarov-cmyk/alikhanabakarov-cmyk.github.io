@@ -24,7 +24,7 @@ input, select, textarea {
   color: var(--panel-text);
   border-color: rgba(128, 148, 122, 0.5);
 }
-input::placeholder, textarea::placeholder { color: #6c7a68; }
+input::placeholder, textarea::placeholder { color: #b4bdb2; }
 .modal-form-grid input, .modal-form-grid select,
 .ig-field-box input, .ig-field-box select, .ig-field-box textarea,
 .savings-text-input { background: var(--panel); color: var(--panel-text); }
@@ -319,7 +319,7 @@ button:disabled {
   border-radius: 999px;
   background: rgba(29,81,57,0.08);
   border: 1px solid rgba(29,81,57,0.16);
-  color: #102B20;
+  color: var(--gold);
   font-size: 14.5px;
   line-height: 1.25;
   font-weight: 850;
@@ -1433,7 +1433,7 @@ textarea.is-valid {
   display: none;
   font-size: 13px;
   font-weight: 700;
-  color: #dc2626;
+  color: #df9090;
   margin-top: 5px;
   line-height: 1.35;
   animation: fieldFadeIn 0.2s ease-out;
@@ -2151,7 +2151,7 @@ label:has(input.is-valid) .field-valid-icon {
 
 .status-in_progress {
   background: rgba(22, 119, 255, 0.12);
-  color: #1456a8;
+  color: #90b3df;
 }
 
 .status-done {
@@ -2161,7 +2161,7 @@ label:has(input.is-valid) .field-valid-icon {
 
 .status-archived {
   background: rgba(102, 112, 133, 0.14);
-  color: #475467;
+  color: #aab5c5;
 }
 
 .admin-hero,
@@ -2214,7 +2214,7 @@ button.compact {
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
-  color: #475467;
+  color: #aab5c5;
   font-family: Consolas, "Courier New", monospace;
   font-size: 12px;
   line-height: 1.45;
@@ -2316,7 +2316,7 @@ th {
 
 .danger {
   border-color: #b42318;
-  color: #b42318;
+  color: #df9690;
 }
 
 @media (max-width: 1050px) {
@@ -3838,7 +3838,7 @@ th {
   gap: 6px;
   padding: 6px 12px;
   background: rgba(180, 83, 9, 0.1);
-  color: #b45309;
+  color: #dfb290;
   border: 1px solid rgba(180, 83, 9, 0.25);
   border-radius: 30px;
   font-size: 12px;
@@ -4066,7 +4066,7 @@ th {
 
 .b2b-prod-price {
   font-weight: 900;
-  color: #065f46;
+  color: #90dfc9;
   white-space: nowrap;
   margin-left: 8px;
 }
@@ -4436,7 +4436,7 @@ th {
   justify-content: center;
   font-size: 22px;
   font-weight: 850;
-  color: var(--ink);
+  color: #202722;
   flex-shrink: 0;
 }
 
@@ -4488,7 +4488,7 @@ th {
 
 .worker-talent-tag.verified {
   background: rgba(16, 185, 129, 0.12);
-  color: #047857;
+  color: #90dfc9;
 }
 
 /* Supply Requests Grid */
@@ -4528,7 +4528,7 @@ th {
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #90a9df;
   background: rgba(198,163,98,0.08);
   padding: 3px 8px;
   border-radius: 6px;
@@ -4537,7 +4537,7 @@ th {
 .supply-req-budget {
   font-size: 16px;
   font-weight: 900;
-  color: #15803d;
+  color: #90dfae;
 }
 
 .supply-req-title {
@@ -4612,7 +4612,7 @@ th {
 
 .calc-result-sub {
   font-size: 12.5px;
-  color: #059669;
+  color: #90dfc6;
   font-weight: 700;
 }
 
@@ -4834,7 +4834,7 @@ th {
   border-radius: 999px;
   font-size: 13.5px;
   font-weight: 850;
-  color: #b45309;
+  color: #dfb290;
 }
 
 .worker-review-text {
@@ -5041,7 +5041,7 @@ th {
 }
 
 .earnings-stat-card.highlight-emerald .earnings-stat-val {
-  color: #047857;
+  color: #90dfc9;
 }
 
 .earnings-stat-note {
@@ -5261,7 +5261,7 @@ th {
 .payout-item-sum {
   font-size: 16px;
   font-weight: 900;
-  color: #047857;
+  color: #90dfc9;
 }
 
 .payout-status-pill {
@@ -5281,7 +5281,7 @@ th {
 
 .payout-status-pending {
   background: var(--green-2);
-  color: #b45309;
+  color: #dfb290;
   border: 1px solid #fde68a;
 }
 
@@ -5743,13 +5743,13 @@ th {
 
 .gc-kpi-tag-gold {
   background: var(--green-2);
-  color: #b45309;
+  color: #dfb290;
   border: 1px solid #fde68a;
 }
 
 .gc-kpi-tag-blue {
   background: var(--green-2);
-  color: #1d4ed8;
+  color: #90a5df;
   border: 1px solid #bfdbfe;
 }
 
@@ -5858,7 +5858,7 @@ th {
 .chip-pending {
   background: var(--green-2);
   border-color: #fde68a;
-  color: #92400e;
+  color: #dfae90;
 }
 .chip-pending .chip-dot {
   background: #f59e0b;
@@ -5876,7 +5876,7 @@ th {
 .chip-done {
   background: var(--green-2);
   border-color: #bbf7d0;
-  color: #166534;
+  color: #90dfae;
 }
 .chip-done .chip-dot {
   background: #22c55e;
@@ -6148,7 +6148,7 @@ th {
 .gc-calculator-badge {
   display: inline-block;
   background: rgba(29,81,57,0.08);
-  color: #1D5139;
+  color: var(--gold);
   font-size: 12px;
   font-weight: 800;
   padding: 6px 14px;
@@ -6233,7 +6233,7 @@ th {
 .gc-calc-slider-val {
   font-size: 20px;
   font-weight: 900;
-  color: #1D5139;
+  color: var(--gold);
 }
 .gc-calc-slider {
   width: 100%;
@@ -6354,7 +6354,7 @@ th {
 .gc-faq-badge {
   display: inline-block;
   background: rgba(198,163,98,0.12);
-  color: #b45309;
+  color: #dfb290;
   font-size: 12px;
   font-weight: 800;
   padding: 6px 14px;
@@ -6408,7 +6408,7 @@ th {
   transition: color 0.15s;
 }
 .gc-faq-item.active .gc-faq-question {
-  color: #1D5139;
+  color: var(--gold);
 }
 .gc-faq-icon {
   font-size: 18px;
@@ -6418,7 +6418,7 @@ th {
 }
 .gc-faq-item.active .gc-faq-icon {
   transform: rotate(180deg);
-  color: #1D5139;
+  color: var(--gold);
 }
 .gc-faq-answer {
   display: none;
@@ -6627,7 +6627,7 @@ th {
 }
 
 .dashboard-live-indicator {
-  color: #059669;
+  color: #90dfc6;
   font-size: 11px;
   font-weight: 700;
   display: inline-flex;
@@ -6816,7 +6816,7 @@ th {
 .kpi-card-badge {
   font-size: 11px;
   font-weight: 700;
-  color: #047857;
+  color: #90dfc9;
   background: rgba(16, 185, 129, 0.12);
   padding: 3px 8px;
   border-radius: 6px;
@@ -6830,7 +6830,7 @@ th {
 }
 
 .green-tag {
-  color: #1D5139;
+  color: var(--gold);
   background: rgba(29,81,57,0.1);
 }
 
@@ -6840,7 +6840,7 @@ th {
 }
 
 .blue-tag {
-  color: #0284c7;
+  color: #90c4df;
   background: rgba(2, 132, 199, 0.12);
 }
 
@@ -7218,7 +7218,7 @@ th {
   gap: 6px;
   font-size: 12px;
   font-weight: 800;
-  color: #c026d3;
+  color: #d690df;
   background: var(--green-2);
   border: 1px solid #f5d0fe;
   padding: 4px 10px;
@@ -7250,7 +7250,7 @@ th {
 
 .ig-tpl-btn:hover {
   border-color: #c026d3;
-  color: #c026d3;
+  color: #d690df;
   background: var(--green-2);
 }
 
@@ -7345,7 +7345,7 @@ th {
 }
 
 .ig-tag-chip .remove-tag:hover {
-  color: #ef4444;
+  color: #df9090;
 }
 
 .ig-action-bar {
@@ -7612,7 +7612,7 @@ input, select, textarea {
   color: var(--panel-text) !important;
   border-color: rgba(128,148,122,0.5) !important;
 }
-input::placeholder, textarea::placeholder, select::placeholder { color: #5f6b58 !important; }
+input::placeholder, textarea::placeholder, select::placeholder { color: #b6bfb1 !important; }
 .modal-form-grid input, .modal-form-grid select, .modal-form-grid textarea,
 .ig-field-box input, .ig-field-box select, .ig-field-box textarea,
 .savings-text-input, .settings-form input, .settings-form select, .settings-form textarea {

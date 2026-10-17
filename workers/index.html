@@ -47,7 +47,7 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/style.css?v=1043" />
+    <link rel="stylesheet" href="/style.css?v=1044" />
     <style id="workers-vacancies-hover-anim">
       .vacancies-grid .vacancy-card {
         transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.3s ease;
@@ -85,7 +85,7 @@
       .vacancy-status-bar.status-viewed {
         background: var(--green-2);
         border: 1px solid #bfdbfe;
-        color: #1e40af;
+        color: #90a3df;
         animation: statusBarFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards, statusPulseViewed 2.5s ease-in-out infinite;
       }
       .vacancy-status-bar.status-accepted {
@@ -296,7 +296,7 @@
         text-transform: uppercase;
         letter-spacing: 0.04em;
         background: rgba(34, 158, 217, 0.16);
-        color: #0284c7;
+        color: #90c4df;
         padding: 2px 7px;
         border-radius: 999px;
         margin-left: 2px;
@@ -315,7 +315,7 @@
       }
       .btn-shift-alert.is-subscribed .btn-shift-alert-tg-badge {
         background: rgba(16, 185, 129, 0.2);
-        color: #065f46;
+        color: #90dfc9;
       }
 
       /* Alert Modal styles */
@@ -644,7 +644,7 @@
       }
       .gc-perk-daily {
         background: var(--green-2);
-        color: #92400e;
+        color: #dfae90;
         border: 1px solid #fde68a;
       }
       .gc-perk-trust {
@@ -820,7 +820,7 @@
       }
       .gc-trust-rest .gc-trust-card-icon {
         background: var(--green-2);
-        color: #1d4ed8;
+        color: #90a5df;
       }
       .gc-trust-list {
         margin: 0;
@@ -939,7 +939,7 @@
       .gc-meter-val {
         font-size: 22px;
         font-weight: 950;
-        color: #1D5139;
+        color: var(--gold);
         line-height: 1;
       }
       .gc-meter-sub {
@@ -971,7 +971,7 @@
       .gc-metric-num {
         font-size: 17px;
         font-weight: 900;
-        color: #1D5139;
+        color: var(--gold);
         display: block;
       }
       .gc-metric-label {
@@ -1040,7 +1040,7 @@
       }
       .badge-ontime {
         background: var(--green-2);
-        color: #15803d;
+        color: #90dfae;
         border: 1px solid #bbf7d0;
       }
       .badge-late {
@@ -1925,7 +1925,7 @@
                     Telegram-алерты на смены
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
-                    Специальность: <strong id="shiftAlertModalRoleName" style="color: #0284c7;">Су-шеф</strong>
+                    Специальность: <strong id="shiftAlertModalRoleName" style="color: #90c4df;">Су-шеф</strong>
                   </p>
                 </div>
               </div>
@@ -1969,9 +1969,9 @@
                 <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
                   <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                     <span style="font-size: 20px;">✅</span>
-                    <strong style="color: #065f46; font-size: 15px;">Алерты успешно активированы!</strong>
+                    <strong style="color: #90dfc9; font-size: 15px;">Алерты успешно активированы!</strong>
                   </div>
-                  <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #047857;" id="shiftAlertSuccessMessage">
+                  <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #90dfc9;" id="shiftAlertSuccessMessage">
                     Вы подписаны на уведомления о новых сменах для этой роли. Мы пришлем алерт в Telegram, как только заведение опубликует заявку.
                   </p>
                 </div>
@@ -1982,7 +1982,7 @@
                   <button type="button" id="shiftAlertTestBtn" class="btn" style="background: var(--green-2); border-color: var(--ink); color: var(--ink); font-weight: 800; padding: 12px 16px;">
                     🔔 Тестовый алерт
                   </button>
-                  <button type="button" id="shiftAlertUnsubBtn" class="btn" style="background: transparent; border-color: transparent; color: #ef4444; font-size: 13px; font-weight: 700; padding: 12px 14px; cursor: pointer;">
+                  <button type="button" id="shiftAlertUnsubBtn" class="btn" style="background: transparent; border-color: transparent; color: #df9090; font-size: 13px; font-weight: 700; padding: 12px 14px; cursor: pointer;">
                     Отключить алерты
                   </button>
                 </div>
@@ -2001,14 +2001,14 @@
                     Занять SOS-смену: Выход сейчас
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
-                    Ресторан «Никитская Kitchen» • <strong style="color: #ef4444;">7 500 ₽ за смену</strong>
+                    Ресторан «Никитская Kitchen» • <strong style="color: #df9090;">7 500 ₽ за смену</strong>
                   </p>
                 </div>
               </div>
 
               <div id="sosModalFormView">
                 <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 12px; padding: 14px; margin: 16px 0;">
-                  <div style="font-size: 13px; color: #9f1239; line-height: 1.5;">
+                  <div style="font-size: 13px; color: #df90a6; line-height: 1.5;">
                     ⚡️ Смена закрепится за вами. Шеф закроет набор. Такси до заведения оплачивается, расчет наличными или на карту сразу после смены.
                   </div>
                 </div>
@@ -2042,9 +2042,9 @@
                 <div style="background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                     <span style="font-size: 22px;">🎉</span>
-                    <strong style="color: #065f46; font-size: 16px;">Смена закреплена за вами!</strong>
+                    <strong style="color: #90dfc9; font-size: 16px;">Смена закреплена за вами!</strong>
                   </div>
-                  <p style="margin: 0 0 12px; font-size: 14px; color: #047857; line-height: 1.5;">
+                  <p style="margin: 0 0 12px; font-size: 14px; color: #90dfc9; line-height: 1.5;">
                     Шеф Алексей уведомлен о вашем выезде. Ниже прямые инструкции и контакты для входа:
                   </p>
                   <div style="background: var(--card); border-radius: 10px; padding: 14px; font-size: 13.5px; color: var(--ink); line-height: 1.6; border: 1px solid #d1fae5;">
@@ -2077,7 +2077,7 @@
                     Отклик в 1 клик без резюме
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
-                    Смена: <strong id="quickApplyRoleLabel" style="color: #1D5139;">Повар</strong>
+                    Смена: <strong id="quickApplyRoleLabel" style="color: var(--gold);">Повар</strong>
                   </p>
                 </div>
               </div>
@@ -2135,9 +2135,9 @@
                 <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                     <span style="font-size: 22px;">✅</span>
-                    <strong style="color: #065f46; font-size: 16px;">Отклик успешно передан шефу!</strong>
+                    <strong style="color: #90dfc9; font-size: 16px;">Отклик успешно передан шефу!</strong>
                   </div>
-                  <p style="margin: 0 0 10px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="quickApplySuccessMsg">
+                  <p style="margin: 0 0 10px; font-size: 13.5px; color: #90dfc9; line-height: 1.5;" id="quickApplySuccessMsg">
                     Ваша анкета передана управляющему заведением. Вы также можете связаться напрямую:
                   </p>
                   <div style="background: var(--card); border-radius: 10px; padding: 12px; font-size: 13.5px; color: var(--ink); border: 1px solid #d1fae5;">
@@ -2364,7 +2364,7 @@
                         <span data-star="5" style="color: #eab308; transition: transform 0.1s;">★</span>
                       </div>
                       <input type="hidden" id="reviewRatingVal" value="5" />
-                      <span id="reviewRatingLabel" style="font-size: 14px; font-weight: 800; color: #1D5139; margin-left: 6px;">5.0 — Идеальная смена</span>
+                      <span id="reviewRatingLabel" style="font-size: 14px; font-weight: 800; color: var(--gold); margin-left: 6px;">5.0 — Идеальная смена</span>
                     </div>
                   </div>
 
@@ -2395,7 +2395,7 @@
                   <!-- Чекбокс подтверждения Telegram публикации -->
                   <div style="background: var(--green-2); border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 12px; display: flex; align-items: flex-start; gap: 8px;">
                     <input type="checkbox" id="reviewPublishTgCheckbox" checked style="margin-top: 3px; cursor: pointer;" />
-                    <label for="reviewPublishTgCheckbox" style="font-size: 12.5px; color: #166534; line-height: 1.4; cursor: pointer;">
+                    <label for="reviewPublishTgCheckbox" style="font-size: 12.5px; color: #90dfae; line-height: 1.4; cursor: pointer;">
                       <b>Опубликовать в Telegram-канал @gastroconnect</b><br />
                       Отзыв укрепит рейтинг мастера и подтвердит прозрачность выплат в заведении.
                     </label>
@@ -2412,9 +2412,9 @@
                 <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 14px; padding: 18px; margin-bottom: 16px;">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                     <span style="font-size: 22px;">🎉</span>
-                    <strong style="color: #065f46; font-size: 16px;">Смена подтверждена, отзыв опубликован!</strong>
+                    <strong style="color: #90dfc9; font-size: 16px;">Смена подтверждена, отзыв опубликован!</strong>
                   </div>
-                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #047857; line-height: 1.5;" id="shiftReviewSuccessMsg">
+                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #90dfc9; line-height: 1.5;" id="shiftReviewSuccessMsg">
                     Отзыв от заведения успешно внесен в профиль работника и отправлен в официальный канал сообщества.
                   </p>
                   <div style="background: var(--card); border-radius: 10px; padding: 12px; font-size: 13px; color: var(--ink); border: 1px solid #d1fae5; line-height: 1.5;">
@@ -2468,7 +2468,7 @@
                 Калькулятор чистого дохода и бонусов на смене
               </h2>
             </div>
-            <span style="font-size: 13.5px; font-weight: 750; color: #1D5139; background: rgba(29,81,57,0.08); padding: 6px 14px; border-radius: 999px;">
+            <span style="font-size: 13.5px; font-weight: 750; color: var(--gold); background: rgba(29,81,57,0.08); padding: 6px 14px; border-radius: 999px;">
               📊 Ставки ресторанов Москвы (2025–2026)
             </span>
           </div>
@@ -2497,7 +2497,7 @@
                   <label for="calcShiftsSlider" style="font-size: 12.5px; font-weight: 800; color: #B8C4AE; text-transform: uppercase; margin: 0;">
                     2. Количество смен в неделю
                   </label>
-                  <span id="calcShiftsLabel" style="font-size: 16px; font-weight: 900; color: #1D5139;">
+                  <span id="calcShiftsLabel" style="font-size: 16px; font-weight: 900; color: var(--gold);">
                     4 смены / нед (график 2/2)
                   </span>
                 </div>
@@ -2516,7 +2516,7 @@
                   <label for="calcRateSlider" style="font-size: 12.5px; font-weight: 800; color: #B8C4AE; text-transform: uppercase; margin: 0;">
                     3. Ставка за 1 смену (12 часов)
                   </label>
-                  <span id="calcRateLabel" style="font-size: 18px; font-weight: 950; color: #1D5139;">
+                  <span id="calcRateLabel" style="font-size: 18px; font-weight: 950; color: var(--gold);">
                     5 200 ₽
                   </span>
                 </div>
@@ -2587,16 +2587,16 @@
               </div>
               <ul class="gc-trust-list">
                 <li>
-                  <strong style="color: #1D5139;">✓ Оплата 100% отработанного времени:</strong> без скрытых вычетов, «стажировок на мойке» и удержаний.
+                  <strong style="color: var(--gold);">✓ Оплата 100% отработанного времени:</strong> без скрытых вычетов, «стажировок на мойке» и удержаний.
                 </li>
                 <li>
-                  <strong style="color: #1D5139;">✓ Компенсация при отмене смены:</strong> если заведение отменяет смену менее чем за 3 часа, повар получает 1 500 ₽ компенсации за простой.
+                  <strong style="color: var(--gold);">✓ Компенсация при отмене смены:</strong> если заведение отменяет смену менее чем за 3 часа, повар получает 1 500 ₽ компенсации за простой.
                 </li>
                 <li>
-                  <strong style="color: #1D5139;">✓ Бесплатный стафф-обед и ужин:</strong> полноценное горячее питание с первого дня.
+                  <strong style="color: var(--gold);">✓ Бесплатный стафф-обед и ужин:</strong> полноценное горячее питание с первого дня.
                 </li>
                 <li>
-                  <strong style="color: #1D5139;">✓ Прямой контакт шефа:</strong> без посредников и бессмысленных HR-тестов.
+                  <strong style="color: var(--gold);">✓ Прямой контакт шефа:</strong> без посредников и бессмысленных HR-тестов.
                 </li>
               </ul>
             </div>
@@ -2729,7 +2729,7 @@
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
-                    <strong style="color: #1D5139; font-size: 15.5px; display: block;">Ресторан «Никитская Kitchen»</strong>
+                    <strong style="color: var(--gold); font-size: 15.5px; display: block;">Ресторан «Никитская Kitchen»</strong>
                     <span style="font-size: 12.5px; color: #80947A;">м. Тверская / Патриаршие</span>
                   </div>
                   <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
@@ -2743,7 +2743,7 @@
                   «Смена закрыта безупречно: идеальная чистота станции, быстрая отдача банкетного меню и точное знание ТТК. Выплата переведена сразу.»
                 </p>
               </div>
-              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #90dfc6; font-weight: 700;">
                 <span>💰 6 500 ₽ • Выплачено 100%</span>
                 <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
               </div>
@@ -2754,7 +2754,7 @@
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
-                    <strong style="color: #1D5139; font-size: 15.5px; display: block;">Гастробар «Belorusskaya Grill»</strong>
+                    <strong style="color: var(--gold); font-size: 15.5px; display: block;">Гастробар «Belorusskaya Grill»</strong>
                     <span style="font-size: 12.5px; color: #80947A;">м. Белорусская</span>
                   </div>
                   <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
@@ -2768,7 +2768,7 @@
                   «Вышел на замену вовремя, сразу встал на хоспер и гриль. Гости хвалили прожарку рибаев. Отличный профессионал, будем звать на все пятницы!»
                 </p>
               </div>
-              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #90dfc6; font-weight: 700;">
                 <span>💰 5 100 ₽ • Выплачено 100%</span>
                 <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
               </div>
@@ -2779,7 +2779,7 @@
               <div>
                 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                   <div>
-                    <strong style="color: #1D5139; font-size: 15.5px; display: block;">Бистро «Малая Бронная»</strong>
+                    <strong style="color: var(--gold); font-size: 15.5px; display: block;">Бистро «Малая Бронная»</strong>
                     <span style="font-size: 12.5px; color: #80947A;">м. Маяковская</span>
                   </div>
                   <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
@@ -2793,7 +2793,7 @@
                   «Скорость нарезки и оформления боулов на высоте. Выручила в дневной ланч-пик. Санитарная книжка проверена, все четко.»
                 </p>
               </div>
-              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+              <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #90dfc6; font-weight: 700;">
                 <span>💰 4 600 ₽ • Выплачено 100%</span>
                 <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
               </div>
@@ -4859,7 +4859,7 @@
               </div>
               <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
                 <span class="gc-shift-status-badge ${badgeClass}">${badgeText}</span>
-                <span style="font-size: 11px; font-weight: 700; color: #065f46;">${escapeHtml(s.payout || "Выплачено")}</span>
+                <span style="font-size: 11px; font-weight: 700; color: #90dfc9;">${escapeHtml(s.payout || "Выплачено")}</span>
               </div>
             </div>
           `;
@@ -5117,7 +5117,7 @@
             <div>
               <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                 <div>
-                  <strong style="color: #1D5139; font-size: 15.5px; display: block;">${escapeText(r.restaurantName)}</strong>
+                  <strong style="color: var(--gold); font-size: 15.5px; display: block;">${escapeText(r.restaurantName)}</strong>
                   <span style="font-size: 12.5px; color: #80947A;">${escapeText(r.metro || "Москва")}</span>
                 </div>
                 <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
@@ -5131,7 +5131,7 @@
                 «${escapeText(r.text || "Смена подтверждена заведением, все стандарты кухни соблюдены.")}»
               </p>
             </div>
-            <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+            <div style="border-top: 1px solid #A9B79F; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #90dfc6; font-weight: 700;">
               <span>💰 ${escapeText(r.payout)}</span>
               <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
             </div>
@@ -5206,7 +5206,7 @@
                 <div>
                   <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
                     <div>
-                      <strong style="color: #1D5139; font-size: 15.5px; display: block;">${escapeText(data.review.restaurantName)}</strong>
+                      <strong style="color: var(--gold); font-size: 15.5px; display: block;">${escapeText(data.review.restaurantName)}</strong>
                       <span style="font-size: 12.5px; color: #80947A;">${escapeText(data.review.metro)}</span>
                     </div>
                     <span style="background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 12px; font-weight: 900; padding: 3px 8px; border-radius: 6px;">
@@ -5220,7 +5220,7 @@
                     «${escapeText(data.review.text)}»
                   </p>
                 </div>
-                <div style="border-top: 1px solid #86efac; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #059669; font-weight: 700;">
+                <div style="border-top: 1px solid #86efac; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #90dfc6; font-weight: 700;">
                   <span>💰 ${escapeText(data.review.payout)}</span>
                   <span style="color: #229ed9;">✈️ Опубликовано в TG</span>
                 </div>
