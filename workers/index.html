@@ -47,7 +47,7 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/style.css?v=1042" />
+    <link rel="stylesheet" href="/style.css?v=1043" />
     <style id="workers-vacancies-hover-anim">
       .vacancies-grid .vacancy-card {
         transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.3s ease;
@@ -363,7 +363,7 @@
       }
       .gc-alert-modal-close:hover {
         background: #A9B79F;
-        color: #202722;
+        color: var(--ink);
       }
       .gc-alert-modal-head {
         display: flex;
@@ -534,7 +534,7 @@
       .gc-filter-title {
         font-size: 13.5px;
         font-weight: 900;
-        color: #202722;
+        color: var(--ink);
         text-transform: uppercase;
         letter-spacing: 0.05em;
         display: flex;
@@ -555,7 +555,7 @@
         border-radius: 10px;
         font-size: 13.5px;
         font-weight: 600;
-        color: #202722;
+        color: var(--ink);
         outline: none;
         transition: border-color 0.2s;
       }
@@ -588,7 +588,7 @@
         padding: 6px 14px;
         font-size: 13px;
         font-weight: 800;
-        color: #5b665f;
+        color: #B8C4AE;
         cursor: pointer;
         transition: all 0.2s ease;
         display: inline-flex;
@@ -598,7 +598,7 @@
       }
       .gc-filter-pill:hover {
         background: #A9B79F;
-        color: #202722;
+        color: var(--ink);
       }
       .gc-filter-pill.is-active {
         background: #1D5139;
@@ -682,7 +682,7 @@
         align-items: center;
         font-size: 13.5px;
         font-weight: 800;
-        color: #3a423d;
+        color: var(--ink);
         margin-bottom: 8px;
       }
       .gc-calc-val-display {
@@ -712,7 +712,7 @@
         padding: 9px 10px;
         font-size: 13px;
         font-weight: 750;
-        color: #3a423d;
+        color: var(--ink);
         cursor: pointer;
         text-align: center;
         transition: all 0.2s;
@@ -826,7 +826,7 @@
         margin: 0;
         padding-left: 20px;
         font-size: 14px;
-        color: #3a423d;
+        color: var(--ink);
         line-height: 1.6;
       }
       .gc-trust-list li {
@@ -977,7 +977,7 @@
       .gc-metric-label {
         font-size: 11px;
         font-weight: 800;
-        color: #5b665f;
+        color: #B8C4AE;
         display: block;
         margin: 2px 0;
         line-height: 1.2;
@@ -995,7 +995,7 @@
         padding: 9px 12px;
         font-size: 12.5px;
         font-weight: 800;
-        color: #202722;
+        color: var(--ink);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -1062,7 +1062,7 @@
       .gc-sim-head {
         font-size: 12px;
         font-weight: 800;
-        color: #3a423d;
+        color: var(--ink);
         margin-bottom: 8px;
         display: flex;
         align-items: center;
@@ -1083,7 +1083,7 @@
         font-size: 12px;
         font-weight: 700;
         background: var(--green-2);
-        color: #202722;
+        color: var(--ink);
         outline: none;
       }
       .gc-sim-btn {
@@ -1136,7 +1136,7 @@
         padding: 10px 8px;
         font-size: 12.5px;
         font-weight: 800;
-        color: #3a423d;
+        color: var(--ink);
         cursor: pointer;
         text-align: center;
         transition: all 0.15s ease;
@@ -1921,7 +1921,7 @@
               <div class="gc-alert-modal-head">
                 <div class="gc-alert-modal-icon">🔔</div>
                 <div>
-                  <h3 id="shiftAlertModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #202722;">
+                  <h3 id="shiftAlertModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: var(--ink);">
                     Telegram-алерты на смены
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
@@ -1931,14 +1931,14 @@
               </div>
               
               <div id="shiftAlertModalSubscribeView">
-                <p style="font-size: 14px; line-height: 1.5; color: #3a423d; margin: 16px 0 14px;">
+                <p style="font-size: 14px; line-height: 1.5; color: var(--ink); margin: 16px 0 14px;">
                   Получайте моментальные персональные оповещения в Telegram, как только заведения Москвы открывают новую подтверждённую смену для вашей специальности.
                 </p>
                 <form id="shiftAlertForm">
                   <input type="hidden" id="shiftAlertRoleCategory" value="" />
                   <input type="hidden" id="shiftAlertRoleTitle" value="" />
                   <div style="margin-bottom: 14px;">
-                    <label for="shiftAlertTgInput" style="display: block; font-size: 12.5px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                    <label for="shiftAlertTgInput" style="display: block; font-size: 12.5px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
                       Ваш Telegram (@username или телефон)
                     </label>
                     <input 
@@ -1997,7 +1997,7 @@
               <div class="gc-alert-modal-head">
                 <div class="gc-alert-modal-icon" style="background: #fee2e2; color: #ef4444;">🚨</div>
                 <div>
-                  <h3 id="sosModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #202722;">
+                  <h3 id="sosModalTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: var(--ink);">
                     Занять SOS-смену: Выход сейчас
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
@@ -2014,15 +2014,15 @@
                 </div>
                 <form id="sosAcceptForm">
                   <div style="margin-bottom: 12px;">
-                    <label for="sosCookName" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 5px; text-transform: uppercase;">Ваше имя</label>
+                    <label for="sosCookName" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 5px; text-transform: uppercase;">Ваше имя</label>
                     <input type="text" id="sosCookName" placeholder="Алексей" required style="width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
                   </div>
                   <div style="margin-bottom: 12px;">
-                    <label for="sosCookContact" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 5px; text-transform: uppercase;">Телефон или Telegram</label>
+                    <label for="sosCookContact" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 5px; text-transform: uppercase;">Телефон или Telegram</label>
                     <input type="text" id="sosCookContact" placeholder="+7 (999) 000-00-00 или @username" required style="width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
                   </div>
                   <div style="margin-bottom: 16px;">
-                    <label style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 5px; text-transform: uppercase;">Через сколько будете на месте?</label>
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 5px; text-transform: uppercase;">Через сколько будете на месте?</label>
                     <div style="display: flex; gap: 8px;">
                       <label style="flex: 1; border: 1.5px solid #A9B79F; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; font-size: 13px; font-weight: 750;">
                         <input type="radio" name="sosEta" value="25" checked style="margin-right: 4px;" /> 20–30 мин
@@ -2073,7 +2073,7 @@
               <div class="gc-alert-modal-head">
                 <div class="gc-alert-modal-icon" style="background: #ecfdf5; color: #1D5139;">⚡️</div>
                 <div>
-                  <h3 id="quickApplyTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: #202722;">
+                  <h3 id="quickApplyTitle" style="margin: 0; font-size: 20px; font-weight: 900; color: var(--ink);">
                     Отклик в 1 клик без резюме
                   </h3>
                   <p style="margin: 4px 0 0; font-size: 13px; color: #80947A;">
@@ -2089,7 +2089,7 @@
 
                   <!-- Шаг 1: Цех -->
                   <div style="margin-bottom: 14px;">
-                    <label style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">1. Ваш цех / специализация</label>
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">1. Ваш цех / специализация</label>
                     <div class="gc-step-btn-group" id="quickApplyWorkshopGroup">
                       <button type="button" class="gc-step-pill is-selected" data-val="Горячий цех">Горячий цех</button>
                       <button type="button" class="gc-step-pill" data-val="Холодный цех">Холодный цех</button>
@@ -2101,7 +2101,7 @@
 
                   <!-- Шаг 2: Опыт -->
                   <div style="margin-bottom: 14px;">
-                    <label style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">2. Опыт в ресторанной кухне</label>
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">2. Опыт в ресторанной кухне</label>
                     <div class="gc-step-btn-group" id="quickApplyExpGroup">
                       <button type="button" class="gc-step-pill" data-val="До 1 года">До 1 года</button>
                       <button type="button" class="gc-step-pill is-selected" data-val="1–3 года">1–3 года</button>
@@ -2112,7 +2112,7 @@
 
                   <!-- Шаг 3: Медкнижка -->
                   <div style="margin-bottom: 14px;">
-                    <label style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">3. Медицинская книжка</label>
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">3. Медицинская книжка</label>
                     <div class="gc-step-btn-group" id="quickApplyMedGroup">
                       <button type="button" class="gc-step-pill is-selected" data-val="Есть действующая">✅ Есть действующая</button>
                       <button type="button" class="gc-step-pill" data-val="В процессе оформления">⏳ В процессе</button>
@@ -2121,7 +2121,7 @@
 
                   <!-- Шаг 4: Контакт -->
                   <div style="margin-bottom: 16px;">
-                    <label for="quickApplyContact" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">4. Ваш телефон или Telegram для ответа</label>
+                    <label for="quickApplyContact" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">4. Ваш телефон или Telegram для ответа</label>
                     <input type="text" id="quickApplyContact" placeholder="+7 (999) 000-00-00 или @username" required style="width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14.5px; font-weight: 600;" />
                   </div>
 
@@ -2166,7 +2166,7 @@
                 <div style="width: 68px; height: 68px; border-radius: 50%; background: #1D5139; color: #fef08a; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(29,81,57,0.25);">
                   👨‍🍳
                 </div>
-                <h3 id="gastroPassTitle" style="margin: 0 0 4px; font-size: 22px; font-weight: 900; color: #202722;">
+                <h3 id="gastroPassTitle" style="margin: 0 0 4px; font-size: 22px; font-weight: 900; color: var(--ink);">
                   <span id="gpCardName">Повар GastroConnect</span>
                 </h3>
                 <p style="margin: 0 0 10px; font-size: 14px; color: #80947A;" id="gpCardRole">
@@ -2195,7 +2195,7 @@
                   <div class="gc-reliability-head">
                     <div style="display: flex; align-items: center; gap: 8px;">
                       <span style="font-size: 16px;">🛡</span>
-                      <strong style="font-size: 14.5px; color: #202722;">Рейтинг «Надежность»</strong>
+                      <strong style="font-size: 14.5px; color: var(--ink);">Рейтинг «Надежность»</strong>
                     </div>
                     <span class="gc-reliability-badge" id="gpReliabilityLevelBadge">
                       Топ-1% по дисциплине
@@ -2315,7 +2315,7 @@
                 <span class="gc-alert-modal-badge" style="background: rgba(198,163,98,0.2); color: #C6A362; border: 1px solid rgba(198,163,98,0.4);">
                   ⭐️ Официальный отзыв заведения
                 </span>
-                <h3 id="shiftReviewModalTitle" style="margin: 8px 0 4px; font-size: 20px; font-weight: 900; color: #202722;">
+                <h3 id="shiftReviewModalTitle" style="margin: 8px 0 4px; font-size: 20px; font-weight: 900; color: var(--ink);">
                   Подтверждение смены & Публикация отзыва
                 </h3>
                 <p style="margin: 0; font-size: 13.5px; color: #80947A; line-height: 1.4;">
@@ -2327,7 +2327,7 @@
                 <form id="shiftReviewForm" style="display: flex; flex-direction: column; gap: 14px;">
                   <!-- Выбор смены -->
                   <div>
-                    <label for="reviewShiftSelect" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                    <label for="reviewShiftSelect" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
                       1. Смена / Должность
                     </label>
                     <select id="reviewShiftSelect" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 14px; font-weight: 600; background: var(--card); color: var(--ink);">
@@ -2341,18 +2341,18 @@
                   <!-- Повар и Заведение -->
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
-                      <label for="reviewRestaurantInput" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Заведение</label>
+                      <label for="reviewRestaurantInput" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Заведение</label>
                       <input type="text" id="reviewRestaurantInput" value="Ресторан «Никитская Kitchen»" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13.5px; font-weight: 600;" />
                     </div>
                     <div>
-                      <label for="reviewWorkerInput" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Имя мастера</label>
+                      <label for="reviewWorkerInput" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Имя мастера</label>
                       <input type="text" id="reviewWorkerInput" value="Артем Смирнов" required placeholder="Имя специалиста" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13.5px; font-weight: 600;" />
                     </div>
                   </div>
 
                   <!-- Оценка звездами -->
                   <div>
-                    <label style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                    <label style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
                       2. Оценка шефа за смену
                     </label>
                     <div style="display: flex; align-items: center; gap: 8px;">
@@ -2371,7 +2371,7 @@
                   <!-- Пунктуальность и соблюдение ТТК -->
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
-                      <label for="reviewPunctualitySelect" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Пунктуальность</label>
+                      <label for="reviewPunctualitySelect" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Пунктуальность</label>
                       <select id="reviewPunctualitySelect" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13px; font-weight: 600; background: var(--card);">
                         <option value="Прибыл за 15 мин до смены">✓ За 15 мин до смены</option>
                         <option value="Вовремя, без опозданий" selected>✓ Вовремя (100% явка)</option>
@@ -2379,14 +2379,14 @@
                       </select>
                     </div>
                     <div>
-                      <label for="reviewPayoutInput" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Статус выплаты</label>
+                      <label for="reviewPayoutInput" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Статус выплаты</label>
                       <input type="text" id="reviewPayoutInput" value="6 500 ₽ (Выплачено полностью)" required style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13px; font-weight: 600;" />
                     </div>
                   </div>
 
                   <!-- Текст отзыва -->
                   <div>
-                    <label for="reviewTextInput" style="display: block; font-size: 12px; font-weight: 800; color: #5b665f; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
+                    <label for="reviewTextInput" style="display: block; font-size: 12px; font-weight: 800; color: #B8C4AE; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">
                       3. Комментарий шеф-повара
                     </label>
                     <textarea id="reviewTextInput" rows="3" required placeholder="Например: Отличная отдача чеков в запару, знание ТТК и безупречная чистота на горячем цеху. Будем рады видеть на постоянных сменах!" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid #A9B79F; border-radius: 10px; font-size: 13.5px; font-family: inherit; line-height: 1.4; resize: vertical;">Отличная отдача в запару пятничного вечера. ТТК соблюдены на 100%, чистота станции идеальная. Расчет произвели сразу после смены, ждем снова!</textarea>
@@ -2464,7 +2464,7 @@
               <span style="color: var(--gold); font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">
                 💰 Прозрачный расчет заработка
               </span>
-              <h2 style="margin: 0; font-size: 24px; font-weight: 950; color: #202722;">
+              <h2 style="margin: 0; font-size: 24px; font-weight: 950; color: var(--ink);">
                 Калькулятор чистого дохода и бонусов на смене
               </h2>
             </div>
@@ -2477,7 +2477,7 @@
             <div class="gc-calc-controls">
               <!-- Роль / Цех -->
               <div>
-                <label style="display: block; font-size: 12.5px; font-weight: 800; color: #5b665f; text-transform: uppercase; margin-bottom: 8px;">
+                <label style="display: block; font-size: 12.5px; font-weight: 800; color: #B8C4AE; text-transform: uppercase; margin-bottom: 8px;">
                   1. Ваша роль / специализация
                 </label>
                 <div class="gc-step-btn-group" id="calcRoleSelector">
@@ -2494,7 +2494,7 @@
               <!-- Количество смен в неделю -->
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <label for="calcShiftsSlider" style="font-size: 12.5px; font-weight: 800; color: #5b665f; text-transform: uppercase; margin: 0;">
+                  <label for="calcShiftsSlider" style="font-size: 12.5px; font-weight: 800; color: #B8C4AE; text-transform: uppercase; margin: 0;">
                     2. Количество смен в неделю
                   </label>
                   <span id="calcShiftsLabel" style="font-size: 16px; font-weight: 900; color: #1D5139;">
@@ -2513,7 +2513,7 @@
               <!-- Пользовательская ставка -->
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <label for="calcRateSlider" style="font-size: 12.5px; font-weight: 800; color: #5b665f; text-transform: uppercase; margin: 0;">
+                  <label for="calcRateSlider" style="font-size: 12.5px; font-weight: 800; color: #B8C4AE; text-transform: uppercase; margin: 0;">
                     3. Ставка за 1 смену (12 часов)
                   </label>
                   <span id="calcRateLabel" style="font-size: 18px; font-weight: 950; color: #1D5139;">
@@ -2567,7 +2567,7 @@
             <span style="color: var(--gold); font-size: 13px; font-weight: 950; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 6px;">
               🛡 Стандарт честной кухни GastroConnect
             </span>
-            <h2 style="font-size: 26px; font-weight: 950; color: #202722; margin: 0 0 10px;">
+            <h2 style="font-size: 26px; font-weight: 950; color: var(--ink); margin: 0 0 10px;">
               Двусторонний Индекс Доверия и Защита от гостинга
             </h2>
             <p style="font-size: 15px; color: #80947A; line-height: 1.5; margin: 0;">
@@ -2612,18 +2612,18 @@
               </div>
               <ul class="gc-trust-list">
                 <li>
-                  <strong style="color: #202722;">✓ Индекс явки 100%:</strong> повара подтверждают выезд геопозицией за 2 часа до начала смены.
+                  <strong style="color: var(--ink);">✓ Индекс явки 100%:</strong> повара подтверждают выезд геопозицией за 2 часа до начала смены.
                 </li>
                 <li>
-                  <strong style="color: #202722;">✓ Верификация медкнижек:</strong> исключаем мастеров без санитарного допуска на кухню.
+                  <strong style="color: var(--ink);">✓ Верификация медкнижек:</strong> исключаем мастеров без санитарного допуска на кухню.
                 </li>
                 <li>
-                  <strong style="color: #202722;">✓ Быстрая замена за 45 минут:</strong> если форс-мажор — система автоматически подбирает замену из ближайших проверенных поваров.
+                  <strong style="color: var(--ink);">✓ Быстрая замена за 45 минут:</strong> если форс-мажор — система автоматически подбирает замену из ближайших проверенных поваров.
                 </li>
                 <li>
                   <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
                     <div>
-                      <strong style="color: #202722;">✓ Двусторонние отзывы:</strong> шеф ставит оценку за смену, формируя репутацию мастера.
+                      <strong style="color: var(--ink);">✓ Двусторонние отзывы:</strong> шеф ставит оценку за смену, формируя репутацию мастера.
                     </div>
                     <button type="button" class="btn primary" id="openReviewModalBtn" style="padding: 6px 12px; font-size: 12px; font-weight: 800; background: #1D5139; border-color: #1D5139; color: #fff; cursor: pointer; border-radius: 8px;">
                       ⭐️ Подтвердить смену и оставить отзыв
@@ -2713,7 +2713,7 @@
                 <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
                 Проверенные отзывы заведений • Telegram @gastroconnect
               </span>
-              <h2 style="margin: 0; font-size: 24px; font-weight: 900; color: #202722;">
+              <h2 style="margin: 0; font-size: 24px; font-weight: 900; color: var(--ink);">
                 Подтвержденные смены и оценки шеф-поваров
               </h2>
             </div>
@@ -2736,10 +2736,10 @@
                     ⭐️ 5.0
                   </span>
                 </div>
-                <div style="margin-bottom: 8px; font-size: 13.5px; color: #3a423d;">
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: var(--ink);">
                   👨‍🍳 <b>Мастер:</b> Артем Смирнов (Су-шеф)
                 </div>
-                <p style="margin: 0 0 12px; font-size: 13.5px; color: #5b665f; line-height: 1.5; font-style: italic;">
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #B8C4AE; line-height: 1.5; font-style: italic;">
                   «Смена закрыта безупречно: идеальная чистота станции, быстрая отдача банкетного меню и точное знание ТТК. Выплата переведена сразу.»
                 </p>
               </div>
@@ -2761,10 +2761,10 @@
                     ⭐️ 5.0
                   </span>
                 </div>
-                <div style="margin-bottom: 8px; font-size: 13.5px; color: #3a423d;">
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: var(--ink);">
                   👨‍🍳 <b>Мастер:</b> Михаил Воронов (Повар горячего цеха)
                 </div>
-                <p style="margin: 0 0 12px; font-size: 13.5px; color: #5b665f; line-height: 1.5; font-style: italic;">
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #B8C4AE; line-height: 1.5; font-style: italic;">
                   «Вышел на замену вовремя, сразу встал на хоспер и гриль. Гости хвалили прожарку рибаев. Отличный профессионал, будем звать на все пятницы!»
                 </p>
               </div>
@@ -2786,10 +2786,10 @@
                     ⭐️ 5.0
                   </span>
                 </div>
-                <div style="margin-bottom: 8px; font-size: 13.5px; color: #3a423d;">
+                <div style="margin-bottom: 8px; font-size: 13.5px; color: var(--ink);">
                   👨‍🍳 <b>Мастер:</b> Светлана Кузнецова (Холодный цех)
                 </div>
-                <p style="margin: 0 0 12px; font-size: 13.5px; color: #5b665f; line-height: 1.5; font-style: italic;">
+                <p style="margin: 0 0 12px; font-size: 13.5px; color: #B8C4AE; line-height: 1.5; font-style: italic;">
                   «Скорость нарезки и оформления боулов на высоте. Выручила в дневной ланч-пик. Санитарная книжка проверена, все четко.»
                 </p>
               </div>
@@ -4850,7 +4850,7 @@
           return `
             <div class="gc-shift-history-row">
               <div style="min-width: 0; flex: 1;">
-                <div style="font-weight: 800; color: #202722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <div style="font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                   ${escapeHtml(s.restaurant)} ${simTag}
                 </div>
                 <div style="font-size: 11px; color: #80947A;">
@@ -5124,10 +5124,10 @@
                   ⭐️ ${ratingNum}.0
                 </span>
               </div>
-              <div style="margin-bottom: 8px; font-size: 13.5px; color: #3a423d;">
+              <div style="margin-bottom: 8px; font-size: 13.5px; color: var(--ink);">
                 👨‍🍳 <b>Мастер:</b> ${escapeText(r.workerName)} (${escapeText(r.role)})
               </div>
-              <p style="margin: 0 0 12px; font-size: 13.5px; color: #5b665f; line-height: 1.5; font-style: italic;">
+              <p style="margin: 0 0 12px; font-size: 13.5px; color: #B8C4AE; line-height: 1.5; font-style: italic;">
                 «${escapeText(r.text || "Смена подтверждена заведением, все стандарты кухни соблюдены.")}»
               </p>
             </div>
@@ -5213,10 +5213,10 @@
                       ⭐️ ${data.review.rating}.0
                     </span>
                   </div>
-                  <div style="margin-bottom: 8px; font-size: 13.5px; color: #3a423d;">
+                  <div style="margin-bottom: 8px; font-size: 13.5px; color: var(--ink);">
                     👨‍🍳 <b>Мастер:</b> ${escapeText(data.review.workerName)} (${escapeText(data.review.role)})
                   </div>
-                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #5b665f; line-height: 1.5; font-style: italic;">
+                  <p style="margin: 0 0 12px; font-size: 13.5px; color: #B8C4AE; line-height: 1.5; font-style: italic;">
                     «${escapeText(data.review.text)}»
                   </p>
                 </div>
