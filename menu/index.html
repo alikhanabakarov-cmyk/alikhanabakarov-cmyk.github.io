@@ -1,30 +1,27 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Меню и технологические карты (ТТК) блюд и напитков — GastroConnect</title>
-  <meta
-    name="description"
-    content="Интерактивная база технологических карт (ТТК) блюд и напитков HoReCa в Москве: калькуляция себестоимости сырья (Food Cost), пошаговое приготовление, нормы СанПиН, КБЖУ и печать бланков для поваров и барменов."
-  />
-  <meta
-    name="keywords"
-    content="технологические карты блюд, ттк ресторана, меню блюд и напитков, калькуляция себестоимости блюда, food cost калькулятор, как готовить рибай, рецепты с граммовками для ресторанов, техкарты напитков бариста, gastroconnect"
-  />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#1b4a34" />
-  <link rel="canonical" href="https://gastroconnect.ru/menu/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="GastroConnect" />
-  <meta property="og:title" content="Меню и технологические карты (ТТК) блюд и напитков — GastroConnect" />
-  <meta property="og:description" content="Полные технико-технологические карты (ТТК) для ресторанов, кафе и баров: граммовки брутто/нетто, расчет фудкоста, тайминги и пошаговые инструкции." />
-  <meta property="og:image" content="https://gastroconnect.ru/assets/og-gastroconnect.webp" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="120x120" />
-  <link rel="alternate icon" href="/favicon.ico" sizes="any" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="stylesheet" href="/style.css?v=1050" />
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0B2924">
+<title>Меню и технологические карты (ТТК) блюд и напитков — GastroConnect</title>
+<meta name="description" content="Интерактивная база технологических карт (ТТК) блюд и напитков HoReCa в Москве: калькуляция себестоимости сырья (Food Cost), пошаговое приготовление, нормы СанПиН, КБЖУ и печать бланков для поваров и барменов.">
+<meta name="keywords" content="технологические карты блюд, ттк ресторана, меню блюд и напитков, калькуляция себестоимости блюда, food cost калькулятор, рецепты с граммовками для ресторанов, техкарты напитков бариста, gastroconnect">
+<link rel="canonical" href="https://gastroconnect.ru/menu/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GastroConnect">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://gastroconnect.ru/menu/">
+<meta property="og:title" content="Технологические карты блюд и напитков HoReCa — GastroConnect">
+<meta property="og:description" content="Готовые ТТК с расчётом брутто/нетто, себестоимости (Food Cost), таймингами и пошаговыми инструкциями.">
+<meta property="og:image" content="https://gastroconnect.ru/assets/og-gastroconnect.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="any">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/assets/site.css?v=2">
+<style>
     /* Styling for Tech Cards & Culinary Hub */
     .menu-hero {
       padding: 48px 24px 36px;
@@ -735,34 +732,33 @@
       }
     }
   </style>
-
-  <script defer src="/cookie-consent.js"></script>
+<script defer src="/assets/gc-shell.js?v=2"></script>
+<script defer src="/assets/gc-ui.js?v=2"></script>
+<script defer src="/cookie-consent.js"></script>
 </head>
-<body>
-  <div class="page-shell">
-    <!-- Header -->
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="GastroConnect">
-        <span class="brand-mark" aria-hidden="true">GC</span>
-        <span class="brand-text">GastroConnect</span>
-      </a>
-      <nav class="main-nav" aria-label="Главное меню">
-        <a href="/workers/">👨‍🍳 Соискателям</a>
-        <a href="/restaurants/">🏛️ Заведениям</a>
-        <a href="/suppliers/">🚚 Поставщикам</a>
-        <a href="/menu/" style="color: var(--gold); font-weight: 800; border-bottom: 2px solid var(--gold);">📋 Меню и техкарты</a>
-        <a href="/telegram-app" style="color: #229ed9; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-          <span>📱 Telegram App</span>
-          <span style="background: #229ed9; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 8px;">NEW</span>
-        </a>
-      </nav>
-      <div class="header-actions">
-        <a class="btn header-login" href="/auth/?mode=login">Войти</a>
-        <a class="header-cta" href="/auth/?mode=signup">Регистрация</a>
-      </div>
-    </header>
-
-    <main>
+<body data-page="menu">
+<a href="#main" class="skip">Перейти к содержимому</a>
+<header class="header">
+<div class="container header-row">
+<a class="brand" href="/" aria-label="GC GastroConnect — главная"><span class="brand-mark" aria-hidden="true">GC</span><span>GastroConnect</span></a>
+<nav class="nav" id="navigation" aria-label="Главная навигация">
+<a href="/workers/">Соискателям</a>
+<a href="/restaurants/">Заведениям</a>
+<a href="/suppliers/">Поставщикам</a>
+<a href="/menu/" aria-current="page">Меню и техкарты</a>
+<div class="mobile-auth">
+<a class="btn btn-outline" href="/auth/?mode=login">Войти</a>
+<a class="btn btn-dark" href="/auth/?mode=signup">Регистрация</a>
+</div>
+</nav>
+<div class="header-actions">
+<a class="btn btn-outline" href="/auth/?mode=login">Войти</a>
+<a class="btn btn-dark" href="/auth/?mode=signup">Регистрация</a>
+</div>
+<button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="navigation">☰</button>
+</div>
+</header>
+<main id="main">
       <!-- Hero Section -->
       <section class="menu-hero">
         <div class="menu-hero-inner">
@@ -911,8 +907,7 @@
         </div>
       </section>
     </main>
-
-    <!-- Modal for Detailed TTK & Cooking -->
+<!-- Modal for Detailed TTK & Cooking -->
     <div class="ttk-modal-backdrop" id="ttkModalBackdrop">
       <div class="ttk-modal" id="ttkModal">
         <div class="ttk-modal-header">
@@ -1254,24 +1249,45 @@
     <!-- Hidden Printable Blank Area -->
     <div id="printArea" class="no-screen" style="display: none;"></div>
 
-    <!-- Footer -->
-    <footer class="footer" id="contacts">
-      <div class="footer-brand">
-        <span class="brand-mark" aria-hidden="true">GC</span>
-        <span class="brand-text">GastroConnect</span>
-      </div>
-      <div class="footer-links">
-        <a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
-        <a href="https://t.me/gastroconnect" target="_blank" rel="noopener">Telegram @gastroconnect</a>
-        <a href="/privacy/">Политика конфиденциальности</a>
-        <a href="/terms/">Пользовательское соглашение</a>
-        <a href="/personal-data-consent/">Согласие на обработку персональных данных</a>
-      </div>
-    </footer>
-  </div>
-
-  <!-- Tech Cards Client Script -->
-  <script src="/tech-cards-loader.js"></script>
+    <footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="/" aria-label="GC GastroConnect — главная"><span class="brand-mark" aria-hidden="true">GC</span><span>GastroConnect</span></a>
+<p class="small" style="margin-top:16px">Люди. Кухня. Возможности.</p>
+</div>
+<div class="footer-col">
+<h3>Платформа</h3>
+<a href="/workers/">Соискателям</a>
+<a href="/restaurants/">Заведениям</a>
+<a href="/suppliers/">Поставщикам</a>
+</div>
+<div class="footer-col">
+<h3>Связь</h3>
+<a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
+<a href="https://t.me/gastroconnect" target="_blank" rel="noopener noreferrer">Telegram</a>
+</div>
+<div class="footer-col">
+<h3>Документы</h3>
+<a href="/privacy/">Политика конфиденциальности</a>
+<a href="/terms/">Пользовательское соглашение</a>
+<a href="/personal-data-consent/">Обработка данных</a>
+</div>
+<div class="footer-col">
+<h3>Инструменты</h3>
+<a href="/menu/">Меню и техкарты</a>
+<a href="/#calculator">Калькулятор дохода</a>
+<a href="/workers/#vacancies">База смен</a>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© GastroConnect, 2026</span>
+<span>Москва и Московская область</span>
+</div>
+</div>
+</footer>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="/tech-cards-loader.js"></script>
   <script>
     (function() {
       let currentCards = [];

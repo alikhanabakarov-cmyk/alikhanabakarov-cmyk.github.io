@@ -82,7 +82,7 @@
 .b2b-badge{align-self:flex-start;background:#eab65322;color:var(--gold);font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px}
 .b2b-empty,.message{color:var(--muted)}
 .btn.btn-sm{min-height:38px;padding:8px 14px;font-size:12px}
-:root{--ink:#F3EBDD}
+:root{--ink:#F3EBDD;--green:#1B4A34;--green-2:#14392A;--sage:#8FA396;--text:#ECE4D6;--panel:#F3EBDD;--panel-2:#DFCFB4;--cream:#0B211A;--cream-2:#071810}
 .b2b-categories-chips{display:flex;flex-wrap:wrap;gap:8px}
 .b2b-cat-chip{background:transparent;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:inherit}
 .b2b-cat-chip.active{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:800}
