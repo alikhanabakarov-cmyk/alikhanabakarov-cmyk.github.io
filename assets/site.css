@@ -82,3 +82,13 @@
 .b2b-badge{align-self:flex-start;background:#eab65322;color:var(--gold);font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px}
 .b2b-empty,.message{color:var(--muted)}
 .btn.btn-sm{min-height:38px;padding:8px 14px;font-size:12px}
+:root{--ink:#F3EBDD}
+.b2b-categories-chips{display:flex;flex-wrap:wrap;gap:8px}
+.b2b-cat-chip{background:transparent;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:inherit}
+.b2b-cat-chip.active{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:800}
+.b2b-btn-web,.b2b-btn-tg,.b2b-btn-phone{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;border:1px solid var(--line);color:var(--white);text-decoration:none}
+.b2b-btn-tg{background:#229ED9;border-color:#229ED9;color:#fff}
+.b2b-btn-phone{color:var(--gold)}
+.b2b-btn-order{display:block;text-align:center;background:var(--gold);color:var(--bg);font-weight:800;font-size:14px;padding:11px 16px;border-radius:12px;text-decoration:none;margin-top:8px}
+.b2b-supplier-card .b2b-products-list{display:none}
+.b2b-supplier-card .b2b-products-list.expanded{display:flex}
