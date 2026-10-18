@@ -1,391 +1,222 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0B211A">
-<title>Соискателям — смены и работа в HoReCa | GastroConnect</title>
-<meta name="description" content="Работа и подработка в ресторанах Москвы и МО: смены для поваров, су-шефов, бариста, официантов и барменов на GastroConnect.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Смены для поваров, официантов и бариста. База смен GastroConnect и калькулятор дохода.">
+<meta name="theme-color" content="#0B2924">
+<title>Соискателям — GastroConnect</title>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://gastroconnect.ru/workers/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="GastroConnect">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://gastroconnect.ru/workers/">
-<meta property="og:title" content="Смены и работа в HoReCa — GastroConnect">
-<meta property="og:description" content="Находите смены по своему профилю в ресторанах Москвы и области.">
+<meta property="og:title" content="Соискателям — GastroConnect">
+<meta property="og:description" content="Смены для поваров, официантов и бариста. База смен GastroConnect и калькулятор дохода.">
 <meta property="og:image" content="https://gastroconnect.ru/assets/og-gastroconnect.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" sizes="any">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/assets/emerald.css?v=1">
-<link rel="stylesheet" href="/assets/gc-live.css?v=1">
+<link rel="stylesheet" href="/assets/site.css?v=1">
 <script defer src="/assets/gc-reviews.js?v=1"></script>
 <script defer src="/assets/gc-shell.js?v=1"></script>
+<script defer src="/assets/gc-ui.js?v=1"></script>
 <script defer src="/assets/gc-public.js?v=1"></script>
-<script defer src="/assets/gc-vacancies.js?v=1"></script>
+<script defer src="/assets/gc-vacancies.js"></script>
 </head>
 <body data-page="workers">
-<a class="skip" href="#main">К содержимому</a>
+<a href="#main" class="skip">Перейти к содержимому</a>
+<a href="#main" class="skip">Перейти к содержимому</a>
 <header class="header">
-  <div class="wrap bar">
-    <a class="brand" href="/" aria-label="GastroConnect — главная">
-      <img src="/assets/logo.png" width="259" height="57" alt="GC GastroConnect">
-    </a>
-    <button class="btn small menu-toggle" aria-controls="navigation" aria-expanded="false">Меню ☰</button>
-    <nav id="navigation" class="nav" aria-label="Основная навигация">
-      <a href="/workers/" aria-current="page">Соискателям</a>
-      <a href="/restaurants/">Заведениям</a>
-      <a href="/suppliers/">Поставщикам</a>
-      <a href="/menu/">Меню и техкарты</a>
-      <a href="https://t.me/gastroconnect" target="_blank" rel="noopener noreferrer">Telegram ↗</a>
-      <a class="btn small" href="/auth/?mode=login">Войти</a>
-      <a class="btn small primary" href="/auth/?mode=signup&role=worker">Регистрация</a>
-    </nav>
-  </div>
+<div class="container header-row">
+<a class="brand" href="/" aria-label="GC GastroConnect — главная"><span class="brand-mark" aria-hidden="true">GC</span><span>GastroConnect</span></a>
+<nav class="nav" id="navigation" aria-label="Главная навигация">
+<a href="/workers/" aria-current="page">Соискателям</a>
+<a href="/restaurants/">Заведениям</a>
+<a href="/suppliers/">Поставщикам</a>
+<a href="/menu/">Меню и техкарты</a>
+<a href="/telegram-app">Telegram App</a>
+<div class="mobile-auth">
+<a class="btn btn-outline" href="/auth/?mode=login">Войти</a>
+<a class="btn btn-dark" href="/auth/?mode=signup">Регистрация</a>
+</div>
+</nav>
+<div class="header-actions">
+<a class="btn btn-outline" href="/auth/?mode=login">Войти</a>
+<a class="btn btn-dark" href="/auth/?mode=signup">Регистрация</a>
+</div>
+<button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="navigation">☰</button>
+</div>
 </header>
 <main id="main">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Для поваров, бариста и команды зала</p>
-        <h1>Работайте там,<br>где ценят<br><em>ваше мастерство</em></h1>
-        <p class="lead">Находите смены по своему профилю, выбирайте удобный район и планируйте рабочий график.</p>
-        <div class="actions">
-          <a class="btn primary" href="#application">Заполнить анкету →</a>
-          <a class="btn" href="#calculator">Рассчитать доход</a>
-        </div>
-        <div class="hero-note">
-          <span>Москва и область</span>
-          <span>Прямое взаимодействие</span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <img src="/assets/hero-workers.webp" alt="Повар за работой в ресторане" width="560" height="365">
-        <span class="mini-tag">Ваш опыт имеет значение</span>
-        <div class="float-card">
-          <strong>График под вашу жизнь</strong>
-          <span>GastroConnect · HoReCa</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="vacancies-section" id="vacancies" aria-label="Горячие смены и вакансии Москвы">
-        <div class="wrap">
-          <div class="section-head">
-            <span style="color: var(--gold); font-size: 13px; font-weight: 950; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 8px;">Оперативная база смен GastroConnect</span>
-            <h2>Горячие смены и вакансии в ресторанах Москвы</h2>
-            <p>
-              Ежедневно обновляемая база смен для поваров и су-шефов с проверенными ставками и стабильными выплатами. Доступ к прямым контактам заведений и шеф-поваров открывается после быстрой авторизации.
-            </p>
-          </div>
-
-          <!-- Telegram WebApp Banner & Quick Launch -->
-          <div style="background: linear-gradient(135deg, rgba(34, 158, 217, 0.12) 0%, rgba(27, 74, 52,0.25) 100%); border: 1.5px solid rgba(34, 158, 217, 0.4); border-radius: 16px; padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-            <div style="display: flex; align-items: center; gap: 14px;">
-              <span style="font-size: 32px;">📱</span>
-              <div>
-                <strong style="color: #fff; font-size: 16px; display: block;">Откликайтесь в 1 клик через Telegram Mini App</strong>
-                <span style="color: #8fa396; font-size: 13.5px;">Без заполнения долгих анкет и паролей — автозаполнение профиля из Telegram и прямой диалог с шефом.</span>
-              </div>
-            </div>
-            <a href="/telegram-app" class="btn" style="background: #229ed9; border-color: #229ed9; color: #fff; font-weight: 800; padding: 10px 20px; text-decoration: none; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px;">
-              <span>Открыть Telegram Mini App</span> →
-            </a>
-          </div>
-
-          <!-- Interactive Role Filter Chips -->
-          <div style="margin-bottom: 12px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none;" id="webRoleFilters">
-            <button class="filter-chip-btn active" data-role="all" style="background: var(--green); color: #fff; border: 1px solid var(--green); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap;">⚡️ Все смены</button>
-            <button class="filter-chip-btn" data-role="горяч" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">🍳 Горячий цех</button>
-            <button class="filter-chip-btn" data-role="холодн" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">🥗 Холодный цех</button>
-            <button class="filter-chip-btn" data-role="пицца" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">🍕 Пиццайоло</button>
-            <button class="filter-chip-btn" data-role="бариста" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">☕️ Бариста</button>
-            <button class="filter-chip-btn" data-role="официант" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">🍷 Официанты</button>
-            <button class="filter-chip-btn" data-role="бармен" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">🍸 Бармены</button>
-            <button class="filter-chip-btn" data-role="су-шеф" style="background: rgba(255, 255, 255,0.05); color: var(--text); border: 1px solid rgba(255, 255, 255,0.1); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap;">👨‍🍳 Су-шефы</button>
-          </div>
-
-          <!-- Interactive Metro Station Filter Pills -->
-          <div style="margin-bottom: 24px; display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none;" id="webMetroPills">
-            <button class="metro-filter-pill active" data-metro="all" style="background: var(--gold); color: #0b211a; border: 1px solid var(--gold); padding: 6px 14px; border-radius: 14px; font-weight: 800; font-size: 12px; cursor: pointer; white-space: nowrap;">📍 Все метро</button>
-            <button class="metro-filter-pill" data-metro="тверск" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🔴 Тверская</button>
-            <button class="metro-filter-pill" data-metro="китай-город" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🟣 Китай-город</button>
-            <button class="metro-filter-pill" data-metro="белорусск" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🟢 Белорусская</button>
-            <button class="metro-filter-pill" data-metro="маяковск" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🟢 Маяковская</button>
-            <button class="metro-filter-pill" data-metro="сити" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🔵 Москва-Сити</button>
-            <button class="metro-filter-pill" data-metro="павелецк" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🟠 Павелецкая</button>
-            <button class="metro-filter-pill" data-metro="курск" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🔵 Курская</button>
-            <button class="metro-filter-pill" data-metro="арбат" style="background: rgba(255, 255, 255,0.04); color: var(--muted); border: 1px solid rgba(255, 255, 255,0.1); padding: 6px 14px; border-radius: 14px; font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap;">🔵 Арбатская</button>
-          </div>
-
-          <div class="vacancies-grid" id="mainVacanciesGrid">
-            <!-- Смена 1: Су-шеф -->
-            <article class="vacancy-card vacancy-card-featured">
-              <div>
-                <span class="vacancy-role-tag">Шеф / Руководство</span>
-                <h3 class="vacancy-title">Су-шеф в ресторан авторской кухни</h3>
-                <div class="vacancy-rate-box">
-                  <span class="vacancy-rate-label">Ставка за смену</span>
-                  <span class="vacancy-rate-val">6 500 ₽</span>
-                </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--ink); background: rgba(27, 74, 52,0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Тверская / Патриаршие</span>
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(197, 163, 103,0.12); padding: 4px 10px; border-radius: 6px;">⏰ 5/2 (11:00 – 23:00)</span>
-                </div>
-                <ul class="vacancy-perks-list">
-                  <li>Бесплатное 3-разовое питание и стильная форма</li>
-                  <li>Официальное оформление по ТК РФ</li>
-                  <li>Выплаты каждые 2 недели + премии от шефа</li>
-                </ul>
-              </div>
-              <div class="vacancy-actions">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-              </div>
-            </article>
-
-            <!-- Смена 2: Повар горячего цеха -->
-            <article class="vacancy-card">
-              <div>
-                <span class="vacancy-role-tag">Кухня / Горячий цех</span>
-                <h3 class="vacancy-title">Повар горячего цеха (Италия, гриль)</h3>
-                <div class="vacancy-rate-box">
-                  <span class="vacancy-rate-label">Ставка за смену</span>
-                  <span class="vacancy-rate-val">5 100 ₽</span>
-                </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--ink); background: rgba(27, 74, 52,0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Белорусская (5 мин)</span>
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(197, 163, 103,0.12); padding: 4px 10px; border-radius: 6px;">⏰ 2/2, 3/3 + доп. смены</span>
-                </div>
-                <ul class="vacancy-perks-list">
-                  <li>Стабильные выплаты 2 раза в месяц без задержек</li>
-                  <li>Вкусное штатное питание и компенсация медкнижки</li>
-                  <li>Дружная команда и комфортные условия</li>
-                </ul>
-              </div>
-              <div class="vacancy-actions">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-              </div>
-            </article>
-
-            <!-- Смена 3: Повар холодного цеха -->
-            <article class="vacancy-card">
-              <div>
-                <span class="vacancy-role-tag">Кухня / Холодный цех</span>
-                <h3 class="vacancy-title">Повар холодного цеха в бистро</h3>
-                <div class="vacancy-rate-box">
-                  <span class="vacancy-rate-label">Ставка за смену</span>
-                  <span class="vacancy-rate-val">4 900 – 5 200 ₽</span>
-                </div>
-                <div class="tg-job-meta" style="margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--ink); background: rgba(27, 74, 52,0.08); padding: 4px 10px; border-radius: 6px;">📍 м. Китай-город</span>
-                  <span class="tg-meta-item" style="font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(197, 163, 103,0.12); padding: 4px 10px; border-radius: 6px;">⏰ 5/2, 6/1 (с 09:00)</span>
-                </div>
-                <ul class="vacancy-perks-list">
-                  <li>Официальное трудоустройство и питание от шефа</li>
-                  <li>Салаты, боулы, закуски по понятным техкартам</li>
-                  <li>Быстрый карьерный рост до су-шефа</li>
-                </ul>
-              </div>
-              <div class="vacancy-actions">
-                <a class="btn primary" href="/auth/?mode=signup&role=worker" style="width: 100%; text-align: center; font-weight: 800;">
-                  🔒 Открыть смену и откликнуться
-                </a>
-              </div>
-            </article>
-          </div>
-
-          <!-- VIP Баннер авторизации -->
-          <div class="vacancies-banner" style="background: linear-gradient(135deg, #1b4a34 0%, #0b211a 100%); border: 1.5px solid rgba(197, 163, 103,0.35); border-radius: 24px; padding: 36px 38px; color: #fff;">
-            <div class="vacancies-banner-info" style="max-width: 660px;">
-              <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 900; color: #c5a367; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
-                🔒 Закрытый доступ к базе смен
-              </span>
-              <h3 style="color: #fff; font-size: 26px; margin: 0 0 10px;">Хотите видеть все смены и прямые контакты шефов?</h3>
-              <p style="color: #d1fae5; font-size: 15.5px; line-height: 1.5; margin: 0;">
-                Пройдите быструю авторизацию соискателя (30 секунд): вам сразу откроется полный каталог с фильтрами по цехам, станциям метро и прямым звонком шеф-повару.
-              </p>
-            </div>
-            <div class="vacancies-banner-contacts" style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <a class="btn" href="/auth/?mode=signup&role=worker" style="background: var(--gold); color: #0b211a; border-color: var(--gold); font-weight: 900; padding: 14px 24px;">
-                Зарегистрироваться как соискатель
-              </a>
-              <a class="btn btn-contact-light" href="/auth/?mode=login&role=worker" style="padding: 14px 22px; font-weight: 800;">
-                Войти в кабинет
-              </a>
-            </div>
-          </div>
-        </div>
-        </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Всё по делу</p>
-          <h2>Простой путь к результату</h2>
-        </div>
-      </div>
-      <div class="grid3">
-        <article class="card card-pad">
-          <span class="step">01</span>
-          <h3>Расскажите о себе</h3>
-          <p class="note">Специализация, опыт и удобные районы — основа вашего профиля.</p>
-        </article>
-        <article class="card card-pad">
-          <span class="step">02</span>
-          <h3>Выберите условия</h3>
-          <p class="note">Согласуйте ставку, время и требования непосредственно с заведением.</p>
-        </article>
-        <article class="card card-pad">
-          <span class="step">03</span>
-          <h3>Выходите на смену</h3>
-          <p class="note">Все договорённости и условия оплаты уточняйте до начала работы.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="calculator">
-    <div class="wrap">
-      <div class="calc">
-        <div>
-          <p class="eyebrow">Ваш график. Ваш доход.</p>
-          <h2>Сколько вы хотите<br>зарабатывать?</h2>
-          <p class="note">Настройте ставку и количество смен в месяц.</p>
-          <div class="range-line">
-            <label for="rate">Ставка за смену <output id="rate-value" for="rate">5 200 ₽</output></label>
-            <input type="range" id="rate" min="2000" max="15000" step="100" value="5200">
-          </div>
-          <div class="range-line">
-            <label for="days">Количество смен в месяц <output id="days-value" for="days">15 смен</output></label>
-            <input type="range" id="days" min="1" max="31" step="1" value="15">
-          </div>
-        </div>
-        <div class="income">
-          <span>Ваш расчётный доход</span>
-          <strong id="income" aria-live="polite">78 000 ₽</strong>
-          <p class="note">Пример расчёта, не гарантия дохода.<br>Условия оплаты согласуются с заведением.</p>
-          <a class="btn primary" href="#application">Начать брать смены →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="application">
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">Следующий шаг</p>
-        <h2>Анкета специалиста</h2>
-        <p class="lead">Заполните основные данные — заявка попадёт в единую базу подбора GastroConnect.</p>
-        <ul class="list">
-          <li>Только необходимые поля</li>
-          <li>Быстрый отклик по телефону или Telegram</li>
-          <li>Прямые контакты заведений</li>
-        </ul>
-        <p class="note">Отправляя анкету, вы соглашаетесь на обработку персональных данных. Мы свяжемся с вами по указанным контактам.</p>
-      </div>
-      <form class="card form-card" data-form-type="worker">
-        <div class="form-grid">
-          <label class="full">Желаемая должность<input name="role" placeholder="Повар, бариста, официант…" required maxlength="120"></label>
-          <label>Ваше имя<input name="name" autocomplete="name" required maxlength="100"></label>
-          <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+7 999 123-45-67" pattern="[+0-9 ()\-]{10,22}" required></label>
-          <label>Telegram<input name="telegram" placeholder="@username" maxlength="100"></label>
-          <label>Город<input name="city" value="Москва" maxlength="100"></label>
-          <label>Район или метро<input name="district" placeholder="Москва, м. Белорусская" maxlength="150"></label>
-          <label>Опыт работы<select name="experience">
-            <option>До 1 года</option>
-            <option>1–3 года</option>
-            <option>3–5 лет</option>
-            <option>Более 5 лет</option>
-          </select></label>
-          <label>Желаемая ставка, ₽<input name="expected_rate" type="number" min="0" max="1000000" value="5200" required></label>
-          <label class="full">Доступность<textarea name="availability" maxlength="2000" placeholder="Дни и время, когда готовы выходить"></textarea></label>
-          <label class="full">Комментарий<textarea name="comment" maxlength="2000" placeholder="Опыт, требования или пожелания"></textarea></label>
-          <label class="check full"><input name="personalDataConsent" type="checkbox" value="true" required>Согласен с <a href="/privacy/">политикой конфиденциальности</a>, <a href="/terms/">пользовательским соглашением</a> и <a href="/personal-data-consent/">обработкой данных</a>.</label>
-          <div class="actions full"><button class="btn primary" type="submit">Отправить анкету</button></div>
-        </div>
-        <p class="form-status success" role="status"></p>
-      </form>
-    </div>
-  </section>
-
-  <section class="section alt" id="reviews">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Профессиональное сообщество</p>
-          <h2>Люди говорят о главном</h2>
-          <p>Отзывы шеф-поваров, рестораторов и поставщиков.</p>
-        </div>
-        <div class="review-tools">
-          <button class="btn" id="review-prev" aria-label="Предыдущие отзывы">←</button>
-          <button class="btn" id="review-next" aria-label="Следующие отзывы">→</button>
-        </div>
-      </div>
-      <div class="grid3" id="reviews-grid" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap faq">
-      <p class="eyebrow">Есть вопросы?</p>
-      <h2>Разберёмся вместе</h2>
-      <details><summary>Как найти смену?</summary><p>Выберите раздел «Соискателям», заполните анкету и получите доступ к сменам. Контакты заведений открываются после регистрации.</p></details>
-      <details><summary>Как заведению разместить смену?</summary><p>Перейдите в раздел «Заведениям» и заполните параметры смены — ваша заявка попадёт в базу и будет обработана.</p></details>
-      <details><summary>Когда производится выплата?</summary><p>Ставку и срок выплаты необходимо согласовать с заведением до выхода. Калькулятор показывает только арифметический расчёт.</p></details>
-      <details><summary>Как поставщику попасть в каталог?</summary><p>В разделе «Поставщикам» подготовьте профиль компании, категории поставок и условия.</p></details>
-      <details><summary>Где работает платформа?</summary><p>Сайт GastroConnect ориентирован на Москву и Московскую область.</p></details>
-    </div>
-  </section>
+<section class="container hero">
+<div class="hero-copy">
+<p class="eyebrow">Работа под ваш ритм</p>
+<h1>Ваш опыт. Ваш график. Ваша следующая смена.</h1>
+<p>Выбирайте направление, сравнивайте условия и находите работу в заведениях HoReCa.</p>
+<div class="actions">
+<a class="btn" href="#vacancies">Смотреть смены ↗</a>
+<a class="btn btn-outline" href="#calculator">Рассчитать доход</a>
+</div>
+</div>
+<div class="hero-media">
+<img src="/assets/hero-workers.webp" alt="Повар за работой" width="1000" height="1100" fetchpriority="high">
+<div class="photo-tag"><span>GC</span> · Команда начинается с вас</div>
+</div>
+</section>
+<section class="container section" id="vacancies">
+<div class="section-head">
+<div>
+<p class="eyebrow">Оперативная база смен</p>
+<h2>Горячие смены и вакансии в ресторанах Москвы</h2>
+<p>Ежедневно обновляемая база смен с проверенными ставками. Прямые контакты заведений открываются после быстрой авторизации.</p>
+</div>
+</div>
+<div class="telegram-banner">
+<div><strong>Откликайтесь в 1 клик через Telegram Mini App</strong><br><span class="small">Автозаполнение профиля из Telegram и прямой диалог с шефом.</span></div>
+<a class="btn" href="/telegram-app">Открыть Telegram Mini App ↗</a>
+</div>
+<div class="filters" id="webRoleFilters" role="group" aria-label="Направление работы">
+<button class="filter active" data-role="all" aria-pressed="true" style="background:var(--gold);color:var(--bg)">Все смены</button>
+<button class="filter" data-role="горяч" aria-pressed="false" style="background:transparent;color:var(--muted)">Горячий цех</button>
+<button class="filter" data-role="холодн" aria-pressed="false" style="background:transparent;color:var(--muted)">Холодный цех</button>
+<button class="filter" data-role="пицца" aria-pressed="false" style="background:transparent;color:var(--muted)">Пиццайоло</button>
+<button class="filter" data-role="бариста" aria-pressed="false" style="background:transparent;color:var(--muted)">Бариста</button>
+<button class="filter" data-role="официант" aria-pressed="false" style="background:transparent;color:var(--muted)">Официанты</button>
+<button class="filter" data-role="бармен" aria-pressed="false" style="background:transparent;color:var(--muted)">Бармены</button>
+<button class="filter" data-role="су-шеф" aria-pressed="false" style="background:transparent;color:var(--muted)">Су-шефы</button>
+</div>
+<div class="filters" id="webMetroPills" role="group" aria-label="Станции метро">
+<button class="filter active" data-metro="all" aria-pressed="true" style="background:var(--gold);color:var(--bg)">Все метро</button>
+<button class="filter" data-metro="тверск" aria-pressed="false" style="background:transparent;color:var(--muted)">Тверская</button>
+<button class="filter" data-metro="китай-город" aria-pressed="false" style="background:transparent;color:var(--muted)">Китай-город</button>
+<button class="filter" data-metro="белорусск" aria-pressed="false" style="background:transparent;color:var(--muted)">Белорусская</button>
+<button class="filter" data-metro="маяковск" aria-pressed="false" style="background:transparent;color:var(--muted)">Маяковская</button>
+<button class="filter" data-metro="сити" aria-pressed="false" style="background:transparent;color:var(--muted)">Москва-Сити</button>
+<button class="filter" data-metro="павелецк" aria-pressed="false" style="background:transparent;color:var(--muted)">Павелецкая</button>
+<button class="filter" data-metro="арбат" aria-pressed="false" style="background:transparent;color:var(--muted)">Арбатская</button>
+</div>
+<div class="grid dishes" id="mainVacanciesGrid">
+<article class="card listing"><div class="listing-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><span class="tag">Шеф / Руководство</span></div><h3>Су-шеф в ресторан авторской кухни</h3><p class="small">📌 м. Тверская / Патриаршие<br>⏰ 5/2 (11:00 – 23:00)</p><span class="price">6 500 ₽ <span class="small">/ смена</span></span><a class="btn btn-outline" href="/auth/?mode=signup&role=worker">Откликнуться</a></article>
+<article class="card listing"><div class="listing-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><span class="tag">Кухня / Горячий цех</span></div><h3>Повар горячего цеха (Италия, гриль)</h3><p class="small">📌 м. Белорусская (5 мин)<br>⏰ 2/2, 3/3 + доп. смены</p><span class="price">5 100 ₽ <span class="small">/ смена</span></span><a class="btn btn-outline" href="/auth/?mode=signup&role=worker">Откликнуться</a></article>
+<article class="card listing"><div class="listing-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg><span class="tag">Кухня / Холодный цех</span></div><h3>Повар холодного цеха в бистро</h3><p class="small">📌 м. Китай-город<br>⏰ 5/2, 6/1 (с 09:00)</p><span class="price">4 900 – 5 200 ₽ <span class="small">/ смена</span></span><a class="btn btn-outline" href="/auth/?mode=signup&role=worker">Откликнуться</a></article>
+</div>
+</section>
+<section class="container section">
+<div class="section-head"><h2>От выбора до смены</h2></div>
+<div class="grid steps">
+<article class="card"><div class="step-number">01 /</div><h3>Заполните анкету</h3><p style="margin-top:14px">Специализация, опыт и удобные районы — основа вашего профиля.</p></article>
+<article class="card"><div class="step-number">02 /</div><h3>Выберите условия</h3><p style="margin-top:14px">Согласуйте ставку, время и требования с заведением.</p></article>
+<article class="card"><div class="step-number">03 /</div><h3>Выходите на смену</h3><p style="margin-top:14px">Подтвердите договорённости и оплату до начала работы.</p></article>
+</div>
+</section>
+<section class="container section" id="calculator" aria-labelledby="calc-title">
+<div class="calc">
+<div class="calc-controls">
+<p class="eyebrow">Ваш темп — ваш выбор</p>
+<h2 id="calc-title">Сколько можно заработать?</h2>
+<div class="range-field">
+<div class="range-label"><label for="rate">Ставка за смену</label><output id="rate-value" for="rate">5 200 ₽</output></div>
+<input type="range" id="rate" min="1000" max="10000" step="100" value="5200">
+<div class="range-limits"><span>1 000 ₽</span><span>10 000 ₽</span></div>
+</div>
+<div class="range-field">
+<div class="range-label"><label for="shifts">Количество смен в месяц</label><output id="shifts-value" for="shifts">15</output></div>
+<input type="range" id="shifts" min="1" max="30" step="1" value="15">
+<div class="range-limits"><span>1 смена</span><span>30 смен</span></div>
+</div>
+</div>
+<div class="calc-result">
+<p>Ваш расчётный доход</p>
+<output class="income" id="income" for="rate shifts" aria-live="polite" aria-atomic="true">78 000 ₽</output>
+<p class="small">Пример расчёта, не гарантия дохода.<br>Без учёта налогов, комиссий и расходов.</p>
+<a href="#application" class="btn">Заполнить анкету <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</section>
+<section class="container section alt" id="application">
+<div class="split">
+<div>
+<p class="eyebrow">Следующий шаг</p>
+<h2>Анкета специалиста</h2>
+<p class="lead">Заполните основные данные — заявка попадёт в единую базу подбора GastroConnect.</p>
+<ul class="list"><li>Только необходимые поля</li><li>Быстрый отклик по телефону или Telegram</li><li>Прямые контакты заведений</li></ul>
+</div>
+<form class="card form-card" data-form-type="worker">
+<div class="form-grid">
+<label class="full">Желаемая должность<input name="role" required maxlength="120" placeholder="Повар, бариста, официант…"></label>
+<label>Ваше имя<input name="name" autocomplete="name" required maxlength="100"></label>
+<label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+7 999 123-45-67" required></label>
+<label>Telegram<input name="telegram" placeholder="@username" maxlength="100"></label>
+<label>Город<input name="city" value="Москва" maxlength="100"></label>
+<label>Район или метро<input name="district" placeholder="Москва, м. Белорусская" maxlength="150"></label>
+<label>Опыт работы<select name="experience"><option>До 1 года</option><option>1–3 года</option><option>3–5 лет</option><option>Более 5 лет</option></select></label>
+<label>Желаемая ставка, ₽<input name="expected_rate" type="number" min="0" max="1000000" value="5200" required></label>
+<label class="full">Доступность<textarea name="availability" maxlength="2000" placeholder="Дни и время, когда готовы выходить"></textarea></label>
+<label class="full">Комментарий<textarea name="comment" maxlength="2000" placeholder="Опыт, требования или пожелания"></textarea></label>
+<label class="check full"><input type="checkbox" name="personalDataConsent" value="true" required>Согласен с <a href="/privacy/">политикой конфиденциальности</a>, <a href="/terms/">пользовательским соглашением</a> и <a href="/personal-data-consent/">обработкой данных</a>.</label>
+<div class="actions full"><button class="btn" type="submit">Отправить анкету</button></div>
+</div>
+<p class="form-status success" role="status"></p>
+</form>
+</div>
+</section>
+<section class="container section">
+<div class="section-head">
+<div><p class="eyebrow">Профессиональное сообщество</p><h2>Отзывы сообщества</h2></div>
+<div class="actions" style="margin:0"><button class="btn btn-outline" id="review-prev" aria-label="Предыдущие отзывы">←</button><button class="btn btn-outline" id="review-next" aria-label="Следующие отзывы">→</button></div>
+</div>
+<div class="grid reviews" id="reviews-grid" aria-live="polite"></div>
+</section>
+<section class="container section" id="faq">
+<div class="faq">
+<div class="section-head"><h2>Частые вопросы</h2></div>
+<div class="faq-item"><h3><button class="faq-button" id="faq-q-0" aria-expanded="false" aria-controls="faq-a-0">Как найти смену?<span class="faq-sign" aria-hidden="true">+</span></button></h3><div class="faq-panel" id="faq-a-0" role="region" aria-labelledby="faq-q-0" hidden>Выберите направление в базе смен и заполните анкету. Контакты заведений открываются после регистрации.</div></div>
+<div class="faq-item"><h3><button class="faq-button" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">Когда производится выплата?<span class="faq-sign" aria-hidden="true">+</span></button></h3><div class="faq-panel" id="faq-a-1" role="region" aria-labelledby="faq-q-1" hidden>Ставку и срок выплаты согласуйте с заведением до выхода. Калькулятор показывает только арифметический расчёт.</div></div>
+<div class="faq-item"><h3><button class="faq-button" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">Как закрыть срочную смену?<span class="faq-sign" aria-hidden="true">+</span></button></h3><div class="faq-panel" id="faq-a-2" role="region" aria-labelledby="faq-q-2" hidden>На странице «Заведениям» заполните заявку: роль, ставка и контакты.</div></div>
+</div>
+</section>
 </main>
-
 <footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="brand" href="/"><img src="/assets/logo.png" width="259" height="57" alt="GC GastroConnect" loading="lazy"></a>
-        <p>Люди, заведения и поставщики.<br>Одна профессиональная среда HoReCa.</p>
-      </div>
-      <div>
-        <h3>Платформа</h3>
-        <ul>
-          <li><a href="/workers/">Соискателям</a></li>
-          <li><a href="/restaurants/">Заведениям</a></li>
-          <li><a href="/suppliers/">Поставщикам</a></li>
-          <li><a href="/menu/">Меню и техкарты</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Связь</h3>
-        <ul>
-          <li><a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a></li>
-          <li><a href="https://t.me/gastroconnect" target="_blank" rel="noopener noreferrer">Telegram ↗</a></li>
-          <li>Москва и Московская область</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Документы</h3>
-        <ul>
-          <li><a href="/privacy/">Конфиденциальность</a></li>
-          <li><a href="/terms/">Пользовательское соглашение</a></li>
-          <li><a href="/personal-data-consent/">Обработка данных</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="copyright">
-      <span>© 2026 GastroConnect</span>
-      <span>Москва и Московская область</span>
-    </div>
-  </div>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="/" aria-label="GC GastroConnect — главная"><span class="brand-mark" aria-hidden="true">GC</span><span>GastroConnect</span></a>
+<p class="small" style="margin-top:16px">Люди. Кухня. Возможности.</p>
+</div>
+<div class="footer-col">
+<h3>Платформа</h3>
+<a href="/workers/">Соискателям</a>
+<a href="/restaurants/">Заведениям</a>
+<a href="/suppliers/">Поставщикам</a>
+</div>
+<div class="footer-col">
+<h3>Связь</h3>
+<a href="mailto:info@gastroconnect.ru">info@gastroconnect.ru</a>
+<a href="https://t.me/gastroconnect" target="_blank" rel="noopener noreferrer">Telegram</a>
+</div>
+<div class="footer-col">
+<h3>Документы</h3>
+<a href="/privacy/">Политика конфиденциальности</a>
+<a href="/terms/">Пользовательское соглашение</a>
+<a href="/personal-data-consent/">Обработка данных</a>
+</div>
+<div class="footer-col">
+<h3>Инструменты</h3>
+<a href="/menu/">Меню и техкарты</a>
+<a href="/#calculator">Калькулятор дохода</a>
+<a href="/#faq">Частые вопросы</a>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© GastroConnect, 2026</span>
+<span>Москва и Московская область</span>
+</div>
+</div>
 </footer>
 <div class="toast" id="toast" role="status" hidden></div>
+<noscript><div class="container notice">Для калькулятора, форм, фильтров и техкарт включите JavaScript. Навигация доступна через подвал.</div></noscript>
 </body>
 </html>
-
