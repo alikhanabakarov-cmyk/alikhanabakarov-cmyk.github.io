@@ -482,11 +482,22 @@
         rawData.userAgent = navigator.userAgent || "";
         rawData.ipAddress = "";
         const row = makeSubmission(form.dataset.formType, rawData);
-        saveLocalSubmission(row);
         try {
-          await saveRemoteSubmission(row);
+          let lastError = null;
+          for (let attempt = 0; attempt < 2; attempt += 1) {
+            try {
+              await saveRemoteSubmission(row);
+              lastError = null;
+              break;
+            } catch (error) {
+              lastError = error;
+              if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 1200));
+            }
+          }
+          if (lastError) throw lastError;
           if (box) {
             box.setAttribute("role", "status");
+            box.style.color = "";
             box.textContent =
               form.dataset.formType === "callback"
                 ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
@@ -496,13 +507,20 @@
                     ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
                     : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
           }
-        } catch {
-          if (box) box.textContent = "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
-        } finally {
-          if (box) box.style.display = "block";
           form.reset();
           form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
           form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
+        } catch {
+          row.pending = true;
+          saveLocalSubmission(row);
+          if (box) {
+            box.setAttribute("role", "alert");
+            box.style.color = "#b42318";
+            box.textContent =
+              "Не удалось отправить заявку: сервер не ответил. Данные остались в форме — проверьте интернет и нажмите «Отправить» ещё раз. Если ошибка повторится, свяжитесь с нами через страницу «Контакты».";
+          }
+        } finally {
+          if (box) box.style.display = "block";
           if (button) button.disabled = false;
         }
       });
@@ -823,18 +841,27 @@
     }
 
     function readableAuthError(error) {
-      const code = String(error?.code || error?.error_code || "");
+      const code = String(error?.code || error?.error_code || "").toLowerCase();
       const text = String(error?.message || "").toLowerCase();
       if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
         return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
       }
-      if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit")) {
-        return "Сейчас слишком много запросов на регистрацию. Попробуйте ещё раз через несколько минут или оставьте заявку через форму на сайте.";
+      if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit") || text.includes("too many requests")) {
+        return "Сейчас слишком много запросов. Подождите несколько минут и попробуйте снова.";
       }
       if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
         return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
       }
-      return error?.message || "Неизвестная ошибка авторизации.";
+      if (code.includes("user_already_exists") || text.includes("already registered") || text.includes("already been registered")) {
+        return "Аккаунт с такими данными уже существует. Войдите или восстановите пароль.";
+      }
+      if (code.includes("weak_password") || text.includes("password should be")) {
+        return "Слишком простой пароль. Используйте не менее 6 символов.";
+      }
+      if (text.includes("failed to fetch") || text.includes("network") || text.includes("timeout")) {
+        return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
+      }
+      return "Не удалось выполнить действие. Попробуйте ещё раз через минуту. Если ошибка повторится, напишите в поддержку через страницу «Контакты».";
     }
 
     async function refreshSession() {
@@ -849,7 +876,7 @@
           message.textContent = "Вы уже вошли. Можно открыть кабинет.";
         } catch (error) {
           cabinetShortcut.hidden = true;
-          message.textContent = error.message;
+          message.textContent = readableAuthError(error);
         }
       }
     }
@@ -887,7 +914,7 @@
       const role = normalizeRole(roleInput.value);
       const name = nameInput?.value.trim() || "";
       const city = cityInput?.value.trim() || "";
-      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон в формате +7...");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -924,7 +951,7 @@
           }
         }
         setBusy(false);
-        return (message.textContent = `Ошибка регистрации: ${readableAuthError(error)}`);
+        return (message.textContent = `Не удалось зарегистрироваться: ${readableAuthError(error)}`);
       }
       if (data?.session?.user) {
         try {
@@ -933,14 +960,14 @@
           return;
         } catch (profileError) {
           setBusy(false);
-          return (message.textContent = `Аккаунт создан, но профиль не сохранился: ${profileError.message}. Пожалуйста, напишите в поддержку.`);
+          return (message.textContent = `Аккаунт создан, но войти сразу не получилось. Войдите снова или напишите в поддержку через страницу «Контакты».`);
         }
       }
       setBusy(false);
       message.textContent =
         method === "phone"
-          ? "Аккаунт создан. Если Supabase просит SMS-код, подтвердите телефон и войдите."
-          : "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
+          ? "Аккаунт создан. Подтвердите номер телефона по SMS и войдите."
+          : "Аккаунт создан. Подтвердите почту по ссылке из письма и войдите.";
       setMode("login");
     });
 
@@ -964,7 +991,7 @@
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
-      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон.");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -974,14 +1001,14 @@
       const { data, error } = await client.auth.signInWithPassword(credentials);
       if (error) {
         setBusy(false);
-        return (message.textContent = `Ошибка входа: ${readableAuthError(error)}`);
+        return (message.textContent = `Не удалось войти: ${readableAuthError(error)}`);
       }
       try {
         const profile = await ensureProfile(data.user, roleWasExplicit ? roleInput.value : "");
         window.location.href = profileCabinetUrl(profile);
       } catch (profileError) {
         setBusy(false);
-        message.textContent = `Вход выполнен, но профиль не открылся: ${profileError.message}. Пожалуйста, напишите в поддержку.`;
+        message.textContent = `Вход выполнен, но кабинет не открылся. Обновите страницу или напишите в поддержку через страницу «Контакты».`;
       }
     });
 

@@ -3848,7 +3848,7 @@
 
   async function init() {
     if (!db) {
-      setMessage(el.userInfo, "Supabase не загрузился. Обновите страницу.");
+      setMessage(el.userInfo, "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
       return;
     }
 

@@ -620,6 +620,10 @@
     writeJson(SUBMISSIONS_KEY, rows.slice(0, 100));
   }
 
+  function removeLocalSubmission(id) {
+    writeJson(SUBMISSIONS_KEY, readSubmissions().filter((row) => row.id !== id));
+  }
+
   function createSubmissionId() {
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
       return window.crypto.randomUUID();
@@ -762,6 +766,17 @@
     if (!first.response.ok) throw new Error(`public_submissions ${first.response.status}: ${first.text}`);
     return true;
   }
+  async function flushPendingSubmissions() {
+    const pendingRows = readSubmissions().filter((row) => row && row.pending);
+    if (!pendingRows.length || !navigator.onLine) return;
+    for (const row of pendingRows) {
+      try {
+        await saveRemoteSubmission(row);
+        removeLocalSubmission(row.id);
+      } catch {}
+    }
+  }
+
   function initPublicForms() {
     document.querySelectorAll("form[data-form-type]").forEach((form) => {
       form.addEventListener("submit", async (event) => {
@@ -782,25 +797,44 @@
         rawData.userAgent = navigator.userAgent || "";
         rawData.ipAddress = "";
         const row = makeSubmission(form.dataset.formType, rawData);
-        saveLocalSubmission(row);
         try {
-          await saveRemoteSubmission(row);
+          let lastError = null;
+          for (let attempt = 0; attempt < 2; attempt += 1) {
+            try {
+              await saveRemoteSubmission(row);
+              lastError = null;
+              break;
+            } catch (error) {
+              lastError = error;
+              if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 1200));
+            }
+          }
+          if (lastError) throw lastError;
           if (box) {
             box.setAttribute("role", "status");
+            box.style.color = "";
             box.textContent =
               form.dataset.formType === "callback"
-                ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0437\u0432\u043e\u043d\u043e\u043a \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c\u0443 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443."
+                ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
                 : form.dataset.formType === "feedback"
-                  ? "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e. \u041c\u044b \u043e\u0442\u0432\u0435\u0442\u0438\u043c \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u043c \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c."
+                  ? "Обращение отправлено. Мы ответим по указанным контактам."
                   : form.dataset.formType === "telegram_bot"
-                    ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 Telegram-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f."
-                    : "\u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0438 \u0432\u0430\u0448\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u0438 \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
+                    ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
+                    : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
           }
-        } catch {
-          if (box) box.textContent = "\u0417\u0430\u044f\u0432\u043a\u0430 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0430 \u0432 \u044d\u0442\u043e\u043c \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435. \u0415\u0441\u043b\u0438 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u0438\u043b\u0438 \u0431\u0430\u0437\u0430 \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b, \u043f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0443 \u043f\u043e\u0437\u0436\u0435.";
+          form.reset();
+          form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
+          form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
+        } catch (error) {
+          row.pending = true;
+          saveLocalSubmission(row);
+          if (box) {
+            box.setAttribute("role", "alert");
+            box.style.color = "#b42318";
+            box.textContent = "Не удалось отправить заявку: сервер не ответил. Данные остались в форме — проверьте интернет и нажмите «Отправить» ещё раз. Если ошибка повторится, свяжитесь с нами через страницу «Контакты».";
+          }
         } finally {
           if (box) box.style.display = "block";
-          form.reset();
           if (button) button.disabled = false;
         }
       });
@@ -995,18 +1029,27 @@
     }
 
     function readableAuthError(error) {
-      const code = String(error?.code || error?.error_code || "");
+      const code = String(error?.code || error?.error_code || "").toLowerCase();
       const text = String(error?.message || "").toLowerCase();
       if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
         return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
       }
-      if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit")) {
-        return "Сейчас слишком много запросов на регистрацию. Попробуйте ещё раз через несколько минут или оставьте заявку через форму на сайте.";
+      if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit") || text.includes("too many requests")) {
+        return "Сейчас слишком много запросов. Подождите несколько минут и попробуйте снова.";
       }
       if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
         return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
       }
-      return error?.message || "Неизвестная ошибка авторизации.";
+      if (code.includes("user_already_exists") || text.includes("already registered") || text.includes("already been registered")) {
+        return "Аккаунт с такими данными уже существует. Войдите или восстановите пароль.";
+      }
+      if (code.includes("weak_password") || text.includes("password should be")) {
+        return "Слишком простой пароль. Используйте не менее 6 символов.";
+      }
+      if (text.includes("failed to fetch") || text.includes("network") || text.includes("timeout")) {
+        return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
+      }
+      return "Не удалось выполнить действие. Попробуйте ещё раз через минуту. Если ошибка повторится, напишите в поддержку через страницу «Контакты».";
     }
 
     async function refreshSession() {
@@ -1021,7 +1064,7 @@
           message.textContent = "Вы уже вошли. Можно открыть кабинет.";
         } catch (error) {
           cabinetShortcut.hidden = true;
-          message.textContent = error.message;
+          message.textContent = readableAuthError(error);
         }
       }
     }
@@ -1035,7 +1078,7 @@
       const role = normalizeRole(roleInput.value);
       const name = nameInput?.value.trim() || "";
       const city = cityInput?.value.trim() || "";
-      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон в формате +7...");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -1072,7 +1115,7 @@
           }
         }
         setBusy(false);
-        return (message.textContent = `Ошибка регистрации: ${readableAuthError(error)}`);
+        return (message.textContent = `Не удалось зарегистрироваться: ${readableAuthError(error)}`);
       }
       if (data?.session?.user) {
         try {
@@ -1081,14 +1124,14 @@
           return;
         } catch (profileError) {
           setBusy(false);
-          return (message.textContent = `Аккаунт создан, но профиль не сохранился: ${profileError.message}. Пожалуйста, напишите в поддержку.`);
+          return (message.textContent = `Аккаунт создан, но войти сразу не получилось. Войдите снова или напишите в поддержку через страницу «Контакты».`);
         }
       }
       setBusy(false);
       message.textContent =
         method === "phone"
-          ? "Аккаунт создан. Если Supabase просит SMS-код, подтвердите телефон и войдите."
-          : "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
+          ? "Аккаунт создан. Подтвердите номер телефона по SMS и войдите."
+          : "Аккаунт создан. Подтвердите почту по ссылке из письма и войдите.";
       setMode("login");
     });
 
@@ -1098,7 +1141,7 @@
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
-      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
+      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон.");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -1108,14 +1151,14 @@
       const { data, error } = await client.auth.signInWithPassword(credentials);
       if (error) {
         setBusy(false);
-        return (message.textContent = `Ошибка входа: ${readableAuthError(error)}`);
+        return (message.textContent = `Не удалось войти: ${readableAuthError(error)}`);
       }
       try {
         const profile = await ensureProfile(data.user, roleWasExplicit ? roleInput.value : "");
         window.location.href = profileCabinetUrl(profile);
       } catch (profileError) {
         setBusy(false);
-        message.textContent = `Вход выполнен, но профиль не открылся: ${profileError.message}. Пожалуйста, напишите в поддержку.`;
+        message.textContent = `Вход выполнен, но кабинет не открылся. Обновите страницу или напишите в поддержку через страницу «Контакты».`;
       }
     });
 
@@ -1170,6 +1213,7 @@
   applySettings(readJson(SETTINGS_KEY, {}));
   scheduleBackgrounds();
   initPublicForms();
+  window.addEventListener("load", () => { setTimeout(flushPendingSubmissions, 2500); }, { once: true });
   initAuthPage();
   initReviewsCarousel();
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });

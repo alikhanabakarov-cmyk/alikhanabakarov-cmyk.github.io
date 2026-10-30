@@ -703,10 +703,12 @@
   }
   async function saveSubmission(type, data) {
     const row = makeSubmissionRow(type, data);
-    saveLocalSubmission(row);
     try {
-      return { row, remote: await saveRemoteSubmission(row) };
+      await saveRemoteSubmission(row);
+      return { row, remote: true };
     } catch (error) {
+      row.pending = true;
+      saveLocalSubmission(row);
       return { row, remote: false, error };
     }
   }
@@ -902,11 +904,12 @@
         const box = form.querySelector(".success");
         try {
           const result = await saveSubmission(type, data);
+          if (!result.remote) throw result.error || new Error("submission failed");
           if (box) {
             box.setAttribute("role", "status");
-            box.textContent = result.remote
-              ? "Готово. Заявка отправлена, мы получили ваши контакты и свяжемся с вами."
-              : "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
+            box.style.color = "";
+            box.textContent =
+              "Готово. Заявка отправлена, мы получили ваши контакты и свяжемся с вами.";
             box.style.display = "block";
           }
           form.reset();
@@ -915,12 +918,44 @@
           form
             .querySelectorAll("input, select, textarea, button")
             .forEach((field) => field.blur());
+        } catch {
+          if (box) {
+            box.setAttribute("role", "alert");
+            box.style.color = "#b42318";
+            box.textContent =
+              "Не удалось отправить заявку: сервер не ответил. Данные остались в форме — проверьте интернет и нажмите «Отправить» ещё раз. Если ошибка повторится, свяжитесь с нами через страницу «Контакты».";
+            box.style.display = "block";
+          }
         } finally {
           if (button) button.disabled = false;
         }
       });
     });
   }
+  function readableAuthError(error) {
+    const code = String(error?.code || error?.error_code || "").toLowerCase();
+    const text = String(error?.message || "").toLowerCase();
+    if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
+      return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
+    }
+    if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit") || text.includes("too many requests")) {
+      return "Сейчас слишком много запросов. Подождите несколько минут и попробуйте снова.";
+    }
+    if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
+      return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
+    }
+    if (code.includes("user_already_exists") || text.includes("already registered") || text.includes("already been registered")) {
+      return "Аккаунт с такими данными уже существует. Войдите или восстановите пароль.";
+    }
+    if (code.includes("weak_password") || text.includes("password should be")) {
+      return "Слишком простой пароль. Используйте не менее 6 символов.";
+    }
+    if (text.includes("failed to fetch") || text.includes("network") || text.includes("timeout")) {
+      return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
+    }
+    return "Не удалось выполнить действие. Попробуйте ещё раз через минуту. Если ошибка повторится, напишите в поддержку через страницу «Контакты».";
+  }
+
   function initAuthPage() {
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -1048,7 +1083,7 @@
       const password = passwordInput.value;
       const role = normalizeAuthRole(roleInput.value);
       if (!client) {
-        message.textContent = "Supabase не загрузился. Обновите страницу.";
+        message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.";
         return;
       }
       if (!email || !password) {
@@ -1068,7 +1103,7 @@
       });
       if (error) {
         setAuthBusy(false);
-        message.textContent = `Ошибка регистрации: ${error.message}`;
+        message.textContent = readableAuthError(error);
         return;
       }
 
@@ -1086,7 +1121,7 @@
 
       setAuthBusy(false);
       message.textContent =
-        "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
+        "Аккаунт создан. Подтвердите почту по ссылке из письма и войдите.";
       setAuthMode("login");
     });
 
@@ -1095,7 +1130,7 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value;
       if (!client) {
-        message.textContent = "Supabase не загрузился. Обновите страницу.";
+        message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.";
         return;
       }
       if (!email || !password) {
@@ -1110,7 +1145,7 @@
       });
       if (error) {
         setAuthBusy(false);
-        message.textContent = `Ошибка входа: ${error.message}`;
+        message.textContent = readableAuthError(error);
         return;
       }
 
