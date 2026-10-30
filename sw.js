@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'gc-cache-v4';
+const CACHE_NAME = 'gc-cache-v1';
 const STATIC_ASSETS = [
   '/',
   '/workers/',
