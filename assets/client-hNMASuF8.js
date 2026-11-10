@@ -1,0 +1,1 @@
+var e;function t(){return typeof window>`u`?Promise.resolve(null):(e||=Promise.resolve(null),e)}function n(e,t,n){return Promise.race([Promise.resolve(e),new Promise((e,r)=>setTimeout(()=>r(Error(`${n} timeout`)),t))])}export{n,t};
