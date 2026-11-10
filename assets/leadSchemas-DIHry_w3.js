@@ -1,0 +1,1 @@
+import{callbackSchema as e,feedbackSchema as t,restaurantRequestSchema as n,shiftFormSchema as r,supplierFormSchema as i,telegramSchema as a,workerFormSchema as o}from"./validation-bQrTCeJv.js";var s={callback:e,urgent_shift:r,restaurant_request:n,supplier_catalog:i,worker_profile:o,feedback:t,telegram_bot:a};export{s as leadSchemas};

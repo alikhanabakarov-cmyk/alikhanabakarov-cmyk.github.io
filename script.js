@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const PUBLIC_SUBMISSIONS_KEY = "gc_public_submissions";
   const PUBLIC_SUBMISSIONS_TABLE = "public_submissions";
   const SITE_SETTINGS_KEY = "gc_site_settings";
@@ -703,12 +703,10 @@
   }
   async function saveSubmission(type, data) {
     const row = makeSubmissionRow(type, data);
+    saveLocalSubmission(row);
     try {
-      await saveRemoteSubmission(row);
-      return { row, remote: true };
+      return { row, remote: await saveRemoteSubmission(row) };
     } catch (error) {
-      row.pending = true;
-      saveLocalSubmission(row);
       return { row, remote: false, error };
     }
   }
@@ -760,202 +758,34 @@
   }
   function initPublicForms() {
     document.querySelectorAll("form[data-form-type]").forEach((form) => {
-      function getOrCreateErrorBadge(input) {
-        const parent = input.closest("label") || input.parentElement;
-        let badge = parent.querySelector(".field-error-msg");
-        if (!badge) {
-          badge = document.createElement("span");
-          badge.className = "field-error-msg";
-          parent.appendChild(badge);
-        }
-        return badge;
-      }
-
-      function validateField(input, isBlur = false) {
-        if (!input || input.type === "hidden" || input.type === "submit") return true;
-        const val = input.value.trim();
-        const badge = getOrCreateErrorBadge(input);
-        let isValid = true;
-        let errorMsg = "";
-
-        if (input.name === "name") {
-          if (!val) {
-            isValid = false;
-            errorMsg = "Пожалуйста, укажите имя";
-          } else if (val.length < 2) {
-            isValid = false;
-            errorMsg = "Имя должно содержать от 2 символов";
-          }
-        } else if (input.name === "phone" || input.type === "tel") {
-          const digits = val.replace(/\D/g, "");
-          if (!val) {
-            isValid = false;
-            errorMsg = "Укажите номер телефона для связи";
-          } else if (digits.length < 10) {
-            isValid = false;
-            errorMsg = "Введите корректный номер (10–11 цифр)";
-          }
-        } else if (input.name === "email" || input.type === "email") {
-          if (input.required && !val) {
-            isValid = false;
-            errorMsg = "Укажите email";
-          } else if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            isValid = false;
-            errorMsg = "Некорректный формат email";
-          }
-        } else if (input.required && !val) {
-          isValid = false;
-          errorMsg = "Обязательное поле для заполнения";
-        }
-
-        if (isValid) {
-          input.classList.remove("is-invalid");
-          if (val.length > 0) input.classList.add("is-valid");
-          else input.classList.remove("is-valid");
-          badge.classList.remove("show");
-          badge.textContent = "";
-        } else {
-          input.classList.remove("is-valid");
-          if (isBlur || input.dataset.touched === "true") {
-            input.classList.add("is-invalid");
-            badge.textContent = errorMsg;
-            badge.classList.add("show");
-          }
-        }
-        return isValid;
-      }
-
-      form.querySelectorAll("input, select, textarea").forEach((input) => {
-        if (input.type === "hidden" || input.type === "submit") return;
-
-        if (input.name === "phone" || input.type === "tel") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            let raw = input.value.replace(/\D/g, "");
-            if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-            if (raw.length > 0) {
-              let formatted = "+7 (";
-              formatted += raw.slice(0, 3);
-              if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-              if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-              if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-              input.value = formatted;
-            }
-            validateField(input);
-          });
-        } else if (input.type !== "checkbox") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            validateField(input);
-          });
-        }
-
-        input.addEventListener("blur", () => {
-          input.dataset.touched = "true";
-          validateField(input, true);
-        });
-      });
-
-      const consentBox = form.querySelector('input[name="personalDataConsent"]');
-      if (consentBox) {
-        consentBox.addEventListener("change", () => {
-          const wrapper = consentBox.closest(".consent-checkbox") || consentBox.parentElement;
-          if (consentBox.checked) {
-            wrapper.classList.remove("is-invalid");
-          }
-        });
-      }
-
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = form.querySelector(
           'button[type="submit"], input[type="submit"]',
         );
-
-        let formIsValid = true;
-        let firstInvalid = null;
-
-        form.querySelectorAll("input, select, textarea").forEach((input) => {
-          if (input.type === "hidden" || input.type === "submit" || input.type === "checkbox") return;
-          input.dataset.touched = "true";
-          const valid = validateField(input, true);
-          if (!valid) {
-            formIsValid = false;
-            if (!firstInvalid) firstInvalid = input;
-          }
-        });
-
-        const consent = form.querySelector('input[name="personalDataConsent"]');
-        if (consent && !consent.checked) {
-          formIsValid = false;
-          const wrapper = consent.closest(".consent-checkbox") || consent.parentElement;
-          wrapper.classList.add("is-invalid");
-          if (!firstInvalid) firstInvalid = consent;
-        }
-
-        if (!formIsValid) {
-          if (firstInvalid) firstInvalid.focus();
-          return;
-        }
-
         if (button) button.disabled = true;
         const type = form.dataset.formType;
         const data = enrichSubmissionData(form, type);
         const box = form.querySelector(".success");
         try {
           const result = await saveSubmission(type, data);
-          if (!result.remote) throw result.error || new Error("submission failed");
           if (box) {
             box.setAttribute("role", "status");
-            box.style.color = "";
-            box.textContent =
-              "Готово. Заявка отправлена, мы получили ваши контакты и свяжемся с вами.";
+            box.textContent = result.remote
+              ? "Готово. Заявка отправлена, мы получили ваши контакты и свяжемся с вами."
+              : "Заявка сохранена в этом браузере. Если интернет или база временно недоступны, повторите отправку позже.";
             box.style.display = "block";
           }
           form.reset();
-          form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
-          form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
           form
             .querySelectorAll("input, select, textarea, button")
             .forEach((field) => field.blur());
-        } catch {
-          if (box) {
-            box.setAttribute("role", "alert");
-            box.style.color = "#b42318";
-            box.textContent =
-              "Не удалось отправить заявку: сервер не ответил. Данные остались в форме — проверьте интернет и нажмите «Отправить» ещё раз. Если ошибка повторится, свяжитесь с нами через страницу «Контакты».";
-            box.style.display = "block";
-          }
         } finally {
           if (button) button.disabled = false;
         }
       });
     });
   }
-  function readableAuthError(error) {
-    const code = String(error?.code || error?.error_code || "").toLowerCase();
-    const text = String(error?.message || "").toLowerCase();
-    if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
-      return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
-    }
-    if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit") || text.includes("too many requests")) {
-      return "Сейчас слишком много запросов. Подождите несколько минут и попробуйте снова.";
-    }
-    if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
-      return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
-    }
-    if (code.includes("user_already_exists") || text.includes("already registered") || text.includes("already been registered")) {
-      return "Аккаунт с такими данными уже существует. Войдите или восстановите пароль.";
-    }
-    if (code.includes("weak_password") || text.includes("password should be")) {
-      return "Слишком простой пароль. Используйте не менее 6 символов.";
-    }
-    if (text.includes("failed to fetch") || text.includes("network") || text.includes("timeout")) {
-      return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
-    }
-    return "Не удалось выполнить действие. Попробуйте ещё раз через минуту. Если ошибка повторится, напишите в поддержку через страницу «Контакты».";
-  }
-
   function initAuthPage() {
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -1083,7 +913,7 @@
       const password = passwordInput.value;
       const role = normalizeAuthRole(roleInput.value);
       if (!client) {
-        message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.";
+        message.textContent = "Supabase не загрузился. Обновите страницу.";
         return;
       }
       if (!email || !password) {
@@ -1103,7 +933,7 @@
       });
       if (error) {
         setAuthBusy(false);
-        message.textContent = readableAuthError(error);
+        message.textContent = `Ошибка регистрации: ${error.message}`;
         return;
       }
 
@@ -1121,7 +951,7 @@
 
       setAuthBusy(false);
       message.textContent =
-        "Аккаунт создан. Подтвердите почту по ссылке из письма и войдите.";
+        "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
       setAuthMode("login");
     });
 
@@ -1130,7 +960,7 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value;
       if (!client) {
-        message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.";
+        message.textContent = "Supabase не загрузился. Обновите страницу.";
         return;
       }
       if (!email || !password) {
@@ -1145,7 +975,7 @@
       });
       if (error) {
         setAuthBusy(false);
-        message.textContent = readableAuthError(error);
+        message.textContent = `Ошибка входа: ${error.message}`;
         return;
       }
 

@@ -44,56 +44,6 @@
     "supplierInquiriesList",
     "adminMessage",
     "adminDataList",
-    "workerReviewsList",
-    "workerReviewsMessage",
-    "refreshWorkerReviewsBtn",
-    "workerAvgRatingNum",
-    "workerRatingStars",
-    "workerTotalReviewsCount",
-    "workerRating5Bar",
-    "workerRating5Val",
-    "workerRating4Bar",
-    "workerRating4Val",
-    "workerRating3Bar",
-    "workerRating3Val",
-    "refreshWorkerEarningsBtn",
-    "workerTotalEarned",
-    "workerPendingPayout",
-    "workerAvgShiftRate",
-    "workerCompletedShiftsCount",
-    "workerCalcRateInput",
-    "workerCalcRateVal",
-    "workerCalcShiftsInput",
-    "workerCalcShiftsVal",
-    "workerCalcTipsCheck",
-    "workerCalcNightCheck",
-    "workerCalcMonthSum",
-    "workerCalcPeriodNote",
-    "workerCalcSingleShift",
-    "workerCalcWeekSum",
-    "workerCalcYearSum",
-    "workerPayoutsList",
-    "savingsAvgRateBadge",
-    "savingsGoalTitleInput",
-    "savingsGoalAmountSlider",
-    "savingsGoalAmountLabel",
-    "savingsCustomAmountRow",
-    "savingsCustomPerShiftSlider",
-    "savingsCustomPerShiftVal",
-    "savingsShiftsPerWeekSlider",
-    "savingsShiftsPerWeekLabel",
-    "savingsTargetNamePreview",
-    "savingsRequiredShifts",
-    "savingsTimeEstimateLabel",
-    "savingsProgressPaceLabel",
-    "savingsProgressTargetLabel",
-    "savingsProgressBar",
-    "savingsMilestonesLabels",
-    "savingsDepositPerShift",
-    "savingsDepositPerWeek",
-    "savingsDepositPerMonth",
-    "savingsTargetDateEstimated",
-    "savingsAccelerationTip",
   ];
 
   const el = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
@@ -116,8 +66,6 @@
     restaurantShifts: [],
     restaurantApplications: [],
     restaurantApplicationFilter: "",
-    workerReviews: [],
-    restaurantReviews: [],
   };
 
   const rolePanels = {
@@ -277,17 +225,6 @@
     return error.message || "Неизвестная ошибка Supabase";
   }
 
-  function withTimeout(promise, ms = 6000, label = "Supabase") {
-    let timeoutId;
-    const timeout = new Promise((_, reject) => {
-      timeoutId = setTimeout(
-        () => reject(new Error(`${label}: превышено время ожидания`)),
-        ms,
-      );
-    });
-    return Promise.race([promise, timeout]).finally(() => clearTimeout(timeoutId));
-  }
-
   function normalizePublicRole(role) {
     return publicRoles.includes(role) ? role : "worker";
   }
@@ -328,16 +265,12 @@
   }
 
   async function updateMainProfile(payload) {
-    const { data, error } = await withTimeout(
-      db
-        .from("profiles")
-        .update({ ...payload, updated_at: new Date().toISOString() })
-        .eq("id", state.user.id)
-        .select("*")
-        .maybeSingle(),
-      6000,
-      "profiles",
-    );
+    const { data, error } = await db
+      .from("profiles")
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq("id", state.user.id)
+      .select("*")
+      .maybeSingle();
 
     if (!error && data) state.profile = data;
     return { error };
@@ -370,11 +303,7 @@
       user_agent: payload.userAgent || metadata.userAgent || navigator.userAgent || "",
       ip_address: payload.ipAddress || metadata.ipAddress || "",
     };
-    const result = await withTimeout(
-      db.from("admin_user_accounts").upsert(consentPayload, { onConflict: "user_id" }),
-      6000,
-      "admin_user_accounts",
-    );
+    const result = await db.from("admin_user_accounts").upsert(consentPayload, { onConflict: "user_id" });
     if (result.error && /personal_data_consent|personal_data_consent_date|user_agent|ip_address/i.test(result.error.message || "")) {
       return db.from("admin_user_accounts").upsert(basePayload, { onConflict: "user_id" });
     }
@@ -440,11 +369,11 @@
   }
 
   async function upsertProfile(table, payload) {
-    return withTimeout(db.from(table).upsert(payload, { onConflict: "user_id" }), 6000, table);
+    return db.from(table).upsert(payload, { onConflict: "user_id" });
   }
 
   async function insertRow(table, payload) {
-    return withTimeout(db.from(table).insert(payload), 6000, table);
+    return db.from(table).insert(payload);
   }
 
   async function updateRows(table, filters, payload) {
@@ -452,7 +381,7 @@
     Object.entries(filters).forEach(([key, filterValue]) => {
       query = query.eq(key, filterValue);
     });
-    return withTimeout(query, 6000, table);
+    return query;
   }
 
   async function selectRows(table, filters = {}, options = {}) {
@@ -467,7 +396,7 @@
     }
 
     if (options.limit) query = query.limit(options.limit);
-    return withTimeout(query, 6000, table);
+    return query;
   }
 
   async function selectRowsWithFallback(table, filters = {}, options = {}) {
@@ -554,7 +483,6 @@
 
     state.shifts = data || [];
     renderShiftPosts();
-    updateWorkerKpiWidgets();
   }
 
   function renderShiftPosts() {
@@ -663,7 +591,6 @@
 
     state.workerApplications = data || [];
     renderWorkerApplications();
-    updateWorkerKpiWidgets();
   }
 
   function renderWorkerApplications() {
@@ -699,328 +626,6 @@
     });
 
     setMessage(el.workerApplicationsMessage, `Ваших откликов: ${state.workerApplications.length}`);
-  }
-
-  function updateWorkerKpiWidgets() {
-    if (!byId("workerKpiDashboard")) return;
-
-    // 1. Active open shifts count
-    const openShifts = (state.shifts || []).filter((s) => s.status === "open" || !s.status);
-    const activeCount = openShifts.length || (state.workerLiveShifts || []).length || 0;
-    if (byId("workerKpiActiveShifts")) {
-      byId("workerKpiActiveShifts").textContent = activeCount;
-    }
-
-    // Minimum rate calculation
-    const rates = (state.shifts || [])
-      .map((s) => Number(s.rate))
-      .filter((r) => r > 0 && !isNaN(r));
-    const minRate = rates.length ? Math.min(...rates) : 4800;
-    if (byId("workerKpiAvgRatePill")) {
-      byId("workerKpiAvgRatePill").textContent = `от ${minRate.toLocaleString("ru-RU")} ₽ / смена`;
-    }
-
-    // 2. Worker applications status breakdown
-    const apps = state.workerApplications || [];
-    const totalApps = apps.length;
-    const pendingApps = apps.filter((a) => a.status === "pending" || a.status === "new");
-    const acceptedApps = apps.filter((a) => a.status === "accepted");
-    const doneApps = apps.filter((a) => a.status === "done");
-    const declinedApps = apps.filter((a) => a.status === "declined" || a.status === "cancelled");
-
-    if (byId("workerKpiTotalApplications")) byId("workerKpiTotalApplications").textContent = totalApps;
-    if (byId("workerKpiPendingCount")) byId("workerKpiPendingCount").textContent = pendingApps.length;
-    if (byId("workerKpiAcceptedCount")) byId("workerKpiAcceptedCount").textContent = acceptedApps.length;
-    if (byId("workerKpiDoneCount")) byId("workerKpiDoneCount").textContent = doneApps.length;
-    if (byId("workerKpiDeclinedCount")) byId("workerKpiDeclinedCount").textContent = declinedApps.length;
-
-    // Confirmed shifts count
-    const confirmedCount = acceptedApps.length + doneApps.length;
-    if (byId("workerKpiConfirmedShiftsPill")) {
-      byId("workerKpiConfirmedShiftsPill").textContent = `${confirmedCount} подтвержденных`;
-    }
-
-    // 3. Conversion / Acceptance rate
-    const conversionPct = totalApps > 0 ? Math.min(100, Math.round((confirmedCount / totalApps) * 100)) : (confirmedCount > 0 ? 100 : 0);
-    if (byId("workerKpiAcceptanceRate")) {
-      byId("workerKpiAcceptanceRate").textContent = `${conversionPct}%`;
-    }
-    if (byId("workerKpiProgressFill")) {
-      byId("workerKpiProgressFill").style.width = `${conversionPct}%`;
-    }
-    if (byId("workerKpiAdvice")) {
-      if (totalApps === 0) {
-        byId("workerKpiAdvice").textContent = "Откликайтесь на горячие смены для первого подтверждения";
-      } else if (conversionPct >= 70) {
-        byId("workerKpiAdvice").textContent = "Отличная репутация! Заведения одобряют большинство откликов";
-      } else if (conversionPct >= 40) {
-        byId("workerKpiAdvice").textContent = "Хороший темп. Заполните медкнижку для роста одобрений";
-      } else {
-        byId("workerKpiAdvice").textContent = "Заполните опыт и профиль для ускорения согласования";
-      }
-    }
-
-    // 4. Latest application card
-    if (totalApps > 0 && apps[0]) {
-      const latest = apps[0];
-      const shift = relatedProfile(latest, "shift") || {};
-      const rest = relatedProfile(latest, "restaurant") || {};
-      if (byId("workerKpiRecentTitle")) {
-        byId("workerKpiRecentTitle").textContent = shift.title || shift.profession || "Смена в HoReCa";
-      }
-      if (byId("workerKpiRecentSub")) {
-        const restName = displayName(rest, latest.restaurant_id) || "Заведение";
-        const dateStr = shift.date_from ? ` • ${shift.date_from}` : "";
-        const rateStr = shift.rate ? ` • ${money(shift.rate)}` : "";
-        byId("workerKpiRecentSub").textContent = `${restName}${dateStr}${rateStr}`;
-      }
-      if (byId("workerKpiRecentStatus")) {
-        const badge = byId("workerKpiRecentStatus");
-        if (latest.status === "accepted") {
-          badge.textContent = "✅ Одобрено заведением";
-          badge.style.background = "#ecfdf5";
-          badge.style.color = "#065f46";
-        } else if (latest.status === "done") {
-          badge.textContent = "🏆 Смена отработана";
-          badge.style.background = "#f0fdf4";
-          badge.style.color = "#166534";
-        } else if (latest.status === "declined" || latest.status === "cancelled") {
-          badge.textContent = "❌ Отклонено";
-          badge.style.background = "#fff1f2";
-          badge.style.color = "#9f1239";
-        } else {
-          badge.textContent = "⏳ В ожидании ответа";
-          badge.style.background = "#fffbeb";
-          badge.style.color = "#92400e";
-        }
-      }
-    } else {
-      if (byId("workerKpiRecentTitle")) {
-        byId("workerKpiRecentTitle").textContent = activeCount > 0 ? `${activeCount} смен ждут отклика` : "Смены пока не выбраны";
-      }
-      if (byId("workerKpiRecentSub")) {
-        byId("workerKpiRecentSub").textContent = "Выберите смену из каталога ниже и отправьте отклик";
-      }
-      if (byId("workerKpiRecentStatus")) {
-        const badge = byId("workerKpiRecentStatus");
-        badge.textContent = "⚡️ Свободен для выхода";
-        badge.style.background = "#f1f5f9";
-        badge.style.color = "#475569";
-      }
-    }
-
-    // Sync status timestamp
-    if (byId("workerKpiSyncStatus")) {
-      const timeStr = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
-      byId("workerKpiSyncStatus").textContent = `🟢 Синхронизировано (${timeStr})`;
-    }
-  }
-
-  function updateRestaurantKpiWidgets() {
-    if (!byId("restaurantKpiDashboard")) return;
-
-    // 1. Restaurant active shifts
-    const shifts = state.restaurantShifts || [];
-    const openShifts = shifts.filter((s) => s.status === "open" || !s.status);
-    const closedShifts = shifts.filter((s) => s.status === "closed" || s.status === "cancelled");
-
-    if (byId("restaurantKpiActiveShifts")) {
-      byId("restaurantKpiActiveShifts").textContent = openShifts.length;
-    }
-    if (byId("restaurantKpiTotalShiftsPill")) {
-      byId("restaurantKpiTotalShiftsPill").textContent = `${shifts.length} всего смен`;
-    }
-    if (byId("restaurantKpiClosedShiftsPill")) {
-      byId("restaurantKpiClosedShiftsPill").textContent = `${closedShifts.length} закрыто`;
-    }
-
-    // 2. Incoming applications breakdown
-    const apps = state.restaurantApplications || [];
-    const totalApps = apps.length;
-    const pendingApps = apps.filter((a) => a.status === "pending" || a.status === "new");
-    const acceptedApps = apps.filter((a) => a.status === "accepted");
-    const doneApps = apps.filter((a) => a.status === "done");
-    const declinedApps = apps.filter((a) => a.status === "declined" || a.status === "cancelled");
-
-    if (byId("restaurantKpiTotalApplications")) byId("restaurantKpiTotalApplications").textContent = totalApps;
-    if (byId("restaurantKpiPendingCount")) byId("restaurantKpiPendingCount").textContent = pendingApps.length;
-    if (byId("restaurantKpiAcceptedCount")) byId("restaurantKpiAcceptedCount").textContent = acceptedApps.length;
-    if (byId("restaurantKpiDoneCount")) byId("restaurantKpiDoneCount").textContent = doneApps.length;
-    if (byId("restaurantKpiDeclinedCount")) byId("restaurantKpiDeclinedCount").textContent = declinedApps.length;
-
-    // 3. Fill rate
-    const confirmedCount = acceptedApps.length + doneApps.length + closedShifts.length;
-    const totalBenchmark = Math.max(shifts.length, totalApps || 1);
-    const fillPct = shifts.length > 0 ? Math.min(100, Math.round((confirmedCount / totalBenchmark) * 100)) : 0;
-
-    if (byId("restaurantKpiFillRate")) {
-      byId("restaurantKpiFillRate").textContent = `${fillPct}%`;
-    }
-    if (byId("restaurantKpiProgressFill")) {
-      byId("restaurantKpiProgressFill").style.width = `${fillPct}%`;
-    }
-    if (byId("restaurantKpiAdvice")) {
-      if (shifts.length === 0) {
-        byId("restaurantKpiAdvice").textContent = "Создайте первую смену для получения откликов от поваров и бариста";
-      } else if (fillPct >= 80) {
-        byId("restaurantKpiAdvice").textContent = "Отличная укомплектованность! Смены закрываются вовремя";
-      } else {
-        byId("restaurantKpiAdvice").textContent = "Публикуйте смены заранее для привлечения опытных специалистов";
-      }
-    }
-
-    // 4. Latest candidate application
-    if (totalApps > 0 && apps[0]) {
-      const latest = apps[0];
-      const worker = relatedProfile(latest, "worker") || {};
-      const shift = relatedProfile(latest, "shift") || {};
-      if (byId("restaurantKpiRecentTitle")) {
-        byId("restaurantKpiRecentTitle").textContent = displayName(worker, latest.worker_id) || "Кандидат";
-      }
-      if (byId("restaurantKpiRecentSub")) {
-        const shiftTitle = shift.title || shift.profession || "Смена";
-        const dateStr = shift.date_from ? ` • ${shift.date_from}` : "";
-        byId("restaurantKpiRecentSub").textContent = `${shiftTitle}${dateStr}`;
-      }
-      if (byId("restaurantKpiRecentStatus")) {
-        const badge = byId("restaurantKpiRecentStatus");
-        if (latest.status === "accepted") {
-          badge.textContent = "✅ Кандидат принят";
-          badge.style.background = "#ecfdf5";
-          badge.style.color = "#065f46";
-        } else if (latest.status === "done") {
-          badge.textContent = "🏆 Смена отработана";
-          badge.style.background = "#f0fdf4";
-          badge.style.color = "#166534";
-        } else if (latest.status === "declined" || latest.status === "cancelled") {
-          badge.textContent = "❌ Отклонен";
-          badge.style.background = "#fff1f2";
-          badge.style.color = "#9f1239";
-        } else {
-          badge.textContent = "⏳ Требует решения";
-          badge.style.background = "#fffbeb";
-          badge.style.color = "#92400e";
-        }
-      }
-    } else {
-      if (byId("restaurantKpiRecentTitle")) {
-        byId("restaurantKpiRecentTitle").textContent = "Новых откликов нет";
-      }
-      if (byId("restaurantKpiRecentSub")) {
-        byId("restaurantKpiRecentSub").textContent = "Опубликуйте смену выше для поиска персонала";
-      }
-      if (byId("restaurantKpiRecentStatus")) {
-        const badge = byId("restaurantKpiRecentStatus");
-        badge.textContent = "Ожидание кандидатов";
-        badge.style.background = "#f1f5f9";
-        badge.style.color = "#475569";
-      }
-    }
-
-    // Sync status timestamp
-    if (byId("restaurantKpiSyncStatus")) {
-      const timeStr = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
-      byId("restaurantKpiSyncStatus").textContent = `🟢 Синхронизировано (${timeStr})`;
-    }
-  }
-
-  async function fetchLiveSupabaseKpiCounts() {
-    if (!db) return;
-    try {
-      const { data, count, error } = await db
-        .from("shift_posts")
-        .select("rate, status", { count: "exact" })
-        .eq("status", "open")
-        .limit(100);
-
-      if (!error && data) {
-        const activeCount = typeof count === "number" ? count : data.length;
-        if (byId("workerKpiActiveShifts") && (!state.shifts || state.shifts.length === 0)) {
-          byId("workerKpiActiveShifts").textContent = activeCount;
-        }
-        if (data.length > 0 && byId("workerKpiAvgRatePill")) {
-          const rates = data.map((d) => Number(d.rate)).filter((r) => r > 0 && !isNaN(r));
-          if (rates.length) {
-            const minRate = Math.min(...rates);
-            byId("workerKpiAvgRatePill").textContent = `от ${minRate.toLocaleString("ru-RU")} ₽ / смена`;
-          }
-        }
-      }
-    } catch (err) {
-      console.warn("fetchLiveSupabaseKpiCounts error:", err);
-    }
-  }
-
-  function initKpiInteractivity() {
-    // Worker refresh button
-    byId("refreshWorkerKpiBtn")?.addEventListener("click", async () => {
-      const btn = byId("refreshWorkerKpiBtn");
-      const tag = byId("workerKpiSyncStatus");
-      btn?.classList.add("is-spinning");
-      if (tag) tag.textContent = "🔄 Синхронизация...";
-      try {
-        await Promise.all([
-          loadShiftPosts(),
-          loadWorkerApplications(),
-          typeof loadWorkerLiveShifts === "function" ? loadWorkerLiveShifts(true) : Promise.resolve(),
-        ]);
-        updateWorkerKpiWidgets();
-      } catch (err) {
-        console.warn("Worker KPI refresh error:", err);
-      } finally {
-        btn?.classList.remove("is-spinning");
-      }
-    });
-
-    // Restaurant refresh button
-    byId("refreshRestaurantKpiBtn")?.addEventListener("click", async () => {
-      const btn = byId("refreshRestaurantKpiBtn");
-      const tag = byId("restaurantKpiSyncStatus");
-      btn?.classList.add("is-spinning");
-      if (tag) tag.textContent = "🔄 Синхронизация...";
-      try {
-        await Promise.all([loadRestaurantShiftPosts(), loadShiftApplications()]);
-        updateRestaurantKpiWidgets();
-      } catch (err) {
-        console.warn("Restaurant KPI refresh error:", err);
-      } finally {
-        btn?.classList.remove("is-spinning");
-      }
-    });
-
-    // Worker click chips -> smooth scroll to applications
-    const scrollWorkerApps = () => {
-      const target = byId("workerApplicationsList") || byId("workerApplicationsMessage");
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    byId("workerCardApplications")?.addEventListener("click", scrollWorkerApps);
-    byId("workerChipPending")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
-    byId("workerChipAccepted")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
-    byId("workerChipDone")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
-    byId("workerChipDeclined")?.addEventListener("click", (e) => { e.stopPropagation(); scrollWorkerApps(); });
-
-    // Worker shifts card click -> smooth scroll to shifts list
-    byId("workerCardShifts")?.addEventListener("click", () => {
-      const target = byId("shiftPostsList") || byId("workerLiveShiftsList");
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-
-    // Restaurant click chips -> smooth scroll to applications
-    const scrollRestApps = () => {
-      const target = byId("restaurantApplicationsList") || byId("restaurantApplicationFilterSelect");
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    byId("restaurantCardApplications")?.addEventListener("click", scrollRestApps);
-    byId("restaurantChipPending")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
-    byId("restaurantChipAccepted")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
-    byId("restaurantChipDone")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
-    byId("restaurantChipDeclined")?.addEventListener("click", (e) => { e.stopPropagation(); scrollRestApps(); });
-
-    // Restaurant shifts card click -> smooth scroll to shifts list
-    byId("restaurantCardShifts")?.addEventListener("click", () => {
-      const target = byId("restaurantShiftPostsList") || byId("restaurantShiftPostsMessage");
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
   }
 
   async function loadWorkerInvites() {
@@ -1104,658 +709,6 @@
     }
 
     await loadWorkerInvites();
-  }
-
-  /* ==========================================================================
-     Worker Reviews & Rating System (HoReCa Trust & Reputation)
-     ========================================================================== */
-
-  const REVIEWS_STORAGE_KEY = "gc_worker_reviews_store";
-
-  const DEFAULT_WORKER_REVIEWS = [
-    {
-      id: "rev-seed-1",
-      worker_id: "default",
-      restaurant_name: "Ресторан «Северяне» (Большая Никитская)",
-      restaurant_city: "Москва, ЦАО",
-      shift_title: "Повар горячего цеха",
-      rating: 5,
-      tags: ["⚡️ 100% выход", "🔪 Строго по ТТК", "✨ Идеальная чистота"],
-      comment: "Отлично отработал пиковую пятничную смену. Высокая скорость на чеках, безупречная отдача блюд по техкартам, оставил цех в идеальной чистоте. С удовольствием пригласим на постоянные смены!",
-      created_at: new Date(Date.now() - 2 * 86400000).toISOString(),
-    },
-    {
-      id: "rev-seed-2",
-      worker_id: "default",
-      restaurant_name: "Гастробар «Loro»",
-      restaurant_city: "Москва, Патриаршие",
-      shift_title: "Су-шеф / Бригадир смены",
-      rating: 5,
-      tags: ["🤝 Командная работа", "🔥 Высокая скорость", "🍳 Качество отдачи"],
-      comment: "Пунктуальный, дисциплинированный специалист. Без лишних вопросов вошел в процесс, поддержал команду во время наплыва гостей. Рекомендуем заведениям как надежного профессионала.",
-      created_at: new Date(Date.now() - 5 * 86400000).toISOString(),
-    },
-    {
-      id: "rev-seed-3",
-      worker_id: "default",
-      restaurant_name: "Итальянский ресторан «Margarita Bistro»",
-      restaurant_city: "Москва, Патриаршие пруды",
-      shift_title: "Повар холодного цеха / Заготовщик",
-      rating: 5,
-      tags: ["🔪 Четко по ТТК", "⚡️ Без опозданий"],
-      comment: "Очень аккуратная работа с продуктом, правильная нарезка и маркировка. Смену закрыл на отлично.",
-      created_at: new Date(Date.now() - 11 * 86400000).toISOString(),
-    },
-    {
-      id: "rev-seed-4",
-      worker_id: "default",
-      restaurant_name: "Кофейня-пекарня «Sapiens»",
-      restaurant_city: "Москва, Хамовники",
-      shift_title: "Бариста / Помощник кондитера",
-      rating: 4,
-      tags: ["⚡️ Пунктуальность", "✨ Чистота"],
-      comment: "Хорошая смена, быстрая отдача заказов, вежливое отношение к гостям и коллегам.",
-      created_at: new Date(Date.now() - 18 * 86400000).toISOString(),
-    },
-  ];
-
-  function getStoredWorkerReviews() {
-    try {
-      const raw = localStorage.getItem(REVIEWS_STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function saveStoredWorkerReviews(reviews) {
-    try {
-      localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviews));
-    } catch (e) {
-      console.warn("Local storage save error:", e);
-    }
-  }
-
-  function getWorkerReviewsList(workerId) {
-    const stored = getStoredWorkerReviews();
-    const forWorker = stored.filter((r) => r.worker_id === workerId);
-    if (forWorker.length > 0) return forWorker;
-    return DEFAULT_WORKER_REVIEWS;
-  }
-
-  function findReviewForWorkerShift(workerId, shiftId) {
-    const stored = getStoredWorkerReviews();
-    return stored.find(
-      (r) => r.worker_id === workerId && (shiftId ? r.shift_id === shiftId : true)
-    );
-  }
-
-  function declOfNum(n, titles) {
-    const cases = [2, 0, 1, 1, 1, 2];
-    return titles[
-      n % 100 > 4 && n % 100 < 20 ? 2 : cases[n % 10 < 5 ? n % 10 : 5]
-    ];
-  }
-
-  function formatReviewDate(isoStr) {
-    if (!isoStr) return "Недавно";
-    try {
-      const date = new Date(isoStr);
-      return date.toLocaleDateString("ru-RU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
-    } catch (e) {
-      return "Недавно";
-    }
-  }
-
-  async function loadWorkerReviews() {
-    setMessage(el.workerReviewsMessage, "Загружаем отзывы от заведений...");
-
-    let dbReviews = [];
-    try {
-      if (state.user?.id) {
-        const { data, error } = await selectRowsWithFallback(
-          "worker_reviews",
-          { worker_id: state.user.id },
-          { order: { column: "created_at", ascending: false } }
-        );
-        if (!error && Array.isArray(data)) {
-          dbReviews = data;
-        }
-      }
-    } catch (err) {
-      console.warn("Supabase worker_reviews query error:", err);
-    }
-
-    const stored = getStoredWorkerReviews();
-    const localReviews = state.user?.id
-      ? stored.filter((r) => r.worker_id === state.user.id)
-      : [];
-
-    const map = new Map();
-    dbReviews.forEach((r) => map.set(r.id, r));
-    localReviews.forEach((r) => map.set(r.id, r));
-
-    let finalReviews = Array.from(map.values());
-    if (!finalReviews.length) {
-      finalReviews = DEFAULT_WORKER_REVIEWS;
-    }
-
-    state.workerReviews = finalReviews;
-    renderWorkerReviews(finalReviews);
-  }
-
-  function renderWorkerReviews(reviews) {
-    if (!el.workerReviewsList) return;
-    el.workerReviewsList.innerHTML = "";
-
-    const total = reviews.length;
-    const sum = reviews.reduce((acc, r) => acc + Number(r.rating || 5), 0);
-    const avg = total > 0 ? (sum / total).toFixed(1) : "5.0";
-
-    const count5 = reviews.filter((r) => Number(r.rating) === 5).length;
-    const count4 = reviews.filter((r) => Number(r.rating) === 4).length;
-    const count3 = reviews.filter((r) => Number(r.rating) <= 3).length;
-
-    const pct5 = total > 0 ? Math.round((count5 / total) * 100) : 100;
-    const pct4 = total > 0 ? Math.round((count4 / total) * 100) : 0;
-    const pct3 = total > 0 ? Math.round((count3 / total) * 100) : 0;
-
-    if (el.workerAvgRatingNum) el.workerAvgRatingNum.textContent = avg;
-    if (el.workerRatingStars) {
-      const rounded = Math.round(Number(avg));
-      el.workerRatingStars.textContent = "★".repeat(rounded) + "☆".repeat(5 - rounded);
-    }
-    if (el.workerTotalReviewsCount) {
-      el.workerTotalReviewsCount.textContent = `На основе ${total} ${declOfNum(total, ["отзыва", "отзывов", "отзывов"])}`;
-    }
-
-    if (el.workerRating5Bar) el.workerRating5Bar.style.width = `${pct5}%`;
-    if (el.workerRating5Val) el.workerRating5Val.textContent = `${pct5}%`;
-    if (el.workerRating4Bar) el.workerRating4Bar.style.width = `${pct4}%`;
-    if (el.workerRating4Val) el.workerRating4Val.textContent = `${pct4}%`;
-    if (el.workerRating3Bar) el.workerRating3Bar.style.width = `${pct3}%`;
-    if (el.workerRating3Val) el.workerRating3Val.textContent = `${pct3}%`;
-
-    reviews.forEach((review) => {
-      const rawName = review.restaurant_name || "Ресторан Москвы";
-      const cleanName = rawName.replace(/^«|»$/g, "");
-      const initials = cleanName
-        .split(/\s+/)
-        .map((w) => w[0])
-        .filter(Boolean)
-        .slice(0, 2)
-        .join("")
-        .toUpperCase() || "GC";
-
-      const ratingNum = Math.min(5, Math.max(1, Number(review.rating) || 5));
-      const starsHtml = "★".repeat(ratingNum) + "☆".repeat(5 - ratingNum);
-
-      const tags = Array.isArray(review.tags)
-        ? review.tags
-        : typeof review.tags === "string" && review.tags
-        ? review.tags.split(",")
-        : [];
-
-      const tagsHtml = tags
-        .filter(Boolean)
-        .map((t) => `<span class="worker-review-tag">${escapeHtml(t.trim())}</span>`)
-        .join("");
-
-      const item = document.createElement("div");
-      item.className = "worker-review-item";
-      item.innerHTML = `
-        <div class="worker-review-item-head">
-          <div class="worker-review-author">
-            <div class="worker-review-avatar">${escapeHtml(initials)}</div>
-            <div>
-              <h5 class="worker-review-rest-name">${escapeHtml(rawName)}</h5>
-              <div class="worker-review-rest-meta">
-                <span>${escapeHtml(review.shift_title || "Смена в заведении")}</span> • 
-                <span>${escapeHtml(review.restaurant_city || "Москва")}</span> • 
-                <span>${formatReviewDate(review.created_at)}</span>
-              </div>
-            </div>
-          </div>
-          <div class="worker-review-score-badge">
-            <span style="color: #f59e0b;">${starsHtml}</span> ${ratingNum}.0
-          </div>
-        </div>
-        <blockquote class="worker-review-text">«${escapeHtml(review.comment || "Смена выполнена качественно и в срок.")}»</blockquote>
-        ${tagsHtml ? `<div class="worker-review-tags">${tagsHtml}</div>` : ""}
-      `;
-
-      el.workerReviewsList.appendChild(item);
-    });
-
-    setMessage(el.workerReviewsMessage, `Всего отзывов: ${reviews.length}`);
-  }
-
-  /* ==========================================================================
-     Worker Earnings, Income Calculator & Payout Tracker
-     ========================================================================== */
-
-  const DEFAULT_WORKER_PAYOUTS = [
-    {
-      id: "pay-1",
-      restaurant_name: "Ресторан «Северяне» (Большая Никитская)",
-      shift_title: "Повар горячего цеха (12 ч)",
-      amount: 5500,
-      payout_type: "СБП (Т-Банк)",
-      status: "paid",
-      status_label: "Выплачено",
-      date: "Вчера, 23:15",
-    },
-    {
-      id: "pay-2",
-      restaurant_name: "Гастробар «Loro» (Патриаршие)",
-      shift_title: "Су-шеф смены (12 ч)",
-      amount: 7200,
-      payout_type: "СБП (Сбер)",
-      status: "paid",
-      status_label: "Выплачено",
-      date: "3 дня назад",
-    },
-    {
-      id: "pay-3",
-      restaurant_name: "Ресторан «Margarita Bistro»",
-      shift_title: "Повар ХЦ / Заготовщик (10 ч)",
-      amount: 5200,
-      payout_type: "Наличные в кассе",
-      status: "paid",
-      status_label: "Выплачено",
-      date: "5 дней назад",
-    },
-    {
-      id: "pay-4",
-      restaurant_name: "Кофейня-пекарня «Sapiens» (Хамовники)",
-      shift_title: "Бариста / Помощник (10 ч)",
-      amount: 4200,
-      payout_type: "СБП (Альфа-Банк)",
-      status: "paid",
-      status_label: "Выплачено",
-      date: "12 дней назад",
-    },
-    {
-      id: "pay-5",
-      restaurant_name: "Ресторан «Горыныч» (Центральный рынок)",
-      shift_title: "Повар ГЦ / Гриль (12 ч)",
-      amount: 5500,
-      payout_type: "СБП (перевод в конце смены)",
-      status: "pending",
-      status_label: "Ожидает перевод (сегодня в 23:00)",
-      date: "Сегодня",
-    },
-    {
-      id: "pay-6",
-      restaurant_name: "Бар «Клава» (Патриаршие)",
-      shift_title: "Бармен (10 ч)",
-      amount: 6000,
-      payout_type: "СБП + Чай",
-      status: "pending",
-      status_label: "Подтвержденная смена (завтра)",
-      date: "Завтра",
-    },
-  ];
-
-  function formatMoneyRub(num) {
-    return `${Number(num || 0).toLocaleString("ru-RU")} ₽`;
-  }
-
-  async function loadWorkerEarnings() {
-    // 1. Calculate actual payouts from accepted and completed applications
-    const workerApps = state.workerApplications || [];
-    let completedShiftsCount = 25; // default benchmark
-    let totalEarned = 136500;
-    let pendingPayout = 16500;
-    let avgRate = 5500;
-
-    // If worker profile has min_rate set, sync default rate
-    const profileMinRate = Number(state.profile?.min_rate || 0);
-    if (profileMinRate > 2000) {
-      avgRate = profileMinRate;
-    }
-
-    if (workerApps.length > 0) {
-      let calcEarned = 0;
-      let calcPending = 0;
-      let countAccepted = 0;
-
-      workerApps.forEach(app => {
-        const shift = relatedProfile(app, "shift") || {};
-        const rate = Number(shift.rate) || avgRate;
-        if (app.status === "accepted" || app.status === "done") {
-          countAccepted++;
-          calcEarned += rate;
-        } else if (app.status === "pending") {
-          calcPending += rate;
-        }
-      });
-
-      if (countAccepted > 0) {
-        completedShiftsCount = countAccepted;
-        totalEarned = calcEarned;
-        pendingPayout = calcPending;
-        avgRate = Math.round(calcEarned / countAccepted);
-      }
-    }
-
-    if (el.workerTotalEarned) el.workerTotalEarned.textContent = formatMoneyRub(totalEarned);
-    if (el.workerPendingPayout) el.workerPendingPayout.textContent = formatMoneyRub(pendingPayout);
-    if (el.workerAvgShiftRate) el.workerAvgShiftRate.textContent = formatMoneyRub(avgRate);
-    if (el.workerCompletedShiftsCount) el.workerCompletedShiftsCount.textContent = `${completedShiftsCount} ${declOfNum(completedShiftsCount, ["смена", "смены", "смен"])}`;
-
-    renderWorkerPayouts(DEFAULT_WORKER_PAYOUTS);
-    recalcWorkerEarnings();
-    recalcWorkerSavingsGoal(avgRate);
-  }
-
-  function renderWorkerPayouts(payouts) {
-    if (!el.workerPayoutsList) return;
-    el.workerPayoutsList.innerHTML = "";
-
-    payouts.forEach(p => {
-      const isPaid = p.status === "paid";
-      const card = document.createElement("div");
-      card.className = "payout-item-card";
-      card.innerHTML = `
-        <div class="payout-item-info">
-          <div class="payout-item-title">${escapeHtml(p.restaurant_name)}</div>
-          <div class="payout-item-meta">
-            <span>${escapeHtml(p.shift_title)}</span> • 
-            <span>${escapeHtml(p.date)}</span> • 
-            <span>${escapeHtml(p.payout_type)}</span>
-          </div>
-        </div>
-        <div class="payout-item-amount-box">
-          <div class="payout-item-sum" style="color: ${isPaid ? '#047857' : '#b45309'};">
-            +${formatMoneyRub(p.amount)}
-          </div>
-          <span class="payout-status-pill ${isPaid ? 'payout-status-paid' : 'payout-status-pending'}">
-            ${escapeHtml(p.status_label)}
-          </span>
-        </div>
-      `;
-      el.workerPayoutsList.appendChild(card);
-    });
-  }
-
-  let currentTipsBonus = 0;
-
-  function initWorkerEarningsCalc() {
-    // Preset buttons
-    const presetContainer = document.getElementById("workerCalcPresets");
-    if (presetContainer) {
-      presetContainer.querySelectorAll(".calc-preset-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          presetContainer.querySelectorAll(".calc-preset-btn").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          const rate = Number(btn.dataset.rate || 5500);
-          const tips = Number(btn.dataset.tips || 0);
-          currentTipsBonus = tips;
-
-          if (el.workerCalcRateInput) {
-            el.workerCalcRateInput.value = rate;
-          }
-          if (el.workerCalcTipsCheck) {
-            el.workerCalcTipsCheck.checked = tips > 0;
-          }
-          recalcWorkerEarnings();
-        });
-      });
-    }
-
-    if (el.workerCalcRateInput) {
-      el.workerCalcRateInput.addEventListener("input", recalcWorkerEarnings);
-    }
-    if (el.workerCalcShiftsInput) {
-      el.workerCalcShiftsInput.addEventListener("input", recalcWorkerEarnings);
-    }
-    if (el.workerCalcTipsCheck) {
-      el.workerCalcTipsCheck.addEventListener("change", recalcWorkerEarnings);
-    }
-    if (el.workerCalcNightCheck) {
-      el.workerCalcNightCheck.addEventListener("change", recalcWorkerEarnings);
-    }
-  }
-
-  function recalcWorkerEarnings() {
-    const rateInput = el.workerCalcRateInput;
-    const shiftsInput = el.workerCalcShiftsInput;
-    if (!rateInput || !shiftsInput) return;
-
-    let baseRate = Number(rateInput.value) || 5500;
-    const shiftsCount = Number(shiftsInput.value) || 15;
-    const isNight = el.workerCalcNightCheck?.checked || false;
-    const isTips = el.workerCalcTipsCheck?.checked || false;
-
-    // Display labels
-    if (el.workerCalcRateVal) {
-      el.workerCalcRateVal.textContent = formatMoneyRub(baseRate);
-    }
-
-    let shiftsSubText = `${shiftsCount} ${declOfNum(shiftsCount, ["смена", "смены", "смен"])}`;
-    if (shiftsCount === 8) shiftsSubText += " (подработка)";
-    else if (shiftsCount === 15) shiftsSubText += " (график 2/2 или 3/3)";
-    else if (shiftsCount === 18) shiftsSubText += " (график 4/3)";
-    else if (shiftsCount === 22) shiftsSubText += " (график 5/2)";
-    else if (shiftsCount === 26) shiftsSubText += " (плотный 6/1)";
-
-    if (el.workerCalcShiftsVal) {
-      el.workerCalcShiftsVal.textContent = shiftsSubText;
-    }
-
-    // Rate calculations
-    let effectiveShiftRate = baseRate;
-    if (isNight) {
-      effectiveShiftRate = Math.round(effectiveShiftRate * 1.2);
-    }
-    if (isTips) {
-      const tipsVal = currentTipsBonus > 0 ? currentTipsBonus : 2500;
-      effectiveShiftRate += tipsVal;
-    }
-
-    const monthIncome = effectiveShiftRate * shiftsCount;
-    const weekShifts = Math.max(1, Math.min(shiftsCount, Math.round(shiftsCount / 4)));
-    const weekIncome = effectiveShiftRate * weekShifts;
-    const yearIncome = monthIncome * 12;
-
-    if (el.workerCalcMonthSum) el.workerCalcMonthSum.textContent = formatMoneyRub(monthIncome);
-    if (el.workerCalcPeriodNote) el.workerCalcPeriodNote.textContent = `за ${shiftsCount} ${declOfNum(shiftsCount, ["смену", "смены", "смен"])} в месяц на руки`;
-    if (el.workerCalcSingleShift) el.workerCalcSingleShift.textContent = formatMoneyRub(effectiveShiftRate);
-    if (el.workerCalcWeekSum) el.workerCalcWeekSum.textContent = formatMoneyRub(weekIncome);
-    if (el.workerCalcYearSum) el.workerCalcYearSum.textContent = formatMoneyRub(yearIncome);
-  }
-
-  /* ==========================================================================
-     Worker Savings Goal & Planning Calculator
-     ========================================================================== */
-  let currentSavingsWorkerAvgRate = 5500;
-  let currentSavingsPctMode = 50; // 100, 50, 30, or "custom"
-
-  function initWorkerSavingsGoalCalc() {
-    const presetsContainer = document.getElementById("savingsPresetsList");
-    if (presetsContainer) {
-      presetsContainer.querySelectorAll(".savings-preset-chip").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          presetsContainer.querySelectorAll(".savings-preset-chip").forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const title = btn.dataset.title || "Финансовая цель";
-          const amount = Number(btn.dataset.amount || 120000);
-
-          if (el.savingsGoalTitleInput) {
-            el.savingsGoalTitleInput.value = title;
-          }
-          if (el.savingsGoalAmountSlider) {
-            el.savingsGoalAmountSlider.value = amount;
-          }
-          recalcWorkerSavingsGoal();
-        });
-      });
-    }
-
-    const modeTabs = document.getElementById("savingsModeTabs");
-    if (modeTabs) {
-      modeTabs.querySelectorAll(".savings-mode-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          modeTabs.querySelectorAll(".savings-mode-btn").forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const mode = btn.dataset.pct;
-          if (mode === "custom") {
-            currentSavingsPctMode = "custom";
-            if (el.savingsCustomAmountRow) el.savingsCustomAmountRow.style.display = "block";
-          } else {
-            currentSavingsPctMode = Number(mode || 50);
-            if (el.savingsCustomAmountRow) el.savingsCustomAmountRow.style.display = "none";
-          }
-          recalcWorkerSavingsGoal();
-        });
-      });
-    }
-
-    if (el.savingsGoalTitleInput) {
-      el.savingsGoalTitleInput.addEventListener("input", () => {
-        if (el.savingsTargetNamePreview) {
-          el.savingsTargetNamePreview.textContent = el.savingsGoalTitleInput.value.trim() || "Финансовая цель";
-        }
-      });
-    }
-
-    if (el.savingsGoalAmountSlider) {
-      el.savingsGoalAmountSlider.addEventListener("input", () => recalcWorkerSavingsGoal());
-    }
-    if (el.savingsCustomPerShiftSlider) {
-      el.savingsCustomPerShiftSlider.addEventListener("input", () => recalcWorkerSavingsGoal());
-    }
-    if (el.savingsShiftsPerWeekSlider) {
-      el.savingsShiftsPerWeekSlider.addEventListener("input", () => recalcWorkerSavingsGoal());
-    }
-  }
-
-  function recalcWorkerSavingsGoal(forcedAvgRate) {
-    if (typeof forcedAvgRate === "number" && forcedAvgRate > 0) {
-      currentSavingsWorkerAvgRate = forcedAvgRate;
-    }
-
-    const avgRate = currentSavingsWorkerAvgRate || 5500;
-    if (el.savingsAvgRateBadge) {
-      el.savingsAvgRateBadge.textContent = `${formatMoneyRub(avgRate)} / смена`;
-    }
-
-    const goalTitle = el.savingsGoalTitleInput?.value.trim() || "Финансовая цель";
-    if (el.savingsTargetNamePreview) {
-      el.savingsTargetNamePreview.textContent = goalTitle;
-    }
-
-    const targetAmount = Number(el.savingsGoalAmountSlider?.value || 120000);
-    if (el.savingsGoalAmountLabel) {
-      el.savingsGoalAmountLabel.textContent = formatMoneyRub(targetAmount);
-    }
-
-    // Determine deposit per shift
-    let depositPerShift = Math.round(avgRate * 0.5);
-    if (currentSavingsPctMode === 100) {
-      depositPerShift = avgRate;
-    } else if (currentSavingsPctMode === 30) {
-      depositPerShift = Math.round(avgRate * 0.3);
-    } else if (currentSavingsPctMode === "custom") {
-      depositPerShift = Number(el.savingsCustomPerShiftSlider?.value || 2500);
-    }
-
-    if (el.savingsCustomPerShiftVal) {
-      el.savingsCustomPerShiftVal.textContent = formatMoneyRub(depositPerShift);
-    }
-
-    // Shifts per week
-    const shiftsPerWeek = Number(el.savingsShiftsPerWeekSlider?.value || 4);
-    let shiftsPerWeekText = `${shiftsPerWeek} ${declOfNum(shiftsPerWeek, ["смена", "смены", "смен"])}`;
-    if (shiftsPerWeek === 1) shiftsPerWeekText += " (разовая подработка)";
-    else if (shiftsPerWeek === 2) shiftsPerWeekText += " (выходные дни)";
-    else if (shiftsPerWeek === 3) shiftsPerWeekText += " (свободный график)";
-    else if (shiftsPerWeek === 4) shiftsPerWeekText += " (график 2/2 или 4/3)";
-    else if (shiftsPerWeek === 5) shiftsPerWeekText += " (график 5/2)";
-    else if (shiftsPerWeek >= 6) shiftsPerWeekText += " (интенсив 6/1)";
-
-    if (el.savingsShiftsPerWeekLabel) {
-      el.savingsShiftsPerWeekLabel.textContent = shiftsPerWeekText;
-    }
-
-    depositPerShift = Math.max(100, depositPerShift);
-    const requiredShifts = Math.max(1, Math.ceil(targetAmount / depositPerShift));
-    const requiredWeeks = Math.max(1, Math.ceil(requiredShifts / shiftsPerWeek));
-    const requiredDays = Math.ceil((requiredShifts / shiftsPerWeek) * 7);
-    const requiredMonths = (requiredWeeks / 4.33).toFixed(1);
-
-    if (el.savingsRequiredShifts) {
-      el.savingsRequiredShifts.textContent = `${requiredShifts} ${declOfNum(requiredShifts, ["смена", "смены", "смен"])}`;
-    }
-
-    let timeEstimateStr = "";
-    if (requiredWeeks <= 2) {
-      timeEstimateStr = `~${requiredDays} ${declOfNum(requiredDays, ["день", "дня", "дней"])} (${requiredWeeks} ${declOfNum(requiredWeeks, ["неделя", "недели", "недель"])})`;
-    } else if (requiredWeeks < 8) {
-      timeEstimateStr = `~${requiredWeeks} ${declOfNum(requiredWeeks, ["неделя", "недели", "недель"])} (~${requiredMonths} мес)`;
-    } else {
-      timeEstimateStr = `~${requiredMonths} ${declOfNum(Math.round(Number(requiredMonths)), ["месяц", "месяца", "месяцев"])} (${requiredWeeks} нед.)`;
-    }
-
-    if (el.savingsTimeEstimateLabel) {
-      el.savingsTimeEstimateLabel.textContent = timeEstimateStr;
-    }
-
-    // Financial flows
-    const weeklyDeposit = depositPerShift * shiftsPerWeek;
-    const monthlyDeposit = Math.round(weeklyDeposit * 4.33);
-
-    if (el.savingsDepositPerShift) el.savingsDepositPerShift.textContent = formatMoneyRub(depositPerShift);
-    if (el.savingsDepositPerWeek) el.savingsDepositPerWeek.textContent = formatMoneyRub(weeklyDeposit);
-    if (el.savingsDepositPerMonth) el.savingsDepositPerMonth.textContent = formatMoneyRub(monthlyDeposit);
-
-    // Forecast date
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + requiredDays);
-    const dateFormatted = targetDate.toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    if (el.savingsTargetDateEstimated) el.savingsTargetDateEstimated.textContent = dateFormatted;
-
-    // Progress bar and labels
-    if (el.savingsProgressPaceLabel) {
-      el.savingsProgressPaceLabel.textContent = `~${formatMoneyRub(weeklyDeposit)} / нед.`;
-    }
-    if (el.savingsProgressTargetLabel) {
-      el.savingsProgressTargetLabel.textContent = formatMoneyRub(targetAmount);
-    }
-    if (el.savingsProgressBar) {
-      const pacePct = Math.min(100, Math.max(15, Math.round((weeklyDeposit / targetAmount) * 100 * 3)));
-      el.savingsProgressBar.style.width = `${pacePct}%`;
-    }
-
-    if (el.savingsMilestonesLabels) {
-      const q1 = Math.round(targetAmount * 0.25);
-      const q2 = Math.round(targetAmount * 0.5);
-      const q3 = Math.round(targetAmount * 0.75);
-      el.savingsMilestonesLabels.innerHTML = `
-        <span>25% (${formatMoneyRub(q1)})</span>
-        <span>50% (${formatMoneyRub(q2)})</span>
-        <span>75% (${formatMoneyRub(q3)})</span>
-      `;
-    }
-
-    // Acceleration tip (+1 shift per week)
-    if (el.savingsAccelerationTip) {
-      const extraShiftsPerWeek = shiftsPerWeek + 1;
-      const acceleratedDays = Math.ceil((requiredShifts / extraShiftsPerWeek) * 7);
-      const daysSaved = Math.max(1, requiredDays - acceleratedDays);
-      el.savingsAccelerationTip.innerHTML = `
-        💡 <strong>Ускорение цели:</strong> +1 дополнительная смена в неделю (${extraShiftsPerWeek} вместо ${shiftsPerWeek}) сократит срок накопления на <strong>${daysSaved} ${declOfNum(daysSaved, ["день", "дня", "дней"])}</strong>!
-      `;
-    }
   }
 
   async function saveRestaurantProfile(event) {
@@ -1887,7 +840,6 @@
     state.restaurantShifts = data || [];
     if (state.workers.length) renderWorkers();
     renderRestaurantShiftPosts();
-    updateRestaurantKpiWidgets();
   }
 
   function restaurantApplicationCounts() {
@@ -1929,7 +881,6 @@
         `,
         `
           <button class="btn" type="button" data-action="view-shift-applications">Отклики</button>
-          <button class="btn primary" type="button" data-action="publish-to-telegram" style="background:#229ED9; border-color:#229ED9; color:#fff;">🚀 В Telegram</button>
           ${
             isOpen
               ? '<button type="button" data-shift-status="closed">Закрыть</button><button class="btn" type="button" data-shift-status="cancelled">Отменить</button>'
@@ -1938,12 +889,6 @@
           <p class="message"></p>
         `
       );
-
-      node.querySelector("[data-action='publish-to-telegram']")?.addEventListener("click", () => {
-        if (window.fillTelegramPublisherFromShift) {
-          window.fillTelegramPublisherFromShift(shift);
-        }
-      });
 
       node.querySelector("[data-action='view-shift-applications']")?.addEventListener("click", async () => {
         await loadShiftApplications(shift.id);
@@ -2005,7 +950,6 @@
     state.restaurantApplications = data || [];
     renderShiftApplications(selectedShiftId);
     if (state.restaurantShifts.length) renderRestaurantShiftPosts();
-    updateRestaurantKpiWidgets();
   }
 
   function renderShiftApplications(filterShiftId = state.restaurantApplicationFilter) {
@@ -2032,225 +976,21 @@
 
     applications.forEach((application) => {
       const pending = application.status === "pending";
-      const isAccepted = application.status === "accepted";
-      const isDone = application.status === "done";
       const worker = relatedProfile(application, "worker");
       const shift = relatedProfile(application, "shift");
       const workerPlace = displayPlace(worker);
-      const workerName = displayName(worker, application.worker_id);
-      const existingReview = findReviewForWorkerShift(application.worker_id, application.shift_id);
-
-      let actionHtml = "";
-      if (pending) {
-        actionHtml = `
-          <div style="display:flex; gap:8px; margin-top:8px;">
-            <button type="button" data-status="accepted" class="btn primary">Принять</button>
-            <button class="btn" type="button" data-status="declined">Отклонить</button>
-          </div>
-          <p class="message"></p>
-        `;
-      } else {
-        actionHtml = `
-          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:10px;">
-            ${isAccepted ? `<button type="button" class="btn primary" data-action="complete-app" style="font-size:13px; padding:6px 12px;">✅ Завершить смену</button>` : `<span class="worker-badge-trust" style="color:#059669;background:#ecfdf5;border-color:#a7f3d0;font-size:11.5px;padding:4px 8px;">✓ Смена завершена</span>`}
-            <button type="button" class="btn" data-action="toggle-review-box" style="font-size:13px; padding:6px 12px;">
-              ${existingReview ? `⭐️ Отзыв (${existingReview.rating}★) • Изменить` : `⭐️ Оценить работника / Отзыв`}
-            </button>
-          </div>
-          <p class="message"></p>
-        `;
-      }
-
-      const reviewBoxHtml = `
-        <div class="restaurant-review-box" data-review-container style="display: none; margin-top: 14px;">
-          <h5 style="margin: 0 0 6px; font-size: 15px; color: var(--green);">⭐️ Оценка работы: ${escapeHtml(workerName)}</h5>
-          <p style="margin: 0 0 10px; font-size: 13px; color: #64748b;">Смена: ${escapeHtml(shift.profession || shift.title || "Смена")}</p>
-          
-          <div style="margin-bottom: 10px;">
-            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">Ваша оценка смены:</div>
-            <div class="rating-stars-input" data-stars-input>
-              <button type="button" class="rating-star-btn active" data-rating="1">★</button>
-              <button type="button" class="rating-star-btn active" data-rating="2">★</button>
-              <button type="button" class="rating-star-btn active" data-rating="3">★</button>
-              <button type="button" class="rating-star-btn active" data-rating="4">★</button>
-              <button type="button" class="rating-star-btn active" data-rating="5">★</button>
-              <span class="rating-score-label" data-score-label>5/5 — Отлично, рекомендуем!</span>
-            </div>
-          </div>
-
-          <div style="margin-bottom: 10px;">
-            <div style="font-size: 12.5px; font-weight: 750; color: #334155; margin-bottom: 4px;">Сильные стороны работника:</div>
-            <div class="rating-tags-selector" data-tags-selector>
-              <button type="button" class="rating-tag-chip active" data-tag="⚡️ Пунктуальность">⚡️ Пунктуальность</button>
-              <button type="button" class="rating-tag-chip active" data-tag="🔪 Четко по ТТК">🔪 Четко по ТТК</button>
-              <button type="button" class="rating-tag-chip active" data-tag="✨ Чистота станции">✨ Чистота станции</button>
-              <button type="button" class="rating-tag-chip" data-tag="🤝 Командная работа">🤝 Командная работа</button>
-              <button type="button" class="rating-tag-chip" data-tag="🔥 Высокая скорость">🔥 Высокая скорость</button>
-              <button type="button" class="rating-tag-chip" data-tag="🍳 Качество отдачи">🍳 Качество отдачи</button>
-            </div>
-          </div>
-
-          <div style="margin-bottom: 12px;">
-            <label style="font-size: 12.5px; font-weight: 750; color: #334155; display: block; margin-bottom: 4px;">Текстовый отзыв от заведения:</label>
-            <textarea rows="3" data-review-text placeholder="Напишите пару слов: скорость на чеках, аккуратность, пунктуальность, отношение к работе..." style="width: 100%; box-sizing: border-box; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 13.5px; font-family: inherit;">${existingReview ? escapeHtml(existingReview.comment) : ""}</textarea>
-          </div>
-
-          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-            <button type="button" class="btn primary" data-action="save-review" style="padding: 7px 16px; font-size: 13.5px;">
-              💾 Сохранить отзыв
-            </button>
-            <button type="button" class="btn" data-action="close-review" style="padding: 7px 14px; font-size: 13px;">
-              Скрыть
-            </button>
-            <span class="message" data-review-msg style="margin: 0; font-size: 13px;"></span>
-          </div>
-        </div>
-      `;
-
       const node = card(
         shift.title || "Отклик работника",
-        `<p>Работник: ${escapeHtml(workerName)}</p><p>${escapeHtml(workerPlace || shift.city || "-")}</p><p>Смена: ${escapeHtml(shift.profession || application.shift_id || "-")}</p><p>Статус: ${escapeHtml(statusText(application.status))}</p><p>${escapeHtml(application.message || "")}</p>`,
-        actionHtml + reviewBoxHtml
+        `<p>Работник: ${escapeHtml(displayName(worker, application.worker_id))}</p><p>${escapeHtml(workerPlace || shift.city || "-")}</p><p>Смена: ${escapeHtml(shift.profession || application.shift_id || "-")}</p><p>Статус: ${escapeHtml(statusText(application.status))}</p><p>${escapeHtml(application.message || "")}</p>`,
+        pending
+          ? '<button type="button" data-status="accepted">Принять</button><button class="btn" type="button" data-status="declined">Отклонить</button><p class="message"></p>'
+          : '<p class="message">Решение уже сохранено.</p>'
       );
 
-      // Status buttons (Accept / Decline)
       node.querySelectorAll("[data-status]").forEach((button) => {
         button.addEventListener("click", () => {
           updateShiftApplication(application.id, button.dataset.status, node);
         });
-      });
-
-      // Complete shift button
-      node.querySelector("[data-action='complete-app']")?.addEventListener("click", async () => {
-        await updateShiftApplication(application.id, "done", node);
-        // Auto-open review box after finishing shift
-        const reviewBox = node.querySelector("[data-review-container]");
-        if (reviewBox) reviewBox.style.display = "block";
-      });
-
-      // Toggle review box
-      const toggleReviewBtn = node.querySelector("[data-action='toggle-review-box']");
-      const reviewBox = node.querySelector("[data-review-container]");
-      toggleReviewBtn?.addEventListener("click", () => {
-        if (!reviewBox) return;
-        const isHidden = reviewBox.style.display === "none";
-        reviewBox.style.display = isHidden ? "block" : "none";
-      });
-
-      node.querySelector("[data-action='close-review']")?.addEventListener("click", () => {
-        if (reviewBox) reviewBox.style.display = "none";
-      });
-
-      // Interactive Star Rating Logic
-      let currentRating = existingReview?.rating || 5;
-      const starButtons = node.querySelectorAll("[data-stars-input] .rating-star-btn");
-      const scoreLabel = node.querySelector("[data-score-label]");
-
-      const ratingLabels = {
-        1: "1/5 — Были серьезные замечания",
-        2: "2/5 — Ниже ожиданий заведения",
-        3: "3/5 — Нормально, стандартная смена",
-        4: "4/5 — Хорошо, качественная работа",
-        5: "5/5 — Отлично, рекомендуем коллегам!",
-      };
-
-      function updateStarsUI(val) {
-        starButtons.forEach((s) => {
-          const sVal = Number(s.dataset.rating);
-          s.classList.toggle("active", sVal <= val);
-        });
-        if (scoreLabel) scoreLabel.textContent = ratingLabels[val] || `${val}/5`;
-      }
-
-      // Pre-set existing review values if present
-      if (existingReview) {
-        updateStarsUI(existingReview.rating);
-        if (Array.isArray(existingReview.tags)) {
-          node.querySelectorAll("[data-tags-selector] .rating-tag-chip").forEach((chip) => {
-            chip.classList.toggle("active", existingReview.tags.includes(chip.dataset.tag));
-          });
-        }
-      }
-
-      starButtons.forEach((starBtn) => {
-        starBtn.addEventListener("click", () => {
-          currentRating = Number(starBtn.dataset.rating);
-          updateStarsUI(currentRating);
-        });
-        starBtn.addEventListener("mouseenter", () => {
-          const hoverVal = Number(starBtn.dataset.rating);
-          starButtons.forEach((s) => {
-            s.classList.toggle("hovered", Number(s.dataset.rating) <= hoverVal);
-          });
-        });
-        starBtn.addEventListener("mouseleave", () => {
-          starButtons.forEach((s) => s.classList.remove("hovered"));
-        });
-      });
-
-      // Tags selection toggle
-      node.querySelectorAll("[data-tags-selector] .rating-tag-chip").forEach((chip) => {
-        chip.addEventListener("click", () => {
-          chip.classList.toggle("active");
-        });
-      });
-
-      // Save Review action
-      node.querySelector("[data-action='save-review']")?.addEventListener("click", async (event) => {
-        const saveBtn = event.currentTarget;
-        setBusy(saveBtn, true, "Сохраняем...");
-        const msgEl = node.querySelector("[data-review-msg]");
-        const commentInput = node.querySelector("[data-review-text]");
-        const comment = (commentInput?.value || "").trim() || "Смена выполнена качественно и в полном соответствии с ТТК.";
-
-        const selectedTags = Array.from(
-          node.querySelectorAll("[data-tags-selector] .rating-tag-chip.active")
-        ).map((c) => c.dataset.tag);
-
-        const restName =
-          state.profile?.business_name ||
-          state.profile?.name ||
-          state.user?.email ||
-          "Ресторан Москвы";
-
-        const reviewPayload = {
-          id: existingReview?.id || `rev-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-          worker_id: application.worker_id,
-          restaurant_id: state.user.id,
-          restaurant_name: restName,
-          restaurant_city: state.profile?.city || "Москва",
-          shift_id: application.shift_id || null,
-          shift_title: shift.profession || shift.title || "Смена в заведении",
-          rating: currentRating,
-          tags: selectedTags,
-          comment,
-          created_at: existingReview?.created_at || new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        };
-
-        // 1. Save to Supabase
-        try {
-          await insertRow("worker_reviews", reviewPayload);
-        } catch (err) {
-          console.warn("Supabase worker_reviews insert:", err);
-        }
-
-        // 2. Save to local storage store
-        const storedReviews = getStoredWorkerReviews();
-        const filtered = storedReviews.filter((r) => r.id !== reviewPayload.id && !(r.worker_id === application.worker_id && r.shift_id === application.shift_id));
-        filtered.unshift(reviewPayload);
-        saveStoredWorkerReviews(filtered);
-
-        setBusy(saveBtn, false);
-        setMessage(msgEl, "✅ Отзыв успешно сохранен!");
-        if (toggleReviewBtn) {
-          toggleReviewBtn.textContent = `⭐️ Отзыв (${currentRating}★) • Изменить`;
-        }
-
-        setTimeout(() => {
-          setMessage(msgEl, "");
-          if (reviewBox) reviewBox.style.display = "none";
-        }, 1500);
       });
 
       el.shiftApplicationsList.appendChild(node);
@@ -2331,17 +1071,8 @@
       const inviteActions = openShifts.length
         ? `<label class="invite-shift-label">Смена<select data-invite-shift>${shiftOptions}</select></label><button type="button" data-action="invite-worker">Пригласить</button><p class="message"></p>`
         : '<p class="message">Сначала опубликуйте открытую смену, чтобы пригласить работника.</p>';
-
-      const workerReviews = getWorkerReviewsList(worker.user_id);
-      const avgRating = workerReviews.length
-        ? (workerReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / workerReviews.length).toFixed(1)
-        : "5.0";
-      const reviewsCount = workerReviews.length;
-
-      const workerTitle = `${displayName(profile, professions === "-" ? "Работник" : professions)} <span class="worker-rating-badge-mini">⭐ ${avgRating} (${reviewsCount} ${declOfNum(reviewsCount, ["отзыв", "отзыва", "отзывов"])})</span>`;
-
       const node = card(
-        workerTitle,
+        displayName(profile, professions === "-" ? "Работник" : professions),
         `
           <p>${escapeHtml(professions)}</p>
           <p>${escapeHtml(place || "Город не указан")}</p>
@@ -2352,9 +1083,6 @@
         `,
         inviteActions
       );
-
-      // card returns innerHTML so sanitize title handling with HTML is preserved
-      node.querySelector("h4").innerHTML = workerTitle;
 
       node.querySelector("[data-action='invite-worker']")?.addEventListener("click", (event) => {
         inviteWorker(worker, node, event.currentTarget);
@@ -3352,20 +2080,14 @@
 
     if (profile.role === "worker") {
       await loadWorkerProfile();
-      await Promise.all([loadWorkerInvites(), loadWorkerApplications(), loadWorkerReviews(), loadWorkerEarnings()]);
+      await Promise.all([loadWorkerInvites(), loadWorkerApplications()]);
       await loadShiftPosts();
-      await loadWorkerLiveShifts();
-      updateWorkerKpiWidgets();
-      if (typeof window.initWorkerRechartsDashboard === "function") {
-        window.initWorkerRechartsDashboard();
-      }
       return;
     }
 
     if (profile.role === "restaurant") {
       await loadRestaurantProfile();
       await loadRestaurantWorkspace();
-      updateRestaurantKpiWidgets();
       return;
     }
 
@@ -3380,428 +2102,15 @@
     }
   }
 
-  // Live Verified Shift Stream for Workers
-  state.workerLiveShifts = [];
-  state.workerLiveShiftsFilter = {
-    search: "",
-    role: "all",
-    minRate: 0,
-    sortBy: "date_desc"
-  };
-
-  async function loadWorkerLiveShifts(forceRefresh = false) {
-    const list = byId("workerLiveShiftsList");
-    const stats = byId("workerShiftStats");
-    if (!list) return;
-
-    if (stats) {
-      stats.innerHTML = `<span class="tg-feed-stats-text">Загрузка открытых смен...</span>`;
-    }
-
-    try {
-      const search = value("workerShiftSearch");
-      const role = value("workerShiftRoleSelect") || "all";
-      const minRate = numberValue("workerShiftMinRate") || 0;
-      const sortBy = value("workerShiftSortSelect") || "date_desc";
-
-      const queryParams = new URLSearchParams({
-        search,
-        role,
-        minRate: String(minRate),
-        sortBy,
-        refresh: forceRefresh ? "true" : "false"
-      });
-
-      const res = await fetch(`/api/vacancies?${queryParams.toString()}`);
-      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      const data = await res.json();
-
-      state.workerLiveShifts = data.items || [];
-      renderWorkerLiveShifts();
-      updateWorkerKpiWidgets();
-
-      if (stats) {
-        stats.innerHTML = `
-          <span class="tg-feed-stats-text">
-            Найдено проверенных предложений: <strong>${state.workerLiveShifts.length}</strong>
-          </span>
-          <span class="tg-feed-stats-text" style="color: var(--muted); font-size: 13px;">
-            Обновлено: ${new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
-          </span>
-        `;
-      }
-    } catch (err) {
-      console.error("Failed to load worker live shifts:", err);
-      if (list) {
-        list.innerHTML = `
-          <div style="grid-column: 1 / -1; padding: 24px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; text-align: center;">
-            <p style="margin: 0 0 12px; color: #f87171;">Не удалось загрузить ленту смен. Попробуйте обновить.</p>
-            <button id="retryWorkerShiftsBtn" class="btn" type="button">Повторить попытку</button>
-          </div>
-        `;
-        byId("retryWorkerShiftsBtn")?.addEventListener("click", () => loadWorkerLiveShifts(true));
-      }
-      if (stats) stats.innerHTML = `<span style="color: #f87171;">Ошибка обновления</span>`;
-    }
-  }
-
-  function renderWorkerLiveShifts() {
-    const list = byId("workerLiveShiftsList");
-    if (!list) return;
-
-    const items = state.workerLiveShifts || [];
-    if (!items.length) {
-      list.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 36px 20px; text-align: center; background: rgba(255,255,255,0.02); border: 1px dashed var(--line); border-radius: 14px;">
-          <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
-          <h4 style="margin: 0 0 8px; font-size: 18px;">Подходящих смен не найдено</h4>
-          <p style="color: var(--muted); margin: 0 0 16px; font-size: 14px;">Попробуйте смягчить фильтры или выбрать другой цех.</p>
-          <button id="resetWorkerFiltersBtn" class="btn" type="button">Сбросить фильтры</button>
-        </div>
-      `;
-      byId("resetWorkerFiltersBtn")?.addEventListener("click", () => {
-        if (byId("workerShiftSearch")) byId("workerShiftSearch").value = "";
-        if (byId("workerShiftRoleSelect")) byId("workerShiftRoleSelect").value = "all";
-        if (byId("workerShiftMinRate")) byId("workerShiftMinRate").value = "0";
-        if (byId("workerShiftSortSelect")) byId("workerShiftSortSelect").value = "date_desc";
-        document.querySelectorAll("#workerCabinet .tg-role-chip").forEach(c => c.classList.toggle("active", c.dataset.role === "all"));
-        loadWorkerLiveShifts();
-      });
-      return;
-    }
-
-    list.innerHTML = items.map(job => {
-      const isFeatured = job.roleCategory === 'chef' || (job.rateNumeric && job.rateNumeric >= 6000);
-      const formattedDate = formatLiveShiftDate(job.date);
-      const benefitsHtml = (job.benefits && job.benefits.length > 0)
-        ? `<ul class="vacancy-perks-list" style="margin: 12px 0 16px; font-size: 14px;">
-            ${job.benefits.slice(0, 4).map(b => `<li>${escapeHtml(b)}</li>`).join('')}
-          </ul>`
-        : '';
-
-      const rawTextExcerpt = job.rawText ? job.rawText.slice(0, 180).replace(/\n+/g, ' ') + '...' : '';
-
-      return `
-        <article class="vacancy-card ${isFeatured ? 'vacancy-card-featured' : ''}" style="display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px;">
-              <span class="vacancy-role-tag">${escapeHtml(job.role || 'Повар')}</span>
-              <span style="font-size: 12px; color: var(--muted); white-space: nowrap;">${formattedDate}</span>
-            </div>
-
-            <h3 class="vacancy-title" style="font-size: 20px; line-height: 1.35; margin-bottom: 12px;">${escapeHtml(job.title)}</h3>
-
-            <div class="vacancy-rate-box" style="padding: 10px 14px; margin-bottom: 14px;">
-              <span class="vacancy-rate-label">Оплата / Смена</span>
-              <span class="vacancy-rate-val" style="font-size: 22px;">${escapeHtml(job.rateText)}</span>
-            </div>
-
-            <div class="tg-job-meta" style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-              ${job.metro ? `<span class="tg-meta-item">📍 ${escapeHtml(job.metro)}</span>` : ''}
-              ${job.schedule ? `<span class="tg-meta-item">⏰ ${escapeHtml(job.schedule)}</span>` : ''}
-              <span class="tg-meta-item" style="color: #34d399; background: rgba(52, 211, 153, 0.1);">✓ Проверено</span>
-            </div>
-
-            ${benefitsHtml}
-
-            ${rawTextExcerpt ? `
-              <details style="margin: 10px 0 14px; font-size: 13px; color: var(--muted);">
-                <summary style="cursor: pointer; color: var(--gold); user-select: none;">Показать описание смены</summary>
-                <div style="margin-top: 8px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; white-space: pre-wrap; font-size: 13px; line-height: 1.5; color: var(--text);">
-                  ${escapeHtml(job.rawText)}
-                </div>
-              </details>
-            ` : ''}
-          </div>
-
-          <div class="vacancy-actions" style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
-            ${job.contacts && job.contacts.telegram ? `
-              <a class="btn primary" href="https://t.me/${job.contacts.telegram.replace(/^@/, '')}" target="_blank" rel="noopener" style="flex: 1 1 auto; text-align: center;">
-                💬 Откликнуться в Telegram
-              </a>
-            ` : ''}
-            ${job.contacts && job.contacts.phone ? `
-              <a class="btn" href="tel:${job.contacts.phone}" style="flex: 1 1 auto; text-align: center;">
-                📞 ${escapeHtml(job.contacts.phone)}
-              </a>
-            ` : ''}
-            ${(!job.contacts || (!job.contacts.telegram && !job.contacts.phone)) ? `
-              <span class="tg-meta-item" style="color: var(--muted); font-size: 13px;">Контакты уточняются через поддержку</span>
-            ` : ''}
-          </div>
-        </article>
-      `;
-    }).join('');
-  }
-
-  function formatLiveShiftDate(dateStr) {
-    if (!dateStr) return 'Сегодня';
-    try {
-      const d = new Date(dateStr);
-      const now = new Date();
-      const diffMs = now.getTime() - d.getTime();
-      const diffMinutes = Math.floor(diffMs / (1000 * 60));
-      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-
-      if (diffMinutes < 5) return 'Только что';
-      if (diffMinutes < 60) return `${diffMinutes} мин. назад`;
-      if (diffHours < 24) return `${diffHours} ч. назад`;
-      return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-    } catch {
-      return 'Свежая';
-    }
-  }
-
-  // =========================================================
-  // GastroConnect B2B HoReCa Marketplace (AgroServer verified)
-  // =========================================================
-  let b2bSuppliersCache = [];
-  let b2bActiveCategory = "all";
-
-  function initB2BSuppliers() {
-    const refreshBtn = byId("refreshB2BSuppliersBtn");
-    const searchInput = byId("b2bSupplierSearch");
-    const minOrderSelect = byId("b2bMinOrderFilter");
-    const applyFilterBtn = byId("b2bApplyFilterBtn");
-    const categoryChips = document.querySelectorAll("#b2bCategoryChips button");
-
-    if (refreshBtn) {
-      refreshBtn.addEventListener("click", () => fetchB2BSuppliers());
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener("input", debounce(() => renderB2BSuppliers(), 250));
-    }
-
-    if (minOrderSelect) {
-      minOrderSelect.addEventListener("change", () => renderB2BSuppliers());
-    }
-
-    if (applyFilterBtn) {
-      applyFilterBtn.addEventListener("click", () => renderB2BSuppliers());
-    }
-
-    categoryChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        categoryChips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        b2bActiveCategory = chip.dataset.b2bCat || "all";
-        renderB2BSuppliers();
-      });
-    });
-
-    // Auto-fetch if container exists
-    if (byId("b2bSuppliersContainer")) {
-      fetchB2BSuppliers();
-    }
-  }
-
-  async function fetchB2BSuppliers() {
-    const msgEl = byId("b2bSuppliersMessage");
-    const container = byId("b2bSuppliersContainer");
-    if (msgEl) msgEl.textContent = "Загружаем каталог оптовых поставщиков продуктов...";
-    
-    try {
-      const res = await fetch("/api/suppliers");
-      const json = await res.json();
-      if (json.success && Array.isArray(json.suppliers)) {
-        b2bSuppliersCache = json.suppliers;
-        if (msgEl) msgEl.textContent = `Доступно ${b2bSuppliersCache.length} проверенных оптовых поставщиков для общепита`;
-        renderB2BSuppliers();
-      } else {
-        if (msgEl) msgEl.textContent = "Не удалось загрузить поставщиков.";
-      }
-    } catch (e) {
-      if (msgEl) msgEl.textContent = "Ошибка при загрузке поставщиков: " + e.message;
-    }
-  }
-
-  function renderB2BSuppliers() {
-    const container = byId("b2bSuppliersContainer");
-    const msgEl = byId("b2bSuppliersMessage");
-    if (!container) return;
-
-    const query = (byId("b2bSupplierSearch")?.value || "").trim().toLowerCase();
-    const minOrderMax = parseInt(byId("b2bMinOrderFilter")?.value || "0", 10);
-
-    let filtered = [...b2bSuppliersCache];
-
-    if (b2bActiveCategory && b2bActiveCategory !== "all") {
-      filtered = filtered.filter(s => s.category === b2bActiveCategory);
-    }
-
-    if (minOrderMax > 0) {
-      filtered = filtered.filter(s => s.min_order_rub <= minOrderMax);
-    }
-
-    if (query) {
-      filtered = filtered.filter(s => 
-        s.company_name.toLowerCase().includes(query) ||
-        s.category_label.toLowerCase().includes(query) ||
-        s.description.toLowerCase().includes(query) ||
-        (s.products && s.products.some(p => p.name.toLowerCase().includes(query)))
-      );
-    }
-
-    if (msgEl) {
-      msgEl.textContent = `Найдено поставщиков: ${filtered.length}`;
-    }
-
-    if (filtered.length === 0) {
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; background: #fff; border-radius: 16px; border: 1px dashed var(--line);">
-          <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
-          <h4 style="margin: 0 0 6px; font-size: 18px; color: var(--ink);">Поставщиков по запросу не найдено</h4>
-          <p style="margin: 0; color: #64748b; font-size: 14px;">Попробуйте сбросить фильтры или выбрать другую категорию продуктов.</p>
-        </div>
-      `;
-      return;
-    }
-
-    container.innerHTML = filtered.map(supplier => {
-      const tgUsername = (supplier.telegram || "").replace(/^@/, "");
-      const tgLink = tgUsername ? `https://t.me/${tgUsername}` : "https://t.me/gastroconnect";
-      const phoneLink = `tel:${supplier.phone.replace(/[^\d+]/g, "")}`;
-      const productsHtml = (supplier.products || []).map(p => `
-        <div class="b2b-prod-item">
-          <div>
-            <div style="font-weight: 750; color: var(--ink);">${escapeHtml(p.name)}</div>
-            <div style="font-size: 11.5px; color: #64748b;">${escapeHtml(p.spec || "")}</div>
-          </div>
-          <div class="b2b-prod-price">${money(p.price)} / ${escapeHtml(p.unit)}</div>
-        </div>
-      `).join("");
-
-      const badgesHtml = (supplier.badges || []).map(b => `
-        <span class="b2b-mini-badge">✓ ${escapeHtml(b)}</span>
-      `).join("");
-
-      return `
-        <div class="b2b-supplier-card" id="card-${supplier.id}">
-          <div class="b2b-card-top">
-            <div>
-              <div class="b2b-sup-cat">${escapeHtml(supplier.category_label)}</div>
-              <h4 class="b2b-sup-name">${escapeHtml(supplier.company_name)}</h4>
-              <div style="font-size: 12px; color: #64748b;">Источник: ${escapeHtml(supplier.source)}</div>
-            </div>
-            <div class="b2b-rating-pill">⭐ ${supplier.rating} (${supplier.reviews_count})</div>
-          </div>
-
-          <p class="b2b-sup-desc">${escapeHtml(supplier.description)}</p>
-
-          <div class="b2b-badges-wrap">${badgesHtml}</div>
-
-          <div class="b2b-sup-meta">
-            <div class="b2b-meta-row">
-              <span class="b2b-meta-label">Мин. заказ:</span>
-              <span class="b2b-meta-value">${money(supplier.min_order_rub)}</span>
-            </div>
-            <div class="b2b-meta-row">
-              <span class="b2b-meta-label">График доставки:</span>
-              <span class="b2b-meta-value">${escapeHtml(supplier.delivery_schedule)}</span>
-            </div>
-            <div class="b2b-meta-row">
-              <span class="b2b-meta-label">Оплата:</span>
-              <span class="b2b-meta-value" style="font-size: 12px;">${escapeHtml(supplier.payment_terms)}</span>
-            </div>
-            <div class="b2b-meta-row">
-              <span class="b2b-meta-label">Склад:</span>
-              <span class="b2b-meta-value" style="font-size: 12px;">${escapeHtml(supplier.warehouse)}</span>
-            </div>
-          </div>
-
-          <button type="button" class="b2b-products-toggle" onclick="
-            var list = this.nextElementSibling;
-            if (list.classList.contains('expanded')) {
-              list.classList.remove('expanded');
-              this.innerHTML = '📋 Показать прайс-лист оптовых цен (' + ${supplier.products.length} + ') ▼';
-            } else {
-              list.classList.add('expanded');
-              this.innerHTML = '📋 Скрыть прайс-лист оптовых цен ▲';
-            }
-          ">
-            📋 Показать прайс-лист оптовых цен (${supplier.products.length}) ▼
-          </button>
-          <div class="b2b-products-list">
-            <div style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px;">Прайс-лист для HoReCa (с НДС)</div>
-            ${productsHtml}
-          </div>
-
-          <div class="b2b-card-actions">
-            <div class="b2b-action-row">
-              ${supplier.website ? `
-                <a href="${escapeHtml(supplier.website)}" target="_blank" rel="noopener" class="b2b-btn-web">
-                  🌐 Сайт
-                </a>
-              ` : ''}
-              <a href="${tgLink}" target="_blank" rel="noopener" class="b2b-btn-tg">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.93-1.28 4.88-2.12 5.86-2.54 2.79-1.16 3.37-1.36 3.75-1.36.08 0 .28.02.4.12.1.08.13.19.14.27-.01.06.01.24 0 .36z"/></svg>
-                Telegram
-              </a>
-              <a href="${phoneLink}" class="b2b-btn-phone">
-                📞 Звонок
-              </a>
-            </div>
-            <button type="button" class="b2b-btn-order" onclick="
-              const reqInput = document.getElementById('supplyRequestTitle');
-              const catInput = document.getElementById('supplyRequestCategory');
-              const cityInput = document.getElementById('supplyRequestCity');
-              const msgInput = document.getElementById('supplyRequestMessage');
-              if (reqInput) reqInput.value = 'Заказ товаров у ${escapeHtml(supplier.short_name)}';
-              if (catInput) catInput.value = '${escapeHtml(supplier.category_label)}';
-              if (cityInput) cityInput.value = 'Москва';
-              if (msgInput) msgInput.value = 'Здравствуйте! Хотим запросить поставку в наше заведение (${escapeHtml(supplier.company_name)}).';
-              document.getElementById('supplyRequestTitle')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              document.getElementById('supplyRequestTitle')?.focus();
-            ">
-              ⚡️ Оформить заявку через GastroConnect
-            </button>
-          </div>
-        </div>
-      `;
-    }).join("");
-  }
-
   function bindEvents() {
     const onClick = (id, handler) => byId(id)?.addEventListener("click", handler);
     const onInput = (id, handler) => byId(id)?.addEventListener("input", handler);
-    const onChange = (id, handler) => byId(id)?.addEventListener("change", handler);
-
-    // Worker Live Shifts Controls
-    onClick("refreshWorkerShiftsBtn", () => loadWorkerLiveShifts(true));
-    onInput("workerShiftSearch", debounce(() => loadWorkerLiveShifts(), 300));
-    onChange("workerShiftRoleSelect", () => {
-      const selected = value("workerShiftRoleSelect");
-      document.querySelectorAll("#workerCabinet .tg-role-chip").forEach(c => {
-        c.classList.toggle("active", c.dataset.role === selected);
-      });
-      loadWorkerLiveShifts();
-    });
-    onChange("workerShiftMinRate", () => loadWorkerLiveShifts());
-    onChange("workerShiftSortSelect", () => loadWorkerLiveShifts());
-
-    // Worker Role Chips
-    document.querySelectorAll("#workerCabinet .tg-role-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        document.querySelectorAll("#workerCabinet .tg-role-chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        const role = chip.dataset.role || "all";
-        if (byId("workerShiftRoleSelect")) byId("workerShiftRoleSelect").value = role;
-        loadWorkerLiveShifts();
-      });
-    });
 
     onClick("saveWorkerProfileBtn", saveWorkerProfile);
     onClick("loadInvitesBtn", loadWorkerInvites);
     onClick("loadWorkerApplicationsBtn", loadWorkerApplications);
-    onClick("refreshWorkerReviewsBtn", () => loadWorkerReviews());
-    onClick("refreshWorkerEarningsBtn", () => loadWorkerEarnings());
     onClick("loadShiftPostsBtn", loadShiftPosts);
     onInput("shiftSearchInput", renderShiftPosts);
-
-    // Initialize Worker Earnings & Savings Goal Calculators
-    initWorkerEarningsCalc();
-    initWorkerSavingsGoalCalc();
 
     onClick("saveRestaurantProfileBtn", saveRestaurantProfile);
     onClick("createShiftPostBtn", createShiftPost);
@@ -3826,36 +2135,19 @@
 
     onClick("loadAdminDataBtn", loadAdminData);
 
-    // B2B Verified Suppliers Controller
-    initB2BSuppliers();
-
-    // Supabase Visual KPI Interactivity
-    initKpiInteractivity();
-
     el.logoutBtn?.addEventListener("click", async () => {
       await db.auth.signOut();
       window.location.href = "/auth/";
     });
   }
 
-  function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  }
-
   async function init() {
     if (!db) {
-      setMessage(el.userInfo, "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
+      setMessage(el.userInfo, "Supabase не загрузился. Обновите страницу.");
       return;
     }
 
     bindEvents();
-    fetchLiveSupabaseKpiCounts();
-    updateWorkerKpiWidgets();
-    updateRestaurantKpiWidgets();
     const profile = await loadProfile();
     if (profile) await openCabinet(profile);
   }

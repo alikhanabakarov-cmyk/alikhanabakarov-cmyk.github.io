@@ -44,20 +44,6 @@
     } catch {}
   }
 
-  function timeoutSignal(ms) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), ms);
-    return { signal: controller.signal, clear: () => clearTimeout(timeoutId) };
-  }
-
-  function withTimeout(promise, ms, message = "request timeout") {
-    let timeoutId;
-    const timeout = new Promise((_, reject) => {
-      timeoutId = setTimeout(() => reject(new Error(message)), ms);
-    });
-    return Promise.race([promise, timeout]).finally(() => clearTimeout(timeoutId));
-  }
-
   function applySettings(settings) {
     if (!settings || typeof settings !== "object") return;
     document.querySelectorAll("[data-site-setting]").forEach((node) => {
@@ -142,15 +128,11 @@
     const client = window.supabaseClient;
     if (!client) return;
     try {
-      const { data, error } = await withTimeout(
-        client
-          .from("site_settings")
-          .select("settings")
-          .eq("id", SETTINGS_ROW)
-          .maybeSingle(),
-        1500,
-        "site_settings timeout",
-      );
+      const { data, error } = await client
+        .from("site_settings")
+        .select("settings")
+        .eq("id", SETTINGS_ROW)
+        .maybeSingle();
       if (error || !data?.settings) return;
       const next = mergeDeep(readJson(SETTINGS_KEY, {}), data.settings);
       writeJson(SETTINGS_KEY, next);
@@ -167,13 +149,7 @@
       };
       return window.__gcSupabaseRestConfig;
     }
-    const timeout = timeoutSignal(1500);
-    let response;
-    try {
-      response = await fetch("/supabase.js?v=1002", { cache: "force-cache", signal: timeout.signal });
-    } finally {
-      timeout.clear();
-    }
+    const response = await fetch("/supabase.js?v=1002", { cache: "force-cache" });
     if (!response.ok) throw new Error("supabase.js не загрузился");
     const source = await response.text();
     const url = source.match(/SUPABASE_URL\s*=\s*['"]([^'"]+)['"]/i)?.[1];
@@ -266,261 +242,65 @@
       source: row.source || "site",
       status: row.status || "new",
     };
-    const compactPayload = {
-      type: row.type,
-      title: row.title,
-      phone: row.phone,
-      telegram: row.telegram,
-      city: row.city,
-      data: {
-        ...row.data,
-        email: row.email || row.data?.email || "",
-        personalDataConsent: Boolean(row.personalDataConsent),
-        personalDataConsentDate: row.personalDataConsentDate || "",
-        ipAddress: row.ipAddress || "",
-        userAgent: row.userAgent || "",
-        source: row.source || "site",
-        status: row.status || "new",
-      },
-    };
-    const isSchemaMismatch = (error) =>
-      /PGRST204|schema cache|personal_data_consent|personal_data_consent_date|ip_address|user_agent|email|status|source/i.test(
-        String(error?.code || error?.message || error || ""),
-      );
     const client = window.supabaseClient;
     if (client) {
-      const { error } = await withTimeout(
-        client.from(SUBMISSIONS_TABLE).insert(payload),
-        3500,
-        "public_submissions timeout",
-      );
-      if (error) {
-        if (!isSchemaMismatch(error)) throw error;
-        const retry = await withTimeout(
-          client.from(SUBMISSIONS_TABLE).insert(compactPayload),
-          3500,
-          "public_submissions compact timeout",
-        );
-        if (retry.error) throw retry.error;
-      }
+      const { error } = await client.from(SUBMISSIONS_TABLE).insert(payload);
+      if (error) throw error;
       return true;
     }
     const { url, key } = await getSupabaseRestConfig();
-    async function post(body) {
-      const timeout = timeoutSignal(3500);
-      try {
-        const response = await fetch(`${url}/rest/v1/${SUBMISSIONS_TABLE}`, {
-          method: "POST",
-          signal: timeout.signal,
-          headers: {
-            apikey: key,
-            Authorization: `Bearer ${key}`,
-            "Content-Type": "application/json",
-            Prefer: "return=minimal",
-          },
-          body: JSON.stringify(body),
-        });
-        const text = response.ok ? "" : await response.text().catch(() => "");
-        return { response, text };
-      } finally {
-        timeout.clear();
-      }
-    }
-    const first = await post(payload);
-    if (!first.response.ok && isSchemaMismatch(first.text)) {
-      const retry = await post(compactPayload);
-      if (!retry.response.ok) throw new Error(`public_submissions ${retry.response.status}: ${retry.text}`);
-      return true;
-    }
-    if (!first.response.ok) throw new Error(`public_submissions ${first.response.status}: ${first.text}`);
+    const response = await fetch(`${url}/rest/v1/${SUBMISSIONS_TABLE}`, {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error(`public_submissions ${response.status}`);
     return true;
   }
   function initPublicForms() {
     document.querySelectorAll("form[data-form-type]").forEach((form) => {
-      function getOrCreateErrorBadge(input) {
-        const parent = input.closest("label") || input.parentElement;
-        let badge = parent.querySelector(".field-error-msg");
-        if (!badge) {
-          badge = document.createElement("span");
-          badge.className = "field-error-msg";
-          parent.appendChild(badge);
-        }
-        return badge;
-      }
-
-      function validateField(input, isBlur = false) {
-        if (!input || input.type === "hidden" || input.type === "submit") return true;
-        const val = input.value.trim();
-        const badge = getOrCreateErrorBadge(input);
-        let isValid = true;
-        let errorMsg = "";
-
-        if (input.name === "name") {
-          if (!val) {
-            isValid = false;
-            errorMsg = "Пожалуйста, укажите имя";
-          } else if (val.length < 2) {
-            isValid = false;
-            errorMsg = "Имя должно содержать от 2 символов";
-          }
-        } else if (input.name === "phone" || input.type === "tel") {
-          const digits = val.replace(/\D/g, "");
-          if (!val) {
-            isValid = false;
-            errorMsg = "Укажите номер телефона для связи";
-          } else if (digits.length < 10) {
-            isValid = false;
-            errorMsg = "Введите корректный номер (10–11 цифр)";
-          }
-        } else if (input.name === "email" || input.type === "email") {
-          if (input.required && !val) {
-            isValid = false;
-            errorMsg = "Укажите email";
-          } else if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            isValid = false;
-            errorMsg = "Некорректный формат email";
-          }
-        } else if (input.required && !val) {
-          isValid = false;
-          errorMsg = "Обязательное поле для заполнения";
-        }
-
-        if (isValid) {
-          input.classList.remove("is-invalid");
-          if (val.length > 0) input.classList.add("is-valid");
-          else input.classList.remove("is-valid");
-          badge.classList.remove("show");
-          badge.textContent = "";
-        } else {
-          input.classList.remove("is-valid");
-          if (isBlur || input.dataset.touched === "true") {
-            input.classList.add("is-invalid");
-            badge.textContent = errorMsg;
-            badge.classList.add("show");
-          }
-        }
-        return isValid;
-      }
-
-      form.querySelectorAll("input, select, textarea").forEach((input) => {
-        if (input.type === "hidden" || input.type === "submit") return;
-
-        if (input.name === "phone" || input.type === "tel") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            let raw = input.value.replace(/\D/g, "");
-            if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-            if (raw.length > 0) {
-              let formatted = "+7 (";
-              formatted += raw.slice(0, 3);
-              if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-              if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-              if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-              input.value = formatted;
-            } else {
-              input.value = "";
-            }
-            validateField(input);
-          });
-        } else if (input.type !== "checkbox") {
-          input.addEventListener("input", () => {
-            input.dataset.touched = "true";
-            validateField(input);
-          });
-        }
-
-        input.addEventListener("blur", () => {
-          input.dataset.touched = "true";
-          validateField(input, true);
-        });
-      });
-
-      const consentBox = form.querySelector('input[name="personalDataConsent"]');
-      if (consentBox) {
-        consentBox.addEventListener("change", () => {
-          const wrapper = consentBox.closest(".consent-checkbox") || consentBox.parentElement;
-          if (consentBox.checked) {
-            wrapper.classList.remove("is-invalid");
-          }
-        });
-      }
-
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = form.querySelector('button[type="submit"], input[type="submit"]');
         const box = form.querySelector(".success");
-
-        let formIsValid = true;
-        let firstInvalid = null;
-
-        form.querySelectorAll("input, select, textarea").forEach((input) => {
-          if (input.type === "hidden" || input.type === "submit" || input.type === "checkbox") return;
-          input.dataset.touched = "true";
-          const valid = validateField(input, true);
-          if (!valid) {
-            formIsValid = false;
-            if (!firstInvalid) firstInvalid = input;
-          }
-        });
-
-        const consent = form.querySelector('input[name="personalDataConsent"]');
-        if (consent && !consent.checked) {
-          formIsValid = false;
-          const wrapper = consent.closest(".consent-checkbox") || consent.parentElement;
-          wrapper.classList.add("is-invalid");
-          if (!firstInvalid) firstInvalid = consent;
-        }
-
-        if (!formIsValid) {
-          if (firstInvalid) firstInvalid.focus();
-          return;
-        }
-
         if (button) button.disabled = true;
         const rawData = Object.fromEntries(new FormData(form).entries());
+        if (rawData.personalDataConsent !== "true" && rawData.personalDataConsent !== "on") {
+          if (box) {
+            box.textContent = "\u041d\u0443\u0436\u043d\u043e \u043f\u0440\u0438\u043d\u044f\u0442\u044c \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438 \u0434\u0430\u0442\u044c \u0441\u043e\u0433\u043b\u0430\u0441\u0438\u0435 \u043d\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0443 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445.";
+            box.style.display = "block";
+          }
+          if (button) button.disabled = false;
+          return;
+        }
         rawData.personalDataConsentDate = new Date().toISOString();
         rawData.userAgent = navigator.userAgent || "";
         rawData.ipAddress = "";
         const row = makeSubmission(form.dataset.formType, rawData);
+        saveLocalSubmission(row);
         try {
-          let lastError = null;
-          for (let attempt = 0; attempt < 2; attempt += 1) {
-            try {
-              await saveRemoteSubmission(row);
-              lastError = null;
-              break;
-            } catch (error) {
-              lastError = error;
-              if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 1200));
-            }
-          }
-          if (lastError) throw lastError;
+          await saveRemoteSubmission(row);
           if (box) {
             box.setAttribute("role", "status");
-            box.style.color = "";
             box.textContent =
               form.dataset.formType === "callback"
-                ? "Заявка на звонок отправлена. Мы свяжемся с вами по указанному телефону."
+                ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0437\u0432\u043e\u043d\u043e\u043a \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c\u0443 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443."
                 : form.dataset.formType === "feedback"
-                  ? "Обращение отправлено. Мы ответим по указанным контактам."
+                  ? "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e. \u041c\u044b \u043e\u0442\u0432\u0435\u0442\u0438\u043c \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u043c \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c."
                   : form.dataset.formType === "telegram_bot"
-                    ? "Заявка на Telegram-уведомления отправлена. Мы свяжемся для подключения."
-                    : "Заявка отправлена. Мы получили ваши контакты и свяжемся с вами.";
+                    ? "\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 Telegram-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f."
+                    : "\u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430. \u041c\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0438 \u0432\u0430\u0448\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b \u0438 \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
           }
-          form.reset();
-          form.querySelectorAll(".is-valid, .is-invalid").forEach((el) => el.classList.remove("is-valid", "is-invalid"));
-          form.querySelectorAll(".field-error-msg").forEach((el) => el.classList.remove("show"));
         } catch {
-          row.pending = true;
-          saveLocalSubmission(row);
-          if (box) {
-            box.setAttribute("role", "alert");
-            box.style.color = "#b42318";
-            box.textContent =
-              "Не удалось отправить заявку: сервер не ответил. Данные остались в форме — проверьте интернет и нажмите «Отправить» ещё раз. Если ошибка повторится, свяжитесь с нами через страницу «Контакты».";
-          }
+          if (box) box.textContent = "\u0417\u0430\u044f\u0432\u043a\u0430 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0430 \u0432 \u044d\u0442\u043e\u043c \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0435. \u0415\u0441\u043b\u0438 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u0438\u043b\u0438 \u0431\u0430\u0437\u0430 \u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b, \u043f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0443 \u043f\u043e\u0437\u0436\u0435.";
         } finally {
           if (box) box.style.display = "block";
+          form.reset();
           if (button) button.disabled = false;
         }
       });
@@ -568,120 +348,6 @@
       return digits ? `+${digits}` : "";
     }
 
-    function getOrCreateAuthBadge(input) {
-      const parent = input.closest("label") || input.parentElement;
-      let badge = parent.querySelector(".field-error-msg");
-      if (!badge) {
-        badge = document.createElement("span");
-        badge.className = "field-error-msg";
-        badge.setAttribute("role", "alert");
-        badge.setAttribute("aria-live", "polite");
-        parent.appendChild(badge);
-      }
-      return badge;
-    }
-
-    function formatAuthPhone(val) {
-      let raw = String(val || "").replace(/\D/g, "");
-      if (raw.startsWith("7") || raw.startsWith("8")) raw = raw.slice(1);
-      if (raw.length === 0) return "";
-      let formatted = "+7 (";
-      formatted += raw.slice(0, 3);
-      if (raw.length > 3) formatted += ") " + raw.slice(3, 6);
-      if (raw.length > 6) formatted += "-" + raw.slice(6, 8);
-      if (raw.length > 8) formatted += "-" + raw.slice(8, 10);
-      return formatted;
-    }
-
-    function validateAuthEmail(isBlur = false) {
-      if (!emailInput || (emailField && emailField.hidden)) {
-        if (emailInput) {
-          emailInput.classList.remove("is-invalid", "is-valid");
-          const b = getOrCreateAuthBadge(emailInput);
-          b.classList.remove("show");
-          b.textContent = "";
-        }
-        return true;
-      }
-      const val = emailValue();
-      const badge = getOrCreateAuthBadge(emailInput);
-      const isPhoneMethod = methodInput.value === "phone";
-      const isRequired = mode === "login" ? !isPhoneMethod : !isPhoneMethod;
-      let isValid = true;
-      let errorMsg = "";
-
-      if (!val) {
-        if (isRequired) {
-          isValid = false;
-          errorMsg = "Пожалуйста, укажите email";
-        }
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-        isValid = false;
-        errorMsg = "Некорректный формат email (например, name@mail.ru)";
-      }
-
-      if (isValid) {
-        emailInput.classList.remove("is-invalid");
-        if (val.length > 0) emailInput.classList.add("is-valid");
-        else emailInput.classList.remove("is-valid");
-        badge.classList.remove("show");
-        badge.textContent = "";
-      } else {
-        emailInput.classList.remove("is-valid");
-        if (isBlur || emailInput.dataset.touched === "true") {
-          emailInput.classList.add("is-invalid");
-          badge.textContent = errorMsg;
-          badge.classList.add("show");
-        }
-      }
-      return isValid;
-    }
-
-    function validateAuthPhone(isBlur = false) {
-      if (!phoneInput || (phoneField && phoneField.hidden)) {
-        if (phoneInput) {
-          phoneInput.classList.remove("is-invalid", "is-valid");
-          const b = getOrCreateAuthBadge(phoneInput);
-          b.classList.remove("show");
-          b.textContent = "";
-        }
-        return true;
-      }
-      const val = phoneInput.value.trim();
-      const digits = val.replace(/\D/g, "");
-      const badge = getOrCreateAuthBadge(phoneInput);
-      const isPhoneMethod = methodInput.value === "phone";
-      const isRequired = mode === "login" ? isPhoneMethod : isPhoneMethod;
-      let isValid = true;
-      let errorMsg = "";
-
-      if (!val || digits.length === 0) {
-        if (isRequired) {
-          isValid = false;
-          errorMsg = "Укажите номер телефона";
-        }
-      } else if (digits.length < 10) {
-        isValid = false;
-        errorMsg = "Введите корректный номер (10–11 цифр)";
-      }
-
-      if (isValid) {
-        phoneInput.classList.remove("is-invalid");
-        if (digits.length >= 10) phoneInput.classList.add("is-valid");
-        else phoneInput.classList.remove("is-valid");
-        badge.classList.remove("show");
-        badge.textContent = "";
-      } else {
-        phoneInput.classList.remove("is-valid");
-        if (isBlur || phoneInput.dataset.touched === "true") {
-          phoneInput.classList.add("is-invalid");
-          badge.textContent = errorMsg;
-          badge.classList.add("show");
-        }
-      }
-      return isValid;
-    }
-
     function emailValue() {
       return emailInput.value.trim().toLowerCase();
     }
@@ -720,18 +386,6 @@
       phoneInput.required = loginMode ? byPhone : methodInput.value === "phone";
       emailInput.placeholder = byPhone ? "Можно указать дополнительно" : "example@mail.ru";
       phoneInput.placeholder = byPhone ? "+7 910 000-00-00" : "Можно указать дополнительно";
-      if (emailField && emailField.hidden) {
-        emailInput.classList.remove("is-invalid", "is-valid");
-        const b = getOrCreateAuthBadge(emailInput);
-        b.classList.remove("show");
-        b.textContent = "";
-      }
-      if (phoneField && phoneField.hidden) {
-        phoneInput.classList.remove("is-invalid", "is-valid");
-        const b = getOrCreateAuthBadge(phoneInput);
-        b.classList.remove("show");
-        b.textContent = "";
-      }
       if (updateUrl) updateHistory();
     }
 
@@ -840,30 +494,6 @@
       return payload;
     }
 
-    function readableAuthError(error) {
-      const code = String(error?.code || error?.error_code || "").toLowerCase();
-      const text = String(error?.message || "").toLowerCase();
-      if (code.includes("email_not_confirmed") || text.includes("email not confirmed")) {
-        return "Email не подтвержден. Откройте письмо от GastroConnect и подтвердите регистрацию.";
-      }
-      if (code.includes("over_email_send_rate_limit") || text.includes("email rate limit") || text.includes("too many requests")) {
-        return "Сейчас слишком много запросов. Подождите несколько минут и попробуйте снова.";
-      }
-      if (code.includes("invalid_credentials") || text.includes("invalid login credentials")) {
-        return "Неверный email/телефон или пароль. Если вы только зарегистрировались, сначала подтвердите email.";
-      }
-      if (code.includes("user_already_exists") || text.includes("already registered") || text.includes("already been registered")) {
-        return "Аккаунт с такими данными уже существует. Войдите или восстановите пароль.";
-      }
-      if (code.includes("weak_password") || text.includes("password should be")) {
-        return "Слишком простой пароль. Используйте не менее 6 символов.";
-      }
-      if (text.includes("failed to fetch") || text.includes("network") || text.includes("timeout")) {
-        return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
-      }
-      return "Не удалось выполнить действие. Попробуйте ещё раз через минуту. Если ошибка повторится, напишите в поддержку через страницу «Контакты».";
-    }
-
     async function refreshSession() {
       const client = window.supabaseClient;
       if (!client || !cabinetShortcut) return;
@@ -876,7 +506,7 @@
           message.textContent = "Вы уже вошли. Можно открыть кабинет.";
         } catch (error) {
           cabinetShortcut.hidden = true;
-          message.textContent = readableAuthError(error);
+          message.textContent = error.message;
         }
       }
     }
@@ -884,37 +514,13 @@
     registerBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
-      emailInput.dataset.touched = "true";
-      phoneInput.dataset.touched = "true";
-      const emailOk = validateAuthEmail(true);
-      const phoneOk = validateAuthPhone(true);
-      if (method === "email" && !emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, укажите корректный email.";
-        return;
-      }
-      if (method === "phone" && !phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, укажите корректный номер телефона.";
-        return;
-      }
-      if (!emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, исправьте ошибки в поле email.";
-        return;
-      }
-      if (!phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, исправьте ошибки в поле телефона.";
-        return;
-      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
       const role = normalizeRole(roleInput.value);
       const name = nameInput?.value.trim() || "";
       const city = cityInput?.value.trim() || "";
-      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
+      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон в формате +7...");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -927,31 +533,8 @@
       const signUpPayload = method === "phone" ? { phone, password, options } : { email, password, options };
       const { data, error } = await client.auth.signUp(signUpPayload);
       if (error) {
-        const authErrorText = String(error?.code || error?.message || "").toLowerCase();
-        if (authErrorText.includes("email rate") || authErrorText.includes("over_email_send_rate_limit")) {
-          try {
-            const fallbackRow = makeSubmission(role, {
-              name,
-              city,
-              email,
-              phone,
-              title: name || email || phone || roleName[role],
-              personalDataConsent: true,
-              personalDataConsentDate: consentDate,
-              userAgent: navigator.userAgent || "",
-              authFallbackReason: "email_rate_limit",
-            });
-            saveLocalSubmission(fallbackRow);
-            await saveRemoteSubmission(fallbackRow);
-            setBusy(false);
-            setMode("login");
-            return (message.textContent = "Заявка принята. Мы получили ваши контакты и поможем завершить регистрацию.");
-          } catch {
-            // Keep the original auth error if even fallback lead capture is unavailable.
-          }
-        }
         setBusy(false);
-        return (message.textContent = `Не удалось зарегистрироваться: ${readableAuthError(error)}`);
+        return (message.textContent = `Ошибка регистрации: ${error.message}`);
       }
       if (data?.session?.user) {
         try {
@@ -960,38 +543,24 @@
           return;
         } catch (profileError) {
           setBusy(false);
-          return (message.textContent = `Аккаунт создан, но войти сразу не получилось. Войдите снова или напишите в поддержку через страницу «Контакты».`);
+          return (message.textContent = `Аккаунт создан, но профиль не сохранен: ${profileError.message}`);
         }
       }
       setBusy(false);
       message.textContent =
         method === "phone"
-          ? "Аккаунт создан. Подтвердите номер телефона по SMS и войдите."
-          : "Аккаунт создан. Подтвердите почту по ссылке из письма и войдите.";
+          ? "Аккаунт создан. Если Supabase просит SMS-код, подтвердите телефон и войдите."
+          : "Аккаунт создан. Если Supabase просит подтверждение email, подтвердите почту и войдите.";
       setMode("login");
     });
 
     loginBtn?.addEventListener("click", async () => {
       const client = window.supabaseClient;
       const method = methodInput.value === "phone" ? "phone" : "email";
-      emailInput.dataset.touched = "true";
-      phoneInput.dataset.touched = "true";
-      const emailOk = validateAuthEmail(true);
-      const phoneOk = validateAuthPhone(true);
-      if (method === "email" && !emailOk) {
-        emailInput.focus();
-        message.textContent = "Пожалуйста, введите корректный email.";
-        return;
-      }
-      if (method === "phone" && !phoneOk) {
-        phoneInput.focus();
-        message.textContent = "Пожалуйста, введите корректный номер телефона.";
-        return;
-      }
       const email = emailValue();
       const phone = phoneValue();
       const password = passwordInput.value;
-      if (!client) return (message.textContent = "Сервис временно недоступен. Обновите страницу и попробуйте снова.");
+      if (!client) return (message.textContent = "Supabase не загрузился. Обновите страницу.");
       if (method === "email" && !email) return (message.textContent = "Введите email.");
       if (method === "phone" && !phone) return (message.textContent = "Введите телефон.");
       if (!password) return (message.textContent = "Введите пароль.");
@@ -1001,34 +570,15 @@
       const { data, error } = await client.auth.signInWithPassword(credentials);
       if (error) {
         setBusy(false);
-        return (message.textContent = `Не удалось войти: ${readableAuthError(error)}`);
+        return (message.textContent = `Ошибка входа: ${error.message}`);
       }
       try {
         const profile = await ensureProfile(data.user, roleWasExplicit ? roleInput.value : "");
         window.location.href = profileCabinetUrl(profile);
       } catch (profileError) {
         setBusy(false);
-        message.textContent = `Вход выполнен, но кабинет не открылся. Обновите страницу или напишите в поддержку через страницу «Контакты».`;
+        message.textContent = `Вход выполнен, но профиль не проверен: ${profileError.message}`;
       }
-    });
-
-    emailInput?.addEventListener("input", () => {
-      emailInput.dataset.touched = "true";
-      validateAuthEmail(false);
-    });
-    emailInput?.addEventListener("blur", () => {
-      emailInput.dataset.touched = "true";
-      validateAuthEmail(true);
-    });
-
-    phoneInput?.addEventListener("input", () => {
-      phoneInput.dataset.touched = "true";
-      phoneInput.value = formatAuthPhone(phoneInput.value);
-      validateAuthPhone(false);
-    });
-    phoneInput?.addEventListener("blur", () => {
-      phoneInput.dataset.touched = "true";
-      validateAuthPhone(true);
     });
 
     showLoginBtn?.addEventListener("click", () => setMode("login"));
@@ -1086,3 +636,5 @@
   initReviewsCarousel();
   window.addEventListener("load", () => setTimeout(refreshSettings, 400), { once: true });
 })();
+
+
