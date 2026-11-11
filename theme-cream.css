@@ -1,0 +1,73 @@
+/* Shared visual theme for the static application shell. */
+:root {
+  color-scheme: light;
+  --gc-cream: #fffaf2;
+  --gc-cream-deep: #f4e7d5;
+  --gc-card: #fffdf8;
+  --gc-green: #064c3b;
+  --gc-green-strong: #043d30;
+  --gc-text: #14211d;
+  --gc-muted: #5e665f;
+  --gc-gold: #c99a3f;
+  --gc-gold-strong: #a97018;
+  --gc-line: #e4cfaa;
+
+  --teal-950: var(--gc-cream);
+  --teal-900: #fbf3e8;
+  --teal-850: var(--gc-cream-deep);
+  --teal-line: var(--gc-line);
+  --amber: var(--gc-gold);
+  --ivory-text: var(--gc-text);
+  --background: var(--gc-cream);
+  --foreground: var(--gc-text);
+  --surface: #fbf3e8;
+  --surface-2: var(--gc-cream-deep);
+  --card: var(--gc-card);
+  --card-foreground: var(--gc-text);
+  --popover: var(--gc-card);
+  --popover-foreground: var(--gc-text);
+  --primary: var(--gc-gold);
+  --primary-glow: var(--gc-gold-strong);
+  --primary-foreground: var(--gc-green-strong);
+  --secondary: var(--gc-cream-deep);
+  --secondary-foreground: var(--gc-green);
+  --muted: var(--gc-cream-deep);
+  --muted-foreground: var(--gc-muted);
+  --accent: #f7e8ce;
+  --accent-foreground: var(--gc-green);
+  --border: var(--gc-line);
+  --input: #ddc7a5;
+  --ring: var(--gc-gold);
+  --success: #23704f;
+  --destructive: #a93226;
+  --destructive-foreground: #fffdf8;
+  --gradient-primary: linear-gradient(135deg, #d6ad59, var(--gc-gold));
+  --gradient-hero: none;
+  --gradient-fade: linear-gradient(90deg, var(--gc-cream) 0%, var(--gc-cream) 55%, transparent 100%);
+  --gradient-card: none;
+  --gradient-amber: linear-gradient(135deg, #d6ad59, var(--gc-gold));
+  --shadow-glow: 0 10px 24px -16px rgba(169, 112, 24, 0.8);
+  --shadow-card: 0 12px 32px -24px rgba(56, 38, 14, 0.38);
+  --showcase: var(--gc-cream);
+  --showcase-2: #fbf3e8;
+  --showcase-foreground: var(--gc-text);
+  --gold: var(--gc-gold);
+  --gold-foreground: var(--gc-green-strong);
+}
+
+html,
+body {
+  background: var(--gc-cream);
+  color: var(--gc-text);
+}
+
+::selection {
+  background: #ecd29f;
+  color: var(--gc-green-strong);
+}
+
+input,
+textarea,
+select {
+  color: var(--gc-text);
+}
