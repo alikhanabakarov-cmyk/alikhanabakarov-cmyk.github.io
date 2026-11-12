@@ -1,0 +1,1 @@
+var e=`/assets/supplier-Dey8msza.webp`;export{e as t};

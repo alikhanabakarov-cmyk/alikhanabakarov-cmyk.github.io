@@ -1,0 +1,1 @@
+var e=`/assets/cook-BNFhnpi1.webp`;export{e as t};
