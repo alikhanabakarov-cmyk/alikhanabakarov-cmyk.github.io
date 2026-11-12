@@ -1,0 +1,1 @@
+import{t as e}from"./geoPages-B1RaJ5E9.js";var t=e[`postavshchiki-produktov-dlya-restoranov`];export{t};
