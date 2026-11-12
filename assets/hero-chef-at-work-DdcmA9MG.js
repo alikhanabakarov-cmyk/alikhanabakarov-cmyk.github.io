@@ -1,0 +1,1 @@
+var e=`/assets/hero-chef-at-work-CheL78n9.webp`;export{e as t};

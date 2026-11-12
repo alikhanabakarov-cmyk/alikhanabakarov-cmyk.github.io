@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CXCudH8Z.js";import{t}from"./GeoLanding-CnXzkOsD.js";import{t as n}from"./goroda-Cj9vpOU9.js";var r=e(),i=()=>(0,r.jsx)(t,{page:n});export{i as component};
