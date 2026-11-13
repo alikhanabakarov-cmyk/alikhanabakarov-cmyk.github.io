@@ -1,0 +1,1 @@
+import{t as e}from"./geoPages-sWVDS9xK.js";var t=e.goroda;export{t};
