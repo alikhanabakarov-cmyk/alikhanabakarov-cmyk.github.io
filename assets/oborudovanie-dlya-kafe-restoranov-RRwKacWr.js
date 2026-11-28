@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CXCudH8Z.js";import{t}from"./oborudovanie-dlya-kafe-restoranov-DPDvgqJN.js";import{t as n}from"./GeoLanding-FrZXhQfM.js";var r=e(),i=()=>(0,r.jsx)(n,{page:t});export{i as component};

@@ -1,0 +1,1 @@
+var e=[`worker`,`restaurant`,`supplier`],t={worker:`Работник`,restaurant:`Заведение`,supplier:`Поставщик`},n={worker:`/cabinet`,restaurant:`/cabinet`,supplier:`/cabinet`};export{e as n,t as r,n as t};

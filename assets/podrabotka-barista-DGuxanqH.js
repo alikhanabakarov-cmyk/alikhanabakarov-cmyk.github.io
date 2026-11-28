@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CXCudH8Z.js";import{t}from"./podrabotka-barista-Co5O9zJL.js";import{t as n}from"./GeoLanding-FrZXhQfM.js";var r=e(),i=()=>(0,r.jsx)(n,{page:t});export{i as component};

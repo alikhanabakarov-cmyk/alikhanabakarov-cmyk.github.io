@@ -1,0 +1,1 @@
+var e=`/assets/process-cooking-recipe-CtQK2fg3.webp`;export{e as t};
